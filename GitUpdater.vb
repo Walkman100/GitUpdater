@@ -25,7 +25,7 @@ Public Class GitUpdater
         For i = 1 To lstDirs.Items.Count
             'MsgBox("/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
             Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
-            System.Threading.Thread.Sleep(100)
+            System.Threading.Thread.Sleep(200)
             'Shell("cmd.exe" & " /k cd " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", , True, 9)
             sendkeys.send("git pull {ENTER}")
             System.Threading.Thread.Sleep(100)
@@ -39,7 +39,7 @@ Public Class GitUpdater
     Sub BtnGitPushAll_Click(sender As Object, e As EventArgs)
         For i = 1 To lstDirs.Items.Count
             Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
-            System.Threading.Thread.Sleep(100)
+            System.Threading.Thread.Sleep(200)
             sendkeys.send("git pull {ENTER}")
             System.Threading.Thread.Sleep(100)
             SendKeys.Send("exit {ENTER}")
@@ -52,7 +52,7 @@ Public Class GitUpdater
             MsgBox("No item selected")
         Else
             Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex))
-            System.Threading.Thread.Sleep(100)
+            System.Threading.Thread.Sleep(200)
             sendkeys.send("git pull {ENTER}")
             System.Threading.Thread.Sleep(100)
             SendKeys.Send("exit {ENTER}")
@@ -64,7 +64,12 @@ Public Class GitUpdater
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
-            Shell(Dir & lstDirs.Items.Item(lstDirs.SelectedIndex) & "\git push", , True, 9)
+            Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex))
+            System.Threading.Thread.Sleep(200)
+            sendkeys.send("git push {ENTER}")
+            System.Threading.Thread.Sleep(100)
+            SendKeys.Send("exit {ENTER}")
+            System.Threading.Thread.Sleep(100)
         End If
         
     End Sub
@@ -74,7 +79,14 @@ Public Class GitUpdater
             MsgBox("No item selected")
         Else
             For i = 1 To lstDirs.Items.Count
-                Shell(Dir & lstDirs.Items.Item(i - 1) & "\git pull", , True, 9)
+                If i - 1 <> lstDirs.SelectedIndex
+                    Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
+                    System.Threading.Thread.Sleep(200)
+                    sendkeys.send("git pull {ENTER}")
+                    System.Threading.Thread.Sleep(100)
+                    SendKeys.Send("exit {ENTER}")
+                    System.Threading.Thread.Sleep(100)
+                End If
             Next
         End If
     End Sub
@@ -84,7 +96,14 @@ Public Class GitUpdater
             MsgBox("No item selected")
         Else
             For i = 1 To lstDirs.Items.Count
-                Shell(Dir & lstDirs.Items.Item(i - 1) & "\git push", , True, 9)
+                If i - 1 <> lstDirs.SelectedIndex
+                    Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
+                    System.Threading.Thread.Sleep(200)
+                    sendkeys.send("git push {ENTER}")
+                    System.Threading.Thread.Sleep(100)
+                    SendKeys.Send("exit {ENTER}")
+                    System.Threading.Thread.Sleep(100)
+                End If
             Next
         End If
     End Sub

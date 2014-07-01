@@ -79,7 +79,7 @@ Partial Class GitUpdater
         Me.lstDirs.IntegralHeight = false
         Me.lstDirs.Location = New System.Drawing.Point(12, 12)
         Me.lstDirs.Name = "lstDirs"
-        Me.lstDirs.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
+        Me.lstDirs.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
         Me.lstDirs.Size = New System.Drawing.Size(248, 137)
         Me.lstDirs.Sorted = true
         Me.lstDirs.TabIndex = 13
