@@ -54,7 +54,11 @@ Public Class GitUpdater
         For i = 1 To lstDirs.Items.Count
             Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
             System.Threading.Thread.Sleep(200)
-            sendkeys.send("git pull {ENTER}")
+            If chkPushForce.Checked = True Then
+                sendkeys.send("git push -f {ENTER}")
+            Else
+                sendkeys.send("git push {ENTER}")
+            End If
             System.Threading.Thread.Sleep(100)
             SendKeys.Send("exit {ENTER}")
             System.Threading.Thread.Sleep(100)
@@ -80,7 +84,11 @@ Public Class GitUpdater
         Else
             Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex))
             System.Threading.Thread.Sleep(200)
-            sendkeys.send("git push {ENTER}")
+            If chkPushForce.Checked = True Then
+                sendkeys.send("git push -f {ENTER}")
+            Else
+                sendkeys.send("git push {ENTER}")
+            End If
             System.Threading.Thread.Sleep(100)
             SendKeys.Send("exit {ENTER}")
             System.Threading.Thread.Sleep(100)
@@ -113,7 +121,11 @@ Public Class GitUpdater
                 If i - 1 <> lstDirs.SelectedIndex
                     Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
                     System.Threading.Thread.Sleep(200)
-                    sendkeys.send("git push {ENTER}")
+                    If chkPushForce.Checked = True Then
+                        sendkeys.send("git push -f {ENTER}")
+                    Else
+                        sendkeys.send("git push {ENTER}")
+                    End If
                     System.Threading.Thread.Sleep(100)
                     SendKeys.Send("exit {ENTER}")
                     System.Threading.Thread.Sleep(100)

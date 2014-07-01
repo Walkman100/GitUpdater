@@ -22,6 +22,7 @@ Partial Class GitUpdater
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GitUpdater))
         Me.btnExit = New System.Windows.Forms.Button()
         Me.btnGitPullAll = New System.Windows.Forms.Button()
         Me.btnGitPushAll = New System.Windows.Forms.Button()
@@ -34,6 +35,7 @@ Partial Class GitUpdater
         Me.btnGitPullNotSelected = New System.Windows.Forms.Button()
         Me.chkRepeat = New System.Windows.Forms.CheckBox()
         Me.folderBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
+        Me.chkPushForce = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout
         '
         'btnExit
@@ -155,7 +157,7 @@ Partial Class GitUpdater
         '
         Me.chkRepeat.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.chkRepeat.AutoSize = true
-        Me.chkRepeat.Location = New System.Drawing.Point(266, 132)
+        Me.chkRepeat.Location = New System.Drawing.Point(266, 141)
         Me.chkRepeat.Name = "chkRepeat"
         Me.chkRepeat.Size = New System.Drawing.Size(125, 17)
         Me.chkRepeat.TabIndex = 20
@@ -167,6 +169,16 @@ Partial Class GitUpdater
         Me.folderBrowserDialog.RootFolder = System.Environment.SpecialFolder.MyDocuments
         Me.folderBrowserDialog.SelectedPath = "GitHub"
         '
+        'chkPushForce
+        '
+        Me.chkPushForce.AutoSize = true
+        Me.chkPushForce.Location = New System.Drawing.Point(266, 125)
+        Me.chkPushForce.Name = "chkPushForce"
+        Me.chkPushForce.Size = New System.Drawing.Size(116, 17)
+        Me.chkPushForce.TabIndex = 21
+        Me.chkPushForce.Text = "Use push -f (Force)"
+        Me.chkPushForce.UseVisualStyleBackColor = true
+        '
         'GitUpdater
         '
         Me.AcceptButton = Me.btnRefresh
@@ -174,6 +186,7 @@ Partial Class GitUpdater
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnExit
         Me.ClientSize = New System.Drawing.Size(524, 163)
+        Me.Controls.Add(Me.chkPushForce)
         Me.Controls.Add(Me.chkRepeat)
         Me.Controls.Add(Me.btnGitPullNotSelected)
         Me.Controls.Add(Me.btnGitPushNotSelected)
@@ -186,6 +199,7 @@ Partial Class GitUpdater
         Me.Controls.Add(Me.btnGitPullAll)
         Me.Controls.Add(Me.btnExit)
         Me.HelpButton = true
+        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
         Me.Name = "GitUpdater"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -195,6 +209,7 @@ Partial Class GitUpdater
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private chkPushForce As System.Windows.Forms.CheckBox
     Private folderBrowserDialog As System.Windows.Forms.FolderBrowserDialog
     Private chkRepeat As System.Windows.Forms.CheckBox
     Private btnGitPullNotSelected As System.Windows.Forms.Button
