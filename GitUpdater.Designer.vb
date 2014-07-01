@@ -32,6 +32,7 @@ Partial Class GitUpdater
         Me.btnCD = New System.Windows.Forms.Button()
         Me.btnGitPushNotSelected = New System.Windows.Forms.Button()
         Me.btnGitPullNotSelected = New System.Windows.Forms.Button()
+        Me.chkRepeat = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout
         '
         'btnExit
@@ -55,6 +56,7 @@ Partial Class GitUpdater
         Me.btnGitPullAll.TabIndex = 11
         Me.btnGitPullAll.Text = "Git Pull all"
         Me.btnGitPullAll.UseVisualStyleBackColor = true
+        AddHandler Me.btnGitPullAll.Click, AddressOf Me.BtnGitPullAll_Click
         '
         'btnGitPushAll
         '
@@ -65,6 +67,7 @@ Partial Class GitUpdater
         Me.btnGitPushAll.TabIndex = 12
         Me.btnGitPushAll.Text = "Git Push all"
         Me.btnGitPushAll.UseVisualStyleBackColor = true
+        AddHandler Me.btnGitPushAll.Click, AddressOf Me.BtnGitPushAll_Click
         '
         'lstDirs
         '
@@ -101,6 +104,7 @@ Partial Class GitUpdater
         Me.btnGitPullSelected.TabIndex = 15
         Me.btnGitPullSelected.Text = "Git Pull selected"
         Me.btnGitPullSelected.UseVisualStyleBackColor = true
+        AddHandler Me.btnGitPullSelected.Click, AddressOf Me.BtnGitPullSelected_Click
         '
         'btnGitPushSelected
         '
@@ -111,6 +115,7 @@ Partial Class GitUpdater
         Me.btnGitPushSelected.TabIndex = 16
         Me.btnGitPushSelected.Text = "Git Push selected"
         Me.btnGitPushSelected.UseVisualStyleBackColor = true
+        AddHandler Me.btnGitPushSelected.Click, AddressOf Me.BtnGitPushSelected_Click
         '
         'btnCD
         '
@@ -121,6 +126,7 @@ Partial Class GitUpdater
         Me.btnCD.TabIndex = 17
         Me.btnCD.Text = "Change Directory..."
         Me.btnCD.UseVisualStyleBackColor = true
+        AddHandler Me.btnCD.Click, AddressOf Me.BtnCD_Click
         '
         'btnGitPushNotSelected
         '
@@ -131,6 +137,7 @@ Partial Class GitUpdater
         Me.btnGitPushNotSelected.TabIndex = 18
         Me.btnGitPushNotSelected.Text = "...all except selected"
         Me.btnGitPushNotSelected.UseVisualStyleBackColor = true
+        AddHandler Me.btnGitPushNotSelected.Click, AddressOf Me.BtnGitPushNotSelected_Click
         '
         'btnGitPullNotSelected
         '
@@ -141,6 +148,18 @@ Partial Class GitUpdater
         Me.btnGitPullNotSelected.TabIndex = 19
         Me.btnGitPullNotSelected.Text = "...all except selected"
         Me.btnGitPullNotSelected.UseVisualStyleBackColor = true
+        AddHandler Me.btnGitPullNotSelected.Click, AddressOf Me.BtnGitPullNotSelected_Click
+        '
+        'chkRepeat
+        '
+        Me.chkRepeat.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.chkRepeat.AutoSize = true
+        Me.chkRepeat.Location = New System.Drawing.Point(266, 132)
+        Me.chkRepeat.Name = "chkRepeat"
+        Me.chkRepeat.Size = New System.Drawing.Size(125, 17)
+        Me.chkRepeat.TabIndex = 20
+        Me.chkRepeat.Text = "Repeat until success"
+        Me.chkRepeat.UseVisualStyleBackColor = true
         '
         'GitUpdater
         '
@@ -149,6 +168,7 @@ Partial Class GitUpdater
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnExit
         Me.ClientSize = New System.Drawing.Size(524, 163)
+        Me.Controls.Add(Me.chkRepeat)
         Me.Controls.Add(Me.btnGitPullNotSelected)
         Me.Controls.Add(Me.btnGitPushNotSelected)
         Me.Controls.Add(Me.btnCD)
@@ -166,7 +186,9 @@ Partial Class GitUpdater
         Me.Text = "GitUpdater"
         Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.ResumeLayout(false)
+        Me.PerformLayout
     End Sub
+    Private chkRepeat As System.Windows.Forms.CheckBox
     Private btnGitPullNotSelected As System.Windows.Forms.Button
     Private btnGitPushNotSelected As System.Windows.Forms.Button
     Private btnCD As System.Windows.Forms.Button
