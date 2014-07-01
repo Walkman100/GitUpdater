@@ -43,7 +43,9 @@ Public Class GitUpdater
             'Shell("cmd.exe" & " /k cd " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", , True, 9)
             sendkeys.send("git pull {ENTER}")
             System.Threading.Thread.Sleep(100)
-            SendKeys.Send("exit {ENTER}")
+            If chkDontClose.Checked = False Then
+                SendKeys.Send("exit {ENTER}")
+            End If
             System.Threading.Thread.Sleep(100)
             'Process.Start("cmd.exe", "/k " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull")
             'Shell(Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", , True, 9)
@@ -60,7 +62,9 @@ Public Class GitUpdater
                 sendkeys.send("git push {ENTER}")
             End If
             System.Threading.Thread.Sleep(100)
-            SendKeys.Send("exit {ENTER}")
+            If chkDontClose.Checked = False Then
+                SendKeys.Send("exit {ENTER}")
+            End If
             System.Threading.Thread.Sleep(100)
         Next
     End Sub
@@ -73,7 +77,9 @@ Public Class GitUpdater
             System.Threading.Thread.Sleep(200)
             sendkeys.send("git pull {ENTER}")
             System.Threading.Thread.Sleep(100)
-            SendKeys.Send("exit {ENTER}")
+            If chkDontClose.Checked = False Then
+                SendKeys.Send("exit {ENTER}")
+            End If
             System.Threading.Thread.Sleep(100)
         End If
     End Sub
@@ -90,7 +96,9 @@ Public Class GitUpdater
                 sendkeys.send("git push {ENTER}")
             End If
             System.Threading.Thread.Sleep(100)
-            SendKeys.Send("exit {ENTER}")
+            If chkDontClose.Checked = False Then
+                SendKeys.Send("exit {ENTER}")
+            End If
             System.Threading.Thread.Sleep(100)
         End If
         
@@ -106,7 +114,9 @@ Public Class GitUpdater
                     System.Threading.Thread.Sleep(200)
                     sendkeys.send("git pull {ENTER}")
                     System.Threading.Thread.Sleep(100)
-                    SendKeys.Send("exit {ENTER}")
+                    If chkDontClose.Checked = False Then
+                        SendKeys.Send("exit {ENTER}")
+                    End If
                     System.Threading.Thread.Sleep(100)
                 End If
             Next
@@ -127,7 +137,9 @@ Public Class GitUpdater
                         sendkeys.send("git push {ENTER}")
                     End If
                     System.Threading.Thread.Sleep(100)
-                    SendKeys.Send("exit {ENTER}")
+                    If chkDontClose.Checked = False Then
+                        SendKeys.Send("exit {ENTER}")
+                    End If
                     System.Threading.Thread.Sleep(100)
                 End If
             Next
