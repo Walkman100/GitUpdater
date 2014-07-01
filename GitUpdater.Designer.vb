@@ -26,13 +26,14 @@ Partial Class GitUpdater
         Me.btnGitPullAll = New System.Windows.Forms.Button()
         Me.btnGitPushAll = New System.Windows.Forms.Button()
         Me.lstDirs = New System.Windows.Forms.ListBox()
-        Me.btnPopulate = New System.Windows.Forms.Button()
+        Me.btnRefresh = New System.Windows.Forms.Button()
         Me.btnGitPullSelected = New System.Windows.Forms.Button()
         Me.btnGitPushSelected = New System.Windows.Forms.Button()
         Me.btnCD = New System.Windows.Forms.Button()
         Me.btnGitPushNotSelected = New System.Windows.Forms.Button()
         Me.btnGitPullNotSelected = New System.Windows.Forms.Button()
         Me.chkRepeat = New System.Windows.Forms.CheckBox()
+        Me.folderBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
         Me.SuspendLayout
         '
         'btnExit
@@ -84,16 +85,16 @@ Partial Class GitUpdater
         Me.lstDirs.Sorted = true
         Me.lstDirs.TabIndex = 13
         '
-        'btnPopulate
+        'btnRefresh
         '
-        Me.btnPopulate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnPopulate.Location = New System.Drawing.Point(266, 99)
-        Me.btnPopulate.Name = "btnPopulate"
-        Me.btnPopulate.Size = New System.Drawing.Size(120, 23)
-        Me.btnPopulate.TabIndex = 14
-        Me.btnPopulate.Text = "Populate"
-        Me.btnPopulate.UseVisualStyleBackColor = true
-        AddHandler Me.btnPopulate.Click, AddressOf Me.BtnPopulate_Click
+        Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnRefresh.Location = New System.Drawing.Point(266, 99)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(120, 23)
+        Me.btnRefresh.TabIndex = 14
+        Me.btnRefresh.Text = "Refresh"
+        Me.btnRefresh.UseVisualStyleBackColor = true
+        AddHandler Me.btnRefresh.Click, AddressOf Me.BtnRefresh_Click
         '
         'btnGitPullSelected
         '
@@ -161,9 +162,14 @@ Partial Class GitUpdater
         Me.chkRepeat.Text = "Repeat until success"
         Me.chkRepeat.UseVisualStyleBackColor = true
         '
+        'folderBrowserDialog
+        '
+        Me.folderBrowserDialog.RootFolder = System.Environment.SpecialFolder.MyDocuments
+        Me.folderBrowserDialog.SelectedPath = "GitHub"
+        '
         'GitUpdater
         '
-        Me.AcceptButton = Me.btnPopulate
+        Me.AcceptButton = Me.btnRefresh
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnExit
@@ -174,7 +180,7 @@ Partial Class GitUpdater
         Me.Controls.Add(Me.btnCD)
         Me.Controls.Add(Me.btnGitPushSelected)
         Me.Controls.Add(Me.btnGitPullSelected)
-        Me.Controls.Add(Me.btnPopulate)
+        Me.Controls.Add(Me.btnRefresh)
         Me.Controls.Add(Me.lstDirs)
         Me.Controls.Add(Me.btnGitPushAll)
         Me.Controls.Add(Me.btnGitPullAll)
@@ -185,16 +191,18 @@ Partial Class GitUpdater
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "GitUpdater"
         Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        AddHandler Load, AddressOf Me.GitUpdater_Load
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private folderBrowserDialog As System.Windows.Forms.FolderBrowserDialog
     Private chkRepeat As System.Windows.Forms.CheckBox
     Private btnGitPullNotSelected As System.Windows.Forms.Button
     Private btnGitPushNotSelected As System.Windows.Forms.Button
     Private btnCD As System.Windows.Forms.Button
     Private btnGitPushSelected As System.Windows.Forms.Button
     Private btnGitPullSelected As System.Windows.Forms.Button
-    Private btnPopulate As System.Windows.Forms.Button
+    Private btnRefresh As System.Windows.Forms.Button
     Private lstDirs As System.Windows.Forms.ListBox
     Private btnGitPushAll As System.Windows.Forms.Button
     Private btnGitPullAll As System.Windows.Forms.Button

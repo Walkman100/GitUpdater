@@ -10,7 +10,14 @@ Public Class GitUpdater
         End
     End Sub
     
-    Sub BtnPopulate_Click(sender As Object, e As EventArgs)
+    Sub GitUpdater_Load(sender As Object, e As EventArgs)
+        lstDirs.Items.Clear
+        For Each Repo As String In Directory.GetDirectories(Dir)
+            lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
+        Next
+    End Sub
+    
+    Sub BtnRefresh_Click(sender As Object, e As EventArgs)
         lstDirs.Items.Clear
         For Each Repo As String In Directory.GetDirectories(Dir)
             lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
@@ -19,6 +26,13 @@ Public Class GitUpdater
     
     Sub BtnCD_Click(sender As Object, e As EventArgs)
         ' show file chooser dialog, set result as Dir
+        folderBrowserDialog.ShowDialog
+        Dir = folderBrowserDialog.SelectedPath
+        ' rebuild list automatically
+        lstDirs.Items.Clear
+        For Each Repo As String In Directory.GetDirectories(Dir)
+            lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
+        Next
     End Sub
     
     Sub BtnGitPullAll_Click(sender As Object, e As EventArgs)
