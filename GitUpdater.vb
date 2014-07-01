@@ -4,6 +4,7 @@ Imports System.IO
 Public Class GitUpdater
     
     Dim usrProfile As String = Environment.GetEnvironmentVariable("HOMEPATH")
+    Dim cmdPath As String = Environment.GetEnvironmentVariable("COMSPEC")
     Dim Dir As String = usrProfile & "\Documents\GitHub"
     
     Private Sub btnExit_Click(sender As Object, e As EventArgs)
@@ -38,23 +39,23 @@ Public Class GitUpdater
     Sub BtnGitPullAll_Click(sender As Object, e As EventArgs)
         For i = 1 To lstDirs.Items.Count
             'MsgBox("/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
-            Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
+            Process.Start(cmdPath, "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
             System.Threading.Thread.Sleep(200)
-            'Shell("cmd.exe" & " /k cd " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", , True, 9)
+            'Shell(cmdPath & " /k cd " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", , True, 9)
             sendkeys.send("git pull {ENTER}")
             System.Threading.Thread.Sleep(100)
             If chkDontClose.Checked = False Then
                 SendKeys.Send("exit {ENTER}")
             End If
             System.Threading.Thread.Sleep(100)
-            'Process.Start("cmd.exe", "/k " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull")
+            'Process.Start(cmdPath, "/k " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull")
             'Shell(Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", , True, 9)
         Next
     End Sub
     
     Sub BtnGitPushAll_Click(sender As Object, e As EventArgs)
         For i = 1 To lstDirs.Items.Count
-            Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
+            Process.Start(cmdPath, "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
             System.Threading.Thread.Sleep(200)
             If chkPushForce.Checked = True Then
                 sendkeys.send("git push -f {ENTER}")
@@ -73,7 +74,7 @@ Public Class GitUpdater
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
-            Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex))
+            Process.Start(cmdPath, "/k cd " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex))
             System.Threading.Thread.Sleep(200)
             sendkeys.send("git pull {ENTER}")
             System.Threading.Thread.Sleep(100)
@@ -88,7 +89,7 @@ Public Class GitUpdater
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
-            Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex))
+            Process.Start(cmdPath, "/k cd " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex))
             System.Threading.Thread.Sleep(200)
             If chkPushForce.Checked = True Then
                 sendkeys.send("git push -f {ENTER}")
@@ -110,7 +111,7 @@ Public Class GitUpdater
         Else
             For i = 1 To lstDirs.Items.Count
                 If i - 1 <> lstDirs.SelectedIndex
-                    Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
+                    Process.Start(cmdPath, "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
                     System.Threading.Thread.Sleep(200)
                     sendkeys.send("git pull {ENTER}")
                     System.Threading.Thread.Sleep(100)
@@ -129,7 +130,7 @@ Public Class GitUpdater
         Else
             For i = 1 To lstDirs.Items.Count
                 If i - 1 <> lstDirs.SelectedIndex
-                    Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
+                    Process.Start(cmdPath, "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
                     System.Threading.Thread.Sleep(200)
                     If chkPushForce.Checked = True Then
                         sendkeys.send("git push -f {ENTER}")
