@@ -54,7 +54,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>..\..\..\..\..\ProgramFiles\Git\etc\git.ico</ApplicationIcon>
+    <ApplicationIcon>My Project\git.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <Optimize>true</Optimize>
