@@ -4,7 +4,6 @@ Imports System.IO
 Public Class GitUpdater
     
     Dim usrProfile As String = Environment.GetEnvironmentVariable("HOMEPATH")
-    Dim cmdPath As String = Environment.GetEnvironmentVariable("COMSPEC")
     Dim Dir As String = usrProfile & "\Documents\GitHub"
     
     Private Sub btnExit_Click(sender As Object, e As EventArgs)
@@ -29,6 +28,7 @@ Public Class GitUpdater
         ' show file chooser dialog, set result as Dir
         folderBrowserDialog.ShowDialog
         Dir = folderBrowserDialog.SelectedPath
+        
         ' rebuild list automatically
         lstDirs.Items.Clear
         For Each Repo As String In Directory.GetDirectories(Dir)
@@ -38,35 +38,27 @@ Public Class GitUpdater
     
     Sub BtnGitPullAll_Click(sender As Object, e As EventArgs)
         For i = 1 To lstDirs.Items.Count
-            'MsgBox("/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
-            Process.Start(cmdPath, "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
-            System.Threading.Thread.Sleep(200)
-            'Shell(cmdPath & " /k cd " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", , True, 9)
-            sendkeys.send("git pull {ENTER}")
-            System.Threading.Thread.Sleep(100)
-            If chkDontClose.Checked = False Then
-                SendKeys.Send("exit {ENTER}")
-            End If
-            System.Threading.Thread.Sleep(100)
-            'Process.Start(cmdPath, "/k " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull")
-            'Shell(Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", , True, 9)
+' another way to do a comment block: http://forums.asp.net/post/4414215.aspx
+'            'MsgBox("/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
+'            Process.Start(cmdPath, "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
+'            System.Threading.Thread.Sleep(200)
+'            'Shell(cmdPath & " /k cd " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", , True, 9)
+'            sendkeys.send("git pull {ENTER}")
+'            System.Threading.Thread.Sleep(100)
+'            If chkDontClose.Checked = False Then
+'                SendKeys.Send("exit {ENTER}")
+'            End If
+'            System.Threading.Thread.Sleep(100)
+'            'Process.Start(cmdPath, "/k " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull")
+'            'Shell(Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", , True, 9)
+            
+            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked, , True, 9)
         Next
     End Sub
     
     Sub BtnGitPushAll_Click(sender As Object, e As EventArgs)
         For i = 1 To lstDirs.Items.Count
-            Process.Start(cmdPath, "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
-            System.Threading.Thread.Sleep(200)
-            If chkPushForce.Checked = True Then
-                sendkeys.send("git push -f {ENTER}")
-            Else
-                sendkeys.send("git push {ENTER}")
-            End If
-            System.Threading.Thread.Sleep(100)
-            If chkDontClose.Checked = False Then
-                SendKeys.Send("exit {ENTER}")
-            End If
-            System.Threading.Thread.Sleep(100)
+            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked, , True, 9)
         Next
     End Sub
     
@@ -74,14 +66,7 @@ Public Class GitUpdater
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
-            Process.Start(cmdPath, "/k cd " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex))
-            System.Threading.Thread.Sleep(200)
-            sendkeys.send("git pull {ENTER}")
-            System.Threading.Thread.Sleep(100)
-            If chkDontClose.Checked = False Then
-                SendKeys.Send("exit {ENTER}")
-            End If
-            System.Threading.Thread.Sleep(100)
+            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, , True, 9)
         End If
     End Sub
     
@@ -89,18 +74,7 @@ Public Class GitUpdater
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
-            Process.Start(cmdPath, "/k cd " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex))
-            System.Threading.Thread.Sleep(200)
-            If chkPushForce.Checked = True Then
-                sendkeys.send("git push -f {ENTER}")
-            Else
-                sendkeys.send("git push {ENTER}")
-            End If
-            System.Threading.Thread.Sleep(100)
-            If chkDontClose.Checked = False Then
-                SendKeys.Send("exit {ENTER}")
-            End If
-            System.Threading.Thread.Sleep(100)
+            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked, , True, 9)
         End If
         
     End Sub
@@ -111,14 +85,7 @@ Public Class GitUpdater
         Else
             For i = 1 To lstDirs.Items.Count
                 If i - 1 <> lstDirs.SelectedIndex
-                    Process.Start(cmdPath, "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
-                    System.Threading.Thread.Sleep(200)
-                    sendkeys.send("git pull {ENTER}")
-                    System.Threading.Thread.Sleep(100)
-                    If chkDontClose.Checked = False Then
-                        SendKeys.Send("exit {ENTER}")
-                    End If
-                    System.Threading.Thread.Sleep(100)
+                    Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, , True, 9)
                 End If
             Next
         End If
@@ -130,18 +97,7 @@ Public Class GitUpdater
         Else
             For i = 1 To lstDirs.Items.Count
                 If i - 1 <> lstDirs.SelectedIndex
-                    Process.Start(cmdPath, "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
-                    System.Threading.Thread.Sleep(200)
-                    If chkPushForce.Checked = True Then
-                        sendkeys.send("git push -f {ENTER}")
-                    Else
-                        sendkeys.send("git push {ENTER}")
-                    End If
-                    System.Threading.Thread.Sleep(100)
-                    If chkDontClose.Checked = False Then
-                        SendKeys.Send("exit {ENTER}")
-                    End If
-                    System.Threading.Thread.Sleep(100)
+                    Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked, , True, 9)
                 End If
             Next
         End If
