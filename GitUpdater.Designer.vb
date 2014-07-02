@@ -196,7 +196,7 @@ Partial Class GitUpdater
         '
         'GitUpdater
         '
-        Me.AcceptButton = Me.btnGitPullSelected
+        Me.AcceptButton = Me.btnGitPushSelected
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnExit
