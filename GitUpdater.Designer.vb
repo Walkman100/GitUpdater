@@ -205,7 +205,6 @@ Partial Class GitUpdater
         Me.chkNoWait.TabIndex = 23
         Me.chkNoWait.Text = "Don't wait for cmd to close before starting next"
         Me.chkNoWait.UseVisualStyleBackColor = true
-        AddHandler Me.chkNoWait.CheckedChanged, AddressOf Me.ChkNoWait_CheckedChanged
         '
         'GitUpdater
         '
