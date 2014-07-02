@@ -59,16 +59,22 @@ Public Class GitUpdater
     
     Sub BtnGitPushAll_Click(sender As Object, e As EventArgs)
         If chkPushForce.Checked = True Then ForcePush = "-f"
-        For i = 1 To lstDirs.Items.Count
-            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True)
-        Next
+        If chkNoWait.Checked = False Then
+            For i = 1 To lstDirs.Items.Count
+                Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True)
+            Next
+        Else
+            For i = 1 To lstDirs.Items.Count
+                Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True, 1000)
+            Next
+        End If
     End Sub
     
     Sub BtnGitPullSelected_Click(sender As Object, e As EventArgs)
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
-            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True)
+            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True, 1000)
         End If
     End Sub
     
@@ -77,7 +83,7 @@ Public Class GitUpdater
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
-            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True)
+            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True, 1000)
         End If
         
     End Sub
