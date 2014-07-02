@@ -158,6 +158,8 @@ Partial Class GitUpdater
         '
         Me.chkRepeat.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.chkRepeat.AutoSize = true
+        Me.chkRepeat.Checked = true
+        Me.chkRepeat.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkRepeat.Location = New System.Drawing.Point(268, 163)
         Me.chkRepeat.Name = "chkRepeat"
         Me.chkRepeat.Size = New System.Drawing.Size(125, 17)
