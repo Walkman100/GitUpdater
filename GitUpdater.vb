@@ -43,7 +43,7 @@ Public Class GitUpdater
 '            'MsgBox("/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
 '            Process.Start(cmdPath, "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
 '            System.Threading.Thread.Sleep(200)
-'            'Shell(cmdPath & " /k cd " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", , True, 9)
+'            'Shell(cmdPath & " /k cd " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", vbNormalFocus, True)
 '            sendkeys.send("git pull {ENTER}")
 '            System.Threading.Thread.Sleep(100)
 '            If chkDontClose.Checked = False Then
@@ -51,18 +51,16 @@ Public Class GitUpdater
 '            End If
 '            System.Threading.Thread.Sleep(100)
 '            'Process.Start(cmdPath, "/k " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull")
-'            'Shell(Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", , True, 9)
+'            'Shell(Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", vbNormalFocus, True)
             
-            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, , True, 9)
-            System.Threading.Thread.Sleep(100)
+            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True)
         Next
     End Sub
     
     Sub BtnGitPushAll_Click(sender As Object, e As EventArgs)
         If chkPushForce.Checked = True Then ForcePush = "-f"
         For i = 1 To lstDirs.Items.Count
-            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, , True, 9)
-            System.Threading.Thread.Sleep(100)
+            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True)
         Next
     End Sub
     
@@ -70,7 +68,7 @@ Public Class GitUpdater
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
-            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, , True, 9)
+            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True)
         End If
     End Sub
     
@@ -79,7 +77,7 @@ Public Class GitUpdater
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
-            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, , True, 9)
+            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True)
         End If
         
     End Sub
@@ -90,9 +88,8 @@ Public Class GitUpdater
         Else
             For i = 1 To lstDirs.Items.Count
                 If i - 1 <> lstDirs.SelectedIndex
-                    Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, , True, 9)
+                    Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True)
                 End If
-                System.Threading.Thread.Sleep(100)
             Next
         End If
     End Sub
@@ -103,9 +100,8 @@ Public Class GitUpdater
         Else
             For i = 1 To lstDirs.Items.Count
                 If i - 1 <> lstDirs.SelectedIndex
-                    Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, , True, 9)
+                    Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True)
                 End If
-                System.Threading.Thread.Sleep(100)
             Next
         End If
     End Sub
