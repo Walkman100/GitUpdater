@@ -38,13 +38,14 @@ Partial Class GitUpdater
         Me.chkPushForce = New System.Windows.Forms.CheckBox()
         Me.chkDontClose = New System.Windows.Forms.CheckBox()
         Me.chkNoWait = New System.Windows.Forms.CheckBox()
+        Me.progressBar = New System.Windows.Forms.ProgressBar()
         Me.SuspendLayout
         '
         'btnExit
         '
         Me.btnExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnExit.Location = New System.Drawing.Point(392, 174)
+        Me.btnExit.Location = New System.Drawing.Point(392, 208)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(120, 23)
         Me.btnExit.TabIndex = 10
@@ -85,14 +86,14 @@ Partial Class GitUpdater
         Me.lstDirs.Location = New System.Drawing.Point(12, 12)
         Me.lstDirs.Name = "lstDirs"
         Me.lstDirs.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lstDirs.Size = New System.Drawing.Size(248, 185)
+        Me.lstDirs.Size = New System.Drawing.Size(248, 219)
         Me.lstDirs.Sorted = true
         Me.lstDirs.TabIndex = 13
         '
         'btnRefresh
         '
         Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnRefresh.Location = New System.Drawing.Point(266, 145)
+        Me.btnRefresh.Location = New System.Drawing.Point(266, 179)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(120, 23)
         Me.btnRefresh.TabIndex = 14
@@ -125,7 +126,7 @@ Partial Class GitUpdater
         'btnCD
         '
         Me.btnCD.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnCD.Location = New System.Drawing.Point(392, 145)
+        Me.btnCD.Location = New System.Drawing.Point(392, 179)
         Me.btnCD.Name = "btnCD"
         Me.btnCD.Size = New System.Drawing.Size(120, 23)
         Me.btnCD.TabIndex = 17
@@ -161,7 +162,7 @@ Partial Class GitUpdater
         Me.chkRepeat.AutoSize = true
         Me.chkRepeat.Checked = true
         Me.chkRepeat.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkRepeat.Location = New System.Drawing.Point(268, 186)
+        Me.chkRepeat.Location = New System.Drawing.Point(268, 220)
         Me.chkRepeat.Name = "chkRepeat"
         Me.chkRepeat.Size = New System.Drawing.Size(125, 17)
         Me.chkRepeat.TabIndex = 20
@@ -177,7 +178,7 @@ Partial Class GitUpdater
         '
         Me.chkPushForce.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.chkPushForce.AutoSize = true
-        Me.chkPushForce.Location = New System.Drawing.Point(268, 170)
+        Me.chkPushForce.Location = New System.Drawing.Point(268, 204)
         Me.chkPushForce.Name = "chkPushForce"
         Me.chkPushForce.Size = New System.Drawing.Size(116, 17)
         Me.chkPushForce.TabIndex = 21
@@ -188,7 +189,7 @@ Partial Class GitUpdater
         '
         Me.chkDontClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.chkDontClose.AutoSize = true
-        Me.chkDontClose.Location = New System.Drawing.Point(268, 122)
+        Me.chkDontClose.Location = New System.Drawing.Point(268, 156)
         Me.chkDontClose.Name = "chkDontClose"
         Me.chkDontClose.Size = New System.Drawing.Size(223, 17)
         Me.chkDontClose.TabIndex = 22
@@ -199,12 +200,23 @@ Partial Class GitUpdater
         '
         Me.chkNoWait.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.chkNoWait.AutoSize = true
-        Me.chkNoWait.Location = New System.Drawing.Point(268, 99)
+        Me.chkNoWait.Location = New System.Drawing.Point(268, 133)
         Me.chkNoWait.Name = "chkNoWait"
         Me.chkNoWait.Size = New System.Drawing.Size(244, 17)
         Me.chkNoWait.TabIndex = 23
         Me.chkNoWait.Text = "Don't wait for cmd to close before starting next"
         Me.chkNoWait.UseVisualStyleBackColor = true
+        '
+        'progressBar
+        '
+        Me.progressBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.progressBar.Location = New System.Drawing.Point(268, 99)
+        Me.progressBar.Name = "progressBar"
+        Me.progressBar.Size = New System.Drawing.Size(244, 28)
+        Me.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.progressBar.TabIndex = 24
+        Me.progressBar.Visible = false
         '
         'GitUpdater
         '
@@ -212,7 +224,8 @@ Partial Class GitUpdater
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnExit
-        Me.ClientSize = New System.Drawing.Size(524, 209)
+        Me.ClientSize = New System.Drawing.Size(524, 243)
+        Me.Controls.Add(Me.progressBar)
         Me.Controls.Add(Me.chkNoWait)
         Me.Controls.Add(Me.chkDontClose)
         Me.Controls.Add(Me.chkPushForce)
@@ -238,6 +251,7 @@ Partial Class GitUpdater
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private progressBar As System.Windows.Forms.ProgressBar
     Private chkNoWait As System.Windows.Forms.CheckBox
     Private chkDontClose As System.Windows.Forms.CheckBox
     Private chkPushForce As System.Windows.Forms.CheckBox

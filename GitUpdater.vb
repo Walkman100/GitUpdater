@@ -38,7 +38,21 @@ Public Class GitUpdater
     End Sub
     
     Sub BtnGitPullAll_Click(sender As Object, e As EventArgs)
-        For i = 1 To lstDirs.Items.Count
+        progressBar.Visible = True
+        progressBar.Maximum = lstDirs.Items.Count
+        If chkNoWait.Checked = False Then
+            For i = 1 To lstDirs.Items.Count
+                progressBar.Value = i
+                Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True)
+            Next
+        Else
+            For i = 1 To lstDirs.Items.Count
+                progressBar.Value = i
+                Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True, 1000)
+            Next
+        End If
+        progressBar.Visible = False
+        
 ' another way to do a comment block: http://forums.asp.net/post/4414215.aspx
 '            'MsgBox("/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
 '            Process.Start(cmdPath, "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
@@ -52,22 +66,25 @@ Public Class GitUpdater
 '            System.Threading.Thread.Sleep(100)
 '            'Process.Start(cmdPath, "/k " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull")
 '            'Shell(Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", vbNormalFocus, True)
-            
-            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True)
         Next
     End Sub
     
     Sub BtnGitPushAll_Click(sender As Object, e As EventArgs)
+        progressBar.Visible = True
+        progressBar.Maximum = lstDirs.Items.Count
         If chkPushForce.Checked = True Then ForcePush = "-f"
         If chkNoWait.Checked = False Then
             For i = 1 To lstDirs.Items.Count
+                progressBar.Value = i
                 Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True)
             Next
         Else
             For i = 1 To lstDirs.Items.Count
+                progressBar.Value = i
                 Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True, 1000)
             Next
         End If
+        progressBar.Visible = False
     End Sub
     
     Sub BtnGitPullSelected_Click(sender As Object, e As EventArgs)
@@ -92,11 +109,24 @@ Public Class GitUpdater
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
-            For i = 1 To lstDirs.Items.Count
-                If i - 1 <> lstDirs.SelectedIndex
-                    Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True)
-                End If
-            Next
+            progressBar.Visible = True
+            progressBar.Maximum = lstDirs.Items.Count
+            If chkNoWait.Checked = False Then
+                For i = 1 To lstDirs.Items.Count
+                    If i - 1 <> lstDirs.SelectedIndex Then
+                        progressBar.Value = i
+                        Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True)
+                    End If
+                Next
+            Else
+                For i = 1 To lstDirs.Items.Count
+                    If i - 1 <> lstDirs.SelectedIndex Then
+                        progressBar.Value = i
+                        Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True, 1000)
+                    End If
+                Next
+            End If
+            progressBar.Visible = False
         End If
     End Sub
     
@@ -104,11 +134,24 @@ Public Class GitUpdater
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
-            For i = 1 To lstDirs.Items.Count
-                If i - 1 <> lstDirs.SelectedIndex
-                    Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True)
-                End If
-            Next
+            progressBar.Visible = True
+            progressBar.Maximum = lstDirs.Items.Count
+            If chkNoWait.Checked = False Then
+                For i = 1 To lstDirs.Items.Count
+                    If i - 1 <> lstDirs.SelectedIndex Then
+                        progressBar.Value = i
+                        Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True)
+                    End If
+                Next
+            Else
+                For i = 1 To lstDirs.Items.Count
+                    If i - 1 <> lstDirs.SelectedIndex Then
+                        progressBar.Value = i
+                        Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True, 1000)
+                    End If
+                Next
+            End If
+            progressBar.Visible = False
         End If
     End Sub
 End Class
