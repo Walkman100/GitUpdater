@@ -39,13 +39,23 @@ Partial Class GitUpdater
         Me.chkDontClose = New System.Windows.Forms.CheckBox()
         Me.chkNoWait = New System.Windows.Forms.CheckBox()
         Me.progressBar = New System.Windows.Forms.ProgressBar()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.grpCreds = New System.Windows.Forms.GroupBox()
+        Me.lblSaved = New System.Windows.Forms.Label()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.txtPassword = New System.Windows.Forms.TextBox()
+        Me.txtUsername = New System.Windows.Forms.TextBox()
+        Me.lblPassword = New System.Windows.Forms.Label()
+        Me.lblUsername = New System.Windows.Forms.Label()
+        Me.grpOptions.SuspendLayout
+        Me.grpCreds.SuspendLayout
         Me.SuspendLayout
         '
         'btnExit
         '
         Me.btnExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnExit.Location = New System.Drawing.Point(392, 208)
+        Me.btnExit.Location = New System.Drawing.Point(392, 341)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(120, 23)
         Me.btnExit.TabIndex = 10
@@ -86,14 +96,14 @@ Partial Class GitUpdater
         Me.lstDirs.Location = New System.Drawing.Point(12, 12)
         Me.lstDirs.Name = "lstDirs"
         Me.lstDirs.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lstDirs.Size = New System.Drawing.Size(248, 219)
+        Me.lstDirs.Size = New System.Drawing.Size(248, 352)
         Me.lstDirs.Sorted = true
         Me.lstDirs.TabIndex = 13
         '
         'btnRefresh
         '
         Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnRefresh.Location = New System.Drawing.Point(266, 179)
+        Me.btnRefresh.Location = New System.Drawing.Point(266, 312)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(120, 23)
         Me.btnRefresh.TabIndex = 14
@@ -126,7 +136,7 @@ Partial Class GitUpdater
         'btnCD
         '
         Me.btnCD.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnCD.Location = New System.Drawing.Point(392, 179)
+        Me.btnCD.Location = New System.Drawing.Point(392, 312)
         Me.btnCD.Name = "btnCD"
         Me.btnCD.Size = New System.Drawing.Size(120, 23)
         Me.btnCD.TabIndex = 17
@@ -162,7 +172,7 @@ Partial Class GitUpdater
         Me.chkRepeat.AutoSize = true
         Me.chkRepeat.Checked = true
         Me.chkRepeat.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkRepeat.Location = New System.Drawing.Point(268, 220)
+        Me.chkRepeat.Location = New System.Drawing.Point(266, 351)
         Me.chkRepeat.Name = "chkRepeat"
         Me.chkRepeat.Size = New System.Drawing.Size(125, 17)
         Me.chkRepeat.TabIndex = 20
@@ -178,7 +188,7 @@ Partial Class GitUpdater
         '
         Me.chkPushForce.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.chkPushForce.AutoSize = true
-        Me.chkPushForce.Location = New System.Drawing.Point(268, 204)
+        Me.chkPushForce.Location = New System.Drawing.Point(266, 335)
         Me.chkPushForce.Name = "chkPushForce"
         Me.chkPushForce.Size = New System.Drawing.Size(116, 17)
         Me.chkPushForce.TabIndex = 21
@@ -187,9 +197,8 @@ Partial Class GitUpdater
         '
         'chkDontClose
         '
-        Me.chkDontClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.chkDontClose.AutoSize = true
-        Me.chkDontClose.Location = New System.Drawing.Point(268, 156)
+        Me.chkDontClose.Location = New System.Drawing.Point(6, 42)
         Me.chkDontClose.Name = "chkDontClose"
         Me.chkDontClose.Size = New System.Drawing.Size(223, 17)
         Me.chkDontClose.TabIndex = 22
@@ -198,25 +207,108 @@ Partial Class GitUpdater
         '
         'chkNoWait
         '
-        Me.chkNoWait.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.chkNoWait.AutoSize = true
-        Me.chkNoWait.Location = New System.Drawing.Point(268, 133)
+        Me.chkNoWait.BackColor = System.Drawing.Color.Transparent
+        Me.chkNoWait.Location = New System.Drawing.Point(6, 19)
         Me.chkNoWait.Name = "chkNoWait"
         Me.chkNoWait.Size = New System.Drawing.Size(244, 17)
         Me.chkNoWait.TabIndex = 23
         Me.chkNoWait.Text = "Don't wait for cmd to close before starting next"
-        Me.chkNoWait.UseVisualStyleBackColor = true
+        Me.chkNoWait.UseVisualStyleBackColor = false
         '
         'progressBar
         '
-        Me.progressBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.progressBar.Location = New System.Drawing.Point(268, 99)
+        Me.progressBar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.progressBar.Location = New System.Drawing.Point(266, 99)
         Me.progressBar.Name = "progressBar"
-        Me.progressBar.Size = New System.Drawing.Size(244, 28)
+        Me.progressBar.Size = New System.Drawing.Size(246, 18)
         Me.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous
         Me.progressBar.TabIndex = 24
         Me.progressBar.Visible = false
+        '
+        'grpOptions
+        '
+        Me.grpOptions.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.grpOptions.Controls.Add(Me.chkNoWait)
+        Me.grpOptions.Controls.Add(Me.chkDontClose)
+        Me.grpOptions.Location = New System.Drawing.Point(266, 242)
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.Size = New System.Drawing.Size(246, 64)
+        Me.grpOptions.TabIndex = 25
+        Me.grpOptions.TabStop = false
+        Me.grpOptions.Text = "Options"
+        '
+        'grpCreds
+        '
+        Me.grpCreds.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.grpCreds.Controls.Add(Me.lblSaved)
+        Me.grpCreds.Controls.Add(Me.btnSave)
+        Me.grpCreds.Controls.Add(Me.txtPassword)
+        Me.grpCreds.Controls.Add(Me.txtUsername)
+        Me.grpCreds.Controls.Add(Me.lblPassword)
+        Me.grpCreds.Controls.Add(Me.lblUsername)
+        Me.grpCreds.Location = New System.Drawing.Point(266, 123)
+        Me.grpCreds.Name = "grpCreds"
+        Me.grpCreds.Size = New System.Drawing.Size(246, 113)
+        Me.grpCreds.TabIndex = 26
+        Me.grpCreds.TabStop = false
+        Me.grpCreds.Text = "Credientials Management"
+        '
+        'lblSaved
+        '
+        Me.lblSaved.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lblSaved.AutoSize = true
+        Me.lblSaved.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblSaved.ForeColor = System.Drawing.Color.Green
+        Me.lblSaved.Location = New System.Drawing.Point(112, 89)
+        Me.lblSaved.Name = "lblSaved"
+        Me.lblSaved.Size = New System.Drawing.Size(47, 13)
+        Me.lblSaved.TabIndex = 5
+        Me.lblSaved.Text = "Saved!"
+        Me.lblSaved.Visible = false
+        '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(165, 84)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.TabIndex = 4
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = true
+        AddHandler Me.btnSave.Click, AddressOf Me.BtnSave_Click
+        '
+        'txtPassword
+        '
+        Me.txtPassword.Location = New System.Drawing.Point(70, 45)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Size = New System.Drawing.Size(170, 20)
+        Me.txtPassword.TabIndex = 3
+        '
+        'txtUsername
+        '
+        Me.txtUsername.Location = New System.Drawing.Point(70, 19)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.Size = New System.Drawing.Size(170, 20)
+        Me.txtUsername.TabIndex = 2
+        '
+        'lblPassword
+        '
+        Me.lblPassword.AutoSize = true
+        Me.lblPassword.Location = New System.Drawing.Point(6, 48)
+        Me.lblPassword.Name = "lblPassword"
+        Me.lblPassword.Size = New System.Drawing.Size(56, 13)
+        Me.lblPassword.TabIndex = 1
+        Me.lblPassword.Text = "Password:"
+        '
+        'lblUsername
+        '
+        Me.lblUsername.AutoSize = true
+        Me.lblUsername.Location = New System.Drawing.Point(6, 22)
+        Me.lblUsername.Name = "lblUsername"
+        Me.lblUsername.Size = New System.Drawing.Size(58, 13)
+        Me.lblUsername.TabIndex = 0
+        Me.lblUsername.Text = "Username:"
         '
         'GitUpdater
         '
@@ -224,10 +316,10 @@ Partial Class GitUpdater
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnExit
-        Me.ClientSize = New System.Drawing.Size(524, 243)
+        Me.ClientSize = New System.Drawing.Size(524, 376)
+        Me.Controls.Add(Me.grpCreds)
+        Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.progressBar)
-        Me.Controls.Add(Me.chkNoWait)
-        Me.Controls.Add(Me.chkDontClose)
         Me.Controls.Add(Me.chkPushForce)
         Me.Controls.Add(Me.chkRepeat)
         Me.Controls.Add(Me.btnGitPullNotSelected)
@@ -248,9 +340,21 @@ Partial Class GitUpdater
         Me.Text = "GitUpdater"
         Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         AddHandler Load, AddressOf Me.GitUpdater_Load
+        Me.grpOptions.ResumeLayout(false)
+        Me.grpOptions.PerformLayout
+        Me.grpCreds.ResumeLayout(false)
+        Me.grpCreds.PerformLayout
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private lblUsername As System.Windows.Forms.Label
+    Private lblPassword As System.Windows.Forms.Label
+    Private txtUsername As System.Windows.Forms.TextBox
+    Private txtPassword As System.Windows.Forms.TextBox
+    Private btnSave As System.Windows.Forms.Button
+    Private lblSaved As System.Windows.Forms.Label
+    Private grpCreds As System.Windows.Forms.GroupBox
+    Private grpOptions As System.Windows.Forms.GroupBox
     Private progressBar As System.Windows.Forms.ProgressBar
     Private chkNoWait As System.Windows.Forms.CheckBox
     Private chkDontClose As System.Windows.Forms.CheckBox

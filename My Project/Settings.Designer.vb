@@ -8,24 +8,23 @@
 ' </auto-generated>
 '------------------------------------------------------------------------------
 
-Option Strict On
+Option Strict Off
 Option Explicit On
 
 
 Namespace My
-
-    <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(), _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0"), _
-     Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)> _
-    Partial Friend NotInheritable Class MySettings
+    
+    <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("ICSharpCode.SettingsEditor.SettingsCodeGeneratorTool", "4.4.1.9729"),  _
+     Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
+    Partial Friend NotInheritable Class 
         Inherits Global.System.Configuration.ApplicationSettingsBase
-
-        Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings), MySettings)
-
-#Region "My.Settings Auto-Save Functionality"
-#If _MyType = "WindowsForms" Then
+        
+        Private Shared defaultInstance As System.Void = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New System.Void()),System.Void)
+        
+        #Region "Support for My.Application.SaveMySettingsOnExit"
+        #If _MyType = "WindowsForms" Then
         Private Shared addedHandler As Boolean
-
         Private Shared addedHandlerLockObject As New Object
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)> _
@@ -34,39 +33,59 @@ Namespace My
                 My.Settings.Save()
             End If
         End Sub
-#End If
-#End Region
-
-        Public Shared ReadOnly Property [Default]() As MySettings
+        #End If
+        #End Region
+        
+        Public Shared ReadOnly Property [Default]() As System.Void
             Get
-
-#If _MyType = "WindowsForms" Then
-                   If Not addedHandler Then
-                        SyncLock addedHandlerLockObject
-                            If Not addedHandler Then
-                                AddHandler My.Application.Shutdown, AddressOf AutoSaveSettings
-                                addedHandler = True
-                            End If
-                        End SyncLock
-                    End If
-#End If
+                #If _MyType = "WindowsForms" Then
+                If Not addedHandler Then
+                    SyncLock addedHandlerLockObject
+                        If Not addedHandler Then
+                            AddHandler My.Application.Shutdown, AddressOf AutoSaveSettings
+                            addedHandler = True
+                        End If
+                    End SyncLock
+                End If
+                #End If
                 Return defaultInstance
             End Get
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property Password() As String
+            Get
+                Return CType(Me("Password"),String)
+            End Get
+            Set
+                Me("Password") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property Username() As String
+            Get
+                Return CType(Me("Username"),String)
+            End Get
+            Set
+                Me("Username") = value
+            End Set
+        End Property
     End Class
-End Namespace
-
-Namespace My
     
-    <Global.Microsoft.VisualBasic.HideModuleNameAttribute(),  _
+    <Microsoft.VisualBasic.HideModuleNameAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.GitUpdater.My.MySettings
+        Friend ReadOnly Property Settings() As GitUpdater.My.Settings
             Get
-                Return Global.GitUpdater.My.MySettings.Default
+                Return GitUpdater.My.Settings.Default
             End Get
         End Property
     End Module

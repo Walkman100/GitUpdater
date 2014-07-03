@@ -11,6 +11,14 @@ Public Class GitUpdater
         End
     End Sub
     
+    Sub BtnSave_Click(sender As Object, e As EventArgs)
+        My.Settings.Username = txtUsername.Text
+        My.Settings.Password = txtPassword.Text
+        lblSaved.Visible = True
+        ' wait 2 seconds
+        lblSaved.Visible = False
+    End Sub
+    
     Sub GitUpdater_Load(sender As Object, e As EventArgs)
         lstDirs.Items.Clear
         For Each Repo As String In Directory.GetDirectories(Dir)
