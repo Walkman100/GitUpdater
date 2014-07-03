@@ -22,6 +22,7 @@ Partial Class GitUpdater
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GitUpdater))
         Me.btnExit = New System.Windows.Forms.Button()
         Me.btnGitPullAll = New System.Windows.Forms.Button()
@@ -47,6 +48,7 @@ Partial Class GitUpdater
         Me.txtUsername = New System.Windows.Forms.TextBox()
         Me.lblPassword = New System.Windows.Forms.Label()
         Me.lblUsername = New System.Windows.Forms.Label()
+        Me.timerKeyChecker = New System.Windows.Forms.Timer(Me.components)
         Me.grpOptions.SuspendLayout
         Me.grpCreds.SuspendLayout
         Me.SuspendLayout
@@ -270,6 +272,7 @@ Partial Class GitUpdater
         '
         'btnSave
         '
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnSave.Location = New System.Drawing.Point(165, 84)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
@@ -310,6 +313,10 @@ Partial Class GitUpdater
         Me.lblUsername.TabIndex = 0
         Me.lblUsername.Text = "Username:"
         '
+        'timerKeyChecker
+        '
+        AddHandler Me.timerKeyChecker.Tick, AddressOf Me.TimerKeyChecker_Tick
+        '
         'GitUpdater
         '
         Me.AcceptButton = Me.btnGitPushSelected
@@ -347,6 +354,7 @@ Partial Class GitUpdater
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private timerKeyChecker As System.Windows.Forms.Timer
     Private lblUsername As System.Windows.Forms.Label
     Private lblPassword As System.Windows.Forms.Label
     Private txtUsername As System.Windows.Forms.TextBox

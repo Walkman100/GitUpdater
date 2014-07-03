@@ -19,6 +19,13 @@ Public Class GitUpdater
         lblSaved.Visible = False
     End Sub
     
+    Sub TimerKeyChecker_Tick(sender As Object, e As EventArgs)
+        If My.Computer.Keyboard.CtrlKeyDown = True And My.Computer.Keyboard.ShiftKeyDown = True Then
+            SendKeys.send(txtUsername.Text & "{ENTER}")
+            SendKeys.send(txtPassword.Text & "{ENTER}")
+        End If
+    End Sub
+    
     Sub GitUpdater_Load(sender As Object, e As EventArgs)
         lstDirs.Items.Clear
         For Each Repo As String In Directory.GetDirectories(Dir)
@@ -78,6 +85,7 @@ Public Class GitUpdater
     End Sub
     
     Sub BtnGitPushAll_Click(sender As Object, e As EventArgs)
+        timerKeyChecker.Start
         progressBar.Visible = True
         progressBar.Maximum = lstDirs.Items.Count
         If chkPushForce.Checked = True Then ForcePush = "-f"
@@ -93,27 +101,32 @@ Public Class GitUpdater
             Next
         End If
         progressBar.Visible = False
+        timerKeyChecker.Stop
     End Sub
     
     Sub BtnGitPullSelected_Click(sender As Object, e As EventArgs)
+        timerKeyChecker.Start
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
             Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True, 1000)
         End If
+        timerKeyChecker.Stop
     End Sub
     
     Sub BtnGitPushSelected_Click(sender As Object, e As EventArgs)
+        timerKeyChecker.Start
         If chkPushForce.Checked = True Then ForcePush = "-f"
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
             Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True, 1000)
         End If
-        
+        timerKeyChecker.Stop
     End Sub
     
     Sub BtnGitPullNotSelected_Click(sender As Object, e As EventArgs)
+        timerKeyChecker.Start
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
@@ -136,9 +149,11 @@ Public Class GitUpdater
             End If
             progressBar.Visible = False
         End If
+        timerKeyChecker.Stop
     End Sub
     
     Sub BtnGitPushNotSelected_Click(sender As Object, e As EventArgs)
+        timerKeyChecker.Start
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
@@ -161,5 +176,7 @@ Public Class GitUpdater
             End If
             progressBar.Visible = False
         End If
+        timerKeyChecker.Stop
     End Sub
+    
 End Class
