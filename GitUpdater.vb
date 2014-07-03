@@ -66,7 +66,7 @@ Public Class GitUpdater
 '            System.Threading.Thread.Sleep(100)
 '            'Process.Start(cmdPath, "/k " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull")
 '            'Shell(Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", vbNormalFocus, True)
-        Next
+        
     End Sub
     
     Sub BtnGitPushAll_Click(sender As Object, e As EventArgs)
