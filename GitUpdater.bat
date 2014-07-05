@@ -28,7 +28,8 @@ IF %3==True (
 
 :End
 IF %4==True (
-    echo Press enter to close this script. Unless you specified the "Don't wait for cmd to close before starting next" option, scripts will not continue entil you close this window.
+    echo.
+    echo Press enter to close this window. Unless you specified the "Don't wait for cmd to close before starting next" option, further git commands will not start entil you close this window.
     Pause
 )
 exit

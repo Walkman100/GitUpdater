@@ -119,7 +119,11 @@ Public Class GitUpdater
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
-            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True, 1000)
+            If chkNoWait.Checked = False Then
+                Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True)
+            Else
+                Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True, 1000)
+            End If
         End If
         timerKeyChecker.Stop
     End Sub
@@ -130,7 +134,11 @@ Public Class GitUpdater
         If lstDirs.SelectedIndex = -1 Then
             MsgBox("No item selected")
         Else
-            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True, 1000)
+            If chkNoWait.Checked = False Then
+                Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True)
+            Else
+                Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True, 1000)
+            End If
         End If
         timerKeyChecker.Stop
     End Sub
