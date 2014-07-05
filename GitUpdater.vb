@@ -19,6 +19,14 @@ Public Class GitUpdater
         lblSaved.Visible = False
     End Sub
     
+    Sub btnShowPass_MouseDown(sender As Object, e As EventArgs)
+        txtPassword.PasswordChar = ""
+    End Sub
+    
+    Sub btnShowPass_MouseUp(sender As Object, e As EventArgs)
+        txtPassword.PasswordChar = "●"
+    End Sub
+    
     Sub TimerKeyChecker_Tick(sender As Object, e As EventArgs)
         If My.Computer.Keyboard.CtrlKeyDown = True And My.Computer.Keyboard.ShiftKeyDown = True Then
             SendKeys.send(txtUsername.Text & "{ENTER}")
@@ -31,6 +39,8 @@ Public Class GitUpdater
         For Each Repo As String In Directory.GetDirectories(Dir)
             lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
         Next
+        txtUsername.Text = My.Settings.Username
+        txtPassword.Text = My.Settings.Password
     End Sub
     
     Sub BtnRefresh_Click(sender As Object, e As EventArgs)
@@ -178,5 +188,4 @@ Public Class GitUpdater
         End If
         timerKeyChecker.Stop
     End Sub
-    
 End Class
