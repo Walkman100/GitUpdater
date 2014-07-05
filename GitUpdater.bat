@@ -21,10 +21,9 @@ IF ERRORLEVEL==1 (
 
 :Repeat
 IF %3==True (
-    echo Failed to %2 repo at %1, trying again...
+    echo.
+    echo Failed to %2 repo at "%1", trying again...
     goto Start
-) ELSE (
-    
 )
 
 :End
