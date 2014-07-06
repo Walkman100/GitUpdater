@@ -19,6 +19,19 @@ Public Class GitUpdater
         For Each Repo As String In Directory.GetDirectories(Dir)
             lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
         Next
+        
+        'Command Line Args
+        For Each s As String In My.Application.CommandLineArgs
+            
+            RunShell(Strings.Right(s, Len(s)-4), Strings.Left(s, 4))
+            
+            ' code from SteamPlaceHolder:
+'            If s = "hideGUI" Or s = "hidegui" Then
+'                WindowState = FormWindowState.Minimized
+'            ElseIf s <> "hideGUI"
+'                ProgArg = s
+'            End If
+        Next
     End Sub
     
     Sub BtnRefresh_Click(sender As Object, e As EventArgs)
