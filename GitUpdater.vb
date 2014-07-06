@@ -5,6 +5,7 @@ Public Class GitUpdater
     
     Dim usrProfile As String = Environment.GetEnvironmentVariable("HOMEPATH")
     Dim Dir As String = usrProfile & "\Documents\GitHub"
+    Dim cmdRepo As String = ""
     
     Dim Wait As Integer = -1   'Wait until cmd closes
     Dim CmdStyle As AppWinStyle = AppWinStyle.MinimizedFocus
@@ -20,17 +21,42 @@ Public Class GitUpdater
             lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
         Next
         
+        Dim rundir As Boolean = False
+        Dim gitcmd As Boolean = False
+        Dim fullRepoPath As Boolean = True
+        Dim tmpGitCommand As String = ""
         'Command Line Args
         For Each s As String In My.Application.CommandLineArgs
+            If gitcmd = False Then
+                If rundir = False Then
+                    If s = "-dir" Or "/dir" Or "\dir" Or "dir" Then
+                        rundir = True
+                    Else
+                        tmpGitCommand = s
+                        gitcmd = True
+                    End If
+                Else
+                    If fullRepoPath = True Then
+                        If File.Exists(s) Then
+                            Dir = Strings.Left(s, Len(s)-Len(cmdRepo))
+                            fullRepoPath = False
+                        Else
+                            cmdRepo = s
+                            rundir = False
+                        End If
+                    Else
+                        cmdRepo = s
+                        rundir = False
+                        fullRepoPath = True
+                    End If
+                End If
+            Else
+                If s = "all" Or s = "selected" Or s = "notselected" Or s = "cmdselected" Or s = "cmdnotselected" Then
+                    RunShell(s, tmpGitCommand)
+                    gitcmd = False
+                End If
+            End If
             
-            RunShell(Strings.Right(s, Len(s)-4), Strings.Left(s, 4))
-            
-            ' code from SteamPlaceHolder:
-'            If s = "hideGUI" Or s = "hidegui" Then
-'                WindowState = FormWindowState.Minimized
-'            ElseIf s <> "hideGUI"
-'                ProgArg = s
-'            End If
         Next
     End Sub
     
@@ -74,6 +100,22 @@ Public Class GitUpdater
             Else
                 For i = 1 To lstDirs.Items.Count
                     If i - 1 <> lstDirs.SelectedIndex Then
+                        Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+                    End If
+                Next
+            End If
+        ElseIf count = "cmdselected" Then
+            If cmdRepo = "" Then
+                MsgBox("No repo passed from command line")
+            Else
+                Shell("GitUpdater.bat " & Dir & "\" & cmdRepo & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+            End If
+        ElseIf count = "cmdnotselected" Then
+            If cmdRepo = "" Then
+                MsgBox("No repo passed from command line")
+            Else
+                For i = 1 To lstDirs.Items.Count
+                    If i - 1 <> cmdRepo Then
                         Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
                     End If
                 Next

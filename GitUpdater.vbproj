@@ -63,7 +63,7 @@
     <Optimize>False</Optimize>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
     <StartAction>Project</StartAction>
-    <StartArguments>pullall</StartArguments>
+    <StartArguments>-dir GitUpdater push cmdselected</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
     <BaseAddress>4194304</BaseAddress>
