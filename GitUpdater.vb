@@ -6,8 +6,8 @@ Public Class GitUpdater
     Dim usrProfile As String = Environment.GetEnvironmentVariable("HOMEPATH")
     Dim Dir As String = usrProfile & "\Documents\GitHub"
     
-    Dim Wait As String = "-1"   'Wait until cwd closes
-    Dim DontShow As String = ""
+    Dim Wait As Integer = -1   'Wait until cmd closes
+    Dim CmdStyle As AppWinStyle = AppWinStyle.MinimizedFocus
     Dim ForcePush As String = ""
     
     Private Sub btnExit_Click(sender As Object, e As EventArgs)
@@ -40,29 +40,36 @@ Public Class GitUpdater
         Next
     End Sub
     
-    Sub RunShell(count As String, cmd As String)
-        If chkDontShow.Checked = True Then DontShow = vbNormalFocus
+    Sub RunShell(count As String, GitCommand As String)
+        If chkNoWait.Checked = True Then Wait = 1000 Else Wait = -1
+        If chkDontShow.Checked = True Then CmdStyle = AppWinStyle.MinimizedFocus Else CmdStyle = vbNormalFocus
         If chkPushForce.Checked = True Then ForcePush = "-f"
         
         If count = "all" Then
-            
+            For i = 1 To lstDirs.Items.Count
+                Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+            Next
         ElseIf count = "selected" Then
-            
+            If lstDirs.SelectedIndex = -1 Then
+                MsgBox("No item selected")
+            Else
+                Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+            End If
         ElseIf count = "notselected" Then
-            
+            If lstDirs.SelectedIndex = -1 Then
+                MsgBox("No item selected")
+            Else
+                For i = 1 To lstDirs.Items.Count
+                    If i - 1 <> lstDirs.SelectedIndex Then
+                        Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+                    End If
+                Next
+            End If
         End If
     End Sub
     
     Sub BtnGitPullAll_Click(sender As Object, e As EventArgs)
-        If chkNoWait.Checked = False Then
-            For i = 1 To lstDirs.Items.Count
-                Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True)
-            Next
-        Else
-            For i = 1 To lstDirs.Items.Count
-                Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True, 1000)
-            Next
-        End If
+        RunShell("all", "pull")
         
 ' another way to do a comment block: http://forums.asp.net/post/4414215.aspx
 '            'MsgBox("/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
@@ -81,72 +88,22 @@ Public Class GitUpdater
     End Sub
     
     Sub BtnGitPushAll_Click(sender As Object, e As EventArgs)
-        If chkPushForce.Checked = True Then ForcePush = "-f"
-        If chkNoWait.Checked = False Then
-            For i = 1 To lstDirs.Items.Count
-                Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True)
-            Next
-        Else
-            For i = 1 To lstDirs.Items.Count
-                Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True, 1000)
-            Next
-        End If
+        RunShell("all", "push")
     End Sub
     
     Sub BtnGitPullSelected_Click(sender As Object, e As EventArgs)
-        If lstDirs.SelectedIndex = -1 Then
-            MsgBox("No item selected")
-        Else
-            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True, 1000)
-        End If
+        RunShell("selected", "pull")
     End Sub
     
     Sub BtnGitPushSelected_Click(sender As Object, e As EventArgs)
-        If chkPushForce.Checked = True Then ForcePush = "-f"
-        If lstDirs.SelectedIndex = -1 Then
-            MsgBox("No item selected")
-        Else
-            Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " push " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & ForcePush, vbNormalFocus, True, 1000)
-        End If
+        RunShell("selected", "push")
     End Sub
     
     Sub BtnGitPullNotSelected_Click(sender As Object, e As EventArgs)
-        If lstDirs.SelectedIndex = -1 Then
-            MsgBox("No item selected")
-        Else
-            If chkNoWait.Checked = False Then
-                For i = 1 To lstDirs.Items.Count
-                    If i - 1 <> lstDirs.SelectedIndex Then
-                        Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True)
-                    End If
-                Next
-            Else
-                For i = 1 To lstDirs.Items.Count
-                    If i - 1 <> lstDirs.SelectedIndex Then
-                        Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True, 1000)
-                    End If
-                Next
-            End If
-        End If
+        RunShell("notselected", "pull")
     End Sub
     
     Sub BtnGitPushNotSelected_Click(sender As Object, e As EventArgs)
-        If lstDirs.SelectedIndex = -1 Then
-            MsgBox("No item selected")
-        Else
-            If chkNoWait.Checked = False Then
-                For i = 1 To lstDirs.Items.Count
-                    If i - 1 <> lstDirs.SelectedIndex Then
-                        Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True)
-                    End If
-                Next
-            Else
-                For i = 1 To lstDirs.Items.Count
-                    If i - 1 <> lstDirs.SelectedIndex Then
-                        Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " pull " & chkRepeat.Checked & " " & chkDontClose.Checked, vbNormalFocus, True, 1000)
-                    End If
-                Next
-            End If
-        End If
+        RunShell("notselected", "push")
     End Sub
 End Class
