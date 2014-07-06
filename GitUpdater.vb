@@ -29,7 +29,7 @@ Public Class GitUpdater
         For Each s As String In My.Application.CommandLineArgs
             If gitcmd = False Then
                 If rundir = False Then
-                    If s = "-dir" Or "/dir" Or "\dir" Or "dir" Then
+                    If s = "-dir" Or s = "/dir" Or s = "\dir" Or s = "dir" Then
                         rundir = True
                     Else
                         tmpGitCommand = s
