@@ -3,7 +3,8 @@
 rem %1 is folder/repo, %2 is git command (like "pull" or "push"), %5 is commands after that (like -f)
 rem %3 is True if it should repeat until success, %4 is True if it should not close when done
 
-rem Remove "rem" from line below to show all parameters when bat file launches
+rem Remove "rem" from lines below to show all parameters when bat file launches
+rem echo Parameters: "%*"
 rem echo 1: %1 2: %2 3: %3 4: %4 5: %5
 
 echo Git %2ing repo at location "%1"

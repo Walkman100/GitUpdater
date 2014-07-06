@@ -49,7 +49,7 @@ Partial Class GitUpdater
         '
         Me.btnExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnExit.Location = New System.Drawing.Point(434, 363)
+        Me.btnExit.Location = New System.Drawing.Point(434, 267)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(78, 23)
         Me.btnExit.TabIndex = 10
@@ -90,14 +90,14 @@ Partial Class GitUpdater
         Me.lstDirs.Location = New System.Drawing.Point(12, 12)
         Me.lstDirs.Name = "lstDirs"
         Me.lstDirs.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lstDirs.Size = New System.Drawing.Size(248, 374)
+        Me.lstDirs.Size = New System.Drawing.Size(248, 278)
         Me.lstDirs.Sorted = true
         Me.lstDirs.TabIndex = 13
         '
         'btnRefresh
         '
         Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnRefresh.Location = New System.Drawing.Point(266, 363)
+        Me.btnRefresh.Location = New System.Drawing.Point(266, 267)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(78, 23)
         Me.btnRefresh.TabIndex = 14
@@ -130,7 +130,7 @@ Partial Class GitUpdater
         'btnCD
         '
         Me.btnCD.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnCD.Location = New System.Drawing.Point(350, 363)
+        Me.btnCD.Location = New System.Drawing.Point(350, 267)
         Me.btnCD.Name = "btnCD"
         Me.btnCD.Size = New System.Drawing.Size(78, 23)
         Me.btnCD.TabIndex = 17
@@ -219,7 +219,7 @@ Partial Class GitUpdater
         Me.grpGUI.Controls.Add(Me.chkDontClose)
         Me.grpGUI.Location = New System.Drawing.Point(266, 99)
         Me.grpGUI.Name = "grpGUI"
-        Me.grpGUI.Size = New System.Drawing.Size(246, 187)
+        Me.grpGUI.Size = New System.Drawing.Size(246, 91)
         Me.grpGUI.TabIndex = 25
         Me.grpGUI.TabStop = false
         Me.grpGUI.Text = "GUI Options"
@@ -239,7 +239,7 @@ Partial Class GitUpdater
         Me.grpData.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.grpData.Controls.Add(Me.chkPushForce)
         Me.grpData.Controls.Add(Me.chkRepeat)
-        Me.grpData.Location = New System.Drawing.Point(266, 292)
+        Me.grpData.Location = New System.Drawing.Point(266, 196)
         Me.grpData.Name = "grpData"
         Me.grpData.Size = New System.Drawing.Size(246, 65)
         Me.grpData.TabIndex = 26
@@ -252,7 +252,7 @@ Partial Class GitUpdater
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnExit
-        Me.ClientSize = New System.Drawing.Size(524, 398)
+        Me.ClientSize = New System.Drawing.Size(524, 302)
         Me.Controls.Add(Me.grpData)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnCD)

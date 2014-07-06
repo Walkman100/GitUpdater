@@ -5,6 +5,9 @@ Public Class GitUpdater
     
     Dim usrProfile As String = Environment.GetEnvironmentVariable("HOMEPATH")
     Dim Dir As String = usrProfile & "\Documents\GitHub"
+    
+    Dim Wait As String = "-1"   'Wait until cwd closes
+    Dim DontShow As String = ""
     Dim ForcePush As String = ""
     
     Private Sub btnExit_Click(sender As Object, e As EventArgs)
@@ -35,6 +38,19 @@ Public Class GitUpdater
         For Each Repo As String In Directory.GetDirectories(Dir)
             lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
         Next
+    End Sub
+    
+    Sub RunShell(count As String, cmd As String)
+        If chkDontShow.Checked = True Then DontShow = vbNormalFocus
+        If chkPushForce.Checked = True Then ForcePush = "-f"
+        
+        If count = "all" Then
+            
+        ElseIf count = "selected" Then
+            
+        ElseIf count = "notselected" Then
+            
+        End If
     End Sub
     
     Sub BtnGitPullAll_Click(sender As Object, e As EventArgs)
