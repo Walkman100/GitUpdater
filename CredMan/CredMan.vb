@@ -10,6 +10,7 @@ Public Class CredMan
     Sub BtnSave_Click(sender As Object, e As EventArgs)
         My.Settings.Username = txtUsername.Text
         My.Settings.Password = txtPassword.Text
+        My.Settings.Save()
         lblSaved.Visible = True
         ' wait 2 seconds
         lblSaved.Visible = False
