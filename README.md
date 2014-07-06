@@ -36,7 +36,7 @@ To do this you use an external program to launch GitUpdater with command line ar
 
 An external program that you can use is Windows itself, using the Windows Task Scheduler:
 
-1. Press <kbd>Windows Key</kbd> & <kbd>R</kbd>
+1. Press <kbd>⊞ Win</kbd> & <kbd>R</kbd>
 
 2. Type `taskschd.msc` or copy and paste, then press enter
 
