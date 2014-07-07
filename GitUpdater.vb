@@ -161,4 +161,12 @@ Public Class GitUpdater
     Sub BtnGitPushNotSelected_Click(sender As Object, e As EventArgs)
         RunShell("notselected", "push")
     End Sub
+    
+    Sub BtnLaunchCredMan_Click(sender As Object, e As EventArgs)
+        If File.Exists("CredMan.exe") Then
+            Process.Start("CredMan.exe")
+        Else
+            MsgBox("CredMan.exe Not found!")
+        End If
+    End Sub
 End Class
