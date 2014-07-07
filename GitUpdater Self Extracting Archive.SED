@@ -5,7 +5,7 @@ SEDVersion=3
 PackagePurpose=ExtractOnly
 ShowInstallProgramWindow=0
 HideExtractAnimation=0
-UseLongFileName=0
+UseLongFileName=1
 InsideCompressed=0
 CAB_FixedSize=0
 CAB_ResvCodeSigning=0
@@ -22,7 +22,7 @@ UserQuietInstCmd=%UserQuietInstCmd%
 SourceFiles=SourceFiles
 [Strings]
 InstallPrompt=
-DisplayLicense=C:\Users\Matthew\Documents\GitHub\GitUpdater\README.md
+DisplayLicense=C:\Users\Matthew\Documents\GitHub\GitUpdater\LICENSE.md
 FinishMessage=
 TargetName=C:\Users\Matthew\Documents\GitHub\GitUpdater\bin\Release\GitUpdater Self Extracting Archive.exe
 FriendlyName=GitUpdater
