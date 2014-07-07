@@ -26,8 +26,9 @@ Partial Class CredMan
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CredMan))
         Me.btnExit = New System.Windows.Forms.Button()
         Me.grpCreds = New System.Windows.Forms.GroupBox()
+        Me.btnInsert = New System.Windows.Forms.Button()
         Me.lblKeys = New System.Windows.Forms.Label()
-        Me.btnChangeKeys = New System.Windows.Forms.Button()
+        Me.btnStartStop = New System.Windows.Forms.Button()
         Me.btnShowPass = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.txtPassword = New System.Windows.Forms.TextBox()
@@ -42,7 +43,7 @@ Partial Class CredMan
         '
         Me.btnExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnExit.Location = New System.Drawing.Point(312, 71)
+        Me.btnExit.Location = New System.Drawing.Point(171, 100)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(78, 23)
         Me.btnExit.TabIndex = 10
@@ -55,8 +56,9 @@ Partial Class CredMan
         Me.grpCreds.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
                         Or System.Windows.Forms.AnchorStyles.Left)  _
                         Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.grpCreds.Controls.Add(Me.btnInsert)
         Me.grpCreds.Controls.Add(Me.lblKeys)
-        Me.grpCreds.Controls.Add(Me.btnChangeKeys)
+        Me.grpCreds.Controls.Add(Me.btnStartStop)
         Me.grpCreds.Controls.Add(Me.btnExit)
         Me.grpCreds.Controls.Add(Me.btnShowPass)
         Me.grpCreds.Controls.Add(Me.btnSave)
@@ -66,33 +68,45 @@ Partial Class CredMan
         Me.grpCreds.Controls.Add(Me.lblUsername)
         Me.grpCreds.Location = New System.Drawing.Point(12, 12)
         Me.grpCreds.Name = "grpCreds"
-        Me.grpCreds.Size = New System.Drawing.Size(396, 100)
+        Me.grpCreds.Size = New System.Drawing.Size(255, 129)
         Me.grpCreds.TabIndex = 26
         Me.grpCreds.TabStop = false
         Me.grpCreds.Text = "Credentials Management"
+        '
+        'btnInsert
+        '
+        Me.btnInsert.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.btnInsert.Location = New System.Drawing.Point(6, 100)
+        Me.btnInsert.Name = "btnInsert"
+        Me.btnInsert.Size = New System.Drawing.Size(75, 23)
+        Me.btnInsert.TabIndex = 30
+        Me.btnInsert.Text = "Insert data..."
+        Me.btnInsert.UseVisualStyleBackColor = true
+        AddHandler Me.btnInsert.Click, AddressOf Me.BtnInsert_Click
         '
         'lblKeys
         '
         Me.lblKeys.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left)  _
                         Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lblKeys.AutoEllipsis = true
-        Me.lblKeys.Location = New System.Drawing.Point(101, 76)
+        Me.lblKeys.Location = New System.Drawing.Point(101, 71)
         Me.lblKeys.Name = "lblKeys"
-        Me.lblKeys.Size = New System.Drawing.Size(121, 13)
+        Me.lblKeys.Size = New System.Drawing.Size(148, 23)
         Me.lblKeys.TabIndex = 29
-        Me.lblKeys.Text = "Current keys: Shift + Ctrl"
+        Me.lblKeys.Text = "Current key(s): Alt"
+        Me.lblKeys.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'btnChangeKeys
+        'btnStartStop
         '
-        Me.btnChangeKeys.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
-        Me.btnChangeKeys.AutoSize = true
-        Me.btnChangeKeys.Location = New System.Drawing.Point(6, 71)
-        Me.btnChangeKeys.Name = "btnChangeKeys"
-        Me.btnChangeKeys.Size = New System.Drawing.Size(89, 23)
-        Me.btnChangeKeys.TabIndex = 28
-        Me.btnChangeKeys.Text = "Change Keys..."
-        Me.btnChangeKeys.UseVisualStyleBackColor = true
-        AddHandler Me.btnChangeKeys.Click, AddressOf Me.BtnChangeKeys_Click
+        Me.btnStartStop.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.btnStartStop.AutoSize = true
+        Me.btnStartStop.Location = New System.Drawing.Point(6, 71)
+        Me.btnStartStop.Name = "btnStartStop"
+        Me.btnStartStop.Size = New System.Drawing.Size(89, 23)
+        Me.btnStartStop.TabIndex = 28
+        Me.btnStartStop.Text = "Hotkey On"
+        Me.btnStartStop.UseVisualStyleBackColor = true
+        AddHandler Me.btnStartStop.Click, AddressOf Me.BtnStartStop_Click
         '
         'btnShowPass
         '
@@ -105,7 +119,7 @@ Partial Class CredMan
         Me.btnShowPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnShowPass.ForeColor = System.Drawing.Color.Transparent
         Me.btnShowPass.Image = CType(resources.GetObject("btnShowPass.Image"),System.Drawing.Image)
-        Me.btnShowPass.Location = New System.Drawing.Point(368, 47)
+        Me.btnShowPass.Location = New System.Drawing.Point(226, 47)
         Me.btnShowPass.Name = "btnShowPass"
         Me.btnShowPass.Size = New System.Drawing.Size(20, 16)
         Me.btnShowPass.TabIndex = 27
@@ -116,7 +130,7 @@ Partial Class CredMan
         'btnSave
         '
         Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnSave.Location = New System.Drawing.Point(228, 71)
+        Me.btnSave.Location = New System.Drawing.Point(87, 100)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(78, 23)
         Me.btnSave.TabIndex = 4
@@ -131,7 +145,7 @@ Partial Class CredMan
         Me.txtPassword.Location = New System.Drawing.Point(70, 45)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(9679)
-        Me.txtPassword.Size = New System.Drawing.Size(320, 20)
+        Me.txtPassword.Size = New System.Drawing.Size(179, 20)
         Me.txtPassword.TabIndex = 3
         '
         'txtUsername
@@ -140,7 +154,7 @@ Partial Class CredMan
                         Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.txtUsername.Location = New System.Drawing.Point(70, 19)
         Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.Size = New System.Drawing.Size(320, 20)
+        Me.txtUsername.Size = New System.Drawing.Size(179, 20)
         Me.txtUsername.TabIndex = 2
         '
         'lblPassword
@@ -167,10 +181,11 @@ Partial Class CredMan
         '
         'CredMan
         '
+        Me.AcceptButton = Me.btnInsert
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnExit
-        Me.ClientSize = New System.Drawing.Size(420, 124)
+        Me.ClientSize = New System.Drawing.Size(279, 153)
         Me.Controls.Add(Me.grpCreds)
         Me.HelpButton = true
         Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
@@ -184,8 +199,9 @@ Partial Class CredMan
         Me.grpCreds.PerformLayout
         Me.ResumeLayout(false)
     End Sub
+    Private btnStartStop As System.Windows.Forms.Button
+    Private btnInsert As System.Windows.Forms.Button
     Private lblKeys As System.Windows.Forms.Label
-    Private btnChangeKeys As System.Windows.Forms.Button
     Private btnShowPass As System.Windows.Forms.Button
     Private timerKeyChecker As System.Windows.Forms.Timer
     Private lblUsername As System.Windows.Forms.Label
