@@ -6,7 +6,6 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{09E48E59-9699-400E-8F08-B10A43CB7862}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>GitUpdater.GitUpdater</StartupObject>
     <RootNamespace>GitUpdater</RootNamespace>
     <AssemblyName>GitUpdater</AssemblyName>
     <FileAlignment>512</FileAlignment>
