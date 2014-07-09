@@ -115,7 +115,7 @@ Public Class GitUpdater
                 MsgBox("No repo passed from command line")
             Else
                 For i = 1 To lstDirs.Items.Count
-                    If i - 1 <> cmdRepo Then
+                    If lstDirs.Items.Item(i - 1) <> cmdRepo Then
                         Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
                     End If
                 Next
