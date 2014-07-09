@@ -284,7 +284,7 @@ Partial Class GitUpdater
         Me.Name = "GitUpdater"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "GitUpdater"
+        Me.Text = "Git Updater"
         Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         AddHandler Load, AddressOf Me.GitUpdater_Load
         Me.grpGUI.ResumeLayout(false)
