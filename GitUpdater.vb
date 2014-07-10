@@ -8,8 +8,10 @@ Public Class GitUpdater
     Dim cmdRepo As String = ""
     
     Dim Wait As Integer = -1   'Wait until cmd closes
-    Dim CmdStyle As AppWinStyle = AppWinStyle.MinimizedFocus
+    Dim CmdStyle As AppWinStyle = AppWinStyle.MinimizedFocus   'window location of CMD
     Dim ForcePush As String = ""
+    
+    Dim count, GitCommand As String   'because the Worker doesn't support direct sub calling
     
     Private Sub btnExit_Click(sender As Object, e As EventArgs)
         End
@@ -52,7 +54,13 @@ Public Class GitUpdater
                 End If
             Else
                 If s = "all" Or s = "selected" Or s = "notselected" Or s = "cmdselected" Or s = "cmdnotselected" Then
-                    RunShell(s, tmpGitCommand)
+                    count = s
+                    GitCommand = tmpGitCommand
+                    If ShellWorker.IsBusy = False Then
+                        ShellWorker.RunWorkerAsync
+                    Else
+                        MsgBox("A script is currently in progress!")
+                    End If
                     gitcmd = False
                 End If
             End If
@@ -79,21 +87,28 @@ Public Class GitUpdater
         Next
     End Sub
     
-    Sub RunShell(count As String, GitCommand As String)
+    Sub ShellWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
         If chkNoWait.Checked = True Then Wait = 1000 Else Wait = -1
         If chkDontShow.Checked = True Then CmdStyle = AppWinStyle.MinimizedFocus Else CmdStyle = vbNormalFocus
         If chkPushForce.Checked = True Then ForcePush = "-f"
+        progressBar.Maximum = lstDirs.Items.Count
         
         If count = "all" Then
             For i = 1 To lstDirs.Items.Count
                 Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+                progressBar.Value = i
             Next
+            
         ElseIf count = "selected" Then
             If lstDirs.SelectedIndex = -1 Then
                 MsgBox("No item selected")
             Else
+                progressBar.Maximum = 2
+                progressBar.Value = 1
                 Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+                progressBar.Value = 2
             End If
+            
         ElseIf count = "notselected" Then
             If lstDirs.SelectedIndex = -1 Then
                 MsgBox("No item selected")
@@ -102,14 +117,20 @@ Public Class GitUpdater
                     If i - 1 <> lstDirs.SelectedIndex Then
                         Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
                     End If
+                    progressBar.Value = i
                 Next
             End If
+            
         ElseIf count = "cmdselected" Then
             If cmdRepo = "" Then
                 MsgBox("No repo passed from command line")
             Else
+                progressBar.Maximum = 2
+                progressBar.Value = 1
                 Shell("GitUpdater.bat " & Dir & "\" & cmdRepo & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+                progressBar.Value = 2
             End If
+            
         ElseIf count = "cmdnotselected" Then
             If cmdRepo = "" Then
                 MsgBox("No repo passed from command line")
@@ -117,14 +138,22 @@ Public Class GitUpdater
                 For i = 1 To lstDirs.Items.Count
                     If lstDirs.Items.Item(i - 1) <> cmdRepo Then
                         Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+                        progressBar.Value = i
                     End If
                 Next
             End If
+            
         End If
     End Sub
     
     Sub BtnGitPullAll_Click(sender As Object, e As EventArgs)
-        RunShell("all", "pull")
+        count = "all"
+        GitCommand = "pull"
+        If ShellWorker.IsBusy = False Then
+            ShellWorker.RunWorkerAsync
+        Else
+            MsgBox("A git session is currently in progress!")
+        End If
         
 ' another way to do a comment block: http://forums.asp.net/post/4414215.aspx
 '            'MsgBox("/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
@@ -143,23 +172,53 @@ Public Class GitUpdater
     End Sub
     
     Sub BtnGitPushAll_Click(sender As Object, e As EventArgs)
-        RunShell("all", "push")
+        count = "all"
+        GitCommand = "push"
+        If ShellWorker.IsBusy = False Then
+            ShellWorker.RunWorkerAsync
+        Else
+            MsgBox("A git session is currently in progress!")
+        End If
     End Sub
     
     Sub BtnGitPullSelected_Click(sender As Object, e As EventArgs)
-        RunShell("selected", "pull")
+        count = "selected"
+        GitCommand = "pull"
+        If ShellWorker.IsBusy = False Then
+            ShellWorker.RunWorkerAsync
+        Else
+            MsgBox("A git session is currently in progress!")
+        End If
     End Sub
     
     Sub BtnGitPushSelected_Click(sender As Object, e As EventArgs)
-        RunShell("selected", "push")
+        count = "selected"
+        GitCommand = "push"
+        If ShellWorker.IsBusy = False Then
+            ShellWorker.RunWorkerAsync
+        Else
+            MsgBox("A git session is currently in progress!")
+        End If
     End Sub
     
     Sub BtnGitPullNotSelected_Click(sender As Object, e As EventArgs)
-        RunShell("notselected", "pull")
+        count = "notselected"
+        GitCommand = "pull"
+        If ShellWorker.IsBusy = False Then
+            ShellWorker.RunWorkerAsync
+        Else
+            MsgBox("A git session is currently in progress!")
+        End If
     End Sub
     
     Sub BtnGitPushNotSelected_Click(sender As Object, e As EventArgs)
-        RunShell("notselected", "push")
+        count = "notselected"
+        GitCommand = "push"
+        If ShellWorker.IsBusy = False Then
+            ShellWorker.RunWorkerAsync
+        Else
+            MsgBox("A git session is currently in progress!")
+        End If
     End Sub
     
     Sub BtnLaunchCredMan_Click(sender As Object, e As EventArgs)
@@ -168,5 +227,9 @@ Public Class GitUpdater
         Else
             MsgBox("CredMan.exe Not found!")
         End If
+    End Sub
+    
+    Sub ShellWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs)
+        MsgBox("Complete!")
     End Sub
 End Class
