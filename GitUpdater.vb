@@ -280,8 +280,9 @@ Public Class GitUpdater
     
     Sub TimerKeyChecker_Tick(sender As Object, e As EventArgs)
         If My.Computer.Keyboard.AltKeyDown = True Then
-            SendKeys.send(txtUsername.Text & "{ENTER}")
-            SendKeys.send(txtPassword.Text & "{ENTER}")
+            SendKeys.send(txtUsername.Text & "~")
+            SendKeys.send(txtPassword.Text & "~")
+            ' See http://msdn.microsoft.com/en-us/library/system.windows.forms.sendkeys.send(v=vs.110).aspx
         End If
     End Sub
     
@@ -301,5 +302,14 @@ Public Class GitUpdater
     
     Sub btnShowPass_MouseUp(sender As Object, e As EventArgs)
         txtPassword.PasswordChar = "●"
+    End Sub
+    
+    Sub BtnCloseCmd_Click(sender As Object, e As EventArgs)
+        Me.WindowState = FormWindowState.Minimized
+        System.Threading.Thread.Sleep(1000)
+        SendKeys.send("^C")
+        SendKeys.send("Y{ENTER}")
+        System.Threading.Thread.Sleep(1000)
+        Me.WindowState = FormWindowState.Normal
     End Sub
 End Class

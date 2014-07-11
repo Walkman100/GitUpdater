@@ -56,6 +56,7 @@ Partial Class GitUpdater
         Me.txtUsername = New System.Windows.Forms.TextBox()
         Me.lblUsername = New System.Windows.Forms.Label()
         Me.timerKeyChecker = New System.Windows.Forms.Timer(Me.components)
+        Me.btnCloseCmd = New System.Windows.Forms.Button()
         Me.grpGUI.SuspendLayout
         Me.grpData.SuspendLayout
         Me.grpCredMan.SuspendLayout
@@ -66,7 +67,7 @@ Partial Class GitUpdater
         Me.btnExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnExit.AutoSize = true
         Me.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnExit.Location = New System.Drawing.Point(449, 428)
+        Me.btnExit.Location = New System.Drawing.Point(449, 457)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(63, 23)
         Me.btnExit.TabIndex = 10
@@ -107,7 +108,7 @@ Partial Class GitUpdater
         Me.lstRepos.Location = New System.Drawing.Point(12, 12)
         Me.lstRepos.Name = "lstRepos"
         Me.lstRepos.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lstRepos.Size = New System.Drawing.Size(248, 439)
+        Me.lstRepos.Size = New System.Drawing.Size(248, 468)
         Me.lstRepos.Sorted = true
         Me.lstRepos.TabIndex = 13
         '
@@ -115,7 +116,7 @@ Partial Class GitUpdater
         '
         Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnRefresh.AutoSize = true
-        Me.btnRefresh.Location = New System.Drawing.Point(266, 428)
+        Me.btnRefresh.Location = New System.Drawing.Point(266, 457)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(63, 23)
         Me.btnRefresh.TabIndex = 14
@@ -149,7 +150,7 @@ Partial Class GitUpdater
         '
         Me.btnCD.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnCD.AutoSize = true
-        Me.btnCD.Location = New System.Drawing.Point(335, 428)
+        Me.btnCD.Location = New System.Drawing.Point(335, 457)
         Me.btnCD.Name = "btnCD"
         Me.btnCD.Size = New System.Drawing.Size(108, 23)
         Me.btnCD.TabIndex = 17
@@ -237,7 +238,7 @@ Partial Class GitUpdater
         Me.grpGUI.Controls.Add(Me.chkDontShow)
         Me.grpGUI.Controls.Add(Me.chkNoWait)
         Me.grpGUI.Controls.Add(Me.chkDontClose)
-        Me.grpGUI.Location = New System.Drawing.Point(266, 128)
+        Me.grpGUI.Location = New System.Drawing.Point(266, 157)
         Me.grpGUI.Name = "grpGUI"
         Me.grpGUI.Size = New System.Drawing.Size(246, 88)
         Me.grpGUI.TabIndex = 25
@@ -260,7 +261,7 @@ Partial Class GitUpdater
         Me.grpData.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.grpData.Controls.Add(Me.chkPushForce)
         Me.grpData.Controls.Add(Me.chkRepeat)
-        Me.grpData.Location = New System.Drawing.Point(266, 222)
+        Me.grpData.Location = New System.Drawing.Point(266, 251)
         Me.grpData.Name = "grpData"
         Me.grpData.Size = New System.Drawing.Size(246, 65)
         Me.grpData.TabIndex = 26
@@ -315,7 +316,7 @@ Partial Class GitUpdater
         Me.grpCredMan.Controls.Add(Me.txtUsername)
         Me.grpCredMan.Controls.Add(Me.lblUsername)
         Me.grpCredMan.Controls.Add(Me.btnInsertCredentials)
-        Me.grpCredMan.Location = New System.Drawing.Point(266, 293)
+        Me.grpCredMan.Location = New System.Drawing.Point(266, 322)
         Me.grpCredMan.Name = "grpCredMan"
         Me.grpCredMan.Size = New System.Drawing.Size(246, 129)
         Me.grpCredMan.TabIndex = 31
@@ -416,13 +417,26 @@ Partial Class GitUpdater
         '
         AddHandler Me.timerKeyChecker.Tick, AddressOf Me.TimerKeyChecker_Tick
         '
+        'btnCloseCmd
+        '
+        Me.btnCloseCmd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnCloseCmd.AutoSize = true
+        Me.btnCloseCmd.Location = New System.Drawing.Point(266, 128)
+        Me.btnCloseCmd.Name = "btnCloseCmd"
+        Me.btnCloseCmd.Size = New System.Drawing.Size(246, 23)
+        Me.btnCloseCmd.TabIndex = 32
+        Me.btnCloseCmd.Text = "Cancel current CMD window"
+        Me.btnCloseCmd.UseVisualStyleBackColor = true
+        AddHandler Me.btnCloseCmd.Click, AddressOf Me.BtnCloseCmd_Click
+        '
         'GitUpdater
         '
         Me.AcceptButton = Me.btnGitPushSelected
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnExit
-        Me.ClientSize = New System.Drawing.Size(524, 463)
+        Me.ClientSize = New System.Drawing.Size(524, 492)
+        Me.Controls.Add(Me.btnCloseCmd)
         Me.Controls.Add(Me.grpCredMan)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.progressBar)
@@ -455,6 +469,7 @@ Partial Class GitUpdater
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private btnCloseCmd As System.Windows.Forms.Button
     Private timerKeyChecker As System.Windows.Forms.Timer
     Private btnShowPass As System.Windows.Forms.Button
     Private lblUsername As System.Windows.Forms.Label
