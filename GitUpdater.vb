@@ -10,7 +10,7 @@ Public Class GitUpdater
     Dim count, GitCommand As String   'because the Worker doesn't support direct sub calling
     
     Dim ForcePush As String = ""
-    Dim CmdStyle As AppWinStyle = vbMinimizedFocus   'window location of CMD
+    Dim CmdStyle As AppWinStyle = vbNormalFocus   'window location of CMD
     Dim Wait As Integer = -1   'Wait until cmd closes
     
     Private Sub btnExit_Click(sender As Object, e As EventArgs)
@@ -185,7 +185,6 @@ Public Class GitUpdater
             
         End If
         Me.TopMost = False
-        MsgBox("Succesfully completed!")
     End Sub
     
     ' starting and stopping the thread
@@ -306,10 +305,13 @@ Public Class GitUpdater
     
     Sub BtnCloseCmd_Click(sender As Object, e As EventArgs)
         Me.WindowState = FormWindowState.Minimized
-        System.Threading.Thread.Sleep(1000)
+        System.Threading.Thread.Sleep(500)
         SendKeys.send("^C")
-        SendKeys.send("Y{ENTER}")
-        System.Threading.Thread.Sleep(1000)
+        System.Threading.Thread.Sleep(100)
+        SendKeys.send("Y")
+        System.Threading.Thread.Sleep(100)
+        SendKeys.Send("{ENTER}")
+        System.Threading.Thread.Sleep(100)
         Me.WindowState = FormWindowState.Normal
     End Sub
 End Class
