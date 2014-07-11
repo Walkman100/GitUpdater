@@ -66,9 +66,9 @@ Public Class GitUpdater
     End Sub
     
     Sub RebuildRepoList
-        lstDirs.Items.Clear
+        lstRepos.Items.Clear
         For Each Repo As String In Directory.GetDirectories(Dir)
-            lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
+            lstRepos.Items.Add(Mid(Repo, Len(Dir) + 2))
         Next
     End Sub
     
@@ -103,31 +103,31 @@ Public Class GitUpdater
             Me.TopMost = True
         End If
         If chkPushForce.Checked = True Then ForcePush = "-f"
-        progressBar.Maximum = lstDirs.Items.Count
+        progressBar.Maximum = lstRepos.Items.Count
         
         If count = "all" Then
-            For i = 1 To lstDirs.Items.Count
-                Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+            For i = 1 To lstRepos.Items.Count
+                Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
                 progressBar.Value = i
             Next
             
         ElseIf count = "selected" Then
-            If lstDirs.SelectedIndex = -1 Then
+            If lstRepos.SelectedIndex = -1 Then
                 MsgBox("No item selected")
             Else
                 progressBar.Maximum = 2
                 progressBar.Value = 1
-                Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(lstDirs.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+                Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
                 progressBar.Value = 2
             End If
             
         ElseIf count = "notselected" Then
-            If lstDirs.SelectedIndex = -1 Then
+            If lstRepos.SelectedIndex = -1 Then
                 MsgBox("No item selected")
             Else
-                For i = 1 To lstDirs.Items.Count
-                    If i - 1 <> lstDirs.SelectedIndex Then
-                        Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+                For i = 1 To lstRepos.Items.Count
+                    If i - 1 <> lstRepos.SelectedIndex Then
+                        Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
                     End If
                     progressBar.Value = i
                 Next
@@ -147,9 +147,9 @@ Public Class GitUpdater
             If cmdRepo = "" Then
                 MsgBox("No repo passed from command line")
             Else
-                For i = 1 To lstDirs.Items.Count
-                    If lstDirs.Items.Item(i - 1) <> cmdRepo Then
-                        Shell("GitUpdater.bat " & Dir & "\" & lstDirs.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+                For i = 1 To lstRepos.Items.Count
+                    If lstRepos.Items.Item(i - 1) <> cmdRepo Then
+                        Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
                         progressBar.Value = i
                     End If
                 Next

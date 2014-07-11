@@ -26,7 +26,7 @@ Partial Class GitUpdater
         Me.btnExit = New System.Windows.Forms.Button()
         Me.btnGitPullAll = New System.Windows.Forms.Button()
         Me.btnGitPushAll = New System.Windows.Forms.Button()
-        Me.lstDirs = New System.Windows.Forms.ListBox()
+        Me.lstRepos = New System.Windows.Forms.ListBox()
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.btnGitPullSelected = New System.Windows.Forms.Button()
         Me.btnGitPushSelected = New System.Windows.Forms.Button()
@@ -82,20 +82,20 @@ Partial Class GitUpdater
         Me.btnGitPushAll.UseVisualStyleBackColor = true
         AddHandler Me.btnGitPushAll.Click, AddressOf Me.BtnGitPushAll_Click
         '
-        'lstDirs
+        'lstRepos
         '
-        Me.lstDirs.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+        Me.lstRepos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
                         Or System.Windows.Forms.AnchorStyles.Left)  _
                         Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.lstDirs.FormattingEnabled = true
-        Me.lstDirs.HorizontalScrollbar = true
-        Me.lstDirs.IntegralHeight = false
-        Me.lstDirs.Location = New System.Drawing.Point(12, 12)
-        Me.lstDirs.Name = "lstDirs"
-        Me.lstDirs.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lstDirs.Size = New System.Drawing.Size(248, 333)
-        Me.lstDirs.Sorted = true
-        Me.lstDirs.TabIndex = 13
+        Me.lstRepos.FormattingEnabled = true
+        Me.lstRepos.HorizontalScrollbar = true
+        Me.lstRepos.IntegralHeight = false
+        Me.lstRepos.Location = New System.Drawing.Point(12, 12)
+        Me.lstRepos.Name = "lstRepos"
+        Me.lstRepos.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.lstRepos.Size = New System.Drawing.Size(248, 333)
+        Me.lstRepos.Sorted = true
+        Me.lstRepos.TabIndex = 13
         '
         'btnRefresh
         '
@@ -291,7 +291,7 @@ Partial Class GitUpdater
         Me.Controls.Add(Me.btnGitPushNotSelected)
         Me.Controls.Add(Me.btnGitPushSelected)
         Me.Controls.Add(Me.btnGitPullSelected)
-        Me.Controls.Add(Me.lstDirs)
+        Me.Controls.Add(Me.lstRepos)
         Me.Controls.Add(Me.btnGitPushAll)
         Me.Controls.Add(Me.btnGitPullAll)
         Me.HelpButton = true
@@ -325,7 +325,7 @@ Partial Class GitUpdater
     Private btnGitPushSelected As System.Windows.Forms.Button
     Private btnGitPullSelected As System.Windows.Forms.Button
     Private btnRefresh As System.Windows.Forms.Button
-    Private lstDirs As System.Windows.Forms.ListBox
+    Private lstRepos As System.Windows.Forms.ListBox
     Private btnGitPushAll As System.Windows.Forms.Button
     Private btnGitPullAll As System.Windows.Forms.Button
     Private btnExit As System.Windows.Forms.Button
