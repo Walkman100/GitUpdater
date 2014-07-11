@@ -18,10 +18,7 @@ Public Class GitUpdater
     End Sub
     
     Sub GitUpdater_Load(sender As Object, e As EventArgs)
-        lstDirs.Items.Clear
-        For Each Repo As String In Directory.GetDirectories(Dir)
-            lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
-        Next
+        RebuildRepoList
         
         Dim rundir As Boolean = False
         Dim gitcmd As Boolean = False
@@ -68,17 +65,18 @@ Public Class GitUpdater
         Next
     End Sub
     
+    Sub RebuildRepoList
+        lstDirs.Items.Clear
+        For Each Repo As String In Directory.GetDirectories(Dir)
+            lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
+        Next
+    End Sub
+    
     Sub BtnRefresh_Click(sender As Object, e As EventArgs)
         If ShellWorker.IsBusy = False Then
-            lstDirs.Items.Clear
-            For Each Repo As String In Directory.GetDirectories(Dir)
-                lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
-            Next
+            RebuildRepoList
         ElseIf MsgBox("A script is currently in progress! Refreshing repos might mess up the script. You can use the cancel button above to cancel operation." & vbNewLine &vbNewLine & "Refresh anyway?", vbOKCancel, "Operation in progress") = vbOK
-            lstDirs.Items.Clear
-            For Each Repo As String In Directory.GetDirectories(Dir)
-                lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
-            Next
+            RebuildRepoList
         End If
     End Sub
     
@@ -89,10 +87,7 @@ Public Class GitUpdater
             Dir = folderBrowserDialog.SelectedPath
             
             ' rebuild list automatically
-            lstDirs.Items.Clear
-            For Each Repo As String In Directory.GetDirectories(Dir)
-                lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
-            Next
+            RebuildRepoList
         Else
             MsgBox("A script is currently in progress! Changing directory will mess up the script. Please cancel using the button above first.")
         End If
@@ -100,8 +95,7 @@ Public Class GitUpdater
     End Sub
     
     Sub ShellWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
-    If chkNoWait.Checked = True Then Wait = 1000 Else Wait = -1
-        
+        If chkNoWait.Checked = True Then Wait = 1000 Else Wait = -1
         If chkDontShow.Checked = True Then
             CmdStyle = vbMinimizedNoFocus
         Else
