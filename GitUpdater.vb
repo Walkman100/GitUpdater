@@ -69,27 +69,45 @@ Public Class GitUpdater
     End Sub
     
     Sub BtnRefresh_Click(sender As Object, e As EventArgs)
-        lstDirs.Items.Clear
-        For Each Repo As String In Directory.GetDirectories(Dir)
-            lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
-        Next
+        If ShellWorker.IsBusy = False Then
+            lstDirs.Items.Clear
+            For Each Repo As String In Directory.GetDirectories(Dir)
+                lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
+            Next
+        ElseIf MsgBox("A script is currently in progress! Refreshing repos might mess up the script. You can use the cancel button above to cancel operation." & vbNewLine &vbNewLine & "Refresh anyway?", vbOKCancel, "Operation in progress") = vbOK
+            lstDirs.Items.Clear
+            For Each Repo As String In Directory.GetDirectories(Dir)
+                lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
+            Next
+        End If
     End Sub
     
     Sub BtnCD_Click(sender As Object, e As EventArgs)
-        ' show file chooser dialog, set result as Dir
-        folderBrowserDialog.ShowDialog
-        Dir = folderBrowserDialog.SelectedPath
+        If ShellWorker.IsBusy = False Then
+            ' show file chooser dialog, set result as Dir
+            folderBrowserDialog.ShowDialog
+            Dir = folderBrowserDialog.SelectedPath
+            
+            ' rebuild list automatically
+            lstDirs.Items.Clear
+            For Each Repo As String In Directory.GetDirectories(Dir)
+                lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
+            Next
+        Else
+            MsgBox("A script is currently in progress! Changing directory will mess up the script. Please cancel using the button above first.")
+        End If
         
-        ' rebuild list automatically
-        lstDirs.Items.Clear
-        For Each Repo As String In Directory.GetDirectories(Dir)
-            lstDirs.Items.Add(Mid(Repo, Len(Dir) + 2))
-        Next
     End Sub
     
     Sub ShellWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
-        If chkNoWait.Checked = True Then Wait = 1000 Else Wait = -1
-        If chkDontShow.Checked = True Then CmdStyle = AppWinStyle.MinimizedFocus Else CmdStyle = vbNormalFocus
+    If chkNoWait.Checked = True Then Wait = 1000 Else Wait = -1
+        
+        If chkDontShow.Checked = True Then
+            CmdStyle = vbMinimizedNoFocus
+        Else
+            CmdStyle = vbNormalFocus
+            Me.TopMost = True
+        End If
         If chkPushForce.Checked = True Then ForcePush = "-f"
         progressBar.Maximum = lstDirs.Items.Count
         
@@ -144,6 +162,18 @@ Public Class GitUpdater
             End If
             
         End If
+        Me.TopMost = False
+        MsgBox("Succesfully completed!")
+    End Sub
+    
+    Sub BtnCancel_Click(sender As Object, e As EventArgs)
+        If ShellWorker.IsBusy = True Then
+            If MsgBox("Are you sure you want to cancel operation? This requires restarting GitUpdater." & vbNewLine & vbNewLine & "This will not close the currently active CMD window. To do so, please click on the window and press 'Ctrl' + 'C', then 'Y', then 'Enter'.", vbYesNo, "Confirmation") = vbNo Then Exit Sub
+            Application.Restart
+        Else
+            MsgBox("No git operation is currently in progress!")
+        End If
+        
     End Sub
     
     Sub BtnGitPullAll_Click(sender As Object, e As EventArgs)
@@ -152,7 +182,7 @@ Public Class GitUpdater
         If ShellWorker.IsBusy = False Then
             ShellWorker.RunWorkerAsync
         Else
-            MsgBox("A git session is currently in progress!")
+            MsgBox("A git operation is currently in progress!", , "Operation in progress")
         End If
         
 ' another way to do a comment block: http://forums.asp.net/post/4414215.aspx
@@ -177,7 +207,7 @@ Public Class GitUpdater
         If ShellWorker.IsBusy = False Then
             ShellWorker.RunWorkerAsync
         Else
-            MsgBox("A git session is currently in progress!")
+            MsgBox("A git operation is currently in progress!", ,"Operation in progress")
         End If
     End Sub
     
@@ -187,7 +217,7 @@ Public Class GitUpdater
         If ShellWorker.IsBusy = False Then
             ShellWorker.RunWorkerAsync
         Else
-            MsgBox("A git session is currently in progress!")
+            MsgBox("A git operation is currently in progress!", ,"Operation in progress")
         End If
     End Sub
     
@@ -197,7 +227,7 @@ Public Class GitUpdater
         If ShellWorker.IsBusy = False Then
             ShellWorker.RunWorkerAsync
         Else
-            MsgBox("A git session is currently in progress!")
+            MsgBox("A git operation is currently in progress!", ,"Operation in progress")
         End If
     End Sub
     
@@ -207,7 +237,7 @@ Public Class GitUpdater
         If ShellWorker.IsBusy = False Then
             ShellWorker.RunWorkerAsync
         Else
-            MsgBox("A git session is currently in progress!")
+            MsgBox("A git operation is currently in progress!", ,"Operation in progress")
         End If
     End Sub
     
@@ -217,19 +247,7 @@ Public Class GitUpdater
         If ShellWorker.IsBusy = False Then
             ShellWorker.RunWorkerAsync
         Else
-            MsgBox("A git session is currently in progress!")
+            MsgBox("A git operation is currently in progress!", ,"Operation in progress")
         End If
-    End Sub
-    
-    Sub BtnLaunchCredMan_Click(sender As Object, e As EventArgs)
-        If File.Exists("CredMan.exe") Then
-            Process.Start("CredMan.exe")
-        Else
-            MsgBox("CredMan.exe Not found!")
-        End If
-    End Sub
-    
-    Sub ShellWorker_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs)
-        MsgBox("Complete!")
     End Sub
 End Class

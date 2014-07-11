@@ -41,9 +41,9 @@ Partial Class GitUpdater
         Me.grpGUI = New System.Windows.Forms.GroupBox()
         Me.chkDontShow = New System.Windows.Forms.CheckBox()
         Me.grpData = New System.Windows.Forms.GroupBox()
-        Me.btnLaunchCredMan = New System.Windows.Forms.Button()
         Me.ShellWorker = New System.ComponentModel.BackgroundWorker()
         Me.progressBar = New System.Windows.Forms.ProgressBar()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.grpGUI.SuspendLayout
         Me.grpData.SuspendLayout
         Me.SuspendLayout
@@ -52,7 +52,7 @@ Partial Class GitUpdater
         '
         Me.btnExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnExit.Location = New System.Drawing.Point(392, 314)
+        Me.btnExit.Location = New System.Drawing.Point(392, 322)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(120, 23)
         Me.btnExit.TabIndex = 10
@@ -93,14 +93,14 @@ Partial Class GitUpdater
         Me.lstDirs.Location = New System.Drawing.Point(12, 12)
         Me.lstDirs.Name = "lstDirs"
         Me.lstDirs.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lstDirs.Size = New System.Drawing.Size(248, 325)
+        Me.lstDirs.Size = New System.Drawing.Size(248, 333)
         Me.lstDirs.Sorted = true
         Me.lstDirs.TabIndex = 13
         '
         'btnRefresh
         '
         Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnRefresh.Location = New System.Drawing.Point(392, 285)
+        Me.btnRefresh.Location = New System.Drawing.Point(392, 293)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(120, 23)
         Me.btnRefresh.TabIndex = 14
@@ -133,7 +133,7 @@ Partial Class GitUpdater
         'btnCD
         '
         Me.btnCD.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnCD.Location = New System.Drawing.Point(266, 285)
+        Me.btnCD.Location = New System.Drawing.Point(266, 293)
         Me.btnCD.Name = "btnCD"
         Me.btnCD.Size = New System.Drawing.Size(120, 23)
         Me.btnCD.TabIndex = 17
@@ -219,7 +219,7 @@ Partial Class GitUpdater
         Me.grpGUI.Controls.Add(Me.chkDontShow)
         Me.grpGUI.Controls.Add(Me.chkNoWait)
         Me.grpGUI.Controls.Add(Me.chkDontClose)
-        Me.grpGUI.Location = New System.Drawing.Point(266, 120)
+        Me.grpGUI.Location = New System.Drawing.Point(266, 128)
         Me.grpGUI.Name = "grpGUI"
         Me.grpGUI.Size = New System.Drawing.Size(246, 88)
         Me.grpGUI.TabIndex = 25
@@ -241,29 +241,17 @@ Partial Class GitUpdater
         Me.grpData.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.grpData.Controls.Add(Me.chkPushForce)
         Me.grpData.Controls.Add(Me.chkRepeat)
-        Me.grpData.Location = New System.Drawing.Point(266, 214)
+        Me.grpData.Location = New System.Drawing.Point(266, 222)
         Me.grpData.Name = "grpData"
         Me.grpData.Size = New System.Drawing.Size(246, 65)
         Me.grpData.TabIndex = 26
         Me.grpData.TabStop = false
         Me.grpData.Text = "Data Options"
         '
-        'btnLaunchCredMan
-        '
-        Me.btnLaunchCredMan.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnLaunchCredMan.AutoEllipsis = true
-        Me.btnLaunchCredMan.Location = New System.Drawing.Point(266, 314)
-        Me.btnLaunchCredMan.Name = "btnLaunchCredMan"
-        Me.btnLaunchCredMan.Size = New System.Drawing.Size(120, 23)
-        Me.btnLaunchCredMan.TabIndex = 27
-        Me.btnLaunchCredMan.Text = "Open Creds Manager"
-        Me.btnLaunchCredMan.UseVisualStyleBackColor = true
-        AddHandler Me.btnLaunchCredMan.Click, AddressOf Me.BtnLaunchCredMan_Click
-        '
         'ShellWorker
         '
+        Me.ShellWorker.WorkerSupportsCancellation = true
         AddHandler Me.ShellWorker.DoWork, AddressOf Me.ShellWorker_DoWork
-        AddHandler Me.ShellWorker.RunWorkerCompleted, AddressOf Me.ShellWorker_RunWorkerCompleted
         '
         'progressBar
         '
@@ -271,8 +259,19 @@ Partial Class GitUpdater
                         Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.progressBar.Location = New System.Drawing.Point(266, 99)
         Me.progressBar.Name = "progressBar"
-        Me.progressBar.Size = New System.Drawing.Size(246, 15)
+        Me.progressBar.Size = New System.Drawing.Size(165, 23)
         Me.progressBar.TabIndex = 28
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.Location = New System.Drawing.Point(437, 99)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.TabIndex = 29
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = true
+        AddHandler Me.btnCancel.Click, AddressOf Me.BtnCancel_Click
         '
         'GitUpdater
         '
@@ -280,9 +279,9 @@ Partial Class GitUpdater
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnExit
-        Me.ClientSize = New System.Drawing.Size(524, 349)
+        Me.ClientSize = New System.Drawing.Size(524, 357)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.progressBar)
-        Me.Controls.Add(Me.btnLaunchCredMan)
         Me.Controls.Add(Me.grpData)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnCD)
@@ -309,9 +308,9 @@ Partial Class GitUpdater
         Me.grpData.PerformLayout
         Me.ResumeLayout(false)
     End Sub
+    Private btnCancel As System.Windows.Forms.Button
     Private progressBar As System.Windows.Forms.ProgressBar
     Private ShellWorker As System.ComponentModel.BackgroundWorker
-    Private btnLaunchCredMan As System.Windows.Forms.Button
     Private grpGUI As System.Windows.Forms.GroupBox
     Private grpData As System.Windows.Forms.GroupBox
     Private chkDontShow As System.Windows.Forms.CheckBox
