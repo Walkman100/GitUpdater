@@ -17,8 +17,15 @@ Public Class GitUpdater
         End
     End Sub
     
-    Sub GitUpdater_Load(sender As Object, e As EventArgs)
+    Sub LoadGitUpdater(sender As Object, e As EventArgs)
         RebuildRepoList
+        ' apply settings to where they are changed
+        txtUsername.Text = My.Settings.Username
+        txtPassword.Text = My.Settings.Password
+        'chkRememberBrowser.Checked = My.Settings.RememberBrowser
+
+        ' apply settings to where they affect
+        'none yet
         
         Dim rundir As Boolean = False
         Dim gitcmd As Boolean = False
@@ -65,6 +72,8 @@ Public Class GitUpdater
         Next
     End Sub
     
+    ' to do with list of repos
+    
     Sub RebuildRepoList
         lstRepos.Items.Clear
         For Each Repo As String In Directory.GetDirectories(Dir)
@@ -93,6 +102,8 @@ Public Class GitUpdater
         End If
         
     End Sub
+    
+    ' actual code that runs the shells
     
     Sub ShellWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
         If chkNoWait.Checked = True Then Wait = 1000 Else Wait = -1
@@ -159,6 +170,8 @@ Public Class GitUpdater
         Me.TopMost = False
         MsgBox("Succesfully completed!")
     End Sub
+    
+    ' starting and stopping the thread
     
     Sub BtnCancel_Click(sender As Object, e As EventArgs)
         If ShellWorker.IsBusy = True Then
@@ -244,4 +257,49 @@ Public Class GitUpdater
             MsgBox("A git operation is currently in progress!", ,"Operation in progress")
         End If
     End Sub
+    
+    ' credentials-related stuff
+    
+    Sub BtnSave_Click(sender As Object, e As EventArgs)
+        My.Settings.Username = txtUsername.Text
+        My.Settings.Password = txtPassword.Text
+        My.Settings.Save()
+        MsgBox("Succesfully Saved!", , "Saved!")
+    End Sub
+    
+    Sub BtnInsert_Click(sender As Object, e As EventArgs)
+        Me.WindowState = FormWindowState.Minimized
+        System.Threading.Thread.Sleep(1000)
+        SendKeys.send(txtUsername.Text & "{ENTER}")
+        SendKeys.send(txtPassword.Text & "{ENTER}")
+    End Sub
+    
+    Sub TimerKeyChecker_Tick(sender As Object, e As EventArgs)
+        If My.Computer.Keyboard.AltKeyDown = True Then
+            SendKeys.send(txtUsername.Text & "{ENTER}")
+            SendKeys.send(txtPassword.Text & "{ENTER}")
+        End If
+    End Sub
+    
+    Sub BtnHotkey_Click(sender As Object, e As EventArgs)
+        If btnHotkey.Text = "Hotkey On" Then
+            btnHotkey.Text = "Hotkey Off"
+            timerKeyChecker.Start
+        ElseIf btnHotkey.Text = "Hotkey Off" Then
+            btnHotkey.Text = "Hotkey On"
+            timerKeyChecker.Stop
+        End If
+    End Sub
+    
+    Sub btnShowPass_MouseDown(sender As Object, e As EventArgs)
+        txtPassword.PasswordChar = ""
+    End Sub
+    
+    Sub btnShowPass_MouseUp(sender As Object, e As EventArgs)
+        txtPassword.PasswordChar = "●"
+    End Sub
+    
+    ' visual stuff
+    
+    
 End Class

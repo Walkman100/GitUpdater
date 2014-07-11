@@ -22,6 +22,7 @@ Partial Class GitUpdater
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GitUpdater))
         Me.btnExit = New System.Windows.Forms.Button()
         Me.btnGitPullAll = New System.Windows.Forms.Button()
@@ -46,14 +47,15 @@ Partial Class GitUpdater
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnInsertCredentials = New System.Windows.Forms.Button()
         Me.grpCredMan = New System.Windows.Forms.GroupBox()
-        Me.lblUsername = New System.Windows.Forms.Label()
-        Me.txtUsername = New System.Windows.Forms.TextBox()
-        Me.txtPassword = New System.Windows.Forms.TextBox()
-        Me.lblPassword = New System.Windows.Forms.Label()
-        Me.btnHotkey = New System.Windows.Forms.Button()
-        Me.btnSave = New System.Windows.Forms.Button()
-        Me.lblHotkey = New System.Windows.Forms.Label()
         Me.btnShowPass = New System.Windows.Forms.Button()
+        Me.lblHotkey = New System.Windows.Forms.Label()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnHotkey = New System.Windows.Forms.Button()
+        Me.lblPassword = New System.Windows.Forms.Label()
+        Me.txtPassword = New System.Windows.Forms.TextBox()
+        Me.txtUsername = New System.Windows.Forms.TextBox()
+        Me.lblUsername = New System.Windows.Forms.Label()
+        Me.timerKeyChecker = New System.Windows.Forms.Timer(Me.components)
         Me.grpGUI.SuspendLayout
         Me.grpData.SuspendLayout
         Me.grpCredMan.SuspendLayout
@@ -296,6 +298,7 @@ Partial Class GitUpdater
         Me.btnInsertCredentials.TabIndex = 30
         Me.btnInsertCredentials.Text = "Insert Credentials"
         Me.btnInsertCredentials.UseVisualStyleBackColor = true
+        AddHandler Me.btnInsertCredentials.Click, AddressOf Me.BtnInsert_Click
         '
         'grpCredMan
         '
@@ -317,74 +320,6 @@ Partial Class GitUpdater
         Me.grpCredMan.TabStop = false
         Me.grpCredMan.Text = "Credentials Management"
         '
-        'lblUsername
-        '
-        Me.lblUsername.AutoSize = true
-        Me.lblUsername.Location = New System.Drawing.Point(6, 22)
-        Me.lblUsername.Name = "lblUsername"
-        Me.lblUsername.Size = New System.Drawing.Size(58, 13)
-        Me.lblUsername.TabIndex = 31
-        Me.lblUsername.Text = "Username:"
-        '
-        'txtUsername
-        '
-        Me.txtUsername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
-                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.txtUsername.Location = New System.Drawing.Point(70, 19)
-        Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.Size = New System.Drawing.Size(170, 20)
-        Me.txtUsername.TabIndex = 32
-        '
-        'txtPassword
-        '
-        Me.txtPassword.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
-                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.txtPassword.Location = New System.Drawing.Point(70, 45)
-        Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(170, 20)
-        Me.txtPassword.TabIndex = 33
-        '
-        'lblPassword
-        '
-        Me.lblPassword.AutoSize = true
-        Me.lblPassword.Location = New System.Drawing.Point(6, 48)
-        Me.lblPassword.Name = "lblPassword"
-        Me.lblPassword.Size = New System.Drawing.Size(56, 13)
-        Me.lblPassword.TabIndex = 34
-        Me.lblPassword.Text = "Password:"
-        '
-        'btnHotkey
-        '
-        Me.btnHotkey.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
-        Me.btnHotkey.Location = New System.Drawing.Point(6, 71)
-        Me.btnHotkey.Name = "btnHotkey"
-        Me.btnHotkey.Size = New System.Drawing.Size(114, 23)
-        Me.btnHotkey.TabIndex = 35
-        Me.btnHotkey.Text = "Hotkey On"
-        Me.btnHotkey.UseVisualStyleBackColor = true
-        '
-        'btnSave
-        '
-        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnSave.AutoSize = true
-        Me.btnSave.Location = New System.Drawing.Point(126, 100)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(114, 23)
-        Me.btnSave.TabIndex = 36
-        Me.btnSave.Text = "Save Credentials"
-        Me.btnSave.UseVisualStyleBackColor = true
-        '
-        'lblHotkey
-        '
-        Me.lblHotkey.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left)  _
-                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.lblHotkey.Location = New System.Drawing.Point(126, 71)
-        Me.lblHotkey.Name = "lblHotkey"
-        Me.lblHotkey.Size = New System.Drawing.Size(114, 23)
-        Me.lblHotkey.TabIndex = 37
-        Me.lblHotkey.Text = "Current key(s): Alt"
-        Me.lblHotkey.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
         'btnShowPass
         '
         Me.btnShowPass.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
@@ -401,6 +336,82 @@ Partial Class GitUpdater
         Me.btnShowPass.Size = New System.Drawing.Size(20, 16)
         Me.btnShowPass.TabIndex = 38
         Me.btnShowPass.UseVisualStyleBackColor = false
+        AddHandler Me.btnShowPass.MouseDown, AddressOf Me.btnShowPass_MouseDown
+        AddHandler Me.btnShowPass.MouseUp, AddressOf Me.btnShowPass_MouseUp
+        '
+        'lblHotkey
+        '
+        Me.lblHotkey.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left)  _
+                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lblHotkey.Location = New System.Drawing.Point(126, 71)
+        Me.lblHotkey.Name = "lblHotkey"
+        Me.lblHotkey.Size = New System.Drawing.Size(114, 23)
+        Me.lblHotkey.TabIndex = 37
+        Me.lblHotkey.Text = "Current key(s): Alt"
+        Me.lblHotkey.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'btnSave
+        '
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnSave.AutoSize = true
+        Me.btnSave.Location = New System.Drawing.Point(126, 100)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(114, 23)
+        Me.btnSave.TabIndex = 36
+        Me.btnSave.Text = "Save Credentials"
+        Me.btnSave.UseVisualStyleBackColor = true
+        AddHandler Me.btnSave.Click, AddressOf Me.BtnSave_Click
+        '
+        'btnHotkey
+        '
+        Me.btnHotkey.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.btnHotkey.Location = New System.Drawing.Point(6, 71)
+        Me.btnHotkey.Name = "btnHotkey"
+        Me.btnHotkey.Size = New System.Drawing.Size(114, 23)
+        Me.btnHotkey.TabIndex = 35
+        Me.btnHotkey.Text = "Hotkey On"
+        Me.btnHotkey.UseVisualStyleBackColor = true
+        AddHandler Me.btnHotkey.Click, AddressOf Me.BtnHotkey_Click
+        '
+        'lblPassword
+        '
+        Me.lblPassword.AutoSize = true
+        Me.lblPassword.Location = New System.Drawing.Point(6, 48)
+        Me.lblPassword.Name = "lblPassword"
+        Me.lblPassword.Size = New System.Drawing.Size(56, 13)
+        Me.lblPassword.TabIndex = 34
+        Me.lblPassword.Text = "Password:"
+        '
+        'txtPassword
+        '
+        Me.txtPassword.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.txtPassword.Location = New System.Drawing.Point(70, 45)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Size = New System.Drawing.Size(170, 20)
+        Me.txtPassword.TabIndex = 33
+        '
+        'txtUsername
+        '
+        Me.txtUsername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.txtUsername.Location = New System.Drawing.Point(70, 19)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.Size = New System.Drawing.Size(170, 20)
+        Me.txtUsername.TabIndex = 32
+        '
+        'lblUsername
+        '
+        Me.lblUsername.AutoSize = true
+        Me.lblUsername.Location = New System.Drawing.Point(6, 22)
+        Me.lblUsername.Name = "lblUsername"
+        Me.lblUsername.Size = New System.Drawing.Size(58, 13)
+        Me.lblUsername.TabIndex = 31
+        Me.lblUsername.Text = "Username:"
+        '
+        'timerKeyChecker
+        '
+        AddHandler Me.timerKeyChecker.Tick, AddressOf Me.TimerKeyChecker_Tick
         '
         'GitUpdater
         '
@@ -431,7 +442,7 @@ Partial Class GitUpdater
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Git Updater"
         Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
-        AddHandler Load, AddressOf Me.GitUpdater_Load
+        AddHandler Load, AddressOf Me.LoadGitUpdater
         Me.grpGUI.ResumeLayout(false)
         Me.grpGUI.PerformLayout
         Me.grpData.ResumeLayout(false)
@@ -441,6 +452,7 @@ Partial Class GitUpdater
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private timerKeyChecker As System.Windows.Forms.Timer
     Private btnShowPass As System.Windows.Forms.Button
     Private lblUsername As System.Windows.Forms.Label
     Private txtUsername As System.Windows.Forms.TextBox
