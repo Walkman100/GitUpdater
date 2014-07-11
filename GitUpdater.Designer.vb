@@ -388,6 +388,7 @@ Partial Class GitUpdater
                         Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.txtPassword.Location = New System.Drawing.Point(70, 45)
         Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(9679)
         Me.txtPassword.Size = New System.Drawing.Size(170, 20)
         Me.txtPassword.TabIndex = 33
         '
