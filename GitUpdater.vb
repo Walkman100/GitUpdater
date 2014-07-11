@@ -7,11 +7,11 @@ Public Class GitUpdater
     Dim Dir As String = usrProfile & "\Documents\GitHub"
     Dim cmdRepo As String = ""
     
-    Dim Wait As Integer = -1   'Wait until cmd closes
-    Dim CmdStyle As AppWinStyle = AppWinStyle.MinimizedFocus   'window location of CMD
-    Dim ForcePush As String = ""
-    
     Dim count, GitCommand As String   'because the Worker doesn't support direct sub calling
+    
+    Dim ForcePush As String = ""
+    Dim CmdStyle As AppWinStyle = vbMinimizedFocus   'window location of CMD
+    Dim Wait As Integer = -1   'Wait until cmd closes
     
     Private Sub btnExit_Click(sender As Object, e As EventArgs)
         End
@@ -103,17 +103,34 @@ Public Class GitUpdater
         
     End Sub
     
+    ' how to run the shells
+    
+    Sub ChkNoWait_CheckedChanged(sender As Object, e As EventArgs)
+        If chkNoWait.Checked = True Then Wait = 1000 Else Wait = -1
+    End Sub
+    
+    Sub ChkDontShow_CheckedChanged(sender As Object, e As EventArgs)
+        If chkDontShow.Checked = True Then
+            CmdStyle = vbMinimizedNoFocus
+            If ShellWorker.IsBusy = True Then
+                Me.TopMost = False
+            End If
+        ElseIf chkDontShow.Checked = False Then
+            CmdStyle = vbNormalFocus
+            If ShellWorker.IsBusy = True Then
+                Me.TopMost = True
+            End If
+        End If
+    End Sub
+    
+    Sub ChkPushForce_CheckedChanged(sender As Object, e As EventArgs)
+        If chkPushForce.Checked = True Then ForcePush = "-f" Else ForcePush = ""
+    End Sub
+    
     ' actual code that runs the shells
     
     Sub ShellWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
-        If chkNoWait.Checked = True Then Wait = 1000 Else Wait = -1
-        If chkDontShow.Checked = True Then
-            CmdStyle = vbMinimizedNoFocus
-        Else
-            CmdStyle = vbNormalFocus
-            Me.TopMost = True
-        End If
-        If chkPushForce.Checked = True Then ForcePush = "-f"
+        If chkDontShow.Checked = False Then Me.TopMost = True
         progressBar.Maximum = lstRepos.Items.Count
         
         If count = "all" Then
@@ -191,21 +208,6 @@ Public Class GitUpdater
         Else
             MsgBox("A git operation is currently in progress!", , "Operation in progress")
         End If
-        
-' another way to do a comment block: http://forums.asp.net/post/4414215.aspx
-'            'MsgBox("/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
-'            Process.Start(cmdPath, "/k cd " & Dir & "\" & lstDirs.Items.Item(i - 1))
-'            System.Threading.Thread.Sleep(200)
-'            'Shell(cmdPath & " /k cd " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", vbNormalFocus, True)
-'            sendkeys.send("git pull {ENTER}")
-'            System.Threading.Thread.Sleep(100)
-'            If chkDontClose.Checked = False Then
-'                SendKeys.Send("exit {ENTER}")
-'            End If
-'            System.Threading.Thread.Sleep(100)
-'            'Process.Start(cmdPath, "/k " & Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull")
-'            'Shell(Dir & "\" & lstDirs.Items.Item(i - 1) & "\git pull", vbNormalFocus, True)
-        
     End Sub
     
     Sub BtnGitPushAll_Click(sender As Object, e As EventArgs)
@@ -272,6 +274,8 @@ Public Class GitUpdater
         System.Threading.Thread.Sleep(1000)
         SendKeys.send(txtUsername.Text & "{ENTER}")
         SendKeys.send(txtPassword.Text & "{ENTER}")
+        System.Threading.Thread.Sleep(1000)
+        Me.WindowState = FormWindowState.Normal
     End Sub
     
     Sub TimerKeyChecker_Tick(sender As Object, e As EventArgs)
@@ -298,8 +302,4 @@ Public Class GitUpdater
     Sub btnShowPass_MouseUp(sender As Object, e As EventArgs)
         txtPassword.PasswordChar = "●"
     End Sub
-    
-    ' visual stuff
-    
-    
 End Class
