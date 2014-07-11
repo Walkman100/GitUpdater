@@ -44,17 +44,29 @@ Partial Class GitUpdater
         Me.ShellWorker = New System.ComponentModel.BackgroundWorker()
         Me.progressBar = New System.Windows.Forms.ProgressBar()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnInsertCredentials = New System.Windows.Forms.Button()
+        Me.grpCredMan = New System.Windows.Forms.GroupBox()
+        Me.lblUsername = New System.Windows.Forms.Label()
+        Me.txtUsername = New System.Windows.Forms.TextBox()
+        Me.txtPassword = New System.Windows.Forms.TextBox()
+        Me.lblPassword = New System.Windows.Forms.Label()
+        Me.btnHotkey = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.lblHotkey = New System.Windows.Forms.Label()
+        Me.btnShowPass = New System.Windows.Forms.Button()
         Me.grpGUI.SuspendLayout
         Me.grpData.SuspendLayout
+        Me.grpCredMan.SuspendLayout
         Me.SuspendLayout
         '
         'btnExit
         '
         Me.btnExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnExit.AutoSize = true
         Me.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnExit.Location = New System.Drawing.Point(392, 322)
+        Me.btnExit.Location = New System.Drawing.Point(449, 428)
         Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(120, 23)
+        Me.btnExit.Size = New System.Drawing.Size(63, 23)
         Me.btnExit.TabIndex = 10
         Me.btnExit.Text = "Close"
         Me.btnExit.UseVisualStyleBackColor = true
@@ -93,16 +105,17 @@ Partial Class GitUpdater
         Me.lstRepos.Location = New System.Drawing.Point(12, 12)
         Me.lstRepos.Name = "lstRepos"
         Me.lstRepos.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lstRepos.Size = New System.Drawing.Size(248, 333)
+        Me.lstRepos.Size = New System.Drawing.Size(248, 439)
         Me.lstRepos.Sorted = true
         Me.lstRepos.TabIndex = 13
         '
         'btnRefresh
         '
         Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnRefresh.Location = New System.Drawing.Point(392, 293)
+        Me.btnRefresh.AutoSize = true
+        Me.btnRefresh.Location = New System.Drawing.Point(266, 428)
         Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(120, 23)
+        Me.btnRefresh.Size = New System.Drawing.Size(63, 23)
         Me.btnRefresh.TabIndex = 14
         Me.btnRefresh.Text = "Refresh"
         Me.btnRefresh.UseVisualStyleBackColor = true
@@ -133,9 +146,10 @@ Partial Class GitUpdater
         'btnCD
         '
         Me.btnCD.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnCD.Location = New System.Drawing.Point(266, 293)
+        Me.btnCD.AutoSize = true
+        Me.btnCD.Location = New System.Drawing.Point(335, 428)
         Me.btnCD.Name = "btnCD"
-        Me.btnCD.Size = New System.Drawing.Size(120, 23)
+        Me.btnCD.Size = New System.Drawing.Size(108, 23)
         Me.btnCD.TabIndex = 17
         Me.btnCD.Text = "Change Directory..."
         Me.btnCD.UseVisualStyleBackColor = true
@@ -215,7 +229,7 @@ Partial Class GitUpdater
         '
         'grpGUI
         '
-        Me.grpGUI.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.grpGUI.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.grpGUI.Controls.Add(Me.chkDontShow)
         Me.grpGUI.Controls.Add(Me.chkNoWait)
         Me.grpGUI.Controls.Add(Me.chkDontClose)
@@ -238,7 +252,7 @@ Partial Class GitUpdater
         '
         'grpData
         '
-        Me.grpData.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.grpData.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.grpData.Controls.Add(Me.chkPushForce)
         Me.grpData.Controls.Add(Me.chkRepeat)
         Me.grpData.Location = New System.Drawing.Point(266, 222)
@@ -255,8 +269,7 @@ Partial Class GitUpdater
         '
         'progressBar
         '
-        Me.progressBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.progressBar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.progressBar.Location = New System.Drawing.Point(266, 99)
         Me.progressBar.Name = "progressBar"
         Me.progressBar.Size = New System.Drawing.Size(165, 23)
@@ -264,7 +277,7 @@ Partial Class GitUpdater
         '
         'btnCancel
         '
-        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnCancel.Location = New System.Drawing.Point(437, 99)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
@@ -273,13 +286,130 @@ Partial Class GitUpdater
         Me.btnCancel.UseVisualStyleBackColor = true
         AddHandler Me.btnCancel.Click, AddressOf Me.BtnCancel_Click
         '
+        'btnInsertCredentials
+        '
+        Me.btnInsertCredentials.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.btnInsertCredentials.AutoSize = true
+        Me.btnInsertCredentials.Location = New System.Drawing.Point(6, 100)
+        Me.btnInsertCredentials.Name = "btnInsertCredentials"
+        Me.btnInsertCredentials.Size = New System.Drawing.Size(114, 23)
+        Me.btnInsertCredentials.TabIndex = 30
+        Me.btnInsertCredentials.Text = "Insert Credentials"
+        Me.btnInsertCredentials.UseVisualStyleBackColor = true
+        '
+        'grpCredMan
+        '
+        Me.grpCredMan.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.grpCredMan.Controls.Add(Me.btnShowPass)
+        Me.grpCredMan.Controls.Add(Me.lblHotkey)
+        Me.grpCredMan.Controls.Add(Me.btnSave)
+        Me.grpCredMan.Controls.Add(Me.btnHotkey)
+        Me.grpCredMan.Controls.Add(Me.lblPassword)
+        Me.grpCredMan.Controls.Add(Me.txtPassword)
+        Me.grpCredMan.Controls.Add(Me.txtUsername)
+        Me.grpCredMan.Controls.Add(Me.lblUsername)
+        Me.grpCredMan.Controls.Add(Me.btnInsertCredentials)
+        Me.grpCredMan.Location = New System.Drawing.Point(266, 293)
+        Me.grpCredMan.Name = "grpCredMan"
+        Me.grpCredMan.Size = New System.Drawing.Size(246, 129)
+        Me.grpCredMan.TabIndex = 31
+        Me.grpCredMan.TabStop = false
+        Me.grpCredMan.Text = "Credentials Management"
+        '
+        'lblUsername
+        '
+        Me.lblUsername.AutoSize = true
+        Me.lblUsername.Location = New System.Drawing.Point(6, 22)
+        Me.lblUsername.Name = "lblUsername"
+        Me.lblUsername.Size = New System.Drawing.Size(58, 13)
+        Me.lblUsername.TabIndex = 31
+        Me.lblUsername.Text = "Username:"
+        '
+        'txtUsername
+        '
+        Me.txtUsername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.txtUsername.Location = New System.Drawing.Point(70, 19)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.Size = New System.Drawing.Size(170, 20)
+        Me.txtUsername.TabIndex = 32
+        '
+        'txtPassword
+        '
+        Me.txtPassword.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.txtPassword.Location = New System.Drawing.Point(70, 45)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Size = New System.Drawing.Size(170, 20)
+        Me.txtPassword.TabIndex = 33
+        '
+        'lblPassword
+        '
+        Me.lblPassword.AutoSize = true
+        Me.lblPassword.Location = New System.Drawing.Point(6, 48)
+        Me.lblPassword.Name = "lblPassword"
+        Me.lblPassword.Size = New System.Drawing.Size(56, 13)
+        Me.lblPassword.TabIndex = 34
+        Me.lblPassword.Text = "Password:"
+        '
+        'btnHotkey
+        '
+        Me.btnHotkey.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.btnHotkey.Location = New System.Drawing.Point(6, 71)
+        Me.btnHotkey.Name = "btnHotkey"
+        Me.btnHotkey.Size = New System.Drawing.Size(114, 23)
+        Me.btnHotkey.TabIndex = 35
+        Me.btnHotkey.Text = "Hotkey On"
+        Me.btnHotkey.UseVisualStyleBackColor = true
+        '
+        'btnSave
+        '
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnSave.AutoSize = true
+        Me.btnSave.Location = New System.Drawing.Point(126, 100)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(114, 23)
+        Me.btnSave.TabIndex = 36
+        Me.btnSave.Text = "Save Credentials"
+        Me.btnSave.UseVisualStyleBackColor = true
+        '
+        'lblHotkey
+        '
+        Me.lblHotkey.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left)  _
+                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lblHotkey.Location = New System.Drawing.Point(126, 71)
+        Me.lblHotkey.Name = "lblHotkey"
+        Me.lblHotkey.Size = New System.Drawing.Size(114, 23)
+        Me.lblHotkey.TabIndex = 37
+        Me.lblHotkey.Text = "Current key(s): Alt"
+        Me.lblHotkey.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'btnShowPass
+        '
+        Me.btnShowPass.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnShowPass.BackColor = System.Drawing.Color.White
+        Me.btnShowPass.FlatAppearance.BorderColor = System.Drawing.Color.White
+        Me.btnShowPass.FlatAppearance.BorderSize = 0
+        Me.btnShowPass.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlLight
+        Me.btnShowPass.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnShowPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnShowPass.ForeColor = System.Drawing.Color.Transparent
+        Me.btnShowPass.Image = CType(resources.GetObject("btnShowPass.Image"),System.Drawing.Image)
+        Me.btnShowPass.Location = New System.Drawing.Point(219, 47)
+        Me.btnShowPass.Name = "btnShowPass"
+        Me.btnShowPass.Size = New System.Drawing.Size(20, 16)
+        Me.btnShowPass.TabIndex = 38
+        Me.btnShowPass.UseVisualStyleBackColor = false
+        '
         'GitUpdater
         '
         Me.AcceptButton = Me.btnGitPushSelected
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnExit
-        Me.ClientSize = New System.Drawing.Size(524, 357)
+        Me.ClientSize = New System.Drawing.Size(524, 463)
+        Me.Controls.Add(Me.grpCredMan)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.progressBar)
         Me.Controls.Add(Me.grpData)
@@ -306,8 +436,21 @@ Partial Class GitUpdater
         Me.grpGUI.PerformLayout
         Me.grpData.ResumeLayout(false)
         Me.grpData.PerformLayout
+        Me.grpCredMan.ResumeLayout(false)
+        Me.grpCredMan.PerformLayout
         Me.ResumeLayout(false)
+        Me.PerformLayout
     End Sub
+    Private btnShowPass As System.Windows.Forms.Button
+    Private lblUsername As System.Windows.Forms.Label
+    Private txtUsername As System.Windows.Forms.TextBox
+    Private txtPassword As System.Windows.Forms.TextBox
+    Private lblPassword As System.Windows.Forms.Label
+    Private btnHotkey As System.Windows.Forms.Button
+    Private btnSave As System.Windows.Forms.Button
+    Private lblHotkey As System.Windows.Forms.Label
+    Private grpCredMan As System.Windows.Forms.GroupBox
+    Private btnInsertCredentials As System.Windows.Forms.Button
     Private btnCancel As System.Windows.Forms.Button
     Private progressBar As System.Windows.Forms.ProgressBar
     Private ShellWorker As System.ComponentModel.BackgroundWorker
