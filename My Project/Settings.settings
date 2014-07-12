@@ -4,7 +4,25 @@
     <Profile Name="(Default)" />
   </Profiles>
   <Settings>
+    <Setting Name="DontClose" Type="System.Boolean" Scope="User" Roaming="false">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DontShow" Type="System.Boolean" Scope="User" Roaming="false">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NoWait" Type="System.Boolean" Scope="User" Roaming="false">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="Password" Type="System.String" Scope="User" Roaming="false">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PushForce" Type="System.Boolean" Scope="User" Roaming="false">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Repeat" Type="System.Boolean" Scope="User" Roaming="false">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SavedDir" Type="System.String" Scope="User" Roaming="false">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Username" Type="System.String" Scope="User" Roaming="false">

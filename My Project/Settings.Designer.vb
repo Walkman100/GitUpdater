@@ -55,6 +55,42 @@ Namespace My
         End Property
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DontClose() As Boolean
+            Get
+                Return CType(Me("DontClose"),Boolean)
+            End Get
+            Set
+                Me("DontClose") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DontShow() As Boolean
+            Get
+                Return CType(Me("DontShow"),Boolean)
+            End Get
+            Set
+                Me("DontShow") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property NoWait() As Boolean
+            Get
+                Return CType(Me("NoWait"),Boolean)
+            End Get
+            Set
+                Me("NoWait") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
         Public Property Password() As String
             Get
@@ -62,6 +98,42 @@ Namespace My
             End Get
             Set
                 Me("Password") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property PushForce() As Boolean
+            Get
+                Return CType(Me("PushForce"),Boolean)
+            End Get
+            Set
+                Me("PushForce") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property Repeat() As Boolean
+            Get
+                Return CType(Me("Repeat"),Boolean)
+            End Get
+            Set
+                Me("Repeat") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property SavedDir() As String
+            Get
+                Return CType(Me("SavedDir"),String)
+            End Get
+            Set
+                Me("SavedDir") = value
             End Set
         End Property
         

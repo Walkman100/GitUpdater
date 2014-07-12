@@ -22,10 +22,45 @@ Public Class GitUpdater
         ' apply settings to where they are changed
         txtUsername.Text = My.Settings.Username
         txtPassword.Text = My.Settings.Password
-        'chkRememberBrowser.Checked = My.Settings.RememberBrowser
+        chkNoWait.Checked = My.Settings.NoWait
+        chkDontClose.Checked = My.Settings.DontClose
+        chkDontShow.Checked = My.Settings.DontShow
+        chkPushForce.Checked = My.Settings.PushForce
+        chkRepeat.Checked = My.Settings.Repeat
+        If My.Settings.SavedDir <> "" Then
+            Dir = My.Settings.SavedDir
+        End If
 
         ' apply settings to where they affect
-        'none yet
+        If My.Settings.NoWait = True Then Wait = 1000 Else Wait = -1
+        If My.Settings.DontShow = True Then
+            CmdStyle = vbMinimizedNoFocus
+            If ShellWorker.IsBusy = True Then
+                Me.TopMost = False
+            End If
+        ElseIf My.Settings.DontShow = False Then
+            CmdStyle = vbNormalFocus
+            If ShellWorker.IsBusy = True Then
+                Me.TopMost = True
+            End If
+        End If
+        If My.Settings.PushForce = True Then ForcePush = "-f" Else ForcePush = ""
+        
+        ' new command line args
+        Dim inputArgument As String = "/input=" 
+        Dim inputName As String = "" 
+
+        For Each s As String In My.Application.CommandLineArgs
+            If s.ToLower.StartsWith(inputArgument) Then
+                inputName = s.Remove(0, inputArgument.Length)
+            End If 
+        Next 
+
+        If inputName = "" Then
+            MsgBox("No input name")
+        Else
+            MsgBox("Input name: " & inputName)
+        End If
         
         Dim rundir As Boolean = False
         Dim gitcmd As Boolean = False
@@ -304,6 +339,9 @@ Public Class GitUpdater
     End Sub
     
     Sub BtnCloseCmd_Click(sender As Object, e As EventArgs)
+        If ShellWorker.IsBusy = False Then
+            If MsgBox("No git operation from this program is in progress, are you sure you want to insert commands to close a CMD windom?", vbYesNo, "Confirmation") = vbNo Then Exit Sub
+        End If
         Me.WindowState = FormWindowState.Minimized
         System.Threading.Thread.Sleep(500)
         SendKeys.send("^C")
