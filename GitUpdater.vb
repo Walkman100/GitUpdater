@@ -3,15 +3,14 @@ Imports System.IO
 
 Public Class GitUpdater
     
-    Dim usrProfile As String = Environment.GetEnvironmentVariable("HOMEPATH")
-    Dim Dir As String = usrProfile & "\Documents\GitHub"
+    Dim Dir As String = Environment.GetEnvironmentVariable("HOMEPATH") & "\Documents\GitHub"
     Dim cmdRepo As String = ""
     
-    Dim count, GitCommand As String   'because the Worker doesn't support direct sub calling
+    Dim count, GitCommand As String  ' because the Worker doesn't support direct sub calling
     
     Dim ForcePush As String = ""
-    Dim CmdStyle As AppWinStyle = vbNormalFocus   'window location of CMD
-    Dim Wait As Integer = -1   'Wait until cmd closes
+    Dim CmdStyle As AppWinStyle = vbNormalFocus  ' window location of CMD
+    Dim Wait As Integer = -1  ' Wait until cmd closes
     
     Private Sub btnExit_Click(sender As Object, e As EventArgs)
         End
@@ -46,64 +45,29 @@ Public Class GitUpdater
         End If
         If My.Settings.PushForce = True Then ForcePush = "-f" Else ForcePush = ""
         
-        ' new command line args
-        Dim inputArgument As String = "/input=" 
-        Dim inputName As String = "" 
-
+        ' command line args
         For Each s As String In My.Application.CommandLineArgs
-            If s.ToLower.StartsWith(inputArgument) Then
-                inputName = s.Remove(0, inputArgument.Length)
-            End If 
-        Next 
-
-        If inputName = "" Then
-            MsgBox("No input name")
-        Else
-            MsgBox("Input name: " & inputName)
-        End If
-        
-        Dim rundir As Boolean = False
-        Dim gitcmd As Boolean = False
-        Dim fullRepoPath As Boolean = True
-        Dim tmpGitCommand As String = ""
-        'Command Line Args
-        For Each s As String In My.Application.CommandLineArgs
-            If gitcmd = False Then
-                If rundir = False Then
-                    If s = "-dir" Or s = "/dir" Or s = "\dir" Or s = "dir" Then
-                        rundir = True
-                    Else
-                        tmpGitCommand = s
-                        gitcmd = True
-                    End If
-                Else
-                    If fullRepoPath = True Then
-                        If File.Exists(s) Then
-                            Dir = Strings.Left(s, Len(s)-Len(cmdRepo))
-                            fullRepoPath = False
-                        Else
-                            cmdRepo = s
-                            rundir = False
-                        End If
-                    Else
-                        cmdRepo = s
-                        rundir = False
-                        fullRepoPath = True
-                    End If
-                End If
-            Else
-                If s = "all" Or s = "selected" Or s = "notselected" Or s = "cmdselected" Or s = "cmdnotselected" Then
-                    count = s
-                    GitCommand = tmpGitCommand
-                    If ShellWorker.IsBusy = False Then
-                        ShellWorker.RunWorkerAsync
-                    Else
-                        MsgBox("A script is currently in progress!")
-                    End If
-                    gitcmd = False
-                End If
+            If s.ToLower.StartsWith("-gitcmd=") Then
+                GitCommand = s.Remove(0, 8)
+            End If
+            If s.ToLower.StartsWith("-gitwhat=") Then
+                count = s.Remove(0, 9)
+            End If
+            If s.ToLower.StartsWith("-dir=") Then
+                Dir = s.Remove(0, 5)
+                RebuildRepoList
+            End If
+            If s.ToLower.StartsWith("-repo=") Then
+                cmdRepo = s.Remove(0, 6)
             End If
             
+            If s.ToLower.StartsWith("run") Then
+                If ShellWorker.IsBusy = False Then
+                    ShellWorker.RunWorkerAsync
+                Else
+                    MsgBox("A script is currently in progress!")
+                End If
+            End If
         Next
     End Sub
     

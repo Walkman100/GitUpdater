@@ -20,7 +20,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="Repeat" Type="System.Boolean" Scope="User" Roaming="false">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="SavedDir" Type="System.String" Scope="User" Roaming="false">
       <Value Profile="(Default)" />
