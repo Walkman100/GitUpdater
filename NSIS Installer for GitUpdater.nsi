@@ -50,7 +50,11 @@ Section "GitUpdater Quick Launch Shortcut"
 SectionEnd
 
 Section "Example Shortcuts in Start Menu"
-  
+  CreateShortCut "$SMPROGRAMS\DeavmiOSS\GitUpdater (Pull All).lnk" "$INSTDIR\GitUpdater.exe -gitcmd=pull -gitwhat=all run" "" "" "" "" "" "Start GitUpdater and pull all repos"
+  CreateShortCut "$SMPROGRAMS\DeavmiOSS\GitUpdater (Push All).lnk" "$INSTDIR\GitUpdater.exe -gitcmd=push -gitwhat=all run" "" "" "" "" "" "Start GitUpdater and push all repos"
+  CreateShortCut "$SMPROGRAMS\DeavmiOSS\GitUpdater (Pull GitUpdater Repo).lnk" "$INSTDIR\GitUpdater.exe -gitcmd=pull -gitwhat=cmdselected -repo=GitUpdater run" "" "" "" "" "" "Start GitUpdater and pull the GitUpdater repo"
+  CreateShortCut "$SMPROGRAMS\DeavmiOSS\GitUpdater (Push GitUpdater Repo).lnk" "$INSTDIR\GitUpdater.exe -gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run" "" "" "" "" "" "Start GitUpdater and pull the GitUpdater repo"
+  CreateShortCut "$SMPROGRAMS\DeavmiOSS\GitUpdater (Start in Users directory).lnk" "$INSTDIR\GitUpdater.exe -dir=C:\Users" "" "" "" "" "" "Start GitUpdater in Users directory"
 SectionEnd
 
 ;Section "More apps from DeavmiOSS"
