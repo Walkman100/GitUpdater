@@ -291,6 +291,7 @@ Partial Class GitUpdater
         Me.progressBar.Location = New System.Drawing.Point(266, 287)
         Me.progressBar.Name = "progressBar"
         Me.progressBar.Size = New System.Drawing.Size(165, 23)
+        Me.progressBar.Step = 1
         Me.progressBar.TabIndex = 28
         '
         'btnCancel

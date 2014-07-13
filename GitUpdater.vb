@@ -146,10 +146,10 @@ Public Class GitUpdater
             If lstRepos.SelectedIndex = -1 Then
                 MsgBox("No item selected")
             Else
-                progressBar.Maximum = 2
-                progressBar.Value = 1
+                progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee
                 Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & ForcePush, CmdStyle, True, Wait)
-                progressBar.Value = 2
+                progressBar.Style = System.Windows.Forms.ProgressBarStyle.Blocks
+                progressBar.Value = progressBar.Maximum
             End If
             
         ElseIf count = "notselected" Then
@@ -308,7 +308,7 @@ Public Class GitUpdater
     
     Sub BtnCloseCmd_Click(sender As Object, e As EventArgs)
         If ShellWorker.IsBusy = False Then
-            If MsgBox("No git operation from this program is in progress, are you sure you want to insert commands to close a CMD windom?", vbYesNo, "Confirmation") = vbNo Then Exit Sub
+            If MsgBox("No git operation from this program is in progress, are you sure you want to insert commands to close a CMD window?", vbYesNo, "Confirmation") = vbNo Then Exit Sub
         End If
         Me.WindowState = FormWindowState.Minimized
         System.Threading.Thread.Sleep(500)
@@ -317,7 +317,7 @@ Public Class GitUpdater
         SendKeys.send("Y")
         System.Threading.Thread.Sleep(100)
         SendKeys.Send("{ENTER}")
-        System.Threading.Thread.Sleep(100)
+        System.Threading.Thread.Sleep(500)
         Me.WindowState = FormWindowState.Normal
     End Sub
 End Class
