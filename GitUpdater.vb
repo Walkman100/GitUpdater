@@ -5,8 +5,8 @@ Public Class GitUpdater
     
     Dim Dir As String = Environment.GetEnvironmentVariable("HOMEPATH") & "\Documents\GitHub"
     Dim cmdRepo As String = ""
-    
     Dim count, GitCommand As String  ' because the Worker doesn't support direct sub calling
+    Dim ExitWhenDone As Boolean = False
     
     Dim ForcePush As String
     Dim CmdStyle As AppWinStyle  ' window location of CMD
@@ -64,13 +64,15 @@ Public Class GitUpdater
             If s.ToLower.StartsWith("-repo=") Then
                 cmdRepo = s.Remove(0, 6)
             End If
-            
             If s.ToLower.StartsWith("run") Then
                 If ShellWorker.IsBusy = False Then
                     ShellWorker.RunWorkerAsync
                 Else
                     MsgBox("A script is currently in progress!")
                 End If
+            End If
+            If s.ToLower.StartsWith("exitwhendone") Then
+                ExitWhenDone = True
             End If
         Next
     End Sub
@@ -186,6 +188,9 @@ Public Class GitUpdater
                 Next
             End If
             
+        End If
+        If ExitWhenDone = True Then
+            End
         End If
         Me.TopMost = False
     End Sub
