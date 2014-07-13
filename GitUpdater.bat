@@ -15,7 +15,12 @@ cd %1
 :Start
 
 IF %5==True (
-    git %2 %6 >> ../log.txt
+    
+    @echo Git %2ing repo at location "%1" >> ..\log.txt
+    git %2 %6 >> ..\log.txt
+    echo. >> ..\log.txt
+    echo. >> ..\log.txt
+    
 ) ELSE (
     git %2 %6
 )
