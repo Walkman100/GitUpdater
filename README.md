@@ -45,22 +45,39 @@ An external program that you can use is Windows itself, using the Windows Task S
 
 1. Press <kbd>⊞ Win</kbd> & <kbd>R</kbd>
 
+![Run Dialogue](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/GitUpdater/WinTaskSchdRun.png "Run Dialogue")
+
 2. Type `taskschd.msc` or copy and paste, then press enter
 
 3. In the window that opens, in the pane on the left click on 'Task Scheduler Library' or expand it and click on the folder where you want to make the task.
 
+![Left Pane](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/GitUpdater/WinTaskSchdLeftPane.png "Left Pane")
+
 4. Click on the option in the pane on the right that reads 'Create Task...'
+
+![Right Pane](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/GitUpdater/WinTaskSchdRightPane.png "Right Pane")
 
 5. Give the task any name you want. Click on the tab 'Triggers', then the 'New...' button.
 
+![Set a name](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/GitUpdater/WinTaskSchdName.png "Set a name")
+![Click Triggers then New](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/GitUpdater/WinTaskSchdTriggersNew.png "Click Triggers then New")
+
 6. Set when you want the task to start.
+
+![Set when you want the task to start](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/GitUpdater/WinTaskSchdTaskStart.png "Set when you want the task to start")
 
 7. Click 'OK', then go to the 'Actions' tab and click 'New...'
 
+![Click Actions then New](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/GitUpdater/WinTaskSchdActionsNew.png "Click Actions then New")
+
 8. Click 'Browse...' and locate the GitUpdater executable.
+
+![Locate GitUpdater](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/GitUpdater/WinTaskSchdLocateGitUpdater.png "Locate GitUpdater")
 
 9. In the 'Add arguments (optional):' box add the arguments you want, e.g. `-gitcmd=pull -gitwhat=all run` or `-gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run`
 
+![Set the Arguments](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/GitUpdater/WinTaskSchdArguments.png "Set the Arguments")
+
 10. Click 'OK', 'OK' again, then close the Task Scheduler window.
 
-Screenshots coming soon!
+![Check the line looks correct](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/GitUpdater/WinTaskSchdDone.png "Check the line looks correct")
