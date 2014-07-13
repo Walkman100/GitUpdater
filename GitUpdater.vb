@@ -17,6 +17,9 @@ Public Class GitUpdater
     End Sub
     
     Sub LoadGitUpdater(sender As Object, e As EventArgs)
+        If Not File.Exists("GitUpdater.bat") Then
+            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/GitUpdater.bat", "GitUpdater.bat")
+        End If
         RebuildRepoList
         ' apply settings to where they are changed
         txtUsername.Text = My.Settings.Username
