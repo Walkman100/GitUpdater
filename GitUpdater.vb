@@ -8,9 +8,9 @@ Public Class GitUpdater
     
     Dim count, GitCommand As String  ' because the Worker doesn't support direct sub calling
     
-    Dim ForcePush As String = ""
-    Dim CmdStyle As AppWinStyle = vbNormalFocus  ' window location of CMD
-    Dim Wait As Integer = -1  ' Wait until cmd closes
+    Dim ForcePush As String
+    Dim CmdStyle As AppWinStyle  ' window location of CMD
+    Dim Wait As Integer  ' Wait until cmd closes
     
     Private Sub btnExit_Click(sender As Object, e As EventArgs)
         End
@@ -26,11 +26,12 @@ Public Class GitUpdater
         chkDontShow.Checked = My.Settings.DontShow
         chkPushForce.Checked = My.Settings.PushForce
         chkRepeat.Checked = My.Settings.Repeat
+        chkLog.Checked = My.Settings.Log
+        
+        ' apply settings to where they affect
         If My.Settings.SavedDir <> "" Then
             Dir = My.Settings.SavedDir
         End If
-
-        ' apply settings to where they affect
         If My.Settings.NoWait = True Then Wait = 1000 Else Wait = -1
         If My.Settings.DontShow = True Then
             CmdStyle = vbMinimizedNoFocus
@@ -134,7 +135,7 @@ Public Class GitUpdater
         
         If count = "all" Then
             For i = 1 To lstRepos.Items.Count
-                Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+                Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & ForcePush, CmdStyle, True, Wait)
                 progressBar.Value = i
             Next
             
@@ -144,7 +145,7 @@ Public Class GitUpdater
             Else
                 progressBar.Maximum = 2
                 progressBar.Value = 1
-                Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+                Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & ForcePush, CmdStyle, True, Wait)
                 progressBar.Value = 2
             End If
             
@@ -154,7 +155,7 @@ Public Class GitUpdater
             Else
                 For i = 1 To lstRepos.Items.Count
                     If i - 1 <> lstRepos.SelectedIndex Then
-                        Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+                        Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & ForcePush, CmdStyle, True, Wait)
                     End If
                     progressBar.Value = i
                 Next
@@ -166,7 +167,7 @@ Public Class GitUpdater
             Else
                 progressBar.Maximum = 2
                 progressBar.Value = 1
-                Shell("GitUpdater.bat " & Dir & "\" & cmdRepo & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+                Shell("GitUpdater.bat " & Dir & "\" & cmdRepo & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & ForcePush, CmdStyle, True, Wait)
                 progressBar.Value = 2
             End If
             
@@ -176,7 +177,7 @@ Public Class GitUpdater
             Else
                 For i = 1 To lstRepos.Items.Count
                     If lstRepos.Items.Item(i - 1) <> cmdRepo Then
-                        Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked, CmdStyle, True, Wait)
+                        Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & ForcePush, CmdStyle, True, Wait)
                         progressBar.Value = i
                     End If
                 Next
