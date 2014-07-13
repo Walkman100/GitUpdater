@@ -108,10 +108,17 @@ Public Class GitUpdater
         
     End Sub
     
-    ' how to run the shells
+    ' how to run the shells & changing settings
     
     Sub ChkNoWait_CheckedChanged(sender As Object, e As EventArgs)
         If chkNoWait.Checked = True Then Wait = 1000 Else Wait = -1
+        My.Settings.NoWait = chkNoWait.Checked
+        My.Settings.Save()
+    End Sub
+    
+    Sub ChkDontClose_CheckedChanged(sender As Object, e As EventArgs)
+        My.Settings.DontClose = chkDontClose.Checked
+        My.Settings.Save()
     End Sub
     
     Sub ChkDontShow_CheckedChanged(sender As Object, e As EventArgs)
@@ -126,10 +133,24 @@ Public Class GitUpdater
                 Me.TopMost = True
             End If
         End If
+        My.Settings.DontShow = chkDontShow.Checked
+        My.Settings.Save()
     End Sub
     
     Sub ChkPushForce_CheckedChanged(sender As Object, e As EventArgs)
         If chkPushForce.Checked = True Then ForcePush = "-f" Else ForcePush = ""
+        My.Settings.PushForce = chkPushForce.Checked
+        My.Settings.Save()
+    End Sub
+    
+    Sub ChkRepeat_CheckedChanged(sender As Object, e As EventArgs)
+        My.Settings.Repeat = chkRepeat.Checked
+        My.Settings.Save()
+    End Sub
+    
+    Sub ChkLog_CheckedChanged(sender As Object, e As EventArgs)
+        My.Settings.Log = chkLog.Checked
+        My.Settings.Save()
     End Sub
     
     ' actual code that runs the shells

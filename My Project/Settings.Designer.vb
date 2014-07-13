@@ -80,9 +80,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property Log() As String
+        Public Property Log() As Boolean
             Get
-                Return CType(Me("Log"),String)
+                Return CType(Me("Log"),Boolean)
             End Get
             Set
                 Me("Log") = value

@@ -185,14 +185,13 @@ Partial Class GitUpdater
         '
         Me.chkRepeat.AutoSize = true
         Me.chkRepeat.BackColor = System.Drawing.Color.Transparent
-        Me.chkRepeat.Checked = true
-        Me.chkRepeat.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkRepeat.Location = New System.Drawing.Point(6, 42)
         Me.chkRepeat.Name = "chkRepeat"
         Me.chkRepeat.Size = New System.Drawing.Size(125, 17)
         Me.chkRepeat.TabIndex = 20
         Me.chkRepeat.Text = "Repeat until success"
         Me.chkRepeat.UseVisualStyleBackColor = false
+        AddHandler Me.chkRepeat.CheckedChanged, AddressOf Me.ChkRepeat_CheckedChanged
         '
         'folderBrowserDialog
         '
@@ -220,6 +219,7 @@ Partial Class GitUpdater
         Me.chkDontClose.TabIndex = 22
         Me.chkDontClose.Text = "Don't close command window when done"
         Me.chkDontClose.UseVisualStyleBackColor = true
+        AddHandler Me.chkDontClose.CheckedChanged, AddressOf Me.ChkDontClose_CheckedChanged
         '
         'chkNoWait
         '
@@ -279,6 +279,7 @@ Partial Class GitUpdater
         Me.chkLog.TabIndex = 22
         Me.chkLog.Text = "Send output from operation to log.txt"
         Me.chkLog.UseVisualStyleBackColor = true
+        AddHandler Me.chkLog.CheckedChanged, AddressOf Me.ChkLog_CheckedChanged
         '
         'ShellWorker
         '
