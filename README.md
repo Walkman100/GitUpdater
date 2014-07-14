@@ -1,10 +1,8 @@
-GitUpdater [![Build status](https://ci.appveyor.com/api/projects/status/72cvetqe8awtp2fn)](https://ci.appveyor.com/project/Walkman100/gitupdater)
-=================================================================================================================================================
+# GitUpdater [![Build status](https://ci.appveyor.com/api/projects/status/72cvetqe8awtp2fn)](https://ci.appveyor.com/project/Walkman100/gitupdater)
 
 A simple application written in VB.NET to update all your repos with one click, or one repeatedly until it works.
 
-Command Line
-============
+# Command Line
 
 The syntax to launch GitUpdater from the command line is:
 ```shell
@@ -20,23 +18,22 @@ some examples are:
 
 Notes:
 
-* If you use either of the `selected` or `notselected` options, it will say that no item has been specified, since those methods use the selection in the GUI. Please use the <i><b>cmd</b>selected</i> and <i><b>cmd</b>notselected</i> methods.
-* The way this has been programmed allows you to put multiple commands after each other:
+- If you use either of the `selected` or `notselected` options, it will say that no item has been specified, since those methods use the selection in the GUI. Please use the <i><b>cmd</b>selected</i> and <i><b>cmd</b>notselected</i> methods.
+- The way this has been programmed allows you to put multiple commands after each other:
 `gitupdater.exe -gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run -gitcmd=pull -gitwhat=cmdselected -repo=YTVL run`
-* Any git command can be used in place of `push|pull`, the flags can be put in any order (but it is recommended to use the specified order), and anything that doesn't begin with one of the predefined flags will be ignored. This allows for a command like this:
+- Any git command can be used in place of `push|pull`, the flags can be put in any order (but it is recommended to use the specified order), and anything that doesn't begin with one of the predefined flags will be ignored. This allows for a command like this:
 `gitupdater.exe -repo=GitUpdater -gitcmd=show ouiocuiygcrdackdacrdi -gitwhat=cmdselected run`
 This will execute the `git show` command in the `GitUpdater` repo.
-* The `exitWhenDone` flag is only used when the program performs a git operation, so if you use for example `gitupdater.exe exitWhenDone` it will still open the GUI, but after any Git operation it will close.
+- The `exitWhenDone` flag is only used when the program performs a git operation, so if you use for example `gitupdater.exe exitWhenDone` it will still open the GUI, but after any Git operation it will close.
 
 **Please note that the `run` flag is necessary to run the program, and if it is put before any other parameters they will not be used** (except the `exitWhenDone` flag, that can be put anywhere).
-* You can launch GitUpdater in a specific repo parent folder:
+- You can launch GitUpdater in a specific repo parent folder:
 
 `gitupdater.exe -dir="C:\Users\Matthew\GitHub"`
 
 If your repos are located in that folder.
 
-Perform Git commands at a scheduled time
-========================================
+# Perform Git commands at a scheduled time
 
 To do this you use an external program to launch GitUpdater with command line args (please see [above](#command-line) for an explanation of them).
 

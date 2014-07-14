@@ -1,10 +1,8 @@
-GitUpdater [![Build status](https://ci.appveyor.com/api/projects/status/72cvetqe8awtp2fn)](https://ci.appveyor.com/project/Walkman100/gitupdater)
-==========
+# GitUpdater [![Build status](https://ci.appveyor.com/api/projects/status/72cvetqe8awtp2fn)](https://ci.appveyor.com/project/Walkman100/gitupdater)
 
 A simple application written in VB.NET to update all your repos with one click, or one repeatedly until it works.
 
-Command Line
-============
+# Command Line
 
 The syntax to launch GitUpdater from the command line is:
 ```shell
@@ -29,8 +27,7 @@ Also note that any git command can be used in place of `push|pull`, and anything
 
 This will execute the `git show` command in the `GitUpdater` repo.
 
-Perform Git commands at a scheduled time
-========================================
+# Perform Git commands at a scheduled time
 
 To do this you use an external program to launch GitUpdater with command line args (please see above for an explanation of them).
 
@@ -55,5 +52,3 @@ An external program that you can use is Windows itself, using the Windows Task S
 9. In the 'Add arguments (optional):' box add the arguments you want, e.g. `pull all` or `-dir GitUpdater push cmdselected`
 
 10. Click 'OK', 'OK' again, then close the Task Scheduler window.
-
-Screenshots coming soon!
