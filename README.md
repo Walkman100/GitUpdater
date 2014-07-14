@@ -8,29 +8,27 @@ Command Line
 
 The syntax to launch GitUpdater from the command line is:
 ```shell
-gitupdater.exe [-gitcmd=<push|pull|(any git command)>] [-gitwhat=<all|selected|notselected|cmdselected|cmdnotselected>] [-dir=<repos parent folder>] [-repo=<repo name>] [run]
+gitupdater.exe [-gitcmd=<push|pull|(any git command)>] [-gitwhat=<all|selected|notselected|cmdselected|cmdnotselected>] [-dir=<repos parent folder>] [-repo=<repo name>] [run] [exitWhenDone]
 ```
 some examples are:
 
-`gitupdater.exe -gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run`
+`gitupdater.exe -gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run exitWhenDone`
 
-`gitupdater.exe -gitcmd=pull -gitwhat=cmdnotselected -repo=YTVL run`
+`gitupdater.exe -gitcmd=pull -gitwhat=cmdnotselected -repo=YTVL run exitWhenDone`
 
 `gitupdater.exe -gitcmd=pull -gitwhat=all run`
 
-Note that if you use either of the `selected` or `notselected` options, it will say that no item has been specified, since those methods use the selection in the GUI. Please use the <i><b>cmd</b>selected</i> and <i><b>cmd</b>notselected</i> methods.
+Notes:
 
-Note also that the way this has been programmed allows you to put multiple commands after each other:
+* If you use either of the `selected` or `notselected` options, it will say that no item has been specified, since those methods use the selection in the GUI. Please use the <i><b>cmd</b>selected</i> and <i><b>cmd</b>notselected</i> methods.
+* The way this has been programmed allows you to put multiple commands after each other:
 `gitupdater.exe -gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run -gitcmd=pull -gitwhat=cmdselected -repo=YTVL run`
-
-Also note that any git command can be used in place of `push|pull`, they can be put in any order (but it is recommended to use the specified order), and anything that doesn't begin with one of the predefined flags will be ignored. This allows for a command like this:
-
+* Any git command can be used in place of `push|pull`, the flags can be put in any order (but it is recommended to use the specified order), and anything that doesn't begin with one of the predefined flags will be ignored. This allows for a command like this:
 `gitupdater.exe -repo=GitUpdater -gitcmd=show ouiocuiygcrdackdacrdi -gitwhat=cmdselected run`
-
 This will execute the `git show` command in the `GitUpdater` repo.
-
-**Please note that the `run` flag is necessary to run the program, and if it is put before any other parameters they will not be used.**
-Also note that this can be used to launch GitUpdater in a specific repo parent folder:
+* The `exitWhenDone` flag is only used when the program performs a git operation, so if you use for example `gitupdater.exe exitWhenDone` it will still open the GUI, but after any Git operation it will close.
+**Please note that the `run` flag is necessary to run the program, and if it is put before any other parameters they will not be used** (except the `exitWhenDone` flag, that can be put anywhere).
+* You can launch GitUpdater in a specific repo parent folder:
 
 `gitupdater.exe -dir="C:\Users\Matthew\GitHub"`
 
@@ -74,7 +72,7 @@ An external program that you can use is Windows itself, using the Windows Task S
 
 ![Locate GitUpdater](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/GitUpdater/WinTaskSchdLocateGitUpdater.png "Locate GitUpdater")
 
-9: In the 'Add arguments (optional):' box add the arguments you want, e.g. `-gitcmd=pull -gitwhat=all run` or `-gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run`
+9: In the 'Add arguments (optional):' box add the arguments you want, e.g. `-gitcmd=pull -gitwhat=all run exitWhenDone` or `-gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run exitWhenDone`
 
 ![Set the Arguments](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/GitUpdater/WinTaskSchdArguments.png "Set the Arguments")
 
