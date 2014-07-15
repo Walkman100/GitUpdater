@@ -260,9 +260,9 @@ Public Class GitUpdater
             If lstRepos.SelectedIndex = -1 Then
                 MsgBox("No item selected")
             Else
-                progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+                progressBar.Maximum = 2
+                progressBar.Value = 1
                 Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & ForcePush, CmdStyle, True, Wait)
-                progressBar.Style = System.Windows.Forms.ProgressBarStyle.Blocks
                 progressBar.Value = progressBar.Maximum
             End If
             
@@ -285,7 +285,7 @@ Public Class GitUpdater
                 progressBar.Maximum = 2
                 progressBar.Value = 1
                 Shell("GitUpdater.bat " & Dir & "\" & cmdRepo & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & ForcePush, CmdStyle, True, Wait)
-                progressBar.Value = 2
+                progressBar.Value = progressBar.Maximum
             End If
             
         Case = "cmdnotselected"
