@@ -31,7 +31,13 @@ Partial Class GitUpdater
         Me.ContextMenuStripRepos = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ContextMenuStripReposOpenInExplorer = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposOpenInCMD = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposOpenInPS = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposOpenInGitHub = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ContextMenuStripReposOpenReadme = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ContextMenuStripReposCopyRepoName = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposCopyRepoPath = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.btnGitPullSelected = New System.Windows.Forms.Button()
         Me.btnGitPushSelected = New System.Windows.Forms.Button()
@@ -62,7 +68,6 @@ Partial Class GitUpdater
         Me.lblUsername = New System.Windows.Forms.Label()
         Me.timerKeyChecker = New System.Windows.Forms.Timer(Me.components)
         Me.btnCloseCmd = New System.Windows.Forms.Button()
-        Me.ContextMenuStripReposOpenInPS = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripRepos.SuspendLayout
         Me.grpGUI.SuspendLayout
         Me.grpData.SuspendLayout
@@ -123,30 +128,68 @@ Partial Class GitUpdater
         '
         'ContextMenuStripRepos
         '
-        Me.ContextMenuStripRepos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContextMenuStripReposOpenInExplorer, Me.ContextMenuStripReposOpenInCMD, Me.ContextMenuStripReposOpenInGitHub, Me.ContextMenuStripReposOpenInPS})
+        Me.ContextMenuStripRepos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContextMenuStripReposOpenInExplorer, Me.ContextMenuStripReposOpenInCMD, Me.ContextMenuStripReposOpenInPS, Me.ContextMenuStripReposOpenInGitHub, Me.ContextMenuStripReposSeparator1, Me.ContextMenuStripReposOpenReadme, Me.ContextMenuStripReposSeparator2, Me.ContextMenuStripReposCopyRepoName, Me.ContextMenuStripReposCopyRepoPath})
         Me.ContextMenuStripRepos.Name = "contextMenuStripRepos"
-        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(320, 114)
+        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 192)
         '
         'ContextMenuStripReposOpenInExplorer
         '
         Me.ContextMenuStripReposOpenInExplorer.Name = "ContextMenuStripReposOpenInExplorer"
-        Me.ContextMenuStripReposOpenInExplorer.Size = New System.Drawing.Size(319, 22)
+        Me.ContextMenuStripReposOpenInExplorer.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposOpenInExplorer.Text = "Open Repo in Windows Explorer"
         AddHandler Me.ContextMenuStripReposOpenInExplorer.Click, AddressOf Me.LstRepos_DoubleClick
         '
         'ContextMenuStripReposOpenInCMD
         '
         Me.ContextMenuStripReposOpenInCMD.Name = "ContextMenuStripReposOpenInCMD"
-        Me.ContextMenuStripReposOpenInCMD.Size = New System.Drawing.Size(319, 22)
+        Me.ContextMenuStripReposOpenInCMD.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposOpenInCMD.Text = "Open Repo in CMD"
         AddHandler Me.ContextMenuStripReposOpenInCMD.Click, AddressOf Me.ContextMenuStripReposOpenInCMD_Click
+        '
+        'ContextMenuStripReposOpenInPS
+        '
+        Me.ContextMenuStripReposOpenInPS.Name = "ContextMenuStripReposOpenInPS"
+        Me.ContextMenuStripReposOpenInPS.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposOpenInPS.Text = "Open Repo in Windows PowerShell"
+        AddHandler Me.ContextMenuStripReposOpenInPS.Click, AddressOf Me.ContextMenuStripReposOpenInPS_Click
         '
         'ContextMenuStripReposOpenInGitHub
         '
         Me.ContextMenuStripReposOpenInGitHub.Name = "ContextMenuStripReposOpenInGitHub"
-        Me.ContextMenuStripReposOpenInGitHub.Size = New System.Drawing.Size(319, 22)
+        Me.ContextMenuStripReposOpenInGitHub.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposOpenInGitHub.Text = "Open Repo in GitHub for Windows"
         AddHandler Me.ContextMenuStripReposOpenInGitHub.Click, AddressOf Me.ContextMenuStripReposOpenInGitHub_Click
+        '
+        'ContextMenuStripReposSeparator1
+        '
+        Me.ContextMenuStripReposSeparator1.Name = "ContextMenuStripReposSeparator1"
+        Me.ContextMenuStripReposSeparator1.Size = New System.Drawing.Size(269, 6)
+        '
+        'ContextMenuStripReposOpenReadme
+        '
+        Me.ContextMenuStripReposOpenReadme.Name = "ContextMenuStripReposOpenReadme"
+        Me.ContextMenuStripReposOpenReadme.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposOpenReadme.Text = "Open Repo Readme"
+        AddHandler Me.ContextMenuStripReposOpenReadme.Click, AddressOf Me.ContextMenuStripReposOpenReadme_Click
+        '
+        'ContextMenuStripReposSeparator2
+        '
+        Me.ContextMenuStripReposSeparator2.Name = "ContextMenuStripReposSeparator2"
+        Me.ContextMenuStripReposSeparator2.Size = New System.Drawing.Size(269, 6)
+        '
+        'ContextMenuStripReposCopyRepoName
+        '
+        Me.ContextMenuStripReposCopyRepoName.Name = "ContextMenuStripReposCopyRepoName"
+        Me.ContextMenuStripReposCopyRepoName.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposCopyRepoName.Text = "Copy Repo Name"
+        AddHandler Me.ContextMenuStripReposCopyRepoName.Click, AddressOf Me.ContextMenuStripReposCopyRepoName_Click
+        '
+        'ContextMenuStripReposCopyRepoPath
+        '
+        Me.ContextMenuStripReposCopyRepoPath.Name = "ContextMenuStripReposCopyRepoPath"
+        Me.ContextMenuStripReposCopyRepoPath.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposCopyRepoPath.Text = "Copy Repo Path"
+        AddHandler Me.ContextMenuStripReposCopyRepoPath.Click, AddressOf Me.ContextMenuStripReposCopyRepoPath_Click
         '
         'btnRefresh
         '
@@ -478,13 +521,6 @@ Partial Class GitUpdater
         Me.btnCloseCmd.UseVisualStyleBackColor = true
         AddHandler Me.btnCloseCmd.Click, AddressOf Me.BtnCloseCmd_Click
         '
-        'ContextMenuStripReposOpenInPS
-        '
-        Me.ContextMenuStripReposOpenInPS.Name = "ContextMenuStripReposOpenInPS"
-        Me.ContextMenuStripReposOpenInPS.Size = New System.Drawing.Size(319, 22)
-        Me.ContextMenuStripReposOpenInPS.Text = "Open Repo in PowerShell (Requires Setup)"
-        AddHandler Me.ContextMenuStripReposOpenInPS.Click, AddressOf Me.ContextMenuStripReposOpenInPS_Click
-        '
         'GitUpdater
         '
         Me.AcceptButton = Me.btnGitPushSelected
@@ -526,6 +562,11 @@ Partial Class GitUpdater
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private ContextMenuStripReposSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Private ContextMenuStripReposSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Private ContextMenuStripReposOpenReadme As System.Windows.Forms.ToolStripMenuItem
+    Private ContextMenuStripReposCopyRepoPath As System.Windows.Forms.ToolStripMenuItem
+    Private ContextMenuStripReposCopyRepoName As System.Windows.Forms.ToolStripMenuItem
     Private ContextMenuStripReposOpenInPS As System.Windows.Forms.ToolStripMenuItem
     Private ContextMenuStripRepos As System.Windows.Forms.ContextMenuStrip
     Private ContextMenuStripReposOpenInExplorer As System.Windows.Forms.ToolStripMenuItem

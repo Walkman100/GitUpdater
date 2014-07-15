@@ -21,7 +21,8 @@ Public Class GitUpdater
             Try
                 My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/GitUpdater.bat", "GitUpdater.bat")
             Catch ex As Exception
-                MsgBox("Could not download the required file!", MsgBoxStyle.Exclamation)
+                MsgBox("Could not automatically download the required file! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
+                Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/GitUpdater.bat")
             End Try
         End If
         RebuildRepoList
@@ -114,27 +115,74 @@ Public Class GitUpdater
     Sub LstRepos_DoubleClick(sender As Object, e As EventArgs)
         If lstRepos.SelectedIndex <> -1 Then
             Process.Start("explorer.exe", Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
+        Else
+            Process.Start("explorer.exe", Dir)
         End If
     End Sub
     
     Sub ContextMenuStripReposOpenInCMD_Click(sender As Object, e As EventArgs)
         If lstRepos.SelectedIndex <> -1 Then
             Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
+        Else
+            Process.Start("cmd.exe", "/k cd " & Dir)
+        End If
+    End Sub
+    
+    Sub ContextMenuStripReposOpenInPS_Click(sender As Object, e As EventArgs)
+        If File.Exists("OpenRepoInPS.bat") Then
+            If lstRepos.SelectedIndex <> -1 Then
+                Process.Start("OpenRepoInPS.bat", """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """ " & Environment.CurrentDirectory)
+            Else
+                Process.Start("OpenRepoInPS.bat", """" & Dir & """ " & Environment.CurrentDirectory)
+            End If
+        Else
+            Try
+                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/OpenRepoInPS.bat", "OpenRepoInPS.bat")
+                ContextMenuStripReposOpenInPS_Click(Nothing, Nothing) ' Essentially restart the sub (but not quite)
+            Catch ex As Exception
+                MsgBox("Could not automatically download the required file! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
+                Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/OpenRepoInPS.bat")
+            End Try
         End If
     End Sub
     
     Sub ContextMenuStripReposOpenInGitHub_Click(sender As Object, e As EventArgs)
         If lstRepos.SelectedIndex <> -1 Then
-            Process.Start("github-windows://openRepo" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
+            Process.Start("github-windows://openRepo/" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
+        Else
+            Process.Start("github-windows://openRepo/" & Dir)
         End If
     End Sub
     
-    Sub ContextMenuStripReposOpenInPS_Click(sender As Object, e As EventArgs)
+    Sub ContextMenuStripReposOpenReadme_Click(sender As Object, e As EventArgs)
         If lstRepos.SelectedIndex <> -1 Then
-            'Process.Start("cmd.exe", "/k " & Environment.GetEnvironmentVariable("PSModulePath") & "..\powershell.exe -NoExit -ExecutionPolicy Unrestricted -File " & Environment.CurrentDirectory & "\PS\profile.example.ps1")
-            Process.Start("OpenRepoInPS.bat", """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """ " & Environment.CurrentDirectory)
-            'System.Threading.Thread.Sleep(1000)
-            'SendKeys.Send("cd " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "{Enter}")
+            If File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.md") Then
+                Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.md")
+            Else
+                
+            End If
+        Else
+            If File.Exists(Dir & "\Readme.md") Then
+                Process.Start(Dir & "\Readme.md")
+            Else
+                
+            End If
+        End If
+    End Sub
+    
+    Sub ContextMenuStripReposCopyRepoName_Click(sender As Object, e As EventArgs)
+        If lstRepos.SelectedIndex <> -1 Then
+            Clipboard.SetText(lstRepos.Items.Item(lstRepos.SelectedIndex))
+        Else
+            Clipboard.SetText(Dir)
+        End If
+    End Sub
+    
+    Sub ContextMenuStripReposCopyRepoPath_Click(sender As Object, e As EventArgs)
+        If lstRepos.SelectedIndex <> -1 Then
+            Clipboard.SetText(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
+        Else
+            Clipboard.SetText(Dir)
         End If
     End Sub
     
@@ -330,8 +378,8 @@ Public Class GitUpdater
     Sub BtnInsert_Click(sender As Object, e As EventArgs)
         Me.WindowState = FormWindowState.Minimized
         System.Threading.Thread.Sleep(1000)
-        SendKeys.SendWait(txtUsername.Text & "{ENTER}")
-        SendKeys.SendWait(txtPassword.Text & "{ENTER}")
+        SendKeys.SendWait(txtUsername.Text & "~")
+        SendKeys.SendWait(txtPassword.Text & "~")
         Me.WindowState = FormWindowState.Normal
     End Sub
     
@@ -369,7 +417,7 @@ Public Class GitUpdater
         System.Threading.Thread.Sleep(500)
         SendKeys.SendWait("^C")
         SendKeys.SendWait("Y")
-        SendKeys.SendWait("{ENTER}")
+        SendKeys.SendWait("~")
         Me.WindowState = FormWindowState.Normal
     End Sub
 End Class
