@@ -132,7 +132,7 @@ Public Class GitUpdater
     Sub ContextMenuStripReposOpenInPS_Click(sender As Object, e As EventArgs)
         If lstRepos.SelectedIndex <> -1 Then
             'Process.Start("cmd.exe", "/k " & Environment.GetEnvironmentVariable("PSModulePath") & "..\powershell.exe -NoExit -ExecutionPolicy Unrestricted -File " & Environment.CurrentDirectory & "\PS\profile.example.ps1")
-            Process.Start("OpenRepoInPS.bat", """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """ """ & Environment.CurrentDirectory & "\PS\profile.example.ps1" & """")
+            Process.Start("OpenRepoInPS.bat", """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """ " & Environment.CurrentDirectory)
             'System.Threading.Thread.Sleep(1000)
             'SendKeys.Send("cd " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "{Enter}")
         End If
