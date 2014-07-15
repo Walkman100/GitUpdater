@@ -18,7 +18,11 @@ Public Class GitUpdater
     
     Sub LoadGitUpdater(sender As Object, e As EventArgs)
         If Not File.Exists("GitUpdater.bat") Then
-            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/GitUpdater.bat", "GitUpdater.bat")
+            Try
+                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/GitUpdater.bat", "GitUpdater.bat")
+            Catch ex As Exception
+                MsgBox("Could not download the required file!", MsgBoxStyle.Exclamation)
+            End Try
         End If
         RebuildRepoList
         ' apply settings to where they are changed
@@ -249,7 +253,7 @@ Public Class GitUpdater
             If MsgBox("Are you sure you want to cancel operation? This requires restarting GitUpdater." & vbNewLine & vbNewLine & "This will not close the currently active CMD window. To do so, please click on the window and press 'Ctrl' + 'C', then 'Y', then 'Enter'.", vbYesNo, "Confirmation") = vbNo Then Exit Sub
             Application.Restart
         Else
-            MsgBox("No git operation is currently in progress!")
+            MsgBox("No git operation is currently in progress!", MsgBoxStyle.Information)
         End If
         
     End Sub
@@ -260,7 +264,7 @@ Public Class GitUpdater
         If ShellWorker.IsBusy = False Then
             ShellWorker.RunWorkerAsync
         Else
-            MsgBox("A git operation is currently in progress!", , "Operation in progress")
+            MsgBox("A git operation is currently in progress!", MsgBoxStyle.Exclamation, "Operation in progress")
         End If
     End Sub
     
@@ -270,7 +274,7 @@ Public Class GitUpdater
         If ShellWorker.IsBusy = False Then
             ShellWorker.RunWorkerAsync
         Else
-            MsgBox("A git operation is currently in progress!", ,"Operation in progress")
+            MsgBox("A git operation is currently in progress!", MsgBoxStyle.Exclamation, "Operation in progress")
         End If
     End Sub
     
@@ -280,7 +284,7 @@ Public Class GitUpdater
         If ShellWorker.IsBusy = False Then
             ShellWorker.RunWorkerAsync
         Else
-            MsgBox("A git operation is currently in progress!", ,"Operation in progress")
+            MsgBox("A git operation is currently in progress!", MsgBoxStyle.Exclamation, "Operation in progress")
         End If
     End Sub
     
@@ -290,7 +294,7 @@ Public Class GitUpdater
         If ShellWorker.IsBusy = False Then
             ShellWorker.RunWorkerAsync
         Else
-            MsgBox("A git operation is currently in progress!", ,"Operation in progress")
+            MsgBox("A git operation is currently in progress!", MsgBoxStyle.Exclamation, "Operation in progress")
         End If
     End Sub
     
@@ -300,7 +304,7 @@ Public Class GitUpdater
         If ShellWorker.IsBusy = False Then
             ShellWorker.RunWorkerAsync
         Else
-            MsgBox("A git operation is currently in progress!", ,"Operation in progress")
+            MsgBox("A git operation is currently in progress!", MsgBoxStyle.Exclamation, "Operation in progress")
         End If
     End Sub
     
@@ -310,7 +314,7 @@ Public Class GitUpdater
         If ShellWorker.IsBusy = False Then
             ShellWorker.RunWorkerAsync
         Else
-            MsgBox("A git operation is currently in progress!", ,"Operation in progress")
+            MsgBox("A git operation is currently in progress!", MsgBoxStyle.Information, "Operation in progress")
         End If
     End Sub
     
@@ -320,15 +324,14 @@ Public Class GitUpdater
         My.Settings.Username = txtUsername.Text
         My.Settings.Password = txtPassword.Text
         My.Settings.Save()
-        MsgBox("Succesfully Saved!", , "Saved!")
+        MsgBox("Succesfully Saved!", MsgBoxStyle.Information, "Saved!")
     End Sub
     
     Sub BtnInsert_Click(sender As Object, e As EventArgs)
         Me.WindowState = FormWindowState.Minimized
         System.Threading.Thread.Sleep(1000)
-        SendKeys.send(txtUsername.Text & "{ENTER}")
-        SendKeys.send(txtPassword.Text & "{ENTER}")
-        System.Threading.Thread.Sleep(1000)
+        SendKeys.SendWait(txtUsername.Text & "{ENTER}")
+        SendKeys.SendWait(txtPassword.Text & "{ENTER}")
         Me.WindowState = FormWindowState.Normal
     End Sub
     
@@ -364,12 +367,9 @@ Public Class GitUpdater
         End If
         Me.WindowState = FormWindowState.Minimized
         System.Threading.Thread.Sleep(500)
-        SendKeys.send("^C")
-        System.Threading.Thread.Sleep(100)
-        SendKeys.send("Y")
-        System.Threading.Thread.Sleep(100)
-        SendKeys.Send("{ENTER}")
-        System.Threading.Thread.Sleep(500)
+        SendKeys.SendWait("^C")
+        SendKeys.SendWait("Y")
+        SendKeys.SendWait("{ENTER}")
         Me.WindowState = FormWindowState.Normal
     End Sub
 End Class
