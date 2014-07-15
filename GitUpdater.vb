@@ -108,7 +108,21 @@ Public Class GitUpdater
     End Sub
     
     Sub LstRepos_DoubleClick(sender As Object, e As EventArgs)
-        Process.Start("explorer.exe", Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
+        If lstRepos.SelectedIndex <> -1 Then
+            Process.Start("explorer.exe", Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
+        End If
+    End Sub
+    
+    Sub ContextMenuStripReposOpenInCMD_Click(sender As Object, e As EventArgs)
+        If lstRepos.SelectedIndex <> -1 Then
+            Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
+        End If
+    End Sub
+    
+    Sub ContextMenuStripReposOpenInGitHub_Click(sender As Object, e As EventArgs)
+        If lstRepos.SelectedIndex <> -1 Then
+            Process.Start("github-windows://openRepo" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
+        End If
     End Sub
     
     ' how to run the shells & changing settings

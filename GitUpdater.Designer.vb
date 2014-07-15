@@ -28,6 +28,10 @@ Partial Class GitUpdater
         Me.btnGitPullAll = New System.Windows.Forms.Button()
         Me.btnGitPushAll = New System.Windows.Forms.Button()
         Me.lstRepos = New System.Windows.Forms.ListBox()
+        Me.ContextMenuStripRepos = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ContextMenuStripReposOpenInExplorer = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposOpenInCMD = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposOpenInGitHub = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.btnGitPullSelected = New System.Windows.Forms.Button()
         Me.btnGitPushSelected = New System.Windows.Forms.Button()
@@ -58,6 +62,7 @@ Partial Class GitUpdater
         Me.lblUsername = New System.Windows.Forms.Label()
         Me.timerKeyChecker = New System.Windows.Forms.Timer(Me.components)
         Me.btnCloseCmd = New System.Windows.Forms.Button()
+        Me.ContextMenuStripRepos.SuspendLayout
         Me.grpGUI.SuspendLayout
         Me.grpData.SuspendLayout
         Me.grpCredMan.SuspendLayout
@@ -103,6 +108,7 @@ Partial Class GitUpdater
         Me.lstRepos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
                         Or System.Windows.Forms.AnchorStyles.Left)  _
                         Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lstRepos.ContextMenuStrip = Me.ContextMenuStripRepos
         Me.lstRepos.FormattingEnabled = true
         Me.lstRepos.HorizontalScrollbar = true
         Me.lstRepos.IntegralHeight = false
@@ -113,6 +119,33 @@ Partial Class GitUpdater
         Me.lstRepos.Sorted = true
         Me.lstRepos.TabIndex = 13
         AddHandler Me.lstRepos.DoubleClick, AddressOf Me.LstRepos_DoubleClick
+        '
+        'ContextMenuStripRepos
+        '
+        Me.ContextMenuStripRepos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContextMenuStripReposOpenInExplorer, Me.ContextMenuStripReposOpenInCMD, Me.ContextMenuStripReposOpenInGitHub})
+        Me.ContextMenuStripRepos.Name = "contextMenuStripRepos"
+        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(268, 92)
+        '
+        'ContextMenuStripReposOpenInExplorer
+        '
+        Me.ContextMenuStripReposOpenInExplorer.Name = "ContextMenuStripReposOpenInExplorer"
+        Me.ContextMenuStripReposOpenInExplorer.Size = New System.Drawing.Size(267, 22)
+        Me.ContextMenuStripReposOpenInExplorer.Text = "Open Repo in Windows Explorer"
+        AddHandler Me.ContextMenuStripReposOpenInExplorer.Click, AddressOf Me.LstRepos_DoubleClick
+        '
+        'ContextMenuStripReposOpenInCMD
+        '
+        Me.ContextMenuStripReposOpenInCMD.Name = "ContextMenuStripReposOpenInCMD"
+        Me.ContextMenuStripReposOpenInCMD.Size = New System.Drawing.Size(267, 22)
+        Me.ContextMenuStripReposOpenInCMD.Text = "Open Repo in CMD"
+        AddHandler Me.ContextMenuStripReposOpenInCMD.Click, AddressOf Me.ContextMenuStripReposOpenInCMD_Click
+        '
+        'ContextMenuStripReposOpenInGitHub
+        '
+        Me.ContextMenuStripReposOpenInGitHub.Name = "ContextMenuStripReposOpenInGitHub"
+        Me.ContextMenuStripReposOpenInGitHub.Size = New System.Drawing.Size(267, 22)
+        Me.ContextMenuStripReposOpenInGitHub.Text = "Open Repo in GitHub for Windows"
+        AddHandler Me.ContextMenuStripReposOpenInGitHub.Click, AddressOf Me.ContextMenuStripReposOpenInGitHub_Click
         '
         'btnRefresh
         '
@@ -475,6 +508,7 @@ Partial Class GitUpdater
         Me.Text = "GitUpdater"
         Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         AddHandler Load, AddressOf Me.LoadGitUpdater
+        Me.ContextMenuStripRepos.ResumeLayout(false)
         Me.grpGUI.ResumeLayout(false)
         Me.grpGUI.PerformLayout
         Me.grpData.ResumeLayout(false)
@@ -484,6 +518,10 @@ Partial Class GitUpdater
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private ContextMenuStripRepos As System.Windows.Forms.ContextMenuStrip
+    Private ContextMenuStripReposOpenInExplorer As System.Windows.Forms.ToolStripMenuItem
+    Private ContextMenuStripReposOpenInGitHub As System.Windows.Forms.ToolStripMenuItem
+    Private ContextMenuStripReposOpenInCMD As System.Windows.Forms.ToolStripMenuItem
     Private chkLog As System.Windows.Forms.CheckBox
     Private btnCloseCmd As System.Windows.Forms.Button
     Private timerKeyChecker As System.Windows.Forms.Timer
