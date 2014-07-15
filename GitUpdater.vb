@@ -105,7 +105,10 @@ Public Class GitUpdater
         Else
             MsgBox("A script is currently in progress! Changing directory will mess up the script. Please cancel using the button above first.")
         End If
-        
+    End Sub
+    
+    Sub LstRepos_DoubleClick(sender As Object, e As EventArgs)
+        Process.Start("explorer.exe", Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
     End Sub
     
     ' how to run the shells & changing settings

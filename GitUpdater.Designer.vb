@@ -112,6 +112,7 @@ Partial Class GitUpdater
         Me.lstRepos.Size = New System.Drawing.Size(248, 491)
         Me.lstRepos.Sorted = true
         Me.lstRepos.TabIndex = 13
+        AddHandler Me.lstRepos.DoubleClick, AddressOf Me.LstRepos_DoubleClick
         '
         'btnRefresh
         '
