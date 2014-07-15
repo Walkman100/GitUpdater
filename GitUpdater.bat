@@ -16,10 +16,9 @@ cd %1
 
 IF %5==True (
     
-    @echo [%date%%time%] Git %2ing repo at location "%1" >> ..\log.txt
-    git %2 %6 >> ..\log.txt
-    echo. >> ..\log.txt
-    echo. >> ..\log.txt
+    @echo [%date% %time%] Git %2ing repo at location "%1" >> ..\GitUpdater.log
+    git %2 %6 >> ..\GitUpdater.log
+    echo. >> ..\GitUpdater.log
     
 ) ELSE (
     git %2 %6

@@ -158,15 +158,26 @@ Public Class GitUpdater
         If lstRepos.SelectedIndex <> -1 Then
             If File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.md") Then
                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.md")
+            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.txt") Then
+                Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.txt")
+            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.htm") Then
+                Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.htm")
+            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.html") Then
+                Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.html")
+            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.markdown") Then
+                Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.markdown")
+            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.mkd") Then
+                Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.mkd")
+            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme") Then
+                Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme")
             Else
-                
+                MsgBox("No readme found in repo:" & vbNewLine & """" & Dir & "\" & _
+                lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
+                "With filename: Readme.md, Readme.txt, Readme.htm, " & _
+                "Readme.html, Readme.markdown, Readme.mkd, or Readme.")
             End If
         Else
-            If File.Exists(Dir & "\Readme.md") Then
-                Process.Start(Dir & "\Readme.md")
-            Else
-                
-            End If
+            
         End If
     End Sub
     
@@ -237,13 +248,15 @@ Public Class GitUpdater
         If chkDontShow.Checked = False Then Me.TopMost = True
         progressBar.Maximum = lstRepos.Items.Count
         
-        If count = "all" Then
+        Select Case count
+            
+        Case = "all"
             For i = 1 To lstRepos.Items.Count
                 Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & ForcePush, CmdStyle, True, Wait)
                 progressBar.Value = i
             Next
             
-        ElseIf count = "selected" Then
+        Case = "selected"
             If lstRepos.SelectedIndex = -1 Then
                 MsgBox("No item selected")
             Else
@@ -253,7 +266,7 @@ Public Class GitUpdater
                 progressBar.Value = progressBar.Maximum
             End If
             
-        ElseIf count = "notselected" Then
+        Case = "notselected"
             If lstRepos.SelectedIndex = -1 Then
                 MsgBox("No item selected")
             Else
@@ -265,7 +278,7 @@ Public Class GitUpdater
                 Next
             End If
             
-        ElseIf count = "cmdselected" Then
+        Case = "cmdselected"
             If cmdRepo = "" Then
                 MsgBox("No repo passed from command line")
             Else
@@ -275,7 +288,7 @@ Public Class GitUpdater
                 progressBar.Value = 2
             End If
             
-        ElseIf count = "cmdnotselected" Then
+        Case = "cmdnotselected"
             If cmdRepo = "" Then
                 MsgBox("No repo passed from command line")
             Else
@@ -287,7 +300,8 @@ Public Class GitUpdater
                 Next
             End If
             
-        End If
+        End Select
+        
         If ExitWhenDone = True Then
             End
         End If
