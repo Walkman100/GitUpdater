@@ -1,1 +1,0 @@
-@%PSModulePath%\..\powershell.exe -NoExit -ExecutionPolicy Unrestricted -File PS\profile.example.ps1
