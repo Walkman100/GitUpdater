@@ -136,6 +136,7 @@ Public Class GitUpdater
                 Process.Start("OpenRepoInPS.bat", """" & Dir & """ " & Environment.CurrentDirectory)
             End If
         Else
+            If MsgBox("Couldn't find PowerShell script. This program can attempt to download it and put it in the right place, Continue?", vbYesNo, "OpenRepoInPS.bat not found!") = vbNo Then Exit Sub
             Try
                 My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/OpenRepoInPS.bat", "OpenRepoInPS.bat")
                 ContextMenuStripReposOpenInPS_Click(Nothing, Nothing) ' Essentially restart the sub (but not quite)
