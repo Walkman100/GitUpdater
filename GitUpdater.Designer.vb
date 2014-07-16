@@ -174,6 +174,7 @@ Partial Class GitUpdater
         '
         'ContextMenuStripReposOpenReadme
         '
+        Me.ContextMenuStripReposOpenReadme.Image = Global.GitUpdater.My.Resources.Resources.text_x_readme
         Me.ContextMenuStripReposOpenReadme.Name = "ContextMenuStripReposOpenReadme"
         Me.ContextMenuStripReposOpenReadme.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposOpenReadme.Text = "Open Repo Readme"

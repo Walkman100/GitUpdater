@@ -94,7 +94,8 @@ Public Class GitUpdater
     Sub BtnRefresh_Click(sender As Object, e As EventArgs)
         If ShellWorker.IsBusy = False Then
             RebuildRepoList
-        ElseIf MsgBox("A script is currently in progress! Refreshing repos might mess up the script. You can use the cancel button above to cancel operation." & vbNewLine &vbNewLine & "Refresh anyway?", vbOKCancel, "Operation in progress") = vbOK
+        ElseIf MsgBox("A script is currently in progress! Refreshing repos might mess up the script. You can use the cancel button above to cancel operation." _
+                & vbNewLine &vbNewLine & "Refresh anyway?", vbOKCancel, "Operation in progress") = vbOK
             RebuildRepoList
         End If
     End Sub
@@ -143,6 +144,22 @@ Public Class GitUpdater
             Catch ex As Exception
                 MsgBox("Could not automatically download the required file! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
                 Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/OpenRepoInPS.bat")
+            End Try
+            
+            ' using the zip file
+            Try
+                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PSScripts.zip", "PSScripts.zip")
+            Catch ex As Exception
+                MsgBox("Could not automatically download the zip folder containing the required files! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
+                Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PSScripts.zip")
+                Exit Sub
+            End Try
+            Try
+                System.IO.Compression.FileSystem.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
+            Catch ex As Exception
+                MsgBox("Could not automatically unzip the file containing the required files! Please extract it manually. Click OK to show it.", MsgBoxStyle.Exclamation)
+                Process.Start("explorer.exe", Environment.CurrentDirectory & "\PSScripts.zip")
+                Exit Sub
             End Try
         End If
     End Sub
