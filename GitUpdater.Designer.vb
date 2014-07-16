@@ -134,6 +134,8 @@ Partial Class GitUpdater
         '
         'ContextMenuStripReposOpenInExplorer
         '
+        Me.ContextMenuStripReposOpenInExplorer.Image = Global.GitUpdater.My.Resources.Resources.ExplorerSmall
+        Me.ContextMenuStripReposOpenInExplorer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ContextMenuStripReposOpenInExplorer.Name = "ContextMenuStripReposOpenInExplorer"
         Me.ContextMenuStripReposOpenInExplorer.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposOpenInExplorer.Text = "Open Repo in Windows Explorer"
@@ -141,6 +143,8 @@ Partial Class GitUpdater
         '
         'ContextMenuStripReposOpenInCMD
         '
+        Me.ContextMenuStripReposOpenInCMD.Image = Global.GitUpdater.My.Resources.Resources.CmdSmall
+        Me.ContextMenuStripReposOpenInCMD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ContextMenuStripReposOpenInCMD.Name = "ContextMenuStripReposOpenInCMD"
         Me.ContextMenuStripReposOpenInCMD.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposOpenInCMD.Text = "Open Repo in CMD"
@@ -148,6 +152,8 @@ Partial Class GitUpdater
         '
         'ContextMenuStripReposOpenInPS
         '
+        Me.ContextMenuStripReposOpenInPS.Image = Global.GitUpdater.My.Resources.Resources.PSSmall
+        Me.ContextMenuStripReposOpenInPS.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ContextMenuStripReposOpenInPS.Name = "ContextMenuStripReposOpenInPS"
         Me.ContextMenuStripReposOpenInPS.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposOpenInPS.Text = "Open Repo in Windows PowerShell"
@@ -155,6 +161,7 @@ Partial Class GitUpdater
         '
         'ContextMenuStripReposOpenInGitHub
         '
+        Me.ContextMenuStripReposOpenInGitHub.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ContextMenuStripReposOpenInGitHub.Name = "ContextMenuStripReposOpenInGitHub"
         Me.ContextMenuStripReposOpenInGitHub.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposOpenInGitHub.Text = "Open Repo in GitHub for Windows"
@@ -179,6 +186,7 @@ Partial Class GitUpdater
         '
         'ContextMenuStripReposCopyRepoName
         '
+        Me.ContextMenuStripReposCopyRepoName.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ContextMenuStripReposCopyRepoName.Name = "ContextMenuStripReposCopyRepoName"
         Me.ContextMenuStripReposCopyRepoName.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposCopyRepoName.Text = "Copy Repo Name"
@@ -186,6 +194,7 @@ Partial Class GitUpdater
         '
         'ContextMenuStripReposCopyRepoPath
         '
+        Me.ContextMenuStripReposCopyRepoPath.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.ContextMenuStripReposCopyRepoPath.Name = "ContextMenuStripReposCopyRepoPath"
         Me.ContextMenuStripReposCopyRepoPath.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposCopyRepoPath.Text = "Copy Repo Path"
