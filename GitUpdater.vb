@@ -1,7 +1,4 @@
-﻿Imports System
-Imports System.IO
-
-Public Class GitUpdater
+﻿Public Class GitUpdater
     
     Dim Dir As String = Environment.GetEnvironmentVariable("HOMEPATH") & "\Documents\GitHub"
     Dim cmdRepo As String = ""
@@ -155,7 +152,11 @@ Public Class GitUpdater
                 Exit Sub
             End Try
             Try
-                System.IO.Compression.FileSystem.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
+                System.IO.Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
+                IO.Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
+                Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
+                ZipFile.ExtractToDirectory("PSScripts.zip", "./")
+                ExtractToDirectory("PSScripts.zip", "./")
             Catch ex As Exception
                 MsgBox("Could not automatically unzip the file containing the required files! Please extract it manually. Click OK to show it.", MsgBoxStyle.Exclamation)
                 Process.Start("explorer.exe", Environment.CurrentDirectory & "\PSScripts.zip")

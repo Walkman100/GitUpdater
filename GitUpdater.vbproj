@@ -156,6 +156,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="PS" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="GitUpdater" />
+    <Import Include="GitUpdater.My" />
+    <Import Include="GitUpdater.My.Resources" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />
@@ -164,13 +170,11 @@
     <Import Include="System.Diagnostics" />
     <Import Include="System.Drawing" />
     <Import Include="System.IO" />
+    <Import Include="System.IO.Compression" />
     <Import Include="System.Linq" />
     <Import Include="System.Threading.Tasks" />
     <Import Include="System.Windows.Forms" />
     <Import Include="System.Xml.Linq" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PS" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
