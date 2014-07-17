@@ -68,6 +68,7 @@ Partial Class GitUpdater
         Me.lblUsername = New System.Windows.Forms.Label()
         Me.timerKeyChecker = New System.Windows.Forms.Timer(Me.components)
         Me.btnCloseCmd = New System.Windows.Forms.Button()
+        Me.ContextMenuStripReposOpenSLN = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripRepos.SuspendLayout
         Me.grpGUI.SuspendLayout
         Me.grpData.SuspendLayout
@@ -128,9 +129,9 @@ Partial Class GitUpdater
         '
         'ContextMenuStripRepos
         '
-        Me.ContextMenuStripRepos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContextMenuStripReposOpenInExplorer, Me.ContextMenuStripReposOpenInCMD, Me.ContextMenuStripReposOpenInPS, Me.ContextMenuStripReposOpenInGitHub, Me.ContextMenuStripReposSeparator1, Me.ContextMenuStripReposOpenReadme, Me.ContextMenuStripReposSeparator2, Me.ContextMenuStripReposCopyRepoName, Me.ContextMenuStripReposCopyRepoPath})
+        Me.ContextMenuStripRepos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContextMenuStripReposOpenInExplorer, Me.ContextMenuStripReposOpenInCMD, Me.ContextMenuStripReposOpenInPS, Me.ContextMenuStripReposOpenInGitHub, Me.ContextMenuStripReposSeparator1, Me.ContextMenuStripReposOpenReadme, Me.ContextMenuStripReposOpenSLN, Me.ContextMenuStripReposSeparator2, Me.ContextMenuStripReposCopyRepoName, Me.ContextMenuStripReposCopyRepoPath})
         Me.ContextMenuStripRepos.Name = "contextMenuStripRepos"
-        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 192)
+        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 214)
         '
         'ContextMenuStripReposOpenInExplorer
         '
@@ -531,6 +532,13 @@ Partial Class GitUpdater
         Me.btnCloseCmd.UseVisualStyleBackColor = true
         AddHandler Me.btnCloseCmd.Click, AddressOf Me.BtnCloseCmd_Click
         '
+        'ContextMenuStripReposOpenSLN
+        '
+        Me.ContextMenuStripReposOpenSLN.Name = "ContextMenuStripReposOpenSLN"
+        Me.ContextMenuStripReposOpenSLN.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposOpenSLN.Text = "Open Repo SLN"
+        AddHandler Me.ContextMenuStripReposOpenSLN.Click, AddressOf Me.ContextMenuStripReposOpenSLN_Click
+        '
         'GitUpdater
         '
         Me.AcceptButton = Me.btnGitPushSelected
@@ -572,6 +580,7 @@ Partial Class GitUpdater
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private ContextMenuStripReposOpenSLN As System.Windows.Forms.ToolStripMenuItem
     Private ContextMenuStripReposSeparator1 As System.Windows.Forms.ToolStripSeparator
     Private ContextMenuStripReposSeparator2 As System.Windows.Forms.ToolStripSeparator
     Private ContextMenuStripReposOpenReadme As System.Windows.Forms.ToolStripMenuItem

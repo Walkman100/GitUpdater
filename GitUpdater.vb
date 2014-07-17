@@ -146,73 +146,148 @@
             ' using the zip file
             Try
                 My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PSScripts.zip", "PSScripts.zip")
+                ' Remove the next two lines when UnZipping has been sorted out:
+                MsgBox("ZIP file containing the required files has been downloaded, please extract it to the same folder as this program.")
+                Process.Start("explorer.exe", Environment.CurrentDirectory & "\PSScripts.zip")
             Catch ex As Exception
                 MsgBox("Could not automatically download the zip folder containing the required files! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
                 Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PSScripts.zip")
                 Exit Sub
             End Try
-            Try
-                System.IO.Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
-                IO.Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
-                Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
-                ZipFile.ExtractToDirectory("PSScripts.zip", "./")
-                ExtractToDirectory("PSScripts.zip", "./")
-            Catch ex As Exception
-                MsgBox("Could not automatically unzip the file containing the required files! Please extract it manually. Click OK to show it.", MsgBoxStyle.Exclamation)
-                Process.Start("explorer.exe", Environment.CurrentDirectory & "\PSScripts.zip")
-                Exit Sub
-            End Try
+            'Try
+                'System.IO.Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
+                'IO.Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
+                'Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
+                'ZipFile.ExtractToDirectory("PSScripts.zip", "./")
+                'ExtractToDirectory("PSScripts.zip", "./")
+            'Catch ex As Exception
+                'MsgBox("Could not automatically unzip the file containing the required files! Please extract it manually. Click OK to show it.", MsgBoxStyle.Exclamation)
+                'Process.Start("explorer.exe", Environment.CurrentDirectory & "\PSScripts.zip")
+                'Exit Sub
+            'End Try
         End If
     End Sub
     
     Sub ContextMenuStripReposOpenInGitHub_Click(sender As Object, e As EventArgs)
         If lstRepos.SelectedIndex <> -1 Then
-            Process.Start("github-windows://openRepo/" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
+            Try
+                Process.Start("github-windows://openRepo/" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
+            Catch
+                MsgBox("GitHub for windows protocol not found!")
+            End Try
         Else
-            Process.Start("github-windows://openRepo/" & Dir)
+            Try
+                Process.Start("github-windows://openRepo/" & Dir)
+            Catch
+                MsgBox("GitHub for windows protocol not found!")
+            End Try
         End If
     End Sub
     
     Sub ContextMenuStripReposOpenReadme_Click(sender As Object, e As EventArgs)
         If lstRepos.SelectedIndex <> -1 Then
-            If File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.md") Then
-                Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.md")
-            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.txt") Then
-                Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.txt")
-            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.htm") Then
-                Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.htm")
-            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.html") Then
-                Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.html")
-            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.markdown") Then
-                Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.markdown")
-            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.mkd") Then
-                Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme.mkd")
-            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme") Then
-                Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\Readme")
+            If File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.md") Then
+             Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.md")
+            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.txt") Then
+                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.txt")
+            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.htm") Then
+                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.htm")
+            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.html") Then
+                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.html")
+            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.markdown") Then
+                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.markdown")
+            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.mkd") Then
+                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.mkd")
+            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme") Then
+                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme")
             Else
-                MsgBox("No readme found in repo:" & vbNewLine & """" & Dir & "\" & _
-                lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
-                "With filename: Readme.md, Readme.txt, Readme.htm, " & _
-                "Readme.html, Readme.markdown, Readme.mkd, or Readme.")
+                MsgBox("No file found in repo:" & vbNewLine & _
+                    """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
+                "With filename: readme.md, readme.txt, readme.htm, readme.html, readme.markdown, readme.mkd, or readme.")
             End If
         Else
-            
+            If File.Exists(Dir & "\readme.md") Then
+             Process.Start(Dir & "\readme.md")
+            ElseIf File.Exists(Dir & "\readme.txt") Then
+                 Process.Start(Dir & "\readme.txt")
+            ElseIf File.Exists(Dir & "\readme.htm") Then
+                 Process.Start(Dir & "\readme.htm")
+            ElseIf File.Exists(Dir & "\readme.html") Then
+                 Process.Start(Dir & "\readme.html")
+            ElseIf File.Exists(Dir & "\readme.markdown") Then
+                 Process.Start(Dir & "\readme.markdown")
+            ElseIf File.Exists(Dir & "\readme.mkd") Then
+                 Process.Start(Dir & "\readme.mkd")
+            ElseIf File.Exists(Dir & "\readme") Then
+                 Process.Start(Dir & "\readme")
+            Else
+                MsgBox("No file found in folder:" & vbNewLine & _
+                    """" & Dir & """" & vbNewLine & _
+                    "With filename: readme.md, readme.txt, readme.htm, readme.html, readme.markdown, readme.mkd, or readme.")
+            End If
+        End If
+    End Sub
+    
+    Sub ContextMenuStripReposOpenSLN_Click(sender As Object, e As EventArgs)
+        If lstRepos.SelectedIndex <> -1 Then
+            If File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln") Then
+             Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln")
+            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln") Then
+                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln")
+            'ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln") Then
+            '     Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln")
+            Else
+                MsgBox("No file found in locations:" & vbNewLine & _
+                    """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
+                    """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
+                    "With filename: """ & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln""")
+            End If
+        Else
+            If File.Exists(Dir & "\" & "GitHub.sln") Then
+             Process.Start(Dir & "\" & "GitHub.sln")
+            ElseIf File.Exists(Dir & ".sln") Then
+                 Process.Start(Dir & ".sln")
+            Else
+                MsgBox("No file found in locations:" & vbNewLine & _
+                    """" & Dir & "\" & "GitHub.sln""" & vbNewLine & _
+                    """" & Dir & ".sln""")
+            End If
         End If
     End Sub
     
     Sub ContextMenuStripReposCopyRepoName_Click(sender As Object, e As EventArgs)
         If lstRepos.SelectedIndex <> -1 Then
-            Clipboard.SetText(lstRepos.Items.Item(lstRepos.SelectedIndex))
+            Try
+                Clipboard.SetText(lstRepos.Items.Item(lstRepos.SelectedIndex), TextDataFormat.UnicodeText)
+                MsgBox(lstRepos.Items.Item(lstRepos.SelectedIndex) & vbNewLine & "Succesfully copied!", MsgBoxStyle.Information, "Succesfully copied!")
+            Catch ex As Exception
+                MsgBox("Copy failed!" & vbNewLine & "Error: " & ex.ToString, MsgBoxStyle.Critical, "Copy failed!")
+            End Try
         Else
-            Clipboard.SetText(Dir)
+            Try
+                Clipboard.SetText(Dir, TextDataFormat.UnicodeText)
+                MsgBox(Dir & vbNewLine & "Succesfully copied!", MsgBoxStyle.Information, "Succesfully copied!")
+            Catch ex As Exception
+                MsgBox("Copy failed!" & vbNewLine & "Error: " & ex.ToString, MsgBoxStyle.Critical, "Copy failed!")
+            End Try
         End If
     End Sub
     
     Sub ContextMenuStripReposCopyRepoPath_Click(sender As Object, e As EventArgs)
         If lstRepos.SelectedIndex <> -1 Then
-            Clipboard.SetText(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
+            Try
+                Clipboard.SetText(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex), TextDataFormat.UnicodeText)
+                MsgBox(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & vbNewLine & "Succesfully copied!", MsgBoxStyle.Information, "Succesfully copied!")
+            Catch ex As Exception
+                MsgBox("Copy failed!" & vbNewLine & "Error: " & ex.ToString, MsgBoxStyle.Critical, "Copy failed!")
+            End Try
         Else
-            Clipboard.SetText(Dir)
+            Try
+                Clipboard.SetText(Dir, TextDataFormat.UnicodeText)
+                MsgBox(Dir & vbNewLine & "Succesfully copied!", MsgBoxStyle.Information, "Succesfully copied!")
+            Catch ex As Exception
+                MsgBox("Copy failed!" & vbNewLine & "Error: " & ex.ToString, MsgBoxStyle.Critical, "Copy failed!")
+            End Try
         End If
     End Sub
     
