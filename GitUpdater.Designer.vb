@@ -131,7 +131,7 @@ Partial Class GitUpdater
         '
         Me.ContextMenuStripRepos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContextMenuStripReposOpenInExplorer, Me.ContextMenuStripReposOpenInCMD, Me.ContextMenuStripReposOpenInPS, Me.ContextMenuStripReposOpenInGitHub, Me.ContextMenuStripReposSeparator1, Me.ContextMenuStripReposOpenReadme, Me.ContextMenuStripReposOpenSLN, Me.ContextMenuStripReposSeparator2, Me.ContextMenuStripReposCopyRepoName, Me.ContextMenuStripReposCopyRepoPath})
         Me.ContextMenuStripRepos.Name = "contextMenuStripRepos"
-        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 214)
+        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 192)
         '
         'ContextMenuStripReposOpenInExplorer
         '
@@ -502,7 +502,7 @@ Partial Class GitUpdater
         Me.btnHotkey.Name = "btnHotkey"
         Me.btnHotkey.Size = New System.Drawing.Size(114, 23)
         Me.btnHotkey.TabIndex = 35
-        Me.btnHotkey.Text = "Hotkey On"
+        Me.btnHotkey.Text = "Enable Hotkey"
         Me.btnHotkey.UseVisualStyleBackColor = true
         AddHandler Me.btnHotkey.Click, AddressOf Me.BtnHotkey_Click
         '

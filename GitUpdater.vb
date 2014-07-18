@@ -23,6 +23,14 @@
             End Try
         End If
         RebuildRepoList
+        btnGitPullAll.Enabled = True
+        btnGitPushAll.Enabled = True
+        btnGitPullSelected.Enabled = True
+        btnGitPushSelected.Enabled = True
+        btnGitPullNotSelected.Enabled = True
+        btnGitPushNotSelected.Enabled = True
+        btnCD.Enabled = True
+        btnCancel.Enabled = False
         ' apply settings to where they are changed
         txtUsername.Text = My.Settings.Username
         txtPassword.Text = My.Settings.Password
@@ -339,6 +347,16 @@
     ' actual code that runs the shells
     
     Sub ShellWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
+        btnGitPullAll.Enabled = False
+        btnGitPushAll.Enabled = False
+        btnGitPullSelected.Enabled = False
+        btnGitPushSelected.Enabled = False
+        btnGitPullNotSelected.Enabled = False
+        btnGitPushNotSelected.Enabled = False
+        btnCD.Enabled = False
+        btnCancel.Enabled = True
+        
+        
         If chkDontShow.Checked = False Then Me.TopMost = True
         progressBar.Maximum = lstRepos.Items.Count
         
@@ -400,6 +418,15 @@
             End
         End If
         Me.TopMost = False
+        
+        btnGitPullAll.Enabled = True
+        btnGitPushAll.Enabled = True
+        btnGitPullSelected.Enabled = True
+        btnGitPushSelected.Enabled = True
+        btnGitPullNotSelected.Enabled = True
+        btnGitPushNotSelected.Enabled = True
+        btnCD.Enabled = True
+        btnCancel.Enabled = False
     End Sub
     
     ' starting and stopping the thread
@@ -492,6 +519,13 @@
     End Sub
     
     Sub TimerKeyChecker_Tick(sender As Object, e As EventArgs)
+        If btnHotkey.Text = "Hotkey Enabled!" Then
+            btnHotkey.Text = "Disable Hotkey"
+            timerKeyChecker.Interval = 100
+        ElseIf btnHotkey.Text = "Hotkey Disabled!"
+            btnHotkey.Text = "Enable Hotkey"
+            timerKeyChecker.Stop
+        End If
         If My.Computer.Keyboard.AltKeyDown = True Then
             SendKeys.send(txtUsername.Text & "~")
             SendKeys.send(txtPassword.Text & "~")
@@ -500,12 +534,13 @@
     End Sub
     
     Sub BtnHotkey_Click(sender As Object, e As EventArgs)
-        If btnHotkey.Text = "Hotkey On" Then
-            btnHotkey.Text = "Hotkey Off"
+        If btnHotkey.Text = "Enable Hotkey" Then
+            btnHotkey.Text = "Hotkey Enabled!"
+            timerKeyChecker.Interval = 1000
             timerKeyChecker.Start
-        ElseIf btnHotkey.Text = "Hotkey Off" Then
-            btnHotkey.Text = "Hotkey On"
-            timerKeyChecker.Stop
+        ElseIf btnHotkey.Text = "Disable Hotkey" Then
+            btnHotkey.Text = "Hotkey Disabled!"
+            timerKeyChecker.Interval = 1000
         End If
     End Sub
     
