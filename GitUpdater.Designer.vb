@@ -35,6 +35,7 @@ Partial Class GitUpdater
         Me.ContextMenuStripReposOpenInGitHub = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ContextMenuStripReposOpenReadme = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposOpenSLN = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ContextMenuStripReposCopyRepoName = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposCopyRepoPath = New System.Windows.Forms.ToolStripMenuItem()
@@ -68,7 +69,6 @@ Partial Class GitUpdater
         Me.lblUsername = New System.Windows.Forms.Label()
         Me.timerKeyChecker = New System.Windows.Forms.Timer(Me.components)
         Me.btnCloseCmd = New System.Windows.Forms.Button()
-        Me.ContextMenuStripReposOpenSLN = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripRepos.SuspendLayout
         Me.grpGUI.SuspendLayout
         Me.grpData.SuspendLayout
@@ -180,6 +180,14 @@ Partial Class GitUpdater
         Me.ContextMenuStripReposOpenReadme.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposOpenReadme.Text = "Open Repo Readme"
         AddHandler Me.ContextMenuStripReposOpenReadme.Click, AddressOf Me.ContextMenuStripReposOpenReadme_Click
+        '
+        'ContextMenuStripReposOpenSLN
+        '
+        Me.ContextMenuStripReposOpenSLN.Image = Global.GitUpdater.My.Resources.Resources.VS_SLN2
+        Me.ContextMenuStripReposOpenSLN.Name = "ContextMenuStripReposOpenSLN"
+        Me.ContextMenuStripReposOpenSLN.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposOpenSLN.Text = "Open Repo SLN"
+        AddHandler Me.ContextMenuStripReposOpenSLN.Click, AddressOf Me.ContextMenuStripReposOpenSLN_Click
         '
         'ContextMenuStripReposSeparator2
         '
@@ -364,9 +372,9 @@ Partial Class GitUpdater
         Me.chkLog.AutoSize = true
         Me.chkLog.Location = New System.Drawing.Point(6, 65)
         Me.chkLog.Name = "chkLog"
-        Me.chkLog.Size = New System.Drawing.Size(197, 17)
+        Me.chkLog.Size = New System.Drawing.Size(237, 17)
         Me.chkLog.TabIndex = 22
-        Me.chkLog.Text = "Send output from operation to log.txt"
+        Me.chkLog.Text = "Send output from operation to GitUpdater.log"
         Me.chkLog.UseVisualStyleBackColor = true
         AddHandler Me.chkLog.CheckedChanged, AddressOf Me.ChkLog_CheckedChanged
         '
@@ -531,13 +539,6 @@ Partial Class GitUpdater
         Me.btnCloseCmd.Text = "Cancel foreground CMD window"
         Me.btnCloseCmd.UseVisualStyleBackColor = true
         AddHandler Me.btnCloseCmd.Click, AddressOf Me.BtnCloseCmd_Click
-        '
-        'ContextMenuStripReposOpenSLN
-        '
-        Me.ContextMenuStripReposOpenSLN.Name = "ContextMenuStripReposOpenSLN"
-        Me.ContextMenuStripReposOpenSLN.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposOpenSLN.Text = "Open Repo SLN"
-        AddHandler Me.ContextMenuStripReposOpenSLN.Click, AddressOf Me.ContextMenuStripReposOpenSLN_Click
         '
         'GitUpdater
         '
