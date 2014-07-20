@@ -126,6 +126,7 @@ Partial Class GitUpdater
         Me.lstRepos.Sorted = true
         Me.lstRepos.TabIndex = 13
         AddHandler Me.lstRepos.DoubleClick, AddressOf Me.LstRepos_DoubleClick
+        AddHandler Me.lstRepos.MouseDown, AddressOf Me.LstRepos_MouseDown
         '
         'ContextMenuStripRepos
         '

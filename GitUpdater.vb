@@ -194,24 +194,34 @@
     
     Sub ContextMenuStripReposOpenReadme_Click(sender As Object, e As EventArgs)
         If lstRepos.SelectedIndex <> -1 Then
-            If File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.md") Then
-             Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.md")
-            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.txt") Then
-                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.txt")
-            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.htm") Then
-                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.htm")
-            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.html") Then
-                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.html")
-            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.markdown") Then
-                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.markdown")
-            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.mkd") Then
-                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.mkd")
-            ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme") Then
-                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme")
+            If lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".wiki") Then
+                If File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\home.md") Then
+                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\home.md")
+                Else
+                    MsgBox("No file found in wiki folder:" & vbNewLine & _
+                        """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
+                        "With filename: home.md")
+                End If
             Else
-                MsgBox("No file found in repo:" & vbNewLine & _
-                    """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
-                "With filename: readme.md, readme.txt, readme.htm, readme.html, readme.markdown, readme.mkd, or readme.")
+                If File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.md") Then
+                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.md")
+                ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.txt") Then
+                     Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.txt")
+                ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.htm") Then
+                     Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.htm")
+                ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.html") Then
+                     Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.html")
+                ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.markdown") Then
+                     Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.markdown")
+                ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.mkd") Then
+                     Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.mkd")
+                ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme") Then
+                     Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme")
+                Else
+                    MsgBox("No file found in repo:" & vbNewLine & _
+                        """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
+                        "With filename: readme.md, readme.txt, readme.htm, readme.html, readme.markdown, readme.mkd, or readme.")
+                End If
             End If
         Else
             If File.Exists(Dir & "\readme.md") Then
@@ -562,5 +572,13 @@
         SendKeys.SendWait("Y")
         SendKeys.SendWait("~")
         Me.WindowState = FormWindowState.Normal
+    End Sub
+    
+    Sub LstRepos_MouseDown(sender As Object, e As MouseEventArgs)
+        If lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".wiki") Then
+            ContextMenuStripReposOpenReadme.Text = "Open wiki Home.md"
+        Else
+            ContextMenuStripReposOpenReadme.Text = "Open Repo Readme"
+        End If
     End Sub
 End Class
