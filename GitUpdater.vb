@@ -575,8 +575,12 @@
     End Sub
     
     Sub LstRepos_MouseDown(sender As Object, e As MouseEventArgs)
-        If lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".wiki") Then
-            ContextMenuStripReposOpenReadme.Text = "Open wiki Home.md"
+        If lstRepos.SelectedIndex <> -1 Then
+            If lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".wiki") Then
+                ContextMenuStripReposOpenReadme.Text = "Open wiki Home.md"
+            Else
+                ContextMenuStripReposOpenReadme.Text = "Open Repo Readme"
+            End If
         Else
             ContextMenuStripReposOpenReadme.Text = "Open Repo Readme"
         End If
