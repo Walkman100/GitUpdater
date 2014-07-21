@@ -79,4 +79,4 @@ An external program that you can use is Windows itself, using the Windows Task S
 ![Check the line looks correct](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/GitUpdater/WinTaskSchdDone.png "Check the line looks correct")
 
 ## Donate
-[Show your support!](http://walkman100.github.io\Walkman\HTML\Donate.html)
+[Show your support!](http://walkman100.github.io/Walkman/HTML/Donate.html)
