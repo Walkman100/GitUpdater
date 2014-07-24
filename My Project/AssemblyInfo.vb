@@ -8,7 +8,7 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Git Updater")> 
+<Assembly: AssemblyTitle("GitUpdater")> 
 <Assembly: AssemblyDescription("GitUpdater")> 
 <Assembly: AssemblyCompany("DeavmiOSS")> 
 <Assembly: AssemblyProduct("GitUpdater")> 

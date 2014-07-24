@@ -163,15 +163,15 @@
                 Exit Sub
             End Try
             'Try
-                'System.IO.Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
-                'IO.Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
-                'Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
-                'ZipFile.ExtractToDirectory("PSScripts.zip", "./")
-                'ExtractToDirectory("PSScripts.zip", "./")
+            '    System.IO.Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
+            '    IO.Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
+            '    Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
+            '    ZipFile.File.ExtractToDirectory("PSScripts.zip", "./")
+            '    ExtractToDirectory("PSScripts.zip", "./")
             'Catch ex As Exception
-                'MsgBox("Could not automatically unzip the file containing the required files! Please extract it manually. Click OK to show it.", MsgBoxStyle.Exclamation)
-                'Process.Start("explorer.exe", Environment.CurrentDirectory & "\PSScripts.zip")
-                'Exit Sub
+            '    MsgBox("Could not automatically unzip the file containing the required files! Please extract it manually. Click OK to show it.", MsgBoxStyle.Exclamation)
+            '    Process.Start("explorer.exe", Environment.CurrentDirectory & "\PSScripts.zip")
+            '    Exit Sub
             'End Try
         End If
     End Sub
@@ -522,10 +522,11 @@
     
     Sub BtnInsert_Click(sender As Object, e As EventArgs)
         Me.WindowState = FormWindowState.Minimized
-        System.Threading.Thread.Sleep(1000)
+        System.Threading.Thread.Sleep(500)
         SendKeys.SendWait(txtUsername.Text & "~")
         SendKeys.SendWait(txtPassword.Text & "~")
         Me.WindowState = FormWindowState.Normal
+        Me.BringToFront()
     End Sub
     
     Sub TimerKeyChecker_Tick(sender As Object, e As EventArgs)
@@ -569,9 +570,11 @@
         Me.WindowState = FormWindowState.Minimized
         System.Threading.Thread.Sleep(500)
         SendKeys.SendWait("^C")
+        System.Threading.Thread.Sleep(500)
         SendKeys.SendWait("Y")
         SendKeys.SendWait("~")
         Me.WindowState = FormWindowState.Normal
+        Me.BringToFront()
     End Sub
     
     Sub LstRepos_MouseDown(sender As Object, e As MouseEventArgs)
@@ -585,4 +588,5 @@
             ContextMenuStripReposOpenReadme.Text = "Open Repo Readme"
         End If
     End Sub
+
 End Class
