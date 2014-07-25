@@ -8,39 +8,76 @@ rem Remove "rem" from lines below to show all parameters when bat file launches
 rem echo Parameters: "%*"
 rem echo 1: %1 2: %2 3: %3 4: %4 5: %5 6: %6
 
-echo Git %2ing repo at location "%1"
-
+rem Setting GUI elements and going to the Repo directory
+color 0A
+title Git %2ing repo at location "%1" [GitUpdater]
+echo Git %2ing repo at location "%1"...
 cd %1
+:start
 
-:Start
+rem Check if Logging must be enabled
+if %5==True goto log
 
-IF %5==True (
-    
-    @echo [%date% %time%] Git %2ing repo at location "%1" >> ..\GitUpdater.log
-    git %2 %6 >> ..\GitUpdater.log
-    echo. >> ..\GitUpdater.log
-    
-) ELSE (
-    git %2 %6
-)
+rem -----------------------------------------------------
+rem                 Code without logging
+rem -----------------------------------------------------
 
-IF ERRORLEVEL==1 (
-    goto Repeat
-) ELSE (
-    goto End
-)
+rem Run the Git command
+git %2 %6
 
-:Repeat
-IF %3==True (
+rem If it doesn't fail, go to the end of no logging code
+if ERRORLEVEL==0 goto end
+
+rem If it should retry if it fails go to start
+if %3==True (
     echo.
     echo Failed to %2 repo at "%1", trying again...
-    goto Start
+    goto start
 )
 
-:End
-IF %4==True (
+:end
+
+rem If window mustn't be closed when done, pause
+if %4==True (
     echo.
-    echo Press enter to close this window. Unless you specified the "Don't wait for cmd to close before starting next" option, further git commands will not start entil you close this window.
-    Pause
-)
+    echo Press enter to close this window. Unless you specified the "Don't wait for cmd to close before starting next" option, further git commands will not start until you close this window.
+    pause
+) else (
 exit
+)
+
+rem -----------------------------------------------------
+rem                   Code with logging
+rem -----------------------------------------------------
+
+:log
+
+rem Run the Git command
+@echo [%date% %time%] Git %2ing repo at location "%1" >> ..\GitUpdater.log
+git %2 %6 >> ..\GitUpdater.log
+
+rem If it doesn't fail, go to the end of code with logging
+if ERRORLEVEL==0 goto logend
+
+rem If it should retry if it fails go to start
+if %3==True (
+    @echo [%date% %time%] Failed to %2 repo at "%1", trying again... >> ..\GitUpdater.log
+    echo.
+    echo Failed to %2 repo at "%1", trying again...
+    goto start
+)
+@echo [%date% %time%] Failed to %2 repo at "%1", retry disabled. >> ..\GitUpdater.log
+
+:logend
+
+rem If window mustn't be closed when done, pause
+if %4==True (
+    @echo [%date% %time%] Git %2ing repo at location "%1" complete. Don't close CMD window when done was enabled, so waiting for user intervention... >> ..\GitUpdater.log
+    @echo [%date% %time%] Unless you specified the "Don't wait for cmd to close before starting next" option, further git commands will not start until the CMD window is closed.
+    echo.
+    echo Press enter to close this window. Unless you specified the "Don't wait for cmd to close before starting next" option, further git commands will not start until you close this window.
+    pause
+) else (
+@echo [%date% %time%] Git %2ing repo at location "%1" complete. >> ..\GitUpdater.log
+exit
+)
