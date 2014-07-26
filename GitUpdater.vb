@@ -114,7 +114,7 @@
             ' rebuild list automatically
             RebuildRepoList
         Else
-            MsgBox("A script is currently in progress! Changing directory will mess up the script. Please cancel using the button above first.")
+            MsgBox("A script is currently in progress! Changing directory will mess up the script. Please cancel using the button above first.", MsgBoxStyle.Critical)
         End If
     End Sub
     
@@ -156,7 +156,7 @@
                 My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PSScripts.zip", "PSScripts.zip")
                 ' Remove the next two lines when UnZipping has been sorted out:
                 MsgBox("ZIP file containing the required files has been downloaded, please extract it to the same folder as this program.")
-                Process.Start("explorer.exe", Environment.CurrentDirectory & "\PSScripts.zip")
+                Process.Start(Environment.CurrentDirectory & "\PSScripts.zip")
             Catch ex As Exception
                 MsgBox("Could not automatically download the zip folder containing the required files! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
                 Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PSScripts.zip")
@@ -181,13 +181,13 @@
             Try
                 Process.Start("github-windows://openRepo/" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
             Catch
-                MsgBox("GitHub for windows protocol not found!")
+                MsgBox("GitHub for windows protocol not found!", MsgBoxStyle.Critical)
             End Try
         Else
             Try
                 Process.Start("github-windows://openRepo/" & Dir)
             Catch
-                MsgBox("GitHub for windows protocol not found!")
+                MsgBox("GitHub for windows protocol not found!", MsgBoxStyle.Critical)
             End Try
         End If
     End Sub
@@ -200,7 +200,7 @@
                 Else
                     MsgBox("No file found in wiki folder:" & vbNewLine & _
                         """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
-                        "With filename: home.md")
+                        "With filename: home.md", MsgBoxStyle.Critical)
                 End If
             Else
                 If File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.md") Then
@@ -220,7 +220,7 @@
                 Else
                     MsgBox("No file found in repo:" & vbNewLine & _
                         """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
-                        "With filename: readme.md, readme.txt, readme.htm, readme.html, readme.markdown, readme.mkd, or readme.")
+                        "With filename: readme.md, readme.txt, readme.htm, readme.html, readme.markdown, readme.mkd, or readme.", MsgBoxStyle.Critical)
                 End If
             End If
         Else
@@ -241,7 +241,7 @@
             Else
                 MsgBox("No file found in folder:" & vbNewLine & _
                     """" & Dir & """" & vbNewLine & _
-                    "With filename: readme.md, readme.txt, readme.htm, readme.html, readme.markdown, readme.mkd, or readme.")
+                    "With filename: readme.md, readme.txt, readme.htm, readme.html, readme.markdown, readme.mkd, or readme.", MsgBoxStyle.Critical)
             End If
         End If
     End Sub
@@ -258,7 +258,7 @@
                 MsgBox("No file found in locations:" & vbNewLine & _
                     """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
                     """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
-                    "With filename: """ & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln""")
+                    "With filename: """ & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln""", MsgBoxStyle.Critical)
             End If
         Else
             If File.Exists(Dir & "\" & "GitHub.sln") Then
@@ -268,7 +268,7 @@
             Else
                 MsgBox("No file found in locations:" & vbNewLine & _
                     """" & Dir & "\" & "GitHub.sln""" & vbNewLine & _
-                    """" & Dir & ".sln""")
+                    """" & Dir & ".sln""", MsgBoxStyle.Critical)
             End If
         End If
     End Sub
@@ -380,7 +380,7 @@
             
         Case = "selected"
             If lstRepos.SelectedIndex = -1 Then
-                MsgBox("No item selected")
+                    MsgBox("No item selected", MsgBoxStyle.Critical)
             Else
                 progressBar.Maximum = 2
                 progressBar.Value = 1
@@ -390,7 +390,7 @@
             
         Case = "notselected"
             If lstRepos.SelectedIndex = -1 Then
-                MsgBox("No item selected")
+                    MsgBox("No item selected", MsgBoxStyle.Critical)
             Else
                 For i = 1 To lstRepos.Items.Count
                     If i - 1 <> lstRepos.SelectedIndex Then
@@ -402,7 +402,7 @@
             
         Case = "cmdselected"
             If cmdRepo = "" Then
-                MsgBox("No repo passed from command line")
+                    MsgBox("No repo passed from command line", MsgBoxStyle.Critical)
             Else
                 progressBar.Maximum = 2
                 progressBar.Value = 1
@@ -412,7 +412,7 @@
             
         Case = "cmdnotselected"
             If cmdRepo = "" Then
-                MsgBox("No repo passed from command line")
+                    MsgBox("No repo passed from command line", MsgBoxStyle.Critical)
             Else
                 For i = 1 To lstRepos.Items.Count
                     If lstRepos.Items.Item(i - 1) <> cmdRepo Then
