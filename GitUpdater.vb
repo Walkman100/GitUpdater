@@ -120,9 +120,9 @@
     
     Sub LstRepos_DoubleClick(sender As Object, e As EventArgs)
         If lstRepos.SelectedIndex <> -1 Then
-            Process.Start("explorer.exe", Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
+            Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
         Else
-            Process.Start("explorer.exe", Dir)
+            Process.Start(Dir)
         End If
     End Sub
     
