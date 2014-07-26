@@ -22,7 +22,7 @@
                 Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/GitUpdater.bat")
             End Try
         End If
-        RebuildRepoList
+        RebuildRepoList()
         btnGitPullAll.Enabled = True
         btnGitPushAll.Enabled = True
         btnGitPullSelected.Enabled = True
@@ -83,6 +83,9 @@
             End If
             If s.ToLower.StartsWith("exitwhendone") Then
                 ExitWhenDone = True
+            End If
+            If s.ToLower.StartsWith("hidegui") Then
+                Me.WindowState = FormWindowState.Minimized
             End If
         Next
     End Sub
