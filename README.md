@@ -6,15 +6,15 @@ A simple application written in VB.NET to update all your repos with one click, 
 
 The syntax to launch GitUpdater from the command line is:
 ```shell
-gitupdater.exe [-gitcmd=<push|pull|(any git command)>] [-gitwhat=<all|selected|notselected|cmdselected|cmdnotselected>] [-dir=<repos parent folder>] [-repo=<repo name>] [run] [exitWhenDone]
+gitupdater.exe [hideGUI] [exitWhenDone] [-gitcmd=<push|pull|(any git command)>] [-gitwhat=<all|selected|notselected|cmdselected|cmdnotselected>] [-dir=<repos parent folder>] [-repo=<repo name>] [run]
 ```
 some examples are:
 
 `gitupdater.exe -gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run exitWhenDone`
 
-`gitupdater.exe -gitcmd=pull -gitwhat=cmdnotselected -repo=YTVL run exitWhenDone`
+`gitupdater.exe -gitcmd=pull -gitwhat=cmdnotselected -repo=YTVL run`
 
-`gitupdater.exe -gitcmd=pull -gitwhat=all run`
+`gitupdater.exe hideGUI -gitcmd=pull -gitwhat=all run exitWhenDone`
 
 Notes:
 
@@ -26,7 +26,7 @@ Notes:
 This will execute the `git show` command in the `GitUpdater` repo.
 - The `exitWhenDone` flag is only used when the program performs a git operation, so if you use for example `gitupdater.exe exitWhenDone` it will still open the GUI, but after any Git operation it will close.
 
-**Please note that the `run` flag is necessary to run the program, and if it is put before any other parameters they will not be used** (except the `exitWhenDone` flag, that can be put anywhere).
+**Please note that the `run` flag is necessary to run the program, and if it is put before any other parameters they will not be used** (except the `exitWhenDone` and `hideGUI` flags, they can be put anywhere).
 - You can launch GitUpdater in a specific repo parent folder:
 
 `gitupdater.exe -dir="C:\Users\Matthew\GitHub"`
