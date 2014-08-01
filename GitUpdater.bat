@@ -53,35 +53,35 @@ rem -----------------------------------------------------
 :log
 
 rem Run the Git command
-@echo [%date% %time%] Git %2ing repo at location "%1" >> ..\GitUpdater.log
-git %2 %6 >> ..\GitUpdater.log
+@echo [%date% %time%] Git %2ing repo at location "%1" >> %GitUpdater_LogPath%
+git %2 %6 >> %GitUpdater_LogPath%
 
 rem If it doesn't fail, go to the end of code with logging
 if Not ERRORLEVEL==1 goto logend
 
 rem If it should retry if it fails go to start
 if %3==True (
-    @echo [%date% %time%] Failed to %2 repo at "%1", trying again... >> ..\GitUpdater.log
+    @echo [%date% %time%] Failed to %2 repo at "%1", trying again... >> %GitUpdater_LogPath%
     echo.
     echo Failed to %2 repo at "%1", trying again...
     goto start
 )
-@echo [%date% %time%] Failed to %2 repo at "%1", retry disabled. >> ..\GitUpdater.log
+@echo [%date% %time%] Failed to %2 repo at "%1", retry disabled. >> %GitUpdater_LogPath%
 
 :logend
 
 rem If window mustn't be closed when done, pause
 if %4==True (
-    @echo [%date% %time%] Git %2ing repo at location "%1" complete. Don't close CMD window when done was enabled. >> ..\GitUpdater.log
-    @echo [%date% %time%] Unless you specified the "Don't wait for cmd to close before starting next" option, further git commands will not start until the CMD window is closed. >> ..\GitUpdater.log
-    @echo [%date% %time%] Waiting for user intervention... >> ..\GitUpdater.log
+    @echo [%date% %time%] Git %2ing repo at location "%1" complete. Don't close CMD window when done was enabled. >> %GitUpdater_LogPath%
+    @echo [%date% %time%] Unless you specified the "Don't wait for cmd to close before starting next" option, further git commands will not start until the CMD window is closed. >> %GitUpdater_LogPath%
+    @echo [%date% %time%] Waiting for user intervention... >> %GitUpdater_LogPath%
     echo.
     echo Press enter to close this window. Unless you specified the "Don't wait for cmd to close before starting next" option, further git commands will not start until you close this window.
     pause
-    @echo [%date% %time%] Received user intervention. >> ..\GitUpdater.log
-    @echo. >> ..\GitUpdater.log
+    @echo [%date% %time%] Received user intervention. >> %GitUpdater_LogPath%
+    @echo. >> %GitUpdater_LogPath%
 ) else (
-@echo [%date% %time%] Git %2ing repo at location "%1" complete. >> ..\GitUpdater.log
-@echo. >> ..\GitUpdater.log
+@echo [%date% %time%] Git %2ing repo at location "%1" complete. >> %GitUpdater_LogPath%
+@echo. >> %GitUpdater_LogPath%
 exit
 )

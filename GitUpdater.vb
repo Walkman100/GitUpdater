@@ -368,11 +368,10 @@
         btnGitPushNotSelected.Enabled = False
         btnCD.Enabled = False
         btnCancel.Enabled = True
-        
-        
+
         If chkDontShow.Checked = False Then Me.TopMost = True
         progressBar.Maximum = lstRepos.Items.Count
-        
+        Environment.SetEnvironmentVariable("GitUpdater_LogPath", "txtLogPath.Text", EnvironmentVariableTarget.User)
         Select Case count
             
         Case = "all"
