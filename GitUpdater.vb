@@ -1,6 +1,6 @@
 ﻿Public Class GitUpdater
     
-    Dim Dir As String = Environment.GetEnvironmentVariable("HOMEPATH") & "\Documents\GitHub"
+    Dim Dir As String = Environment.GetEnvironmentVariable("USERPROFILE") & "\Documents\GitHub"
     Dim cmdRepo As String = ""
     Dim count, GitCommand As String  ' because the Worker doesn't support direct sub calling
     Dim ExitWhenDone As Boolean = False
@@ -103,8 +103,8 @@
         If ShellWorker.IsBusy = False Then
             RebuildRepoList
         ElseIf MsgBox("A script is currently in progress! Refreshing repos might mess up the script. You can use the cancel button above to cancel operation." _
-                & vbNewLine &vbNewLine & "Refresh anyway?", vbOKCancel, "Operation in progress") = vbOK
-            RebuildRepoList
+                      & vbNewLine & vbNewLine & "Refresh anyway?", vbOKCancel, "Operation in progress") = vbOK Then
+            RebuildRepoList()
         End If
     End Sub
     
