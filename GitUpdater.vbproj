@@ -94,10 +94,13 @@
     <Reference Include="System.Data.DataSetExtensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GitUpdater.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GitUpdater.Designer.vb">
       <DependentUpon>GitUpdater.vb</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GitUpdater.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
