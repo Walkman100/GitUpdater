@@ -101,10 +101,14 @@
 
     Sub BtnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         If ShellWorker.IsBusy = False Then
+            btnRefresh.Visible = False
             RebuildRepoList()
+            btnRefresh.Visible = True
         ElseIf MsgBox("A script is currently in progress! Refreshing repos might mess up the script. You can use the cancel button above to cancel operation." _
                       & vbNewLine & vbNewLine & "Refresh anyway?", MsgBoxStyle.Critical & MsgBoxStyle.OkCancel, "Operation in progress") = vbOK Then
+            btnRefresh.Visible = False
             RebuildRepoList()
+            btnRefresh.Visible = True
         End If
     End Sub
 
