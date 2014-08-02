@@ -9,7 +9,7 @@
     Dim Wait As Integer  ' Wait until cmd closes
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
-        End
+        Application.Exit()
     End Sub
 
     Sub LoadGitUpdater(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -352,10 +352,12 @@
 
     Private Sub txtLogPath_TextChanged(sender As Object, e As EventArgs) Handles txtLogPath.TextChanged
         My.Settings.LogPath = txtLogPath.Text
+        My.Settings.Save()
     End Sub
 
     Private Sub chkOpenLog_CheckedChanged(sender As Object, e As EventArgs) Handles chkOpenLog.CheckedChanged
         My.Settings.OpenLog = chkOpenLog.Checked
+        My.Settings.Save()
     End Sub
 
     ' actual code that runs the shells
@@ -376,7 +378,7 @@
         Select Case count
             Case "all"
                 For i = 1 To lstRepos.Items.Count
-                    Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & "", CmdStyle, True, Wait)
+                    Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                     progressBar.Value = i
                 Next
             Case "selected"
@@ -385,7 +387,7 @@
                 Else
                     progressBar.Maximum = 2
                     progressBar.Value = 1
-                    Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & "", CmdStyle, True, Wait)
+                    Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                     progressBar.Value = progressBar.Maximum
                 End If
             Case "notselected"
@@ -394,7 +396,7 @@
                 Else
                     For i = 1 To lstRepos.Items.Count
                         If i - 1 <> lstRepos.SelectedIndex Then
-                            Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & "", CmdStyle, True, Wait)
+                            Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                         End If
                         progressBar.Value = i
                     Next
@@ -405,7 +407,7 @@
                 Else
                     progressBar.Maximum = 2
                     progressBar.Value = 1
-                    Shell("GitUpdater.bat " & Dir & "\" & cmdRepo & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & "", CmdStyle, True, Wait)
+                    Shell("GitUpdater.bat " & Dir & "\" & cmdRepo & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                     progressBar.Value = progressBar.Maximum
                 End If
             Case "cmdnotselected"
@@ -414,7 +416,7 @@
                 Else
                     For i = 1 To lstRepos.Items.Count
                         If lstRepos.Items.Item(i - 1) <> cmdRepo Then
-                            Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & "", CmdStyle, True, Wait)
+                            Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                             progressBar.Value = i
                         End If
                     Next

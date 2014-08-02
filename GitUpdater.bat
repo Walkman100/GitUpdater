@@ -2,7 +2,7 @@
 
 rem %1 is folder/repo, %2 is git command (like "pull" or "push"), %5 is commands after that (like -f)
 rem %3 is True if it should repeat until success, %4 is True if it should not close when done
-rem %5 is True if it should log output, %6 is where to log
+rem %5 is True if it should log output, %6 is where to log output
 
 rem Remove "rem" from lines below to show all parameters when bat file launches
 rem echo Parameters: "%*"
@@ -53,7 +53,7 @@ rem -----------------------------------------------------
 :log
 
 rem Run the Git command
-@echo [%date% %time%] Git %2ing repo at location "%1" >> %GitUpdater_LogPath%
+@echo [%date% %time%] Git %2ing repo at location "%1" >> %6
 git %2 >> %6
 
 rem If it doesn't fail, go to the end of code with logging
