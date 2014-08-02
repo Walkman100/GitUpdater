@@ -39,6 +39,7 @@
         chkRepeat.Checked = My.Settings.Repeat
         chkLog.Checked = My.Settings.Log
         txtLogPath.Text = My.Settings.LogPath
+        If txtLogPath.Text = "" Then txtLogPath.Text = Dir & "\GitUpdater.log"
         chkOpenLog.Checked = My.Settings.OpenLog
 
         ' apply settings to where they affect
@@ -610,5 +611,9 @@
         Else
             ContextMenuStripReposOpenReadme.Text = "Open Repo Readme"
         End If
+    End Sub
+
+    Private Sub btnBrowseLog_Click(sender As Object, e As EventArgs) Handles btnBrowseLog.Click
+
     End Sub
 End Class
