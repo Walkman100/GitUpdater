@@ -5,14 +5,13 @@
     Dim count, GitCommand As String  ' because the Worker doesn't support direct sub calling
     Dim ExitWhenDone As Boolean = False
     
-    Dim ForcePush As String
     Dim CmdStyle As AppWinStyle  ' window location of CMD
     Dim Wait As Integer  ' Wait until cmd closes
-    
+
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         End
     End Sub
-    
+
     Sub LoadGitUpdater(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not File.Exists("GitUpdater.bat") Then
             Try
@@ -37,7 +36,6 @@
         chkNoWait.Checked = My.Settings.NoWait
         chkDontClose.Checked = My.Settings.DontClose
         chkDontShow.Checked = My.Settings.DontShow
-        chkPushForce.Checked = My.Settings.PushForce
         chkRepeat.Checked = My.Settings.Repeat
         chkLog.Checked = My.Settings.Log
         txtLogPath.Text = My.Settings.LogPath
@@ -59,8 +57,7 @@
                 Me.TopMost = True
             End If
         End If
-        If My.Settings.PushForce = True Then ForcePush = "-f" Else ForcePush = ""
-
+        
         ' command line args
         For Each s As String In My.Application.CommandLineArgs
             If s.ToLower.StartsWith("-gitcmd=") Then
@@ -91,16 +88,16 @@
             End If
         Next
     End Sub
-    
+
     ' to do with list of repos
-    
-    Sub RebuildRepoList
-        lstRepos.Items.Clear
+
+    Sub RebuildRepoList()
+        lstRepos.Items.Clear()
         For Each Repo As String In Directory.GetDirectories(Dir)
             lstRepos.Items.Add(Mid(Repo, Len(Dir) + 2))
         Next
     End Sub
-    
+
     Sub BtnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         If ShellWorker.IsBusy = False Then
             RebuildRepoList()
@@ -109,7 +106,7 @@
             RebuildRepoList()
         End If
     End Sub
-    
+
     Sub BtnCD_Click(sender As Object, e As EventArgs) Handles btnCD.Click
         If ShellWorker.IsBusy = False Then
             ' show file chooser dialog, set result as Dir
@@ -122,7 +119,7 @@
             MsgBox("A script is currently in progress! Changing directory will mess up the script. Please cancel using the button above first.", MsgBoxStyle.Critical)
         End If
     End Sub
-    
+
     Sub LstRepos_DoubleClick(sender As Object, e As EventArgs) Handles lstRepos.DoubleClick, ContextMenuStripReposOpenInExplorer.Click
         If lstRepos.SelectedIndex <> -1 Then
             Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
@@ -130,7 +127,7 @@
             Process.Start(Dir)
         End If
     End Sub
-    
+
     Sub ContextMenuStripReposOpenInCMD_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposOpenInCMD.Click
         If lstRepos.SelectedIndex <> -1 Then
             Process.Start("cmd.exe", "/k cd " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex))
@@ -138,7 +135,7 @@
             Process.Start("cmd.exe", "/k cd " & Dir)
         End If
     End Sub
-    
+
     Sub ContextMenuStripReposOpenInPS_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposOpenInPS.Click
         If File.Exists("OpenRepoInPS.bat") Then
             If lstRepos.SelectedIndex <> -1 Then
@@ -180,7 +177,7 @@
             'End Try
         End If
     End Sub
-    
+
     Sub ContextMenuStripReposOpenInGitHub_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposOpenInGitHub.Click
         If lstRepos.SelectedIndex <> -1 Then
             Try
@@ -196,7 +193,7 @@
             End Try
         End If
     End Sub
-    
+
     Sub ContextMenuStripReposOpenReadme_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposOpenReadme.Click
         If lstRepos.SelectedIndex <> -1 Then
             If lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".wiki") Then
@@ -277,7 +274,7 @@
             End If
         End If
     End Sub
-    
+
     Sub ContextMenuStripReposCopyRepoName_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposCopyRepoName.Click
         If lstRepos.SelectedIndex <> -1 Then
             Try
@@ -295,7 +292,7 @@
             End Try
         End If
     End Sub
-    
+
     Sub ContextMenuStripReposCopyRepoPath_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposCopyRepoPath.Click
         If lstRepos.SelectedIndex <> -1 Then
             Try
@@ -313,20 +310,20 @@
             End Try
         End If
     End Sub
-    
+
     ' how to run the shells & changing settings
-    
+
     Sub ChkNoWait_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoWait.CheckedChanged
         If chkNoWait.Checked = True Then Wait = 1000 Else Wait = -1
         My.Settings.NoWait = chkNoWait.Checked
         My.Settings.Save()
     End Sub
-    
+
     Sub ChkDontClose_CheckedChanged(sender As Object, e As EventArgs) Handles chkDontClose.CheckedChanged
         My.Settings.DontClose = chkDontClose.Checked
         My.Settings.Save()
     End Sub
-    
+
     Sub ChkDontShow_CheckedChanged(sender As Object, e As EventArgs) Handles chkDontShow.CheckedChanged
         If chkDontShow.Checked = True Then
             CmdStyle = vbMinimizedNoFocus
@@ -342,18 +339,12 @@
         My.Settings.DontShow = chkDontShow.Checked
         My.Settings.Save()
     End Sub
-    
-    Sub ChkPushForce_CheckedChanged(sender As Object, e As EventArgs) Handles chkPushForce.CheckedChanged
-        If chkPushForce.Checked = True Then ForcePush = "-f" Else ForcePush = ""
-        My.Settings.PushForce = chkPushForce.Checked
-        My.Settings.Save()
-    End Sub
-    
+
     Sub ChkRepeat_CheckedChanged(sender As Object, e As EventArgs) Handles chkRepeat.CheckedChanged
         My.Settings.Repeat = chkRepeat.Checked
         My.Settings.Save()
     End Sub
-    
+
     Sub ChkLog_CheckedChanged(sender As Object, e As EventArgs) Handles chkLog.CheckedChanged
         My.Settings.Log = chkLog.Checked
         My.Settings.Save()
@@ -366,9 +357,9 @@
     Private Sub chkOpenLog_CheckedChanged(sender As Object, e As EventArgs) Handles chkOpenLog.CheckedChanged
         My.Settings.OpenLog = chkOpenLog.Checked
     End Sub
-    
+
     ' actual code that runs the shells
-    
+
     Sub ShellWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles ShellWorker.DoWork
         btnGitPullAll.Enabled = False
         btnGitPushAll.Enabled = False
@@ -385,7 +376,7 @@
         Select Case count
             Case "all"
                 For i = 1 To lstRepos.Items.Count
-                    Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & ForcePush, CmdStyle, True, Wait)
+                    Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & "", CmdStyle, True, Wait)
                     progressBar.Value = i
                 Next
             Case "selected"
@@ -394,7 +385,7 @@
                 Else
                     progressBar.Maximum = 2
                     progressBar.Value = 1
-                    Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & ForcePush, CmdStyle, True, Wait)
+                    Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & "", CmdStyle, True, Wait)
                     progressBar.Value = progressBar.Maximum
                 End If
             Case "notselected"
@@ -403,7 +394,7 @@
                 Else
                     For i = 1 To lstRepos.Items.Count
                         If i - 1 <> lstRepos.SelectedIndex Then
-                            Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & ForcePush, CmdStyle, True, Wait)
+                            Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & "", CmdStyle, True, Wait)
                         End If
                         progressBar.Value = i
                     Next
@@ -414,7 +405,7 @@
                 Else
                     progressBar.Maximum = 2
                     progressBar.Value = 1
-                    Shell("GitUpdater.bat " & Dir & "\" & cmdRepo & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & ForcePush, CmdStyle, True, Wait)
+                    Shell("GitUpdater.bat " & Dir & "\" & cmdRepo & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & "", CmdStyle, True, Wait)
                     progressBar.Value = progressBar.Maximum
                 End If
             Case "cmdnotselected"
@@ -423,7 +414,7 @@
                 Else
                     For i = 1 To lstRepos.Items.Count
                         If lstRepos.Items.Item(i - 1) <> cmdRepo Then
-                            Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & ForcePush, CmdStyle, True, Wait)
+                            Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & "", CmdStyle, True, Wait)
                             progressBar.Value = i
                         End If
                     Next

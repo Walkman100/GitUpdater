@@ -47,7 +47,6 @@ Partial Class GitUpdater
         Me.btnGitPullNotSelected = New System.Windows.Forms.Button()
         Me.chkRepeat = New System.Windows.Forms.CheckBox()
         Me.folderBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
-        Me.chkPushForce = New System.Windows.Forms.CheckBox()
         Me.chkDontClose = New System.Windows.Forms.CheckBox()
         Me.chkNoWait = New System.Windows.Forms.CheckBox()
         Me.grpGUI = New System.Windows.Forms.GroupBox()
@@ -83,7 +82,7 @@ Partial Class GitUpdater
         Me.btnExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnExit.AutoSize = True
         Me.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnExit.Location = New System.Drawing.Point(449, 531)
+        Me.btnExit.Location = New System.Drawing.Point(449, 508)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(63, 23)
         Me.btnExit.TabIndex = 10
@@ -93,7 +92,7 @@ Partial Class GitUpdater
         'btnGitPullAll
         '
         Me.btnGitPullAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGitPullAll.Location = New System.Drawing.Point(266, 251)
+        Me.btnGitPullAll.Location = New System.Drawing.Point(266, 228)
         Me.btnGitPullAll.Name = "btnGitPullAll"
         Me.btnGitPullAll.Size = New System.Drawing.Size(120, 23)
         Me.btnGitPullAll.TabIndex = 11
@@ -103,7 +102,7 @@ Partial Class GitUpdater
         'btnGitPushAll
         '
         Me.btnGitPushAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGitPushAll.Location = New System.Drawing.Point(392, 251)
+        Me.btnGitPushAll.Location = New System.Drawing.Point(392, 228)
         Me.btnGitPushAll.Name = "btnGitPushAll"
         Me.btnGitPushAll.Size = New System.Drawing.Size(120, 23)
         Me.btnGitPushAll.TabIndex = 12
@@ -122,7 +121,7 @@ Partial Class GitUpdater
         Me.lstRepos.Location = New System.Drawing.Point(12, 12)
         Me.lstRepos.Name = "lstRepos"
         Me.lstRepos.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lstRepos.Size = New System.Drawing.Size(248, 542)
+        Me.lstRepos.Size = New System.Drawing.Size(248, 519)
         Me.lstRepos.Sorted = True
         Me.lstRepos.TabIndex = 13
         '
@@ -205,7 +204,7 @@ Partial Class GitUpdater
         '
         Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRefresh.AutoSize = True
-        Me.btnRefresh.Location = New System.Drawing.Point(266, 531)
+        Me.btnRefresh.Location = New System.Drawing.Point(266, 508)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(63, 23)
         Me.btnRefresh.TabIndex = 14
@@ -215,7 +214,7 @@ Partial Class GitUpdater
         'btnGitPullSelected
         '
         Me.btnGitPullSelected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGitPullSelected.Location = New System.Drawing.Point(266, 280)
+        Me.btnGitPullSelected.Location = New System.Drawing.Point(266, 257)
         Me.btnGitPullSelected.Name = "btnGitPullSelected"
         Me.btnGitPullSelected.Size = New System.Drawing.Size(120, 23)
         Me.btnGitPullSelected.TabIndex = 15
@@ -225,7 +224,7 @@ Partial Class GitUpdater
         'btnGitPushSelected
         '
         Me.btnGitPushSelected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGitPushSelected.Location = New System.Drawing.Point(392, 280)
+        Me.btnGitPushSelected.Location = New System.Drawing.Point(392, 257)
         Me.btnGitPushSelected.Name = "btnGitPushSelected"
         Me.btnGitPushSelected.Size = New System.Drawing.Size(120, 23)
         Me.btnGitPushSelected.TabIndex = 16
@@ -236,7 +235,7 @@ Partial Class GitUpdater
         '
         Me.btnCD.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCD.AutoSize = True
-        Me.btnCD.Location = New System.Drawing.Point(335, 531)
+        Me.btnCD.Location = New System.Drawing.Point(335, 508)
         Me.btnCD.Name = "btnCD"
         Me.btnCD.Size = New System.Drawing.Size(108, 23)
         Me.btnCD.TabIndex = 17
@@ -246,7 +245,7 @@ Partial Class GitUpdater
         'btnGitPushNotSelected
         '
         Me.btnGitPushNotSelected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGitPushNotSelected.Location = New System.Drawing.Point(392, 309)
+        Me.btnGitPushNotSelected.Location = New System.Drawing.Point(392, 286)
         Me.btnGitPushNotSelected.Name = "btnGitPushNotSelected"
         Me.btnGitPushNotSelected.Size = New System.Drawing.Size(120, 23)
         Me.btnGitPushNotSelected.TabIndex = 18
@@ -256,7 +255,7 @@ Partial Class GitUpdater
         'btnGitPullNotSelected
         '
         Me.btnGitPullNotSelected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGitPullNotSelected.Location = New System.Drawing.Point(266, 309)
+        Me.btnGitPullNotSelected.Location = New System.Drawing.Point(266, 286)
         Me.btnGitPullNotSelected.Name = "btnGitPullNotSelected"
         Me.btnGitPullNotSelected.Size = New System.Drawing.Size(120, 23)
         Me.btnGitPullNotSelected.TabIndex = 19
@@ -267,23 +266,12 @@ Partial Class GitUpdater
         '
         Me.chkRepeat.AutoSize = True
         Me.chkRepeat.BackColor = System.Drawing.Color.Transparent
-        Me.chkRepeat.Location = New System.Drawing.Point(6, 42)
+        Me.chkRepeat.Location = New System.Drawing.Point(6, 19)
         Me.chkRepeat.Name = "chkRepeat"
         Me.chkRepeat.Size = New System.Drawing.Size(125, 17)
         Me.chkRepeat.TabIndex = 20
         Me.chkRepeat.Text = "Repeat until success"
         Me.chkRepeat.UseVisualStyleBackColor = False
-        '
-        'chkPushForce
-        '
-        Me.chkPushForce.AutoSize = True
-        Me.chkPushForce.BackColor = System.Drawing.Color.Transparent
-        Me.chkPushForce.Location = New System.Drawing.Point(6, 19)
-        Me.chkPushForce.Name = "chkPushForce"
-        Me.chkPushForce.Size = New System.Drawing.Size(116, 17)
-        Me.chkPushForce.TabIndex = 21
-        Me.chkPushForce.Text = "Use push -f (Force)"
-        Me.chkPushForce.UseVisualStyleBackColor = False
         '
         'chkDontClose
         '
@@ -336,18 +324,17 @@ Partial Class GitUpdater
         Me.grpData.Controls.Add(Me.txtLogPath)
         Me.grpData.Controls.Add(Me.chkOpenLog)
         Me.grpData.Controls.Add(Me.chkLog)
-        Me.grpData.Controls.Add(Me.chkPushForce)
         Me.grpData.Controls.Add(Me.chkRepeat)
         Me.grpData.Location = New System.Drawing.Point(266, 106)
         Me.grpData.Name = "grpData"
-        Me.grpData.Size = New System.Drawing.Size(246, 139)
+        Me.grpData.Size = New System.Drawing.Size(246, 116)
         Me.grpData.TabIndex = 26
         Me.grpData.TabStop = False
         Me.grpData.Text = "Data Options"
         '
         'btnBrowseLog
         '
-        Me.btnBrowseLog.Location = New System.Drawing.Point(165, 110)
+        Me.btnBrowseLog.Location = New System.Drawing.Point(165, 87)
         Me.btnBrowseLog.Name = "btnBrowseLog"
         Me.btnBrowseLog.Size = New System.Drawing.Size(75, 23)
         Me.btnBrowseLog.TabIndex = 25
@@ -356,7 +343,7 @@ Partial Class GitUpdater
         '
         'txtLogPath
         '
-        Me.txtLogPath.Location = New System.Drawing.Point(6, 88)
+        Me.txtLogPath.Location = New System.Drawing.Point(6, 65)
         Me.txtLogPath.Name = "txtLogPath"
         Me.txtLogPath.Size = New System.Drawing.Size(234, 20)
         Me.txtLogPath.TabIndex = 24
@@ -364,7 +351,7 @@ Partial Class GitUpdater
         'chkOpenLog
         '
         Me.chkOpenLog.AutoSize = True
-        Me.chkOpenLog.Location = New System.Drawing.Point(6, 114)
+        Me.chkOpenLog.Location = New System.Drawing.Point(6, 91)
         Me.chkOpenLog.Name = "chkOpenLog"
         Me.chkOpenLog.Size = New System.Drawing.Size(125, 17)
         Me.chkOpenLog.TabIndex = 23
@@ -374,7 +361,7 @@ Partial Class GitUpdater
         'chkLog
         '
         Me.chkLog.AutoSize = True
-        Me.chkLog.Location = New System.Drawing.Point(6, 65)
+        Me.chkLog.Location = New System.Drawing.Point(6, 42)
         Me.chkLog.Name = "chkLog"
         Me.chkLog.Size = New System.Drawing.Size(169, 17)
         Me.chkLog.TabIndex = 22
@@ -388,7 +375,7 @@ Partial Class GitUpdater
         'progressBar
         '
         Me.progressBar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.progressBar.Location = New System.Drawing.Point(266, 338)
+        Me.progressBar.Location = New System.Drawing.Point(266, 315)
         Me.progressBar.Name = "progressBar"
         Me.progressBar.Size = New System.Drawing.Size(165, 23)
         Me.progressBar.Step = 1
@@ -397,7 +384,7 @@ Partial Class GitUpdater
         'btnCancel
         '
         Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCancel.Location = New System.Drawing.Point(437, 338)
+        Me.btnCancel.Location = New System.Drawing.Point(437, 315)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 29
@@ -427,7 +414,7 @@ Partial Class GitUpdater
         Me.grpCredMan.Controls.Add(Me.txtUsername)
         Me.grpCredMan.Controls.Add(Me.lblUsername)
         Me.grpCredMan.Controls.Add(Me.btnInsertCredentials)
-        Me.grpCredMan.Location = New System.Drawing.Point(266, 396)
+        Me.grpCredMan.Location = New System.Drawing.Point(266, 373)
         Me.grpCredMan.Name = "grpCredMan"
         Me.grpCredMan.Size = New System.Drawing.Size(246, 129)
         Me.grpCredMan.TabIndex = 31
@@ -527,7 +514,7 @@ Partial Class GitUpdater
         '
         Me.btnCloseCmd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCloseCmd.AutoSize = True
-        Me.btnCloseCmd.Location = New System.Drawing.Point(266, 367)
+        Me.btnCloseCmd.Location = New System.Drawing.Point(266, 344)
         Me.btnCloseCmd.Name = "btnCloseCmd"
         Me.btnCloseCmd.Size = New System.Drawing.Size(246, 23)
         Me.btnCloseCmd.TabIndex = 32
@@ -540,7 +527,7 @@ Partial Class GitUpdater
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnExit
-        Me.ClientSize = New System.Drawing.Size(524, 566)
+        Me.ClientSize = New System.Drawing.Size(524, 543)
         Me.Controls.Add(Me.btnCloseCmd)
         Me.Controls.Add(Me.grpCredMan)
         Me.Controls.Add(Me.btnCancel)
@@ -607,7 +594,6 @@ Partial Class GitUpdater
     Private WithEvents chkDontShow As System.Windows.Forms.CheckBox
     Private WithEvents chkNoWait As System.Windows.Forms.CheckBox
     Private WithEvents chkDontClose As System.Windows.Forms.CheckBox
-    Private WithEvents chkPushForce As System.Windows.Forms.CheckBox
     Private WithEvents folderBrowserDialog As System.Windows.Forms.FolderBrowserDialog
     Private WithEvents chkRepeat As System.Windows.Forms.CheckBox
     Private WithEvents btnGitPullNotSelected As System.Windows.Forms.Button
