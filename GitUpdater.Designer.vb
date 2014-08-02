@@ -71,6 +71,7 @@ Partial Class GitUpdater
         Me.lblUsername = New System.Windows.Forms.Label()
         Me.timerKeyChecker = New System.Windows.Forms.Timer(Me.components)
         Me.btnCloseCmd = New System.Windows.Forms.Button()
+        Me.SaveLogFileDialog = New System.Windows.Forms.SaveFileDialog()
         Me.ContextMenuStripRepos.SuspendLayout()
         Me.grpGUI.SuspendLayout()
         Me.grpData.SuspendLayout()
@@ -521,6 +522,14 @@ Partial Class GitUpdater
         Me.btnCloseCmd.Text = "Cancel foreground CMD window"
         Me.btnCloseCmd.UseVisualStyleBackColor = True
         '
+        'SaveLogFileDialog
+        '
+        Me.SaveLogFileDialog.DefaultExt = "log"
+        Me.SaveLogFileDialog.FileName = "GitUpdater.log"
+        Me.SaveLogFileDialog.Filter = "Log files|*.log"
+        Me.SaveLogFileDialog.OverwritePrompt = False
+        Me.SaveLogFileDialog.Title = "Choose where to save the log to:"
+        '
         'GitUpdater
         '
         Me.AcceptButton = Me.btnGitPushSelected
@@ -609,4 +618,5 @@ Partial Class GitUpdater
     Private WithEvents chkOpenLog As System.Windows.Forms.CheckBox
     Private WithEvents btnBrowseLog As System.Windows.Forms.Button
     Private WithEvents txtLogPath As System.Windows.Forms.TextBox
+    Friend WithEvents SaveLogFileDialog As System.Windows.Forms.SaveFileDialog
 End Class

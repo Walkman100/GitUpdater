@@ -361,6 +361,14 @@
         My.Settings.Save()
     End Sub
 
+    Private Sub btnBrowseLog_Click(sender As Object, e As EventArgs) Handles btnBrowseLog.Click
+        If SaveLogFileDialog.InitialDirectory = "" Then SaveLogFileDialog.InitialDirectory = Dir
+        SaveLogFileDialog.ShowDialog()
+        txtLogPath.Text = SaveLogFileDialog.FileName
+        If File.Exists(txtLogPath.Text) Then MsgBox("If you set the logfile to an already existing one, the log will be appended to the end of the file.", _
+                                                    MsgBoxStyle.Information, "File already exists")
+    End Sub
+
     ' actual code that runs the shells
 
     Sub ShellWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles ShellWorker.DoWork
@@ -611,9 +619,5 @@
         Else
             ContextMenuStripReposOpenReadme.Text = "Open Repo Readme"
         End If
-    End Sub
-
-    Private Sub btnBrowseLog_Click(sender As Object, e As EventArgs) Handles btnBrowseLog.Click
-
     End Sub
 End Class
