@@ -1,35 +1,39 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<SettingsFile CurrentProfile="(Default)" GeneratedClassNamespace="" GeneratedClassName="" UseMySettingsClassName="true" xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
   <Settings>
-    <Setting Name="DontClose" Type="System.Boolean" Scope="User" Roaming="false">
+    <Setting Name="DontClose" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="DontShow" Type="System.Boolean" Scope="User" Roaming="false">
+    <Setting Name="DontShow" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Log" Type="System.Boolean" Scope="User" Roaming="false">
+    <Setting Name="Log" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="NoWait" Type="System.Boolean" Scope="User" Roaming="false">
+    <Setting Name="NoWait" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Password" Type="System.String" Scope="User" Roaming="false">
+    <Setting Name="Password" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="PushForce" Type="System.Boolean" Scope="User" Roaming="false">
+    <Setting Name="PushForce" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Repeat" Type="System.Boolean" Scope="User" Roaming="false">
+    <Setting Name="Repeat" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="SavedDir" Type="System.String" Scope="User" Roaming="false">
+    <Setting Name="SavedDir" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Username" Type="System.String" Scope="User" Roaming="false">
+    <Setting Name="Username" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LogPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="OpenLog" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>
