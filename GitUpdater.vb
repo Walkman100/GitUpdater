@@ -93,22 +93,20 @@
     ' to do with list of repos
 
     Sub RebuildRepoList()
+        btnRefresh.Enabled = False
         lstRepos.Items.Clear()
         For Each Repo As String In Directory.GetDirectories(Dir)
             lstRepos.Items.Add(Mid(Repo, Len(Dir) + 2))
         Next
+        btnRefresh.Enabled = True
     End Sub
 
     Sub BtnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         If ShellWorker.IsBusy = False Then
-            btnRefresh.Enabled = False
             RebuildRepoList()
-            btnRefresh.Enabled = True
         ElseIf MsgBox("A script is currently in progress! Refreshing repos might mess up the script. You can use the cancel button above to cancel operation." _
                       & vbNewLine & vbNewLine & "Refresh anyway?", MsgBoxStyle.Critical & MsgBoxStyle.OkCancel, "Operation in progress") = vbOK Then
-            btnRefresh.Enabled = False
             RebuildRepoList()
-            btnRefresh.Enabled = True
         End If
     End Sub
 
