@@ -314,6 +314,10 @@
         End If
     End Sub
 
+    Private Sub ContextMenuStripReposRemoveEntry_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposRemoveEntry.Click
+        lstRepos.Items.RemoveAt(lstRepos.SelectedIndex)
+    End Sub
+
     ' how to run the shells & changing settings
 
     Sub ChkNoWait_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoWait.CheckedChanged

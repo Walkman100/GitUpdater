@@ -39,6 +39,8 @@ Partial Class GitUpdater
         Me.ContextMenuStripReposSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ContextMenuStripReposCopyRepoName = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposCopyRepoPath = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ContextMenuStripReposRemoveEntry = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.btnGitPullSelected = New System.Windows.Forms.Button()
         Me.btnGitPushSelected = New System.Windows.Forms.Button()
@@ -72,8 +74,6 @@ Partial Class GitUpdater
         Me.timerKeyChecker = New System.Windows.Forms.Timer(Me.components)
         Me.btnCloseCmd = New System.Windows.Forms.Button()
         Me.SaveLogFileDialog = New System.Windows.Forms.SaveFileDialog()
-        Me.ContextMenuStripReposSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ContextMenuStripReposRemoveEntry = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripRepos.SuspendLayout()
         Me.grpGUI.SuspendLayout()
         Me.grpData.SuspendLayout()
@@ -202,6 +202,17 @@ Partial Class GitUpdater
         Me.ContextMenuStripReposCopyRepoPath.Name = "ContextMenuStripReposCopyRepoPath"
         Me.ContextMenuStripReposCopyRepoPath.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposCopyRepoPath.Text = "Copy Repo Path"
+        '
+        'ContextMenuStripReposSeparator3
+        '
+        Me.ContextMenuStripReposSeparator3.Name = "ContextMenuStripReposSeparator3"
+        Me.ContextMenuStripReposSeparator3.Size = New System.Drawing.Size(269, 6)
+        '
+        'ContextMenuStripReposRemoveEntry
+        '
+        Me.ContextMenuStripReposRemoveEntry.Name = "ContextMenuStripReposRemoveEntry"
+        Me.ContextMenuStripReposRemoveEntry.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposRemoveEntry.Text = "Remove Entry"
         '
         'btnRefresh
         '
@@ -531,17 +542,6 @@ Partial Class GitUpdater
         Me.SaveLogFileDialog.Filter = "Log files|*.log"
         Me.SaveLogFileDialog.OverwritePrompt = False
         Me.SaveLogFileDialog.Title = "Choose where to save the log to:"
-        '
-        'ContextMenuStripReposSeparator3
-        '
-        Me.ContextMenuStripReposSeparator3.Name = "ContextMenuStripReposSeparator3"
-        Me.ContextMenuStripReposSeparator3.Size = New System.Drawing.Size(269, 6)
-        '
-        'ContextMenuStripReposRemoveEntry
-        '
-        Me.ContextMenuStripReposRemoveEntry.Name = "ContextMenuStripReposRemoveEntry"
-        Me.ContextMenuStripReposRemoveEntry.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposRemoveEntry.Text = "Remove Entry"
         '
         'GitUpdater
         '
