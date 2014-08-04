@@ -210,6 +210,7 @@ Partial Class GitUpdater
         '
         'ContextMenuStripReposRemoveEntry
         '
+        Me.ContextMenuStripReposRemoveEntry.Image = CType(resources.GetObject("ContextMenuStripReposRemoveEntry.Image"), System.Drawing.Image)
         Me.ContextMenuStripReposRemoveEntry.Name = "ContextMenuStripReposRemoveEntry"
         Me.ContextMenuStripReposRemoveEntry.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposRemoveEntry.Text = "Remove Entry"
