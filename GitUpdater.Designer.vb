@@ -72,6 +72,8 @@ Partial Class GitUpdater
         Me.timerKeyChecker = New System.Windows.Forms.Timer(Me.components)
         Me.btnCloseCmd = New System.Windows.Forms.Button()
         Me.SaveLogFileDialog = New System.Windows.Forms.SaveFileDialog()
+        Me.ContextMenuStripReposSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ContextMenuStripReposRemoveEntry = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripRepos.SuspendLayout()
         Me.grpGUI.SuspendLayout()
         Me.grpData.SuspendLayout()
@@ -128,9 +130,9 @@ Partial Class GitUpdater
         '
         'ContextMenuStripRepos
         '
-        Me.ContextMenuStripRepos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContextMenuStripReposOpenInExplorer, Me.ContextMenuStripReposOpenInCMD, Me.ContextMenuStripReposOpenInPS, Me.ContextMenuStripReposOpenInGitHub, Me.ContextMenuStripReposSeparator1, Me.ContextMenuStripReposOpenReadme, Me.ContextMenuStripReposOpenSLN, Me.ContextMenuStripReposSeparator2, Me.ContextMenuStripReposCopyRepoName, Me.ContextMenuStripReposCopyRepoPath})
+        Me.ContextMenuStripRepos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContextMenuStripReposOpenInExplorer, Me.ContextMenuStripReposOpenInCMD, Me.ContextMenuStripReposOpenInPS, Me.ContextMenuStripReposOpenInGitHub, Me.ContextMenuStripReposSeparator1, Me.ContextMenuStripReposOpenReadme, Me.ContextMenuStripReposOpenSLN, Me.ContextMenuStripReposSeparator2, Me.ContextMenuStripReposCopyRepoName, Me.ContextMenuStripReposCopyRepoPath, Me.ContextMenuStripReposSeparator3, Me.ContextMenuStripReposRemoveEntry})
         Me.ContextMenuStripRepos.Name = "contextMenuStripRepos"
-        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 192)
+        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 242)
         '
         'ContextMenuStripReposOpenInExplorer
         '
@@ -530,6 +532,17 @@ Partial Class GitUpdater
         Me.SaveLogFileDialog.OverwritePrompt = False
         Me.SaveLogFileDialog.Title = "Choose where to save the log to:"
         '
+        'ContextMenuStripReposSeparator3
+        '
+        Me.ContextMenuStripReposSeparator3.Name = "ContextMenuStripReposSeparator3"
+        Me.ContextMenuStripReposSeparator3.Size = New System.Drawing.Size(269, 6)
+        '
+        'ContextMenuStripReposRemoveEntry
+        '
+        Me.ContextMenuStripReposRemoveEntry.Name = "ContextMenuStripReposRemoveEntry"
+        Me.ContextMenuStripReposRemoveEntry.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposRemoveEntry.Text = "Remove Entry"
+        '
         'GitUpdater
         '
         Me.AcceptButton = Me.btnGitPushSelected
@@ -618,5 +631,7 @@ Partial Class GitUpdater
     Private WithEvents chkOpenLog As System.Windows.Forms.CheckBox
     Private WithEvents btnBrowseLog As System.Windows.Forms.Button
     Private WithEvents txtLogPath As System.Windows.Forms.TextBox
-    Friend WithEvents SaveLogFileDialog As System.Windows.Forms.SaveFileDialog
+    Private WithEvents SaveLogFileDialog As System.Windows.Forms.SaveFileDialog
+    Private WithEvents ContextMenuStripReposSeparator3 As System.Windows.Forms.ToolStripSeparator
+    Private WithEvents ContextMenuStripReposRemoveEntry As System.Windows.Forms.ToolStripMenuItem
 End Class
