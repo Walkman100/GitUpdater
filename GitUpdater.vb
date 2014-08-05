@@ -619,13 +619,31 @@
     
     Sub LstRepos_MouseDown(sender As Object, e As MouseEventArgs) Handles lstRepos.MouseDown
         If lstRepos.SelectedIndex <> -1 Then
+            ContextMenuStripReposOpenInExplorer.Text = "Open Repo in Windows Explorer"
+            ContextMenuStripReposOpenInCMD.Text = "Open Repo in CMD"
+            ContextMenuStripReposOpenInPS.Text = "Open Repo in Windows PowerShell"
+            ContextMenuStripReposOpenInGitHub.Text = "Open Repo in GitHub for Windows"
             If lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".wiki") Then
                 ContextMenuStripReposOpenReadme.Text = "Open wiki Home.md"
             Else
                 ContextMenuStripReposOpenReadme.Text = "Open Repo Readme"
             End If
+            ContextMenuStripReposOpenSLN.Text = "Open Repo SLN"
+            ContextMenuStripReposCopyRepoName.Visible = True
+            ContextMenuStripReposCopyRepoPath.Text = "Copy Repo Path"
+            ContextMenuStripReposSeparator3.Visible = True
+            ContextMenuStripReposRemoveEntry.Visible = True
         Else
-            ContextMenuStripReposOpenReadme.Text = "Open Repo Readme"
+            ContextMenuStripReposOpenInExplorer.Text = "Open Folder in Windows Explorer"
+            ContextMenuStripReposOpenInCMD.Text = "Open Folder in CMD"
+            ContextMenuStripReposOpenInPS.Text = "Open Folder in Windows PowerShell"
+            ContextMenuStripReposOpenInGitHub.Text = "Open Folder in GitHub for Windows"
+            ContextMenuStripReposOpenReadme.Text = "Open Folder Readme"
+            ContextMenuStripReposOpenSLN.Text = "Open Folder SLN"
+            ContextMenuStripReposCopyRepoName.Visible = False
+            ContextMenuStripReposCopyRepoPath.Text = "Copy Folder Path"
+            ContextMenuStripReposSeparator3.Visible = False
+            ContextMenuStripReposRemoveEntry.Visible = False
         End If
     End Sub
 End Class
