@@ -315,7 +315,9 @@
     End Sub
 
     Private Sub ContextMenuStripReposRemoveEntry_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposRemoveEntry.Click
-        lstRepos.Items.RemoveAt(lstRepos.SelectedIndex)
+        If lstRepos.SelectedIndex <> -1 Then
+            lstRepos.Items.RemoveAt(lstRepos.SelectedIndex)
+        End If
     End Sub
 
     ' how to run the shells & changing settings
