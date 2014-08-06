@@ -21,7 +21,6 @@
                 Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/GitUpdater.bat")
             End Try
         End If
-        RebuildRepoList()
         btnGitPullAll.Enabled = True
         btnGitPushAll.Enabled = True
         btnGitPullSelected.Enabled = True
@@ -46,6 +45,7 @@
         If My.Settings.SavedDir <> "" Then
             Dir = My.Settings.SavedDir
         End If
+        RebuildRepoList()
         If My.Settings.NoWait = True Then Wait = 1000 Else Wait = -1
         If My.Settings.DontShow = True Then
             CmdStyle = vbMinimizedNoFocus
