@@ -113,8 +113,10 @@
     Sub BtnCD_Click(sender As Object, e As EventArgs) Handles btnCD.Click
         If ShellWorker.IsBusy = False Then
             ' show file chooser dialog, set result as Dir
+            folderBrowserDialog.SelectedPath = Dir
             folderBrowserDialog.ShowDialog()
             Dir = folderBrowserDialog.SelectedPath
+            My.Settings.SavedDir = Dir
 
             ' rebuild list automatically
             RebuildRepoList()
