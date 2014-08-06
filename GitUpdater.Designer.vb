@@ -41,6 +41,10 @@ Partial Class GitUpdater
         Me.ContextMenuStripReposCopyRepoPath = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ContextMenuStripReposRemoveEntry = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposCDHere = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ContextMenuStripReposGitPullThis = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposGitPushThis = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.btnGitPullSelected = New System.Windows.Forms.Button()
         Me.btnGitPushSelected = New System.Windows.Forms.Button()
@@ -74,10 +78,6 @@ Partial Class GitUpdater
         Me.timerKeyChecker = New System.Windows.Forms.Timer(Me.components)
         Me.btnCloseCmd = New System.Windows.Forms.Button()
         Me.SaveLogFileDialog = New System.Windows.Forms.SaveFileDialog()
-        Me.ContextMenuStripReposCDHere = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStripReposGitPullThis = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStripReposGitPushThis = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStripReposSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.ContextMenuStripRepos.SuspendLayout()
         Me.grpGUI.SuspendLayout()
         Me.grpData.SuspendLayout()
@@ -136,7 +136,7 @@ Partial Class GitUpdater
         '
         Me.ContextMenuStripRepos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContextMenuStripReposOpenInExplorer, Me.ContextMenuStripReposOpenInCMD, Me.ContextMenuStripReposOpenInPS, Me.ContextMenuStripReposOpenInGitHub, Me.ContextMenuStripReposSeparator1, Me.ContextMenuStripReposOpenReadme, Me.ContextMenuStripReposOpenSLN, Me.ContextMenuStripReposSeparator2, Me.ContextMenuStripReposCopyRepoName, Me.ContextMenuStripReposCopyRepoPath, Me.ContextMenuStripReposSeparator3, Me.ContextMenuStripReposRemoveEntry, Me.ContextMenuStripReposCDHere, Me.ContextMenuStripReposSeparator4, Me.ContextMenuStripReposGitPullThis, Me.ContextMenuStripReposGitPushThis})
         Me.ContextMenuStripRepos.Name = "contextMenuStripRepos"
-        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 314)
+        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 292)
         '
         'ContextMenuStripReposOpenInExplorer
         '
@@ -218,6 +218,32 @@ Partial Class GitUpdater
         Me.ContextMenuStripReposRemoveEntry.Name = "ContextMenuStripReposRemoveEntry"
         Me.ContextMenuStripReposRemoveEntry.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposRemoveEntry.Text = "Remove Entry"
+        '
+        'ContextMenuStripReposCDHere
+        '
+        Me.ContextMenuStripReposCDHere.Image = CType(resources.GetObject("ContextMenuStripReposCDHere.Image"), System.Drawing.Image)
+        Me.ContextMenuStripReposCDHere.Name = "ContextMenuStripReposCDHere"
+        Me.ContextMenuStripReposCDHere.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposCDHere.Text = "CD Here..."
+        '
+        'ContextMenuStripReposSeparator4
+        '
+        Me.ContextMenuStripReposSeparator4.Name = "ContextMenuStripReposSeparator4"
+        Me.ContextMenuStripReposSeparator4.Size = New System.Drawing.Size(269, 6)
+        '
+        'ContextMenuStripReposGitPullThis
+        '
+        Me.ContextMenuStripReposGitPullThis.Image = CType(resources.GetObject("ContextMenuStripReposGitPullThis.Image"), System.Drawing.Image)
+        Me.ContextMenuStripReposGitPullThis.Name = "ContextMenuStripReposGitPullThis"
+        Me.ContextMenuStripReposGitPullThis.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposGitPullThis.Text = "Git Pull this"
+        '
+        'ContextMenuStripReposGitPushThis
+        '
+        Me.ContextMenuStripReposGitPushThis.Image = CType(resources.GetObject("ContextMenuStripReposGitPushThis.Image"), System.Drawing.Image)
+        Me.ContextMenuStripReposGitPushThis.Name = "ContextMenuStripReposGitPushThis"
+        Me.ContextMenuStripReposGitPushThis.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposGitPushThis.Text = "Git Push this"
         '
         'btnRefresh
         '
@@ -547,32 +573,6 @@ Partial Class GitUpdater
         Me.SaveLogFileDialog.Filter = "Log files|*.log"
         Me.SaveLogFileDialog.OverwritePrompt = False
         Me.SaveLogFileDialog.Title = "Choose where to save the log to:"
-        '
-        'ContextMenuStripReposCDHere
-        '
-        Me.ContextMenuStripReposCDHere.Image = CType(resources.GetObject("ContextMenuStripReposCDHere.Image"), System.Drawing.Image)
-        Me.ContextMenuStripReposCDHere.Name = "ContextMenuStripReposCDHere"
-        Me.ContextMenuStripReposCDHere.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposCDHere.Text = "CD Here..."
-        '
-        'ContextMenuStripReposGitPullThis
-        '
-        Me.ContextMenuStripReposGitPullThis.Image = CType(resources.GetObject("ContextMenuStripReposGitPullThis.Image"), System.Drawing.Image)
-        Me.ContextMenuStripReposGitPullThis.Name = "ContextMenuStripReposGitPullThis"
-        Me.ContextMenuStripReposGitPullThis.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposGitPullThis.Text = "Git Pull this"
-        '
-        'ContextMenuStripReposGitPushThis
-        '
-        Me.ContextMenuStripReposGitPushThis.Image = CType(resources.GetObject("ContextMenuStripReposGitPushThis.Image"), System.Drawing.Image)
-        Me.ContextMenuStripReposGitPushThis.Name = "ContextMenuStripReposGitPushThis"
-        Me.ContextMenuStripReposGitPushThis.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposGitPushThis.Text = "Git Push this"
-        '
-        'ContextMenuStripReposSeparator4
-        '
-        Me.ContextMenuStripReposSeparator4.Name = "ContextMenuStripReposSeparator4"
-        Me.ContextMenuStripReposSeparator4.Size = New System.Drawing.Size(269, 6)
         '
         'GitUpdater
         '

@@ -322,6 +322,11 @@
         End If
     End Sub
 
+    Private Sub ContextMenuStripReposCDHere_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposCDHere.Click
+        Dir = Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex)
+        RebuildRepoList()
+    End Sub
+
     ' how to run the shells & changing settings
 
     Sub ChkNoWait_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoWait.CheckedChanged
@@ -497,7 +502,7 @@
         End If
     End Sub
     
-    Sub BtnGitPullSelected_Click(sender As Object, e As EventArgs) Handles btnGitPullSelected.Click
+    Sub BtnGitPullSelected_Click(sender As Object, e As EventArgs) Handles btnGitPullSelected.Click, ContextMenuStripReposGitPullThis.Click
         If lstRepos.SelectedIndex = -1 Then
             MsgBox("No item selected", MsgBoxStyle.Critical)
         Else
@@ -511,7 +516,7 @@
         End If
     End Sub
     
-    Sub BtnGitPushSelected_Click(sender As Object, e As EventArgs) Handles btnGitPushSelected.Click
+    Sub BtnGitPushSelected_Click(sender As Object, e As EventArgs) Handles btnGitPushSelected.Click, ContextMenuStripReposGitPushThis.Click
         If lstRepos.SelectedIndex = -1 Then
             MsgBox("No item selected", MsgBoxStyle.Critical)
         Else
@@ -635,6 +640,7 @@
             ContextMenuStripReposCopyRepoPath.Text = "Copy Repo Path"
             ContextMenuStripReposSeparator3.Visible = True
             ContextMenuStripReposRemoveEntry.Visible = True
+            ContextMenuStripReposCDHere.Visible = True
         Else
             ContextMenuStripReposOpenInExplorer.Text = "Open Folder in Windows Explorer"
             ContextMenuStripReposOpenInCMD.Text = "Open Folder in CMD"
@@ -646,6 +652,7 @@
             ContextMenuStripReposCopyRepoPath.Text = "Copy Folder Path"
             ContextMenuStripReposSeparator3.Visible = False
             ContextMenuStripReposRemoveEntry.Visible = False
+            ContextMenuStripReposCDHere.Visible = False
         End If
     End Sub
 End Class
