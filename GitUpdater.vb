@@ -1,10 +1,12 @@
-﻿Public Class GitUpdater
-    
+﻿Imports System.Windows.Shell
+
+Public Class GitUpdater
+
     Dim Dir As String = Environment.GetEnvironmentVariable("USERPROFILE") & "\Documents\GitHub"
     Dim cmdRepo As String = ""
     Dim count, GitCommand As String  ' because the Worker doesn't support direct sub calling
     Dim ExitWhenDone As Boolean = False
-    
+
     Dim CmdStyle As AppWinStyle  ' window location of CMD
     Dim Wait As Integer  ' Wait until cmd closes
 
@@ -58,7 +60,7 @@
                 Me.TopMost = True
             End If
         End If
-        
+
         ' command line args
         For Each s As String In My.Application.CommandLineArgs
             If s.ToLower.StartsWith("-gitcmd=") Then
@@ -398,6 +400,8 @@
 
         If chkDontShow.Checked = False Then Me.TopMost = True
         progressBar.Maximum = lstRepos.Items.Count
+        TaskbarItemInfo = TaskbarItemProgressState.Normal
+
 
         Select Case count
             Case "all"
@@ -469,9 +473,9 @@
         btnCD.Enabled = True
         btnCancel.Enabled = False
     End Sub
-    
+
     ' starting and stopping the thread
-    
+
     Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         If ShellWorker.IsBusy = True Then
             If MsgBox("Are you sure you want to cancel operation? This requires restarting GitUpdater." & vbNewLine & vbNewLine & "This will not close the currently active CMD window. To do so, please click on the window and press 'Ctrl' + 'C', then 'Y', then 'Enter'.", MsgBoxStyle.Question & MsgBoxStyle.YesNo, "Confirmation") = vbNo Then Exit Sub
@@ -481,7 +485,7 @@
         End If
 
     End Sub
-    
+
     Sub BtnGitPullAll_Click(sender As Object, e As EventArgs) Handles btnGitPullAll.Click
         count = "all"
         GitCommand = "pull"
@@ -491,7 +495,7 @@
             MsgBox("A git operation is currently in progress!", MsgBoxStyle.Exclamation, "Operation in progress")
         End If
     End Sub
-    
+
     Sub BtnGitPushAll_Click(sender As Object, e As EventArgs) Handles btnGitPushAll.Click
         count = "all"
         GitCommand = "push"
@@ -501,7 +505,7 @@
             MsgBox("A git operation is currently in progress!", MsgBoxStyle.Exclamation, "Operation in progress")
         End If
     End Sub
-    
+
     Sub BtnGitPullSelected_Click(sender As Object, e As EventArgs) Handles btnGitPullSelected.Click, ContextMenuStripReposGitPullThis.Click
         If lstRepos.SelectedIndex = -1 Then
             MsgBox("No item selected", MsgBoxStyle.Critical)
@@ -515,7 +519,7 @@
             End If
         End If
     End Sub
-    
+
     Sub BtnGitPushSelected_Click(sender As Object, e As EventArgs) Handles btnGitPushSelected.Click, ContextMenuStripReposGitPushThis.Click
         If lstRepos.SelectedIndex = -1 Then
             MsgBox("No item selected", MsgBoxStyle.Critical)
@@ -529,7 +533,7 @@
             End If
         End If
     End Sub
-    
+
     Sub BtnGitPullNotSelected_Click(sender As Object, e As EventArgs) Handles btnGitPullNotSelected.Click
         If lstRepos.SelectedIndex = -1 Then
             MsgBox("No item selected", MsgBoxStyle.Critical)
@@ -543,7 +547,7 @@
             End If
         End If
     End Sub
-    
+
     Sub BtnGitPushNotSelected_Click(sender As Object, e As EventArgs) Handles btnGitPushNotSelected.Click
         If lstRepos.SelectedIndex = -1 Then
             MsgBox("No item selected", MsgBoxStyle.Critical)
@@ -557,16 +561,16 @@
             End If
         End If
     End Sub
-    
+
     ' credentials-related stuff
-    
+
     Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         My.Settings.Username = txtUsername.Text
         My.Settings.Password = txtPassword.Text
         My.Settings.Save()
         MsgBox("Succesfully Saved!", MsgBoxStyle.Information, "Saved!")
     End Sub
-    
+
     Sub BtnInsert_Click(sender As Object, e As EventArgs) Handles btnInsertCredentials.Click
         Me.WindowState = FormWindowState.Minimized
         System.Threading.Thread.Sleep(500)
@@ -575,7 +579,7 @@
         Me.WindowState = FormWindowState.Normal
         Me.BringToFront()
     End Sub
-    
+
     Sub TimerKeyChecker_Tick(sender As Object, e As EventArgs) Handles timerKeyChecker.Tick
         If btnHotkey.Text = "Hotkey Enabled!" Then
             btnHotkey.Text = "Disable Hotkey"
@@ -590,7 +594,7 @@
             ' See http://msdn.microsoft.com/en-us/library/system.windows.forms.sendkeys.send(v=vs.110).aspx
         End If
     End Sub
-    
+
     Sub BtnHotkey_Click(sender As Object, e As EventArgs) Handles btnHotkey.Click
         If btnHotkey.Text = "Enable Hotkey" Then
             btnHotkey.Text = "Hotkey Enabled!"
@@ -601,15 +605,15 @@
             timerKeyChecker.Interval = 1000
         End If
     End Sub
-    
+
     Sub btnShowPass_MouseDown(sender As Object, e As EventArgs)
         txtPassword.PasswordChar = ""
     End Sub
-    
+
     Sub btnShowPass_MouseUp(sender As Object, e As EventArgs)
         txtPassword.PasswordChar = "●"
     End Sub
-    
+
     Sub BtnCloseCmd_Click(sender As Object, e As EventArgs) Handles btnCloseCmd.Click
         If ShellWorker.IsBusy = False Then
             If MsgBox("No git operation from this program is in progress, are you sure you want to insert commands to close a CMD window?", MsgBoxStyle.Question & MsgBoxStyle.YesNo, "Confirmation") = vbNo Then Exit Sub
@@ -623,7 +627,7 @@
         Me.WindowState = FormWindowState.Normal
         Me.BringToFront()
     End Sub
-    
+
     Sub LstRepos_MouseDown(sender As Object, e As MouseEventArgs) Handles lstRepos.MouseDown
         If lstRepos.SelectedIndex <> -1 Then
             ContextMenuStripReposOpenInExplorer.Text = "Open Repo in Windows Explorer"
