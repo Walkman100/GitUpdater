@@ -10,6 +10,8 @@ Public Class GitUpdater
     Dim CmdStyle As AppWinStyle  ' window location of CMD
     Dim Wait As Integer  ' Wait until cmd closes
 
+    Dim TaskbarProgress As New TaskbarItemInfo
+
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         Application.Exit()
     End Sub
@@ -400,23 +402,27 @@ Public Class GitUpdater
 
         If chkDontShow.Checked = False Then Me.TopMost = True
         progressBar.Maximum = lstRepos.Items.Count
-        TaskbarItemInfo = TaskbarItemProgressState.Normal
-
+        Me.TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
+        Me.TaskbarProgress.ProgressValue = lstRepos.Items.Count
 
         Select Case count
             Case "all"
+                Me.TaskbarProgress.ProgressState = TaskbarItemProgressState.Paused
                 For i = 1 To lstRepos.Items.Count
                     Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                     progressBar.Value = i
                 Next
+                Me.TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
             Case "selected"
                 If lstRepos.SelectedIndex = -1 Then
                     MsgBox("No item selected", MsgBoxStyle.Critical)
                 Else
+                    Me.TaskbarProgress.ProgressState = TaskbarItemProgressState.Indeterminate
                     progressBar.Maximum = 2
                     progressBar.Value = 1
                     Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                     progressBar.Value = progressBar.Maximum
+                    Me.TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
                 End If
             Case "notselected"
                 If lstRepos.SelectedIndex = -1 Then
