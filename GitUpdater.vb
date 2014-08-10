@@ -17,6 +17,7 @@ Public Class GitUpdater
     End Sub
 
     Sub LoadGitUpdater(sender As Object, e As EventArgs) Handles MyBase.Load
+        TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
         If Not File.Exists("GitUpdater.bat") Then
             Try
                 My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/GitUpdater.bat", "GitUpdater.bat")
@@ -389,7 +390,6 @@ Public Class GitUpdater
     End Sub
 
     ' actual code that runs the shells
-
     Sub ShellWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles ShellWorker.DoWork
         btnGitPullAll.Enabled = False
         btnGitPushAll.Enabled = False
@@ -402,71 +402,69 @@ Public Class GitUpdater
 
         If chkDontShow.Checked = False Then Me.TopMost = True
         progressBar.Maximum = lstRepos.Items.Count
-        Me.TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
-        Me.TaskbarProgress.ProgressValue = 0
 
         Select Case count
             Case "all"
-                Me.TaskbarProgress.ProgressState = TaskbarItemProgressState.Paused
+                TaskbarProgress.ProgressState = TaskbarItemProgressState.Paused
                 For i = 1 To lstRepos.Items.Count
                     Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                     progressBar.Value = i
-                    Me.TaskbarProgress.ProgressValue = i / lstRepos.Items.Count
+                    TaskbarProgress.ProgressValue = i / lstRepos.Items.Count
                 Next
-                Me.TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
+                TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
             Case "selected"
                 If lstRepos.SelectedIndex = -1 Then
                     MsgBox("No item selected", MsgBoxStyle.Critical)
                 Else
-                    Me.TaskbarProgress.ProgressState = TaskbarItemProgressState.Indeterminate
+                    TaskbarProgress.ProgressState = TaskbarItemProgressState.Indeterminate
                     progressBar.Maximum = 2
                     progressBar.Value = 1
-                    Me.TaskbarProgress.ProgressValue = 0.5
+                    TaskbarProgress.ProgressValue = 0.5
                     Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                     progressBar.Value = progressBar.Maximum
-                    Me.TaskbarProgress.ProgressValue = 1
-                    Me.TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
+                    TaskbarProgress.ProgressValue = 1
+                    TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
                 End If
             Case "notselected"
                 If lstRepos.SelectedIndex = -1 Then
                     MsgBox("No item selected", MsgBoxStyle.Critical)
                 Else
-                    Me.TaskbarProgress.ProgressState = TaskbarItemProgressState.Paused
+                    TaskbarProgress.ProgressState = TaskbarItemProgressState.Paused
                     For i = 1 To lstRepos.Items.Count
                         If i - 1 <> lstRepos.SelectedIndex Then
                             Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                         End If
                         progressBar.Value = i
-                        Me.TaskbarProgress.ProgressValue = i / lstRepos.Items.Count
+                        TaskbarProgress.ProgressValue = i / lstRepos.Items.Count
                     Next
-                    Me.TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
+                    TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
                 End If
             Case "cmdselected"
                 If cmdRepo = "" Then
                     MsgBox("No repo passed from command line", MsgBoxStyle.Critical)
                 Else
-                    Me.TaskbarProgress.ProgressState = TaskbarItemProgressState.Indeterminate
+                    TaskbarProgress.ProgressState = TaskbarItemProgressState.Indeterminate
                     progressBar.Maximum = 2
                     progressBar.Value = 1
-                    Me.TaskbarProgress.ProgressValue = 0.5
+                    TaskbarProgress.ProgressValue = 0.5
                     Shell("GitUpdater.bat " & Dir & "\" & cmdRepo & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                     progressBar.Value = progressBar.Maximum
-                    Me.TaskbarProgress.ProgressValue = 1
-                    Me.TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
+                    TaskbarProgress.ProgressValue = 1
+                    TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
                 End If
             Case "cmdnotselected"
                 If cmdRepo = "" Then
                     MsgBox("No repo passed from command line", MsgBoxStyle.Critical)
                 Else
-                    Me.TaskbarProgress.ProgressState = TaskbarItemProgressState.Paused
+                    TaskbarProgress.ProgressState = TaskbarItemProgressState.Paused
                     For i = 1 To lstRepos.Items.Count
                         If lstRepos.Items.Item(i - 1) <> cmdRepo Then
                             Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                             progressBar.Value = i
-                            Me.TaskbarProgress.ProgressValue = i / lstRepos.Items.Count
+                            TaskbarProgress.ProgressValue = i / lstRepos.Items.Count
                         End If
                     Next
-                    Me.TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
+                    TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
                 End If
         End Select
 
