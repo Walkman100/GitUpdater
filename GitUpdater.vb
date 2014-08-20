@@ -10,14 +10,13 @@ Public Class GitUpdater
     Dim CmdStyle As AppWinStyle  ' window location of CMD
     Dim Wait As Integer  ' Wait until cmd closes
 
-    Dim TaskbarProgress As New TaskbarItemInfo
+    Friend Shared TaskbarProgress As New TaskbarItemInfo
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         Application.Exit()
     End Sub
 
     Sub LoadGitUpdater(sender As Object, e As EventArgs) Handles MyBase.Load
-        TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
         If Not File.Exists("GitUpdater.bat") Then
             Try
                 My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/GitUpdater.bat", "GitUpdater.bat")
@@ -391,104 +390,110 @@ Public Class GitUpdater
 
     ' actual code that runs the shells
     Sub ShellWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles ShellWorker.DoWork
-        btnGitPullAll.Enabled = False
-        btnGitPushAll.Enabled = False
-        btnGitPullSelected.Enabled = False
-        btnGitPushSelected.Enabled = False
-        btnGitPullNotSelected.Enabled = False
-        btnGitPushNotSelected.Enabled = False
-        btnCD.Enabled = False
-        btnCancel.Enabled = True
+        Try
+            btnGitPullAll.Enabled = False
+            btnGitPushAll.Enabled = False
+            btnGitPullSelected.Enabled = False
+            btnGitPushSelected.Enabled = False
+            btnGitPullNotSelected.Enabled = False
+            btnGitPushNotSelected.Enabled = False
+            btnCD.Enabled = False
+            btnCancel.Enabled = True
 
-        If chkDontShow.Checked = False Then Me.TopMost = True
-        progressBar.Maximum = lstRepos.Items.Count
+            If chkDontShow.Checked = False Then Me.TopMost = True
+            progressBar.Maximum = lstRepos.Items.Count
 
-        Select Case count
-            Case "all"
-                TaskbarProgress.ProgressState = TaskbarItemProgressState.Paused
-                For i = 1 To lstRepos.Items.Count
-                    Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
-                    progressBar.Value = i
-                    TaskbarProgress.ProgressValue = i / lstRepos.Items.Count
-                Next
-                TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
-            Case "selected"
-                If lstRepos.SelectedIndex = -1 Then
-                    MsgBox("No item selected", MsgBoxStyle.Critical)
-                Else
-                    TaskbarProgress.ProgressState = TaskbarItemProgressState.Indeterminate
-                    progressBar.Maximum = 2
-                    progressBar.Value = 1
-                    TaskbarProgress.ProgressValue = 0.5
-                    Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
-                    progressBar.Value = progressBar.Maximum
-                    TaskbarProgress.ProgressValue = 1
-                    TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
-                End If
-            Case "notselected"
-                If lstRepos.SelectedIndex = -1 Then
-                    MsgBox("No item selected", MsgBoxStyle.Critical)
-                Else
-                    TaskbarProgress.ProgressState = TaskbarItemProgressState.Paused
+            Select Case count
+                Case "all"
                     For i = 1 To lstRepos.Items.Count
-                        If i - 1 <> lstRepos.SelectedIndex Then
-                            Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
-                        End If
+                        Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                         progressBar.Value = i
-                        TaskbarProgress.ProgressValue = i / lstRepos.Items.Count
+                        TaskbarInfoUpdate(TaskbarItemProgressState.Paused, i / lstRepos.Items.Count)
                     Next
-                    TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
-                End If
-            Case "cmdselected"
-                If cmdRepo = "" Then
-                    MsgBox("No repo passed from command line", MsgBoxStyle.Critical)
-                Else
-                    TaskbarProgress.ProgressState = TaskbarItemProgressState.Indeterminate
-                    progressBar.Maximum = 2
-                    progressBar.Value = 1
-                    TaskbarProgress.ProgressValue = 0.5
-                    Shell("GitUpdater.bat " & Dir & "\" & cmdRepo & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
-                    progressBar.Value = progressBar.Maximum
-                    TaskbarProgress.ProgressValue = 1
-                    TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
-                End If
-            Case "cmdnotselected"
-                If cmdRepo = "" Then
-                    MsgBox("No repo passed from command line", MsgBoxStyle.Critical)
-                Else
-                    TaskbarProgress.ProgressState = TaskbarItemProgressState.Paused
-                    For i = 1 To lstRepos.Items.Count
-                        If lstRepos.Items.Item(i - 1) <> cmdRepo Then
-                            Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
+                    TaskbarInfoUpdate(TaskbarItemProgressState.Normal)
+                Case "selected"
+                    If lstRepos.SelectedIndex = -1 Then
+                        MsgBox("No item selected", MsgBoxStyle.Critical)
+                    Else
+                        progressBar.Maximum = 2
+                        progressBar.Value = 1
+                        TaskbarInfoUpdate(TaskbarItemProgressState.Indeterminate, 0.5)
+                        Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
+                        progressBar.Value = progressBar.Maximum
+                        TaskbarInfoUpdate(TaskbarItemProgressState.Normal, 1)
+                    End If
+                Case "notselected"
+                    If lstRepos.SelectedIndex = -1 Then
+                        MsgBox("No item selected", MsgBoxStyle.Critical)
+                    Else
+                        For i = 1 To lstRepos.Items.Count
+                            If i - 1 <> lstRepos.SelectedIndex Then
+                                Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
+                            End If
                             progressBar.Value = i
-                            TaskbarProgress.ProgressValue = i / lstRepos.Items.Count
-                        End If
-                    Next
-                    TaskbarProgress.ProgressState = TaskbarItemProgressState.Normal
-                End If
-        End Select
+                            TaskbarInfoUpdate(TaskbarItemProgressState.Normal, i / lstRepos.Items.Count)
+                        Next
+                        TaskbarInfoUpdate(TaskbarItemProgressState.Normal)
+                    End If
+                Case "cmdselected"
+                    If cmdRepo = "" Then
+                        MsgBox("No repo passed from command line", MsgBoxStyle.Critical)
+                    Else
+                        TaskbarInfoUpdate(TaskbarItemProgressState.Indeterminate)
+                        progressBar.Maximum = 2
+                        progressBar.Value = 1
+                        TaskbarProgress.ProgressValue = 0.5
+                        Shell("GitUpdater.bat " & Dir & "\" & cmdRepo & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
+                        progressBar.Value = progressBar.Maximum
+                        TaskbarInfoUpdate(TaskbarItemProgressState.Normal, 1)
+                    End If
+                Case "cmdnotselected"
+                    If cmdRepo = "" Then
+                        MsgBox("No repo passed from command line", MsgBoxStyle.Critical)
+                    Else
+                        For i = 1 To lstRepos.Items.Count
+                            If lstRepos.Items.Item(i - 1) <> cmdRepo Then
+                                Shell("GitUpdater.bat " & Dir & "\" & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
+                                progressBar.Value = i
+                                TaskbarInfoUpdate(TaskbarItemProgressState.Paused, i / lstRepos.Items.Count)
+                            End If
+                        Next
+                        TaskbarInfoUpdate(TaskbarItemProgressState.Normal)
+                    End If
+            End Select
 
-        If chkOpenLog.Checked = True Then
-            Try
-                Process.Start(txtLogPath.Text)
-            Catch ex As Exception
-                MsgBox("Failed to open log!", MsgBoxStyle.Critical)
-            End Try
-        End If
+            If chkOpenLog.Checked = True Then
+                Try
+                    Process.Start(txtLogPath.Text)
+                Catch ex As Exception
+                    MsgBox("Failed to open log!", MsgBoxStyle.Critical)
+                End Try
+            End If
 
-        If ExitWhenDone = True Then
-            Application.Exit()
-        End If
-        Me.TopMost = False
+            If ExitWhenDone = True Then
+                Application.Exit()
+            End If
+            Me.TopMost = False
 
-        btnGitPullAll.Enabled = True
-        btnGitPushAll.Enabled = True
-        btnGitPullSelected.Enabled = True
-        btnGitPushSelected.Enabled = True
-        btnGitPullNotSelected.Enabled = True
-        btnGitPushNotSelected.Enabled = True
-        btnCD.Enabled = True
-        btnCancel.Enabled = False
+            btnGitPullAll.Enabled = True
+            btnGitPushAll.Enabled = True
+            btnGitPullSelected.Enabled = True
+            btnGitPushSelected.Enabled = True
+            btnGitPullNotSelected.Enabled = True
+            btnGitPushNotSelected.Enabled = True
+            btnCD.Enabled = True
+            btnCancel.Enabled = False
+        Catch ex As Exception
+            MsgBox("There was an error executing the Git operation! The error was:" & vbNewLine & ex.ToString, MsgBoxStyle.Critical)
+            btnGitPullAll.Enabled = True
+            btnGitPushAll.Enabled = True
+            btnGitPullSelected.Enabled = True
+            btnGitPushSelected.Enabled = True
+            btnGitPullNotSelected.Enabled = True
+            btnGitPushNotSelected.Enabled = True
+            btnCD.Enabled = True
+            btnCancel.Enabled = False
+        End Try
     End Sub
 
     ' starting and stopping the thread
@@ -623,11 +628,11 @@ Public Class GitUpdater
         End If
     End Sub
 
-    Sub btnShowPass_MouseDown(sender As Object, e As EventArgs)
+    Sub btnShowPass_MouseDown(sender As Object, e As EventArgs) Handles btnShowPass.MouseDown
         txtPassword.PasswordChar = ""
     End Sub
 
-    Sub btnShowPass_MouseUp(sender As Object, e As EventArgs)
+    Sub btnShowPass_MouseUp(sender As Object, e As EventArgs) Handles btnShowPass.MouseUp
         txtPassword.PasswordChar = "●"
     End Sub
 
@@ -675,5 +680,16 @@ Public Class GitUpdater
             ContextMenuStripReposRemoveEntry.Visible = False
             ContextMenuStripReposCDHere.Visible = False
         End If
+    End Sub
+
+    Friend Shared Sub TaskbarInfoUpdate(ProgressState As TaskbarItemProgressState, Optional ProgressValue As Double = Nothing)
+        Try
+            GitUpdater.TaskbarProgress.ProgressState = ProgressState
+            If ProgressValue <> Nothing Then
+                GitUpdater.TaskbarProgress.ProgressValue = ProgressValue
+            End If
+        Catch ex As Exception
+            MsgBox("There was an error updating the TaskBarInfo! The error was:" & vbNewLine & ex.ToString, MsgBoxStyle.Critical)
+        End Try
     End Sub
 End Class

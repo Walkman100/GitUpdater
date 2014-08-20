@@ -470,6 +470,7 @@ Partial Class GitUpdater
         '
         Me.btnShowPass.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnShowPass.BackColor = System.Drawing.Color.White
+        Me.btnShowPass.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnShowPass.FlatAppearance.BorderColor = System.Drawing.Color.White
         Me.btnShowPass.FlatAppearance.BorderSize = 0
         Me.btnShowPass.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlLight
