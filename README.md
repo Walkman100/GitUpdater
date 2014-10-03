@@ -1,4 +1,5 @@
 # GitUpdater [![Build status](https://ci.appveyor.com/api/projects/status/72cvetqe8awtp2fn)](https://ci.appveyor.com/project/Walkman100/gitupdater)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Walkman100/GitUpdater?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A simple application written in VB.Net to update all your repos with one click, or one repeatedly until it works.
 
