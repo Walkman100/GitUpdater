@@ -44,6 +44,7 @@ Public Class GitUpdater
         txtLogPath.Text = My.Settings.LogPath
         If txtLogPath.Text = "" Then txtLogPath.Text = Dir & "\GitUpdater.log"
         chkOpenLog.Checked = My.Settings.OpenLog
+        chkShowErrors.Checked = My.Settings.ShowErrors
 
         ' apply settings to where they affect
         If My.Settings.SavedDir <> "" Then
@@ -290,14 +291,14 @@ Public Class GitUpdater
                 Clipboard.SetText(lstRepos.Items.Item(lstRepos.SelectedIndex), TextDataFormat.UnicodeText)
                 MsgBox(lstRepos.Items.Item(lstRepos.SelectedIndex) & vbNewLine & "Succesfully copied!", MsgBoxStyle.Information, "Succesfully copied!")
             Catch ex As Exception
-                MsgBox("Copy failed!" & vbNewLine & "Error: " & ex.ToString, MsgBoxStyle.Critical, "Copy failed!")
+                MsgBox("Copy failed!" & vbNewLine & "Error: """ & ex.ToString, MsgBoxStyle.Critical & """", "Copy failed!")
             End Try
         Else
             Try
                 Clipboard.SetText(Dir, TextDataFormat.UnicodeText)
                 MsgBox(Dir & vbNewLine & "Succesfully copied!", MsgBoxStyle.Information, "Succesfully copied!")
             Catch ex As Exception
-                MsgBox("Copy failed!" & vbNewLine & "Error: " & ex.ToString, MsgBoxStyle.Critical, "Copy failed!")
+                MsgBox("Copy failed!" & vbNewLine & "Error: """ & ex.ToString, MsgBoxStyle.Critical & """", "Copy failed!")
             End Try
         End If
     End Sub
@@ -308,14 +309,14 @@ Public Class GitUpdater
                 Clipboard.SetText(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex), TextDataFormat.UnicodeText)
                 MsgBox(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & vbNewLine & "Succesfully copied!", MsgBoxStyle.Information, "Succesfully copied!")
             Catch ex As Exception
-                MsgBox("Copy failed!" & vbNewLine & "Error: " & ex.ToString, MsgBoxStyle.Critical, "Copy failed!")
+                MsgBox("Copy failed!" & vbNewLine & "Error: """ & ex.ToString, MsgBoxStyle.Critical & """", "Copy failed!")
             End Try
         Else
             Try
                 Clipboard.SetText(Dir, TextDataFormat.UnicodeText)
                 MsgBox(Dir & vbNewLine & "Succesfully copied!", MsgBoxStyle.Information, "Succesfully copied!")
             Catch ex As Exception
-                MsgBox("Copy failed!" & vbNewLine & "Error: " & ex.ToString, MsgBoxStyle.Critical, "Copy failed!")
+                MsgBox("Copy failed!" & vbNewLine & "Error: """ & ex.ToString, MsgBoxStyle.Critical & """", "Copy failed!")
             End Try
         End If
     End Sub
@@ -377,6 +378,11 @@ Public Class GitUpdater
 
     Private Sub chkOpenLog_CheckedChanged(sender As Object, e As EventArgs) Handles chkOpenLog.CheckedChanged
         My.Settings.OpenLog = chkOpenLog.Checked
+        My.Settings.Save()
+    End Sub
+
+    Private Sub chkShowErrors_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowErrors.CheckedChanged
+        My.Settings.ShowErrors = chkShowErrors.Checked
         My.Settings.Save()
     End Sub
 
@@ -689,7 +695,9 @@ Public Class GitUpdater
                 GitUpdater.TaskbarProgress.ProgressValue = ProgressValue
             End If
         Catch ex As Exception
-            MsgBox("There was an error updating the TaskBarInfo! The error was:" & vbNewLine & ex.ToString, MsgBoxStyle.Critical)
+            If GitUpdater.chkShowErrors.Checked = True Then
+                MsgBox("There was an error updating the TaskBarInfo! The error was:" & vbNewLine & ex.ToString, MsgBoxStyle.Critical)
+            End If
         End Try
     End Sub
 End Class

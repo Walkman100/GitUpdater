@@ -78,6 +78,7 @@ Partial Class GitUpdater
         Me.timerKeyChecker = New System.Windows.Forms.Timer(Me.components)
         Me.btnCloseCmd = New System.Windows.Forms.Button()
         Me.SaveLogFileDialog = New System.Windows.Forms.SaveFileDialog()
+        Me.chkShowErrors = New System.Windows.Forms.CheckBox()
         Me.ContextMenuStripRepos.SuspendLayout()
         Me.grpGUI.SuspendLayout()
         Me.grpData.SuspendLayout()
@@ -128,7 +129,7 @@ Partial Class GitUpdater
         Me.lstRepos.Location = New System.Drawing.Point(12, 12)
         Me.lstRepos.Name = "lstRepos"
         Me.lstRepos.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lstRepos.Size = New System.Drawing.Size(248, 519)
+        Me.lstRepos.Size = New System.Drawing.Size(248, 518)
         Me.lstRepos.Sorted = True
         Me.lstRepos.TabIndex = 13
         '
@@ -575,13 +576,27 @@ Partial Class GitUpdater
         Me.SaveLogFileDialog.OverwritePrompt = False
         Me.SaveLogFileDialog.Title = "Choose where to save the log to:"
         '
+        'chkShowErrors
+        '
+        Me.chkShowErrors.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkShowErrors.AutoSize = True
+        Me.chkShowErrors.Checked = True
+        Me.chkShowErrors.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkShowErrors.Location = New System.Drawing.Point(267, 537)
+        Me.chkShowErrors.Name = "chkShowErrors"
+        Me.chkShowErrors.Size = New System.Drawing.Size(209, 17)
+        Me.chkShowErrors.TabIndex = 33
+        Me.chkShowErrors.Text = "Show TaskBarItemState change errors"
+        Me.chkShowErrors.UseVisualStyleBackColor = True
+        '
         'GitUpdater
         '
         Me.AcceptButton = Me.btnGitPushSelected
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnExit
-        Me.ClientSize = New System.Drawing.Size(524, 543)
+        Me.ClientSize = New System.Drawing.Size(524, 538)
+        Me.Controls.Add(Me.chkShowErrors)
         Me.Controls.Add(Me.btnCloseCmd)
         Me.Controls.Add(Me.grpCredMan)
         Me.Controls.Add(Me.btnCancel)
@@ -670,4 +685,5 @@ Partial Class GitUpdater
     Friend WithEvents ContextMenuStripReposSeparator4 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ContextMenuStripReposGitPullThis As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ContextMenuStripReposGitPushThis As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents chkShowErrors As System.Windows.Forms.CheckBox
 End Class
