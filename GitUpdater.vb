@@ -210,25 +210,33 @@ Public Class GitUpdater
                 If File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\home.md") Then
                  Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\home.md")
                 Else
-                    MsgBox("No file found in wiki folder:" & vbNewLine & _
+                    MsgBox("No file found in Wiki folder:" & vbNewLine & _
                         """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
                         "With filename: home.md", MsgBoxStyle.Critical)
                 End If
+            ElseIf lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".github.io") Or lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".github.com") Then
+                If File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\index.html") Then
+                    Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\index.html")
+                Else
+                    MsgBox("No file found in Site folder:" & vbNewLine & _
+                        """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
+                        "With filename: index.html", MsgBoxStyle.Critical)
+                End If
             Else
                 If File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.md") Then
-                 Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.md")
+                    Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.md")
                 ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.txt") Then
-                     Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.txt")
+                    Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.txt")
                 ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.htm") Then
-                     Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.htm")
+                    Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.htm")
                 ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.html") Then
-                     Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.html")
+                    Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.html")
                 ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.markdown") Then
-                     Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.markdown")
+                    Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.markdown")
                 ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.mkd") Then
-                     Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.mkd")
+                    Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.mkd")
                 ElseIf File.Exists(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme") Then
-                     Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme")
+                    Process.Start(Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme")
                 Else
                     MsgBox("No file found in repo:" & vbNewLine & _
                         """" & Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
@@ -237,19 +245,19 @@ Public Class GitUpdater
             End If
         Else
             If File.Exists(Dir & "\readme.md") Then
-             Process.Start(Dir & "\readme.md")
+                Process.Start(Dir & "\readme.md")
             ElseIf File.Exists(Dir & "\readme.txt") Then
-                 Process.Start(Dir & "\readme.txt")
+                Process.Start(Dir & "\readme.txt")
             ElseIf File.Exists(Dir & "\readme.htm") Then
-                 Process.Start(Dir & "\readme.htm")
+                Process.Start(Dir & "\readme.htm")
             ElseIf File.Exists(Dir & "\readme.html") Then
-                 Process.Start(Dir & "\readme.html")
+                Process.Start(Dir & "\readme.html")
             ElseIf File.Exists(Dir & "\readme.markdown") Then
-                 Process.Start(Dir & "\readme.markdown")
+                Process.Start(Dir & "\readme.markdown")
             ElseIf File.Exists(Dir & "\readme.mkd") Then
-                 Process.Start(Dir & "\readme.mkd")
+                Process.Start(Dir & "\readme.mkd")
             ElseIf File.Exists(Dir & "\readme") Then
-                 Process.Start(Dir & "\readme")
+                Process.Start(Dir & "\readme")
             Else
                 MsgBox("No file found in folder:" & vbNewLine & _
                     """" & Dir & """" & vbNewLine & _
@@ -328,8 +336,14 @@ Public Class GitUpdater
     End Sub
 
     Private Sub ContextMenuStripReposCDHere_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposCDHere.Click
-        Dir = Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex)
-        RebuildRepoList()
+        If lstRepos.SelectedIndex <> -1 Then
+            Dir = Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex)
+            RebuildRepoList()
+        Else
+            ' WIP. currently this goes to the root of the drive.
+            Dir = Dir.Remove(Dir.IndexOf("\"))
+            RebuildRepoList()
+        End If
     End Sub
 
     ' how to run the shells & changing settings
@@ -655,6 +669,8 @@ Public Class GitUpdater
         Me.WindowState = FormWindowState.Normal
         Me.BringToFront()
     End Sub
+
+    ' updating the interface
 
     Sub LstRepos_MouseDown(sender As Object, e As MouseEventArgs) Handles lstRepos.MouseDown
         If lstRepos.SelectedIndex <> -1 Then
