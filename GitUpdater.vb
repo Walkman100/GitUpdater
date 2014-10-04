@@ -340,8 +340,7 @@ Public Class GitUpdater
             Dir = Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex)
             RebuildRepoList()
         Else
-            ' WIP. currently this goes to the root of the drive.
-            Dir = Dir.Remove(Dir.IndexOf("\"))
+            Dir = Dir.Remove(Dir.LastIndexOf("\"))
             RebuildRepoList()
         End If
     End Sub
