@@ -338,9 +338,11 @@ Public Class GitUpdater
     Private Sub ContextMenuStripReposCDHere_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposCDHere.Click
         If lstRepos.SelectedIndex <> -1 Then
             Dir = Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex)
+            My.Settings.SavedDir = Dir
             RebuildRepoList()
         Else
             Dir = Dir.Remove(Dir.LastIndexOf("\"))
+            My.Settings.SavedDir = Dir
             RebuildRepoList()
         End If
     End Sub
