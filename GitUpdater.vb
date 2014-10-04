@@ -658,33 +658,90 @@ Public Class GitUpdater
 
     Sub LstRepos_MouseDown(sender As Object, e As MouseEventArgs) Handles lstRepos.MouseDown
         If lstRepos.SelectedIndex <> -1 Then
-            ContextMenuStripReposOpenInExplorer.Text = "Open Repo in Windows Explorer"
-            ContextMenuStripReposOpenInCMD.Text = "Open Repo in CMD"
-            ContextMenuStripReposOpenInPS.Text = "Open Repo in Windows PowerShell"
-            ContextMenuStripReposOpenInGitHub.Text = "Open Repo in GitHub for Windows"
             If lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".wiki") Then
-                ContextMenuStripReposOpenReadme.Text = "Open wiki Home.md"
+                ContextMenuStripReposOpenInExplorer.Text = "Open Wiki in Windows Explorer"
+                ContextMenuStripReposOpenInCMD.Text = "Open Wiki in CMD"
+                ContextMenuStripReposOpenInPS.Text = "Open Wiki in Windows PowerShell"
+                ContextMenuStripReposOpenInGitHub.Text = "Open Wiki in GitHub for Windows"
+                ContextMenuStripReposSeparator1.Visible = True
+                ContextMenuStripReposOpenReadme.Visible = True
+                ContextMenuStripReposOpenReadme.Text = "Open Wiki home.md"
+                ContextMenuStripReposOpenSLN.Visible = False
+                ContextMenuStripReposSeparator2.Visible = True
+                ContextMenuStripReposCopyRepoName.Visible = True
+                ContextMenuStripReposCopyRepoName.Text = "Copy Wiki Name"
+                ContextMenuStripReposCopyRepoPath.Visible = True
+                ContextMenuStripReposCopyRepoPath.Text = "Copy Wiki Path"
+                ContextMenuStripReposSeparator3.Visible = True
+                ContextMenuStripReposRemoveEntry.Visible = True
+                ContextMenuStripReposCDHere.Visible = True
+                ContextMenuStripReposCDHere.Text = "CD Here..."
+                ContextMenuStripReposSeparator4.Visible = True
+                ContextMenuStripReposGitPullThis.Visible = True
+                ContextMenuStripReposGitPushThis.Visible = True
+            ElseIf lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".github.io") Or lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".github.com") Then
+                ContextMenuStripReposOpenInExplorer.Text = "Open Site Folder in Windows Explorer"
+                ContextMenuStripReposOpenInCMD.Text = "Open Site Folder in CMD"
+                ContextMenuStripReposOpenInPS.Text = "Open Site Folder in Windows PowerShell"
+                ContextMenuStripReposOpenInGitHub.Text = "Open Site in GitHub for Windows"
+                ContextMenuStripReposSeparator1.Visible = True
+                ContextMenuStripReposOpenReadme.Visible = True
+                ContextMenuStripReposOpenReadme.Text = "Open Site index.html"
+                ContextMenuStripReposOpenSLN.Visible = False
+                ContextMenuStripReposSeparator2.Visible = True
+                ContextMenuStripReposCopyRepoName.Visible = True
+                ContextMenuStripReposCopyRepoName.Text = "Copy Site Name"
+                ContextMenuStripReposCopyRepoPath.Visible = True
+                ContextMenuStripReposCopyRepoPath.Text = "Copy Site Path"
+                ContextMenuStripReposSeparator3.Visible = True
+                ContextMenuStripReposRemoveEntry.Visible = True
+                ContextMenuStripReposCDHere.Visible = True
+                ContextMenuStripReposCDHere.Text = "CD Here..."
+                ContextMenuStripReposSeparator4.Visible = True
+                ContextMenuStripReposGitPullThis.Visible = True
+                ContextMenuStripReposGitPushThis.Visible = True
             Else
+                ContextMenuStripReposOpenInExplorer.Text = "Open Repo in Windows Explorer"
+                ContextMenuStripReposOpenInCMD.Text = "Open Repo in CMD"
+                ContextMenuStripReposOpenInPS.Text = "Open Repo in Windows PowerShell"
+                ContextMenuStripReposOpenInGitHub.Text = "Open Repo in GitHub for Windows"
+                ContextMenuStripReposSeparator1.Visible = True
+                ContextMenuStripReposOpenReadme.Visible = True
                 ContextMenuStripReposOpenReadme.Text = "Open Repo Readme"
+                ContextMenuStripReposOpenSLN.Visible = True
+                ContextMenuStripReposOpenSLN.Text = "Open Repo SLN"
+                ContextMenuStripReposSeparator2.Visible = True
+                ContextMenuStripReposCopyRepoName.Visible = True
+                ContextMenuStripReposCopyRepoName.Text = "Copy Repo Path"
+                ContextMenuStripReposCopyRepoPath.Visible = True
+                ContextMenuStripReposCopyRepoPath.Text = "Copy Repo Path"
+                ContextMenuStripReposSeparator3.Visible = True
+                ContextMenuStripReposRemoveEntry.Visible = True
+                ContextMenuStripReposCDHere.Visible = True
+                ContextMenuStripReposCDHere.Text = "CD Here..."
+                ContextMenuStripReposSeparator4.Visible = True
+                ContextMenuStripReposGitPullThis.Visible = True
+                ContextMenuStripReposGitPushThis.Visible = True
             End If
-            ContextMenuStripReposOpenSLN.Text = "Open Repo SLN"
-            ContextMenuStripReposCopyRepoName.Visible = True
-            ContextMenuStripReposCopyRepoPath.Text = "Copy Repo Path"
-            ContextMenuStripReposSeparator3.Visible = True
-            ContextMenuStripReposRemoveEntry.Visible = True
-            ContextMenuStripReposCDHere.Visible = True
         Else
             ContextMenuStripReposOpenInExplorer.Text = "Open Folder in Windows Explorer"
             ContextMenuStripReposOpenInCMD.Text = "Open Folder in CMD"
             ContextMenuStripReposOpenInPS.Text = "Open Folder in Windows PowerShell"
             ContextMenuStripReposOpenInGitHub.Text = "Open Folder in GitHub for Windows"
-            ContextMenuStripReposOpenReadme.Text = "Open Folder Readme"
-            ContextMenuStripReposOpenSLN.Text = "Open Folder SLN"
+            ContextMenuStripReposSeparator1.Visible = True
+            ContextMenuStripReposOpenReadme.Visible = False
+            ContextMenuStripReposOpenSLN.Visible = False
+            ContextMenuStripReposSeparator2.Visible = False
             ContextMenuStripReposCopyRepoName.Visible = False
+            ContextMenuStripReposCopyRepoPath.Visible = True
             ContextMenuStripReposCopyRepoPath.Text = "Copy Folder Path"
             ContextMenuStripReposSeparator3.Visible = False
             ContextMenuStripReposRemoveEntry.Visible = False
-            ContextMenuStripReposCDHere.Visible = False
+            ContextMenuStripReposCDHere.Visible = True
+            ContextMenuStripReposCDHere.Text = "Up a level ↩"
+            ContextMenuStripReposSeparator4.Visible = True
+            ContextMenuStripReposGitPullThis.Visible = True
+            ContextMenuStripReposGitPushThis.Visible = True
         End If
     End Sub
 
