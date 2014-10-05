@@ -110,7 +110,7 @@ Public Class GitUpdater
         If ShellWorker.IsBusy = False Then
             RebuildRepoList()
         ElseIf MsgBox("A script is currently in progress! Refreshing repos might mess up the script. You can use the cancel button above to cancel operation." _
-                      & vbNewLine & vbNewLine & "Refresh anyway?", MsgBoxStyle.Critical & MsgBoxStyle.OkCancel, "Operation in progress") = vbOK Then
+                      & vbNewLine & vbNewLine & "Refresh anyway?", MsgBoxStyle.Critical + MsgBoxStyle.OkCancel, "Operation in progress") = vbOK Then
             RebuildRepoList()
         End If
     End Sub
@@ -154,7 +154,7 @@ Public Class GitUpdater
                 Process.Start("OpenRepoInPS.bat", """" & Dir & """ " & Environment.CurrentDirectory)
             End If
         Else
-            If MsgBox("Couldn't find PowerShell script. This program can attempt to download it and put it in the right place, Continue?", MsgBoxStyle.Critical & MsgBoxStyle.YesNo, "OpenRepoInPS.bat not found!") = vbNo Then Exit Sub
+            If MsgBox("Couldn't find PowerShell script. This program can attempt to download it and put it in the right place, Continue?", MsgBoxStyle.Critical + MsgBoxStyle.YesNo, "OpenRepoInPS.bat not found!") = vbNo Then Exit Sub
             Try
                 My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/OpenRepoInPS.bat", "OpenRepoInPS.bat")
                 ContextMenuStripReposOpenInPS_Click(Nothing, Nothing) ' Essentially restart the sub (but not quite)
@@ -341,11 +341,17 @@ Public Class GitUpdater
             My.Settings.SavedDir = Dir
             RebuildRepoList()
         Else
-            Dir = Dir.Remove(Dir.Length - 1)
-            Dir = Dir.Remove(Dir.LastIndexOf("\"))
-            Dir = Dir & "\"
-            My.Settings.SavedDir = Dir
-            RebuildRepoList()
+            Try
+                Dir = Dir.Remove(Dir.Length - 1)
+                Dir = Dir.Remove(Dir.LastIndexOf("\"))
+                Dir = Dir & "\"
+                My.Settings.SavedDir = Dir
+                RebuildRepoList()
+            Catch ex As System.ArgumentOutOfRangeException
+                If MsgBox("Cannot go higher than the root of a drive! Please use the CD button to change drives." & vbNewLine & vbNewLine & "Open CD dialog now?", MsgBoxStyle.YesNo + MsgBoxStyle.Critical, "Trying to go up from a drive root") = vbYes Then
+                    BtnCD_Click(Nothing, Nothing)
+                End If
+            End Try
         End If
     End Sub
 
@@ -523,7 +529,7 @@ Public Class GitUpdater
 
     Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         If ShellWorker.IsBusy = True Then
-            If MsgBox("Are you sure you want to cancel operation? This requires restarting GitUpdater." & vbNewLine & vbNewLine & "This will not close the currently active CMD window. To do so, please click on the window and press 'Ctrl' + 'C', then 'Y', then 'Enter'.", MsgBoxStyle.Question & MsgBoxStyle.YesNo, "Confirmation") = vbNo Then Exit Sub
+            If MsgBox("Are you sure you want to cancel operation? This requires restarting GitUpdater." & vbNewLine & vbNewLine & "This will not close the currently active CMD window. To do so, please click on the window and press 'Ctrl' + 'C', then 'Y', then 'Enter'.", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirmation") = vbNo Then Exit Sub
             Application.Restart()
         Else
             MsgBox("No git operation is currently in progress!", MsgBoxStyle.Information)
@@ -661,7 +667,7 @@ Public Class GitUpdater
 
     Sub BtnCloseCmd_Click(sender As Object, e As EventArgs) Handles btnCloseCmd.Click
         If ShellWorker.IsBusy = False Then
-            If MsgBox("No git operation from this program is in progress, are you sure you want to insert commands to close a CMD window?", MsgBoxStyle.Question & MsgBoxStyle.YesNo, "Confirmation") = vbNo Then Exit Sub
+            If MsgBox("No git operation from this program is in progress, are you sure you want to insert commands to close a CMD window?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirmation") = vbNo Then Exit Sub
         End If
         Me.WindowState = FormWindowState.Minimized
         System.Threading.Thread.Sleep(500)
