@@ -159,9 +159,6 @@
     <None Include="PS\GitUtils.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="PS\install.ps1">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="PS\posh-git.psm1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

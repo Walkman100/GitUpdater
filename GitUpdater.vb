@@ -2,7 +2,7 @@
 
 Public Class GitUpdater
 
-    Dim Dir As String = Environment.GetEnvironmentVariable("USERPROFILE") & "\Documents\GitHub"
+    Dim Dir As String = Environment.GetEnvironmentVariable("USERPROFILE") & "\Documents\GitHub\"
     Dim cmdRepo As String = ""
     Dim count, GitCommand As String  ' because the Worker doesn't support direct sub calling
     Dim ExitWhenDone As Boolean = False
@@ -101,7 +101,7 @@ Public Class GitUpdater
         btnRefresh.Enabled = False
         lstRepos.Items.Clear()
         For Each Repo As String In Directory.GetDirectories(Dir)
-            lstRepos.Items.Add(Mid(Repo, Len(Dir) + 2))
+            lstRepos.Items.Add(Mid(Repo, Len(Dir) + 1))
         Next
         btnRefresh.Enabled = True
     End Sub
@@ -120,7 +120,7 @@ Public Class GitUpdater
             ' show file chooser dialog, set result as Dir
             folderBrowserDialog.SelectedPath = Dir
             folderBrowserDialog.ShowDialog()
-            Dir = folderBrowserDialog.SelectedPath
+            Dir = folderBrowserDialog.SelectedPath & "\"
             My.Settings.SavedDir = Dir
 
             ' rebuild list automatically
@@ -337,11 +337,13 @@ Public Class GitUpdater
 
     Private Sub ContextMenuStripReposCDHere_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposCDHere.Click
         If lstRepos.SelectedIndex <> -1 Then
-            Dir = Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex)
+            Dir = Dir & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\"
             My.Settings.SavedDir = Dir
             RebuildRepoList()
         Else
+            Dir = Dir.Remove(Dir.Length - 1)
             Dir = Dir.Remove(Dir.LastIndexOf("\"))
+            Dir = Dir & "\"
             My.Settings.SavedDir = Dir
             RebuildRepoList()
         End If
