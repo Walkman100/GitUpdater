@@ -7,8 +7,7 @@ Public Class GitUpdater
     Dim cmdRepo As String = ""
     Dim count, GitCommand As String  ' because the Worker doesn't support direct sub calling
     Dim ExitWhenDone As Boolean = False
-    Dim completeGitCommand As Boolean
-    
+
     Dim CmdStyle As AppWinStyle  ' window location of CMD
     Dim Wait As Integer  ' Wait until cmd closes
 
@@ -437,12 +436,12 @@ Public Class GitUpdater
             Select Case count
                 Case "all"
                     For i = 1 To lstRepos.Items.Count
-                        If chkGitRepoOnly.Checked = False Then : completeGitCommand = True
-                        Else : If File.Exists(Dir & lstRepos.Items.Item(i - 1) & "\.git\config") Then completeGitCommand = True Else completeGitCommand = False
+                        If chkGitRepoOnly.Checked = True Then
+                            If File.Exists(Dir & lstRepos.Items.Item(i - 1) & "\.git\config") = False Then
+                                Continue For
+                            End If
                         End If
-                        If completeGitCommand = True Then
-                            Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
-                        End If
+                        Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                         progressBar.Value = i
                         TaskbarInfoUpdate(TaskbarItemProgressState.Paused, i / lstRepos.Items.Count)
                     Next
@@ -463,16 +462,16 @@ Public Class GitUpdater
                         MsgBox("No item selected", MsgBoxStyle.Critical)
                     Else
                         For i = 1 To lstRepos.Items.Count
-                            If chkGitRepoOnly.Checked = False Then : completeGitCommand = True
-                            Else : If File.Exists(Dir & lstRepos.Items.Item(i - 1) & "\.git\config") Then completeGitCommand = True Else completeGitCommand = False
-                            End If
-                            If completeGitCommand = True Then
-                                If i - 1 <> lstRepos.SelectedIndex Then
-                                    Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
+                            If i - 1 <> lstRepos.SelectedIndex Then
+                                If chkGitRepoOnly.Checked = True Then
+                                    If File.Exists(Dir & lstRepos.Items.Item(i - 1) & "\.git\config") = False Then
+                                        Continue For
+                                    End If
                                 End If
+                                Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
+                                progressBar.Value = i
+                                TaskbarInfoUpdate(TaskbarItemProgressState.Normal, i / lstRepos.Items.Count)
                             End If
-                            progressBar.Value = i
-                            TaskbarInfoUpdate(TaskbarItemProgressState.Normal, i / lstRepos.Items.Count)
                         Next
                         TaskbarInfoUpdate(TaskbarItemProgressState.Normal)
                     End If
@@ -494,12 +493,14 @@ Public Class GitUpdater
                     Else
                         For i = 1 To lstRepos.Items.Count
                             If lstRepos.Items.Item(i - 1) <> cmdRepo Then
-                                If File.Exists(Dir & lstRepos.Items.Item(i - 1) & "\.git\config") Then completeGitCommand = True Else completeGitCommand = False
-                                If completeGitCommand = True Then
-                                    Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
-                                    progressBar.Value = i
-                                    TaskbarInfoUpdate(TaskbarItemProgressState.Paused, i / lstRepos.Items.Count)
+                                If chkGitRepoOnly.Checked = True Then
+                                    If File.Exists(Dir & lstRepos.Items.Item(i - 1) & "\.git\config") = False Then
+                                        Continue For
+                                    End If
                                 End If
+                                Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
+                                progressBar.Value = i
+                                TaskbarInfoUpdate(TaskbarItemProgressState.Paused, i / lstRepos.Items.Count)
                             End If
                         Next
                         TaskbarInfoUpdate(TaskbarItemProgressState.Normal)
