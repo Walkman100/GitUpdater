@@ -79,6 +79,7 @@ Partial Class GitUpdater
         Me.btnCloseCmd = New System.Windows.Forms.Button()
         Me.SaveLogFileDialog = New System.Windows.Forms.SaveFileDialog()
         Me.chkShowErrors = New System.Windows.Forms.CheckBox()
+        Me.chkGitRepoOnly = New System.Windows.Forms.CheckBox()
         Me.ContextMenuStripRepos.SuspendLayout()
         Me.grpGUI.SuspendLayout()
         Me.grpData.SuspendLayout()
@@ -366,6 +367,7 @@ Partial Class GitUpdater
         'grpData
         '
         Me.grpData.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpData.Controls.Add(Me.chkGitRepoOnly)
         Me.grpData.Controls.Add(Me.btnBrowseLog)
         Me.grpData.Controls.Add(Me.txtLogPath)
         Me.grpData.Controls.Add(Me.chkOpenLog)
@@ -589,6 +591,18 @@ Partial Class GitUpdater
         Me.chkShowErrors.Text = "Show TaskBarItemState change errors"
         Me.chkShowErrors.UseVisualStyleBackColor = True
         '
+        'chkGitRepoOnly
+        '
+        Me.chkGitRepoOnly.AutoSize = True
+        Me.chkGitRepoOnly.Checked = True
+        Me.chkGitRepoOnly.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkGitRepoOnly.Location = New System.Drawing.Point(130, 19)
+        Me.chkGitRepoOnly.Name = "chkGitRepoOnly"
+        Me.chkGitRepoOnly.Size = New System.Drawing.Size(110, 17)
+        Me.chkGitRepoOnly.TabIndex = 26
+        Me.chkGitRepoOnly.Text = "Check for git repo"
+        Me.chkGitRepoOnly.UseVisualStyleBackColor = True
+        '
         'GitUpdater
         '
         Me.AcceptButton = Me.btnGitPushSelected
@@ -686,4 +700,5 @@ Partial Class GitUpdater
     Friend WithEvents ContextMenuStripReposGitPullThis As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ContextMenuStripReposGitPushThis As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents chkShowErrors As System.Windows.Forms.CheckBox
+    Friend WithEvents chkGitRepoOnly As System.Windows.Forms.CheckBox
 End Class

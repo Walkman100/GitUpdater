@@ -5,6 +5,7 @@
 Caption "GitUpdater Installer"
 Name "GitUpdater"
 AutoCloseWindow true
+ShowInstDetails show
 
 LicenseBkColor /windows
 LicenseData "LICENSE.md"
