@@ -81,3 +81,7 @@ An external program that you can use is Windows itself, using the Windows Task S
 
 ## Donate
 [Show your support!](http://walkman100.github.io/Walkman/HTML/Donate.html)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Walkman100/gitupdater/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
