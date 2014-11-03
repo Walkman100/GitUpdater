@@ -7,6 +7,7 @@ Public Class GitUpdater
     Dim cmdRepo As String = ""
     Dim count, GitCommand As String  ' because the Worker doesn't support direct sub calling
     Dim ExitWhenDone As Boolean = False
+    Dim LineIsOrigin, LineIsUpstream As Boolean
 
     Dim CmdStyle As AppWinStyle  ' window location of CMD
     Dim Wait As Integer  ' Wait until cmd closes
@@ -295,18 +296,42 @@ Public Class GitUpdater
     End Sub
 
     Private Sub ContextMenuStripReposOpenURL_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposOpenURL.Click
-        For Each line In File.ReadLines(Dir & lstRepos.SelectedItem & "\.git\config")
-            '[remote "origin"] 'Repo location
-            '	url = https://github.com/Walkman100/Dashy.git
-            '[remote "upstream"] '[Fork] repo that current one was forked from
-            '	url = https://github.com/deavmi/Dashy.git
-            '[submodule "YTVL"] 'submodule url in git format
-            '	url = git://github.com/Walkman100/YTVL.git/
-            '[submodule "github-watchers-button"] 'submodule url in https format
-            '	url = https://github.com/addyosmani/github-watchers-button.git
+        LineIsOrigin = False
+        LineIsUpstream = False
 
-            If line.StartsWith("	url = ") Then
-                MsgBox(line.Remove(0, line.IndexOf("https://")))
+        '[remote "origin"] 'Repo location
+        '	url = https://github.com/Walkman100/Dashy.git
+        '[remote "upstream"] '[Fork] repo that current one was forked from
+        '	url = https://github.com/deavmi/Dashy.git
+        '[submodule "YTVL"] 'submodule url in git format
+        '	url = git://github.com/Walkman100/YTVL.git/
+        '[submodule "github-watchers-button"] 'submodule url in https format
+        '	url = https://github.com/addyosmani/github-watchers-button.git
+        For Each line In File.ReadLines(Dir & lstRepos.SelectedItem & "\.git\config")
+            If LineIsOrigin Then
+                Try
+                    Process.Start(line.Remove(0, line.IndexOf("https://")))
+                Catch ex As Exception
+                    If MsgBox("Unable to launch URL, copy to clipboard instead?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then Clipboard.SetText(line.Remove(0, line.IndexOf("https://")))
+                End Try
+                LineIsOrigin = False
+            End If
+            If line = "[remote ""origin""]" Then
+                LineIsOrigin = True
+            End If
+
+            If LineIsUpstream Then
+                If MsgBox("Fork detected, open fork origin too?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    Try
+                        Process.Start(line.Remove(0, line.IndexOf("https://")))
+                    Catch ex As Exception
+                        If MsgBox("Unable to launch URL, copy to clipboard instead?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then Clipboard.SetText(line.Remove(0, line.IndexOf("https://")))
+                    End Try
+                End If
+                LineIsUpstream = False
+            End If
+            If line = "[remote ""upstream""]" Then
+                LineIsUpstream = True
             End If
         Next
     End Sub
