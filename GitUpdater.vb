@@ -294,6 +294,23 @@ Public Class GitUpdater
         End If
     End Sub
 
+    Private Sub ContextMenuStripReposOpenURL_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposOpenURL.Click
+        For Each line In File.ReadLines(Dir & lstRepos.SelectedItem & "\.git\config")
+            '[remote "origin"] 'Repo location
+            '	url = https://github.com/Walkman100/Dashy.git
+            '[remote "upstream"] '[Fork] repo that current one was forked from
+            '	url = https://github.com/deavmi/Dashy.git
+            '[submodule "YTVL"] 'submodule url in git format
+            '	url = git://github.com/Walkman100/YTVL.git/
+            '[submodule "github-watchers-button"] 'submodule url in https format
+            '	url = https://github.com/addyosmani/github-watchers-button.git
+
+            If line.StartsWith("	url = ") Then
+                MsgBox(line.Remove(0, line.IndexOf("https://")))
+            End If
+        Next
+    End Sub
+
     Sub ContextMenuStripReposCopyRepoName_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposCopyRepoName.Click
         If lstRepos.SelectedIndex <> -1 Then
             Try
@@ -673,11 +690,11 @@ Public Class GitUpdater
         End If
     End Sub
 
-    Sub btnShowPass_MouseDown(sender As Object, e As EventArgs) Handles btnShowPass.MouseDown
+    Private Sub btnShowPass_MouseDown(sender As Object, e As MouseEventArgs) Handles btnShowPass.MouseDown
         txtPassword.PasswordChar = ""
     End Sub
 
-    Sub btnShowPass_MouseUp(sender As Object, e As EventArgs) Handles btnShowPass.MouseUp
+    Private Sub btnShowPass_MouseUp(sender As Object, e As MouseEventArgs) Handles btnShowPass.MouseUp
         txtPassword.PasswordChar = "●"
     End Sub
 
