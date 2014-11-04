@@ -8,6 +8,7 @@ Public Class GitUpdater
     Dim count, GitCommand As String  ' because the Worker doesn't support direct sub calling
     Dim ExitWhenDone As Boolean = False
     Dim LineIsOrigin, LineIsUpstream As Boolean
+    Dim PSFiles() As String = {"CheckVersion.ps1", "GitPrompt.ps1", "GitTabExpansion.ps1", "GitUtils.ps1", "TortoiseGit.ps1", "Utils.ps1", "posh-git.psm1", "profile.example.ps1"}
 
     Dim CmdStyle As AppWinStyle  ' window location of CMD
     Dim Wait As Integer  ' Wait until cmd closes
@@ -22,9 +23,13 @@ Public Class GitUpdater
         If Not File.Exists("GitUpdater.bat") Then
             Try
                 My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/GitUpdater.bat", "GitUpdater.bat")
-            Catch ex As Exception
+            Catch
                 MsgBox("Could not automatically download the required file! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
-                Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/GitUpdater.bat")
+                Try
+                    Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/GitUpdater.bat")
+                Catch
+                    If MsgBox("Unable to launch URL, copy to clipboard instead?", MsgBoxStyle.YesNo + MsgBoxStyle.Exclamation) = MsgBoxResult.Yes Then Clipboard.SetText("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/GitUpdater.bat")
+                End Try
             End Try
         End If
         btnGitPullAll.Enabled = True
@@ -173,86 +178,32 @@ Public Class GitUpdater
             End If
 
             ' PS folder
-            If Not File.Exists("PS\CheckVersion.ps1") Then
-                Try
-                    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/CheckVersion.ps1", "PS\CheckVersion.ps1")
-                    MsgBox("File PS\CheckVersion.ps1 downloaded succesfully!", MsgBoxStyle.Information)
-                Catch ex As Exception
-                    MsgBox("Could not automatically download the file PS\CheckVersion.ps1! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
-                    Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/CheckVersion.ps1")
-                End Try
-            End If
-            If Not File.Exists("PS\GitPrompt.ps1") Then
-                Try
-                    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/GitPrompt.ps1", "PS\GitPrompt.ps1")
-                    MsgBox("File PS\GitPrompt.ps1 downloaded succesfully!", MsgBoxStyle.Information)
-                Catch ex As Exception
-                    MsgBox("Could not automatically download the file PS\GitPrompt.ps1! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
-                    Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/GitPrompt.ps1")
-                End Try
-            End If
-            If Not File.Exists("PS\GitTabExpansion.ps1") Then
-                Try
-                    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/GitTabExpansion.ps1", "PS\GitTabExpansion.ps1")
-                    MsgBox("File PS\GitTabExpansion.ps1 downloaded succesfully!", MsgBoxStyle.Information)
-                Catch ex As Exception
-                    MsgBox("Could not automatically download the file PS\GitTabExpansion.ps1! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
-                    Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/GitTabExpansion.ps1")
-                End Try
-            End If
-            If Not File.Exists("PS\GitUtils.ps1") Then
-                Try
-                    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/GitUtils.ps1", "PS\GitUtils.ps1")
-                    MsgBox("File PS\GitUtils.ps1 downloaded succesfully!", MsgBoxStyle.Information)
-                Catch ex As Exception
-                    MsgBox("Could not automatically download the file PS\GitUtils.ps1! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
-                    Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/GitUtils.ps1")
-                End Try
-            End If
-            If Not File.Exists("PS\TortoiseGit.ps1") Then
-                Try
-                    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/TortoiseGit.ps1", "PS\TortoiseGit.ps1")
-                    MsgBox("File PS\TortoiseGit.ps1 downloaded succesfully!", MsgBoxStyle.Information)
-                Catch ex As Exception
-                    MsgBox("Could not automatically download the file PS\TortoiseGit.ps1! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
-                    Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/TortoiseGit.ps1")
-                End Try
-            End If
-            If Not File.Exists("PS\Utils.ps1") Then
-                Try
-                    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/Utils.ps1", "PS\Utils.ps1")
-                    MsgBox("File PS\Utils.ps1 downloaded succesfully!", MsgBoxStyle.Information)
-                Catch ex As Exception
-                    MsgBox("Could not automatically download the file PS\Utils.ps1! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
-                    Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/Utils.ps1")
-                End Try
-            End If
-            If Not File.Exists("PS\posh-git.psm1") Then
-                Try
-                    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/posh-git.psm1", "PS\posh-git.psm1")
-                    MsgBox("File PS\posh-git.psm1 downloaded succesfully!", MsgBoxStyle.Information)
-                Catch ex As Exception
-                    MsgBox("Could not automatically download the file PS\posh-git.psm1! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
-                    Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/posh-git.psm1")
-                End Try
-            End If
-            If Not File.Exists("PS\profile.example.ps1") Then
-                Try
-                    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/profile.example.ps1", "PS\profile.example.ps1")
-                    MsgBox("File PS\profile.example.ps1 downloaded succesfully!", MsgBoxStyle.Information)
-                Catch ex As Exception
-                    MsgBox("Could not automatically download the file PS\profile.example.ps1! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
-                    Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/profile.example.ps1")
-                End Try
-            End If
+            For Each file In PSFiles
+                If Not IO.File.Exists("PS\" & file) Then
+                    Try
+                        My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/" & file, "PS\" & file)
+                    Catch
+                        MsgBox("Could not automatically download the file PS\" & file & "! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
+                        Try
+                            Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/" & file)
+                        Catch
+                            If MsgBox("Unable to launch URL, copy to clipboard instead?", MsgBoxStyle.YesNo + MsgBoxStyle.Exclamation) = MsgBoxResult.Yes Then Clipboard.SetText("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/" & file)
+                        End Try
+                    End Try
+                End If
+            Next
             ' Main Batfile
             If Not File.Exists("OpenRepoInPS.bat") Then
                 Try
                     My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/OpenRepoInPS.bat", "OpenRepoInPS.bat")
                     MsgBox("File OpenRepoInPS.bat downloaded succesfully!", MsgBoxStyle.Information)
-                Catch ex As Exception
+                Catch
                     MsgBox("Could not automatically download the PowerShell batchfile! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
-                    Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/OpenRepoInPS.bat")
+                    Try
+                        Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/OpenRepoInPS.bat")
+                    Catch
+                        If MsgBox("Unable to launch URL, copy to clipboard instead?", MsgBoxStyle.YesNo + MsgBoxStyle.Exclamation) = MsgBoxResult.Yes Then Clipboard.SetText("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/OpenRepoInPS.bat")
+                    End Try
                 End Try
             End If
             MsgBox("File download attempts complete! Please try your action again.", MsgBoxStyle.Information)
