@@ -149,6 +149,73 @@ Public Class GitUpdater
     End Sub
 
     Sub ContextMenuStripReposOpenInPS_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposOpenInPS.Click
+        ' PS folder
+        If File.Exists("PS\CheckVersion.ps1") = False Then
+            Try
+                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/CheckVersion.ps1", "PS\CheckVersion.ps1")
+            Catch ex As Exception
+                MsgBox("Could not automatically download the file CheckVersion.ps1! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
+                Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/CheckVersion.ps1")
+            End Try
+        End If
+        If File.Exists("PS\GitPrompt.ps1") = False Then
+            Try
+                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/GitPrompt.ps1", "PS\GitPrompt.ps1")
+            Catch ex As Exception
+                MsgBox("Could not automatically download the file GitPrompt.ps1! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
+                Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/GitPrompt.ps1")
+            End Try
+        End If
+        If File.Exists("PS\GitTabExpansion.ps1") = False Then
+            Try
+                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/GitTabExpansion.ps1", "PS\GitTabExpansion.ps1")
+            Catch ex As Exception
+                MsgBox("Could not automatically download the file GitTabExpansion.ps1! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
+                Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/GitTabExpansion.ps1")
+            End Try
+        End If
+        If File.Exists("PS\GitUtils.ps1") = False Then
+            Try
+                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/GitUtils.ps1", "PS\GitUtils.ps1")
+            Catch ex As Exception
+                MsgBox("Could not automatically download the file GitUtils.ps1! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
+                Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/GitUtils.ps1")
+            End Try
+        End If
+        If File.Exists("PS\TortoiseGit.ps1") = False Then
+            Try
+                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/TortoiseGit.ps1", "PS\TortoiseGit.ps1")
+            Catch ex As Exception
+                MsgBox("Could not automatically download the file TortoiseGit.ps1! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
+                Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/TortoiseGit.ps1")
+            End Try
+        End If
+        If File.Exists("PS\Utils.ps1") = False Then
+            Try
+                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/Utils.ps1", "PS\Utils.ps1")
+            Catch ex As Exception
+                MsgBox("Could not automatically download the file Utils.ps1! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
+                Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/Utils.ps1")
+            End Try
+        End If
+        If File.Exists("PS\posh-git.psm1") = False Then
+            Try
+                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/posh-git.psm1", "PS\posh-git.psm1")
+            Catch ex As Exception
+                MsgBox("Could not automatically download the file posh-git.psm1! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
+                Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/posh-git.psm1")
+            End Try
+        End If
+        If File.Exists("PS\profile.example.ps1") = False Then
+            Try
+                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/profile.example.ps1", "PS\profile.example.ps1")
+            Catch ex As Exception
+                MsgBox("Could not automatically download the file profile.example.ps1! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
+                Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PS/profile.example.ps1")
+            End Try
+        End If
+
+        ' Main Batfile
         If File.Exists("OpenRepoInPS.bat") Then
             If lstRepos.SelectedIndex <> -1 Then
                 Process.Start("OpenRepoInPS.bat", """" & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & """ " & Environment.CurrentDirectory)
@@ -156,37 +223,14 @@ Public Class GitUpdater
                 Process.Start("OpenRepoInPS.bat", """" & Dir & """ " & Environment.CurrentDirectory)
             End If
         Else
-            If MsgBox("Couldn't find PowerShell script. This program can attempt to download it and put it in the right place, Continue?", MsgBoxStyle.Critical + MsgBoxStyle.YesNo, "OpenRepoInPS.bat not found!") = vbNo Then Exit Sub
+            If MsgBox("Couldn't find PowerShell batchfile. This program can attempt to download it and put it in the right place, Continue?", MsgBoxStyle.Critical + MsgBoxStyle.YesNo, "OpenRepoInPS.bat not found!") = vbNo Then Exit Sub
             Try
                 My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/OpenRepoInPS.bat", "OpenRepoInPS.bat")
                 ContextMenuStripReposOpenInPS_Click(Nothing, Nothing) ' Essentially restart the sub (but not quite)
             Catch ex As Exception
-                MsgBox("Could not automatically download a required file! Please download it manually. Select OK to open the download page.", MsgBoxStyle.Exclamation)
+                MsgBox("Could not automatically download the PowerShell batchfile! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
                 Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/OpenRepoInPS.bat")
             End Try
-
-            ' using the zip file
-            Try
-                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PSScripts.zip", "PSScripts.zip")
-                ' Remove the next two lines when UnZipping has been sorted out:
-                MsgBox("ZIP file containing the required files has been downloaded, please extract it to the same folder as this program.")
-                Process.Start(Environment.CurrentDirectory & "\PSScripts.zip")
-            Catch ex As Exception
-                MsgBox("Could not automatically download the zip folder containing the required files! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
-                Process.Start("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/PSScripts.zip")
-                Exit Sub
-            End Try
-            'Try
-            '    System.IO.Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
-            '    IO.Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
-            '    Compression.ZipFile.ExtractToDirectory("PSScripts.zip", "./")
-            '    ZipFile.File.ExtractToDirectory("PSScripts.zip", "./")
-            '    ExtractToDirectory("PSScripts.zip", "./")
-            'Catch ex As Exception
-            '    MsgBox("Could not automatically unzip the file containing the required files! Please extract it manually. Click OK to show it.", MsgBoxStyle.Exclamation)
-            '    Process.Start("explorer.exe", Environment.CurrentDirectory & "\PSScripts.zip")
-            '    Exit Sub
-            'End Try
         End If
     End Sub
 
