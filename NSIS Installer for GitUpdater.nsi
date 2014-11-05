@@ -35,6 +35,11 @@ Section "GitUpdater Executable & Uninstaller"
   WriteUninstaller "GitUpdater-Uninst.exe"
 SectionEnd
 
+Section "PowerShell files"
+  File "bin\Release\OpenRepoInPS.bat"
+  File /r "bin\Release\PS"
+SectionEnd
+
 Section "GitUpdater Start Menu Shortcuts"
   CreateDirectory "$SMPROGRAMS\DeavmiOSS"
   CreateShortCut "$SMPROGRAMS\DeavmiOSS\GitUpdater.lnk" "$INSTDIR\GitUpdater.exe" "" "" "" "" "" "Start GitUpdater with default options"
