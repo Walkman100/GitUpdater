@@ -335,10 +335,12 @@ Public Class GitUpdater
         '	url = https://github.com/addyosmani/github-watchers-button.git
         For Each line In File.ReadLines(Dir & lstRepos.SelectedItem & "\.git\config")
             If LineIsOrigin Then
+                cmdRepo = line.Remove(0, line.IndexOf("https://")) ' cmdRepo just because it's a string that would be unused by this point
+                If cmdRepo.EndsWith(".git") Then cmdRepo = cmdRepo.Remove(cmdRepo.Length - 4)
                 Try
-                    Process.Start(line.Remove(0, line.IndexOf("https://")))
+                    Process.Start(cmdRepo)
                 Catch ex As Exception
-                    If MsgBox("Unable to launch URL, copy to clipboard instead?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then Clipboard.SetText(line.Remove(0, line.IndexOf("https://")))
+                    If MsgBox("Unable to launch URL, copy to clipboard instead?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then Clipboard.SetText(cmdRepo)
                 End Try
                 LineIsOrigin = False
             End If
@@ -348,10 +350,12 @@ Public Class GitUpdater
 
             If LineIsUpstream Then
                 If MsgBox("Fork detected, open fork origin too?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    cmdRepo = line.Remove(0, line.IndexOf("https://"))
+                    If cmdRepo.EndsWith(".git") Then cmdRepo = cmdRepo.Remove(cmdRepo.Length - 4)
                     Try
-                        Process.Start(line.Remove(0, line.IndexOf("https://")))
+                        Process.Start(cmdRepo)
                     Catch ex As Exception
-                        If MsgBox("Unable to launch URL, copy to clipboard instead?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then Clipboard.SetText(line.Remove(0, line.IndexOf("https://")))
+                        If MsgBox("Unable to launch URL, copy to clipboard instead?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then Clipboard.SetText(cmdRepo)
                     End Try
                 End If
                 LineIsUpstream = False
