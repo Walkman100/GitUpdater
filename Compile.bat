@@ -1,5 +1,11 @@
+@echo off
+
 %ProgramFiles%\MSBuild\12.0\bin\msbuild.exe /property:OutDir=bin\Release\ GitUpdater.sln
 
 %ProgramFiles%\NSIS\makensis.exe "NSIS Installer for GitUpdater.nsi"
+
+rem use this if you want it to ask where to zip to
+rem %ProgramFiles%\WinRAR\WinRAR.exe a -ep1 -scul -r0 -iext --. %~dp0bin\Release\GitUpdater.exe %~dp0bin\Release\GitUpdater.bat %~dp0bin\Release\OpenRepoInPS.bat %~dp0bin\Release\PS
+%ProgramFiles%\WinRAR\WinRAR.exe a -ep1 -scul -r0 -iext -- %~dp0bin\Release\GitUpdater-Portable.rar %~dp0bin\Release\GitUpdater.exe %~dp0bin\Release\GitUpdater.bat %~dp0bin\Release\OpenRepoInPS.bat %~dp0bin\Release\PS
 
 explorer.exe "%~dp0bin\Release"
