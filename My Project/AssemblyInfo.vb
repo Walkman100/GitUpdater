@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("GitUpdater")> 
-<Assembly: AssemblyDescription("GitUpdater")> 
+<Assembly: AssemblyTitle("Git Updater")> 
+<Assembly: AssemblyDescription("A program to update all your Git Repos at once")> 
 <Assembly: AssemblyCompany("DeavmiOSS")> 
 <Assembly: AssemblyProduct("GitUpdater")> 
-<Assembly: AssemblyCopyright("FOSS from Walkman")> 
+<Assembly: AssemblyCopyright("FOSS from Walkman 2014")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
