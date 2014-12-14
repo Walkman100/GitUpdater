@@ -1,6 +1,6 @@
 @echo off
 
-rem %1 is folder/repo, %2 is git command (like "pull" or "push"), %5 is commands after that (like -f)
+rem %1 is folder/repo, %2 is git command (like "pull" or "push")
 rem %3 is True if it should repeat until success, %4 is True if it should not close when done
 rem %5 is True if it should log output, %6 is where to log output
 
@@ -43,7 +43,7 @@ if %~4==True (
     echo Press enter to close this window. Unless you specified the "Don't wait for cmd to close before starting next" option, further git commands will not start until you close this window.
     pause
 ) else (
-exit
+    exit
 )
 
 rem -----------------------------------------------------
@@ -57,14 +57,14 @@ rem Run the Git command
 git %~2 >> %~6
 
 rem If it doesn't fail, go to the end of code with logging
-if Not ERRORLEVEL==1 goto logend
+if ERRORLEVEL==0 goto logend
 
-rem If it should retry if it fails go to start
+rem If it should retry if it fails go to logging start
 if %~3==True (
     @echo [%date% %time%] Failed to %~2 repo at "%~1", trying again... >> %~6
     echo.
     echo Failed to %~2 repo at "%~1", trying again...
-    goto start
+    goto log
 )
 @echo [%date% %time%] Failed to %~2 repo at "%~1", retry disabled. >> %~6
 

@@ -176,6 +176,7 @@ Public Class GitUpdater
                 End If
                 Exit Sub
             End If
+            cmdRepo = ""
 
             ' PS folder
             For Each file In PSFiles
