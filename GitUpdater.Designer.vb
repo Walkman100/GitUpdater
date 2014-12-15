@@ -76,6 +76,7 @@ Partial Class GitUpdater
         Me.btnHotkey = New System.Windows.Forms.Button()
         Me.txtUsername = New System.Windows.Forms.TextBox()
         Me.lblUsername = New System.Windows.Forms.Label()
+        Me.chkAutoInsert = New System.Windows.Forms.CheckBox()
         Me.timerKeyChecker = New System.Windows.Forms.Timer(Me.components)
         Me.btnCloseCmd = New System.Windows.Forms.Button()
         Me.SaveLogFileDialog = New System.Windows.Forms.SaveFileDialog()
@@ -486,6 +487,7 @@ Partial Class GitUpdater
         Me.grpCredMan.Controls.Add(Me.txtUsername)
         Me.grpCredMan.Controls.Add(Me.lblUsername)
         Me.grpCredMan.Controls.Add(Me.btnInsertCredentials)
+        Me.grpCredMan.Controls.Add(Me.chkAutoInsert)
         Me.grpCredMan.Location = New System.Drawing.Point(266, 373)
         Me.grpCredMan.Name = "grpCredMan"
         Me.grpCredMan.Size = New System.Drawing.Size(246, 129)
@@ -568,6 +570,17 @@ Partial Class GitUpdater
         Me.lblUsername.Size = New System.Drawing.Size(58, 13)
         Me.lblUsername.TabIndex = 31
         Me.lblUsername.Text = "Username:"
+        '
+        'chkAutoInsert
+        '
+        Me.chkAutoInsert.Checked = True
+        Me.chkAutoInsert.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkAutoInsert.Location = New System.Drawing.Point(120, 95)
+        Me.chkAutoInsert.Name = "chkAutoInsert"
+        Me.chkAutoInsert.Size = New System.Drawing.Size(134, 30)
+        Me.chkAutoInsert.TabIndex = 39
+        Me.chkAutoInsert.Text = "Auto-insert after starting Push operation"
+        Me.chkAutoInsert.UseVisualStyleBackColor = True
         '
         'timerKeyChecker
         '
@@ -702,4 +715,5 @@ Partial Class GitUpdater
     Friend WithEvents chkShowErrors As System.Windows.Forms.CheckBox
     Friend WithEvents chkGitRepoOnly As System.Windows.Forms.CheckBox
     Friend WithEvents ContextMenuStripReposOpenURL As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents chkAutoInsert As System.Windows.Forms.CheckBox
 End Class

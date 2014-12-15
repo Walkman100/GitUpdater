@@ -113,7 +113,7 @@ Public Class GitUpdater
         btnRefresh.Enabled = True
     End Sub
 
-    Sub BtnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+    Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         If ShellWorker.IsBusy = False Then
             RebuildRepoList()
         ElseIf MsgBox("A script is currently in progress! Refreshing repos might mess up the script. You can use the cancel button above to cancel operation." _
@@ -122,7 +122,7 @@ Public Class GitUpdater
         End If
     End Sub
 
-    Sub BtnCD_Click(sender As Object, e As EventArgs) Handles btnCD.Click
+    Sub btnCD_Click(sender As Object, e As EventArgs) Handles btnCD.Click
         If ShellWorker.IsBusy = False Then
             ' show file chooser dialog, set result as Dir
             folderBrowserDialog.SelectedPath = Dir
@@ -294,7 +294,7 @@ Public Class GitUpdater
             End If
         End If
     End Sub
-    
+
     Sub ContextMenuStripReposOpenSLN_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposOpenSLN.Click
         If lstRepos.SelectedIndex <> -1 Then
             If File.Exists(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln") Then
@@ -423,7 +423,7 @@ Public Class GitUpdater
                 RebuildRepoList()
             Catch ex As System.ArgumentOutOfRangeException
                 If MsgBox("Cannot go higher than the root of a drive! Please use the CD button to change drives." & vbNewLine & vbNewLine & "Open CD dialog now?", MsgBoxStyle.YesNo + MsgBoxStyle.Critical, "Trying to go up from a drive root") = vbYes Then
-                    BtnCD_Click(Nothing, Nothing)
+                    btnCD_Click(Nothing, Nothing)
                 End If
             End Try
         End If
@@ -431,18 +431,18 @@ Public Class GitUpdater
 
     ' how to run the shells & changing settings
 
-    Sub ChkNoWait_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoWait.CheckedChanged
+    Sub chkNoWait_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoWait.CheckedChanged
         If chkNoWait.Checked = True Then Wait = 1000 Else Wait = -1
         My.Settings.NoWait = chkNoWait.Checked
         My.Settings.Save()
     End Sub
 
-    Sub ChkDontClose_CheckedChanged(sender As Object, e As EventArgs) Handles chkDontClose.CheckedChanged
+    Sub chkDontClose_CheckedChanged(sender As Object, e As EventArgs) Handles chkDontClose.CheckedChanged
         My.Settings.DontClose = chkDontClose.Checked
         My.Settings.Save()
     End Sub
 
-    Sub ChkDontShow_CheckedChanged(sender As Object, e As EventArgs) Handles chkDontShow.CheckedChanged
+    Sub chkDontShow_CheckedChanged(sender As Object, e As EventArgs) Handles chkDontShow.CheckedChanged
         If chkDontShow.Checked = True Then
             CmdStyle = vbMinimizedNoFocus
             If ShellWorker.IsBusy = True Then
@@ -458,12 +458,12 @@ Public Class GitUpdater
         My.Settings.Save()
     End Sub
 
-    Sub ChkRepeat_CheckedChanged(sender As Object, e As EventArgs) Handles chkRepeat.CheckedChanged
+    Sub chkRepeat_CheckedChanged(sender As Object, e As EventArgs) Handles chkRepeat.CheckedChanged
         My.Settings.Repeat = chkRepeat.Checked
         My.Settings.Save()
     End Sub
 
-    Sub ChkLog_CheckedChanged(sender As Object, e As EventArgs) Handles chkLog.CheckedChanged
+    Sub chkLog_CheckedChanged(sender As Object, e As EventArgs) Handles chkLog.CheckedChanged
         My.Settings.Log = chkLog.Checked
         My.Settings.Save()
     End Sub
@@ -515,6 +515,7 @@ Public Class GitUpdater
                             End If
                         End If
                         Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
+                        If chkAutoInsert.Checked = True And GitCommand = "push" And chkDontShow.Checked = False Then SendKeys.Send(txtUsername.Text & "~" & txtPassword.Text & "~")
                         progressBar.Value = i
                         TaskbarInfoUpdate(TaskbarItemProgressState.Paused, i / lstRepos.Items.Count)
                     Next
@@ -527,6 +528,7 @@ Public Class GitUpdater
                         progressBar.Value = 1
                         TaskbarInfoUpdate(TaskbarItemProgressState.Indeterminate, 0.5)
                         Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, vbNormalFocus, True, Wait)
+                        If chkAutoInsert.Checked = True And GitCommand = "push" And chkDontShow.Checked = False Then SendKeys.Send(txtUsername.Text & "~" & txtPassword.Text & "~")
                         progressBar.Value = progressBar.Maximum
                         TaskbarInfoUpdate(TaskbarItemProgressState.Normal, 1)
                     End If
@@ -542,6 +544,7 @@ Public Class GitUpdater
                                     End If
                                 End If
                                 Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
+                                If chkAutoInsert.Checked = True And GitCommand = "push" And chkDontShow.Checked = False Then SendKeys.Send(txtUsername.Text & "~" & txtPassword.Text & "~")
                                 progressBar.Value = i
                                 TaskbarInfoUpdate(TaskbarItemProgressState.Normal, i / lstRepos.Items.Count)
                             End If
@@ -557,6 +560,7 @@ Public Class GitUpdater
                         progressBar.Value = 1
                         TaskbarProgress.ProgressValue = 0.5
                         Shell("GitUpdater.bat " & Dir & cmdRepo & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, vbNormalFocus, True, Wait)
+                        If chkAutoInsert.Checked = True And GitCommand = "push" And chkDontShow.Checked = False Then SendKeys.Send(txtUsername.Text & "~" & txtPassword.Text & "~")
                         progressBar.Value = progressBar.Maximum
                         TaskbarInfoUpdate(TaskbarItemProgressState.Normal, 1)
                     End If
@@ -572,6 +576,7 @@ Public Class GitUpdater
                                     End If
                                 End If
                                 Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
+                                If chkAutoInsert.Checked = True And GitCommand = "push" And chkDontShow.Checked = False Then SendKeys.Send(txtUsername.Text & "~" & txtPassword.Text & "~")
                                 progressBar.Value = i
                                 TaskbarInfoUpdate(TaskbarItemProgressState.Paused, i / lstRepos.Items.Count)
                             End If
@@ -616,7 +621,7 @@ Public Class GitUpdater
 
     ' starting and stopping the thread
 
-    Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         If ShellWorker.IsBusy = True Then
             If MsgBox("Are you sure you want to cancel operation? This requires restarting GitUpdater." & vbNewLine & vbNewLine & "This will not close the currently active CMD window. To do so, please click on the window and press 'Ctrl' + 'C', then 'Y', then 'Enter'.", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirmation") = vbNo Then Exit Sub
             Application.Restart()
@@ -626,7 +631,7 @@ Public Class GitUpdater
 
     End Sub
 
-    Sub BtnGitPullAll_Click(sender As Object, e As EventArgs) Handles btnGitPullAll.Click
+    Sub btnGitPullAll_Click(sender As Object, e As EventArgs) Handles btnGitPullAll.Click
         count = "all"
         GitCommand = "pull"
         If ShellWorker.IsBusy = False Then
@@ -636,7 +641,7 @@ Public Class GitUpdater
         End If
     End Sub
 
-    Sub BtnGitPushAll_Click(sender As Object, e As EventArgs) Handles btnGitPushAll.Click
+    Sub btnGitPushAll_Click(sender As Object, e As EventArgs) Handles btnGitPushAll.Click
         count = "all"
         GitCommand = "push"
         If ShellWorker.IsBusy = False Then
@@ -646,7 +651,7 @@ Public Class GitUpdater
         End If
     End Sub
 
-    Sub BtnGitPullSelected_Click(sender As Object, e As EventArgs) Handles btnGitPullSelected.Click, ContextMenuStripReposGitPullThis.Click
+    Sub btnGitPullSelected_Click(sender As Object, e As EventArgs) Handles btnGitPullSelected.Click, ContextMenuStripReposGitPullThis.Click
         If lstRepos.SelectedIndex = -1 Then
             MsgBox("No item selected", MsgBoxStyle.Critical)
         Else
@@ -660,7 +665,7 @@ Public Class GitUpdater
         End If
     End Sub
 
-    Sub BtnGitPushSelected_Click(sender As Object, e As EventArgs) Handles btnGitPushSelected.Click, ContextMenuStripReposGitPushThis.Click
+    Sub btnGitPushSelected_Click(sender As Object, e As EventArgs) Handles btnGitPushSelected.Click, ContextMenuStripReposGitPushThis.Click
         If lstRepos.SelectedIndex = -1 Then
             MsgBox("No item selected", MsgBoxStyle.Critical)
         Else
@@ -674,7 +679,7 @@ Public Class GitUpdater
         End If
     End Sub
 
-    Sub BtnGitPullNotSelected_Click(sender As Object, e As EventArgs) Handles btnGitPullNotSelected.Click
+    Sub btnGitPullNotSelected_Click(sender As Object, e As EventArgs) Handles btnGitPullNotSelected.Click
         If lstRepos.SelectedIndex = -1 Then
             MsgBox("No item selected", MsgBoxStyle.Critical)
         Else
@@ -688,7 +693,7 @@ Public Class GitUpdater
         End If
     End Sub
 
-    Sub BtnGitPushNotSelected_Click(sender As Object, e As EventArgs) Handles btnGitPushNotSelected.Click
+    Sub btnGitPushNotSelected_Click(sender As Object, e As EventArgs) Handles btnGitPushNotSelected.Click
         If lstRepos.SelectedIndex = -1 Then
             MsgBox("No item selected", MsgBoxStyle.Critical)
         Else
@@ -704,14 +709,14 @@ Public Class GitUpdater
 
     ' credentials-related stuff
 
-    Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+    Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         My.Settings.Username = txtUsername.Text
         My.Settings.Password = txtPassword.Text
         My.Settings.Save()
         MsgBox("Succesfully Saved!", MsgBoxStyle.Information, "Saved!")
     End Sub
 
-    Sub BtnInsert_Click(sender As Object, e As EventArgs) Handles btnInsertCredentials.Click
+    Sub btnInsertCredentials_Click() Handles btnInsertCredentials.Click
         Me.WindowState = FormWindowState.Minimized
         System.Threading.Thread.Sleep(500)
         SendKeys.SendWait(txtUsername.Text & "~")
@@ -735,7 +740,7 @@ Public Class GitUpdater
         End If
     End Sub
 
-    Sub BtnHotkey_Click(sender As Object, e As EventArgs) Handles btnHotkey.Click
+    Sub btnHotkey_Click(sender As Object, e As EventArgs) Handles btnHotkey.Click
         If btnHotkey.Text = "Enable Hotkey (Alt)" Then
             btnHotkey.Text = "Hotkey Enabled!"
             timerKeyChecker.Interval = 1000
@@ -754,7 +759,7 @@ Public Class GitUpdater
         txtPassword.PasswordChar = "●"
     End Sub
 
-    Sub BtnCloseCmd_Click(sender As Object, e As EventArgs) Handles btnCloseCmd.Click
+    Sub btnCloseCmd_Click(sender As Object, e As EventArgs) Handles btnCloseCmd.Click
         If ShellWorker.IsBusy = False Then
             If MsgBox("No git operation from this program is in progress, are you sure you want to insert commands to close a CMD window?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirmation") = vbNo Then Exit Sub
         End If
@@ -864,15 +869,17 @@ Public Class GitUpdater
     End Sub
 
     Friend Shared Sub TaskbarInfoUpdate(ProgressState As TaskbarItemProgressState, Optional ProgressValue As Double = Nothing)
-        Try
-            GitUpdater.TaskbarProgress.ProgressState = ProgressState
-            If ProgressValue <> Nothing Then
-                GitUpdater.TaskbarProgress.ProgressValue = ProgressValue
-            End If
-        Catch ex As Exception
-            If GitUpdater.chkShowErrors.Checked = True Then
-                MsgBox("There was an error updating the TaskBarInfo! The error was:" & vbNewLine & ex.ToString, MsgBoxStyle.Critical)
-            End If
-        End Try
+        If 0 <> 0 Then
+            Try
+                GitUpdater.TaskbarProgress.ProgressState = ProgressState
+                If ProgressValue <> Nothing Then
+                    GitUpdater.TaskbarProgress.ProgressValue = ProgressValue
+                End If
+            Catch ex As Exception
+                If GitUpdater.chkShowErrors.Checked = True Then
+                    MsgBox("There was an error updating the TaskBarInfo! The error was:" & vbNewLine & ex.ToString, MsgBoxStyle.Critical)
+                End If
+            End Try
+        End If
     End Sub
 End Class
