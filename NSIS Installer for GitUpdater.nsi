@@ -2,6 +2,8 @@
 ; get NSIS at http://tenet.dl.sourceforge.net/project/nsis/NSIS%202/2.46/nsis-2.46-setup.exe
 ; As a program that all Power PC users should have, Notepad ++ is recommended to edit this file
 
+AddBrandingImage top 20
+Icon "My Project\git.ico"
 Caption "GitUpdater Installer"
 Name "GitUpdater"
 AutoCloseWindow true
@@ -88,6 +90,7 @@ Function .onInit
   MessageBox MB_YESNO "This will install GitUpdater. Do you wish to continue?" IDYES gogogo
     Abort
   gogogo:
+  SetBrandingImage "[/RESIZETOFIT] 'My Project\git.ico'"
   SetShellVarContext all
   SetAutoClose true
 FunctionEnd
