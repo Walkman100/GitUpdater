@@ -29,10 +29,23 @@ Partial Class GitUpdater
         Me.btnGitPushAll = New System.Windows.Forms.Button()
         Me.lstRepos = New System.Windows.Forms.ListBox()
         Me.ContextMenuStripRepos = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ContextMenuStripReposOpenInExplorer = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposOpenInCMD = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposOpenInPS = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposOpenInGitHub = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ContextMenuStripReposOpenReadme = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposOpenSLN = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposOpenURL = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ContextMenuStripReposCopyRepoName = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposCopyRepoPath = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ContextMenuStripReposRemoveEntry = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposCDHere = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ContextMenuStripReposGitPullThis = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposGitPushThis = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.btnGitPullSelected = New System.Windows.Forms.Button()
         Me.btnGitPushSelected = New System.Windows.Forms.Button()
@@ -56,7 +69,7 @@ Partial Class GitUpdater
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnInsertCredentials = New System.Windows.Forms.Button()
         Me.grpCredMan = New System.Windows.Forms.GroupBox()
-        Me.lblHotkey = New System.Windows.Forms.Label()
+        Me.btnShowPass = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.lblPassword = New System.Windows.Forms.Label()
         Me.txtPassword = New System.Windows.Forms.TextBox()
@@ -67,20 +80,6 @@ Partial Class GitUpdater
         Me.btnCloseCmd = New System.Windows.Forms.Button()
         Me.SaveLogFileDialog = New System.Windows.Forms.SaveFileDialog()
         Me.chkShowErrors = New System.Windows.Forms.CheckBox()
-        Me.btnShowPass = New System.Windows.Forms.Button()
-        Me.ContextMenuStripReposOpenInExplorer = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStripReposOpenInCMD = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStripReposOpenInPS = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStripReposOpenInGitHub = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStripReposOpenReadme = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStripReposOpenSLN = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStripReposOpenURL = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStripReposCopyRepoName = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStripReposCopyRepoPath = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStripReposRemoveEntry = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStripReposCDHere = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStripReposGitPullThis = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuStripReposGitPushThis = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripRepos.SuspendLayout()
         Me.grpGUI.SuspendLayout()
         Me.grpData.SuspendLayout()
@@ -139,27 +138,121 @@ Partial Class GitUpdater
         '
         Me.ContextMenuStripRepos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContextMenuStripReposOpenInExplorer, Me.ContextMenuStripReposOpenInCMD, Me.ContextMenuStripReposOpenInPS, Me.ContextMenuStripReposOpenInGitHub, Me.ContextMenuStripReposSeparator1, Me.ContextMenuStripReposOpenReadme, Me.ContextMenuStripReposOpenSLN, Me.ContextMenuStripReposOpenURL, Me.ContextMenuStripReposSeparator2, Me.ContextMenuStripReposCopyRepoName, Me.ContextMenuStripReposCopyRepoPath, Me.ContextMenuStripReposSeparator3, Me.ContextMenuStripReposRemoveEntry, Me.ContextMenuStripReposCDHere, Me.ContextMenuStripReposSeparator4, Me.ContextMenuStripReposGitPullThis, Me.ContextMenuStripReposGitPushThis})
         Me.ContextMenuStripRepos.Name = "contextMenuStripRepos"
-        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 336)
+        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 314)
+        '
+        'ContextMenuStripReposOpenInExplorer
+        '
+        Me.ContextMenuStripReposOpenInExplorer.Image = Global.GitUpdater.My.Resources.Resources.ExplorerSmall
+        Me.ContextMenuStripReposOpenInExplorer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ContextMenuStripReposOpenInExplorer.Name = "ContextMenuStripReposOpenInExplorer"
+        Me.ContextMenuStripReposOpenInExplorer.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposOpenInExplorer.Text = "Open Repo in Windows Explorer"
+        '
+        'ContextMenuStripReposOpenInCMD
+        '
+        Me.ContextMenuStripReposOpenInCMD.Image = Global.GitUpdater.My.Resources.Resources.CmdSmall
+        Me.ContextMenuStripReposOpenInCMD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ContextMenuStripReposOpenInCMD.Name = "ContextMenuStripReposOpenInCMD"
+        Me.ContextMenuStripReposOpenInCMD.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposOpenInCMD.Text = "Open Repo in CMD"
+        '
+        'ContextMenuStripReposOpenInPS
+        '
+        Me.ContextMenuStripReposOpenInPS.Image = Global.GitUpdater.My.Resources.Resources.PSSmall
+        Me.ContextMenuStripReposOpenInPS.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ContextMenuStripReposOpenInPS.Name = "ContextMenuStripReposOpenInPS"
+        Me.ContextMenuStripReposOpenInPS.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposOpenInPS.Text = "Open Repo in Windows PowerShell"
+        '
+        'ContextMenuStripReposOpenInGitHub
+        '
+        Me.ContextMenuStripReposOpenInGitHub.Image = Global.GitUpdater.My.Resources.Resources.GitHubForWindowsMedium
+        Me.ContextMenuStripReposOpenInGitHub.Name = "ContextMenuStripReposOpenInGitHub"
+        Me.ContextMenuStripReposOpenInGitHub.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposOpenInGitHub.Text = "Open Repo in GitHub for Windows"
         '
         'ContextMenuStripReposSeparator1
         '
         Me.ContextMenuStripReposSeparator1.Name = "ContextMenuStripReposSeparator1"
         Me.ContextMenuStripReposSeparator1.Size = New System.Drawing.Size(269, 6)
         '
+        'ContextMenuStripReposOpenReadme
+        '
+        Me.ContextMenuStripReposOpenReadme.Image = Global.GitUpdater.My.Resources.Resources.text_x_readme
+        Me.ContextMenuStripReposOpenReadme.Name = "ContextMenuStripReposOpenReadme"
+        Me.ContextMenuStripReposOpenReadme.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposOpenReadme.Text = "Open Repo Readme"
+        '
+        'ContextMenuStripReposOpenSLN
+        '
+        Me.ContextMenuStripReposOpenSLN.Image = Global.GitUpdater.My.Resources.Resources.VS_SLN2
+        Me.ContextMenuStripReposOpenSLN.Name = "ContextMenuStripReposOpenSLN"
+        Me.ContextMenuStripReposOpenSLN.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposOpenSLN.Text = "Open Repo SLN"
+        '
+        'ContextMenuStripReposOpenURL
+        '
+        Me.ContextMenuStripReposOpenURL.Image = Global.GitUpdater.My.Resources.Resources.internet1
+        Me.ContextMenuStripReposOpenURL.Name = "ContextMenuStripReposOpenURL"
+        Me.ContextMenuStripReposOpenURL.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposOpenURL.Text = "Open Repo URL"
+        '
         'ContextMenuStripReposSeparator2
         '
         Me.ContextMenuStripReposSeparator2.Name = "ContextMenuStripReposSeparator2"
         Me.ContextMenuStripReposSeparator2.Size = New System.Drawing.Size(269, 6)
+        '
+        'ContextMenuStripReposCopyRepoName
+        '
+        Me.ContextMenuStripReposCopyRepoName.Image = Global.GitUpdater.My.Resources.Resources.EditCopy
+        Me.ContextMenuStripReposCopyRepoName.Name = "ContextMenuStripReposCopyRepoName"
+        Me.ContextMenuStripReposCopyRepoName.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposCopyRepoName.Text = "Copy Repo Name"
+        '
+        'ContextMenuStripReposCopyRepoPath
+        '
+        Me.ContextMenuStripReposCopyRepoPath.Image = Global.GitUpdater.My.Resources.Resources.EditCopy
+        Me.ContextMenuStripReposCopyRepoPath.Name = "ContextMenuStripReposCopyRepoPath"
+        Me.ContextMenuStripReposCopyRepoPath.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposCopyRepoPath.Text = "Copy Repo Path"
         '
         'ContextMenuStripReposSeparator3
         '
         Me.ContextMenuStripReposSeparator3.Name = "ContextMenuStripReposSeparator3"
         Me.ContextMenuStripReposSeparator3.Size = New System.Drawing.Size(269, 6)
         '
+        'ContextMenuStripReposRemoveEntry
+        '
+        Me.ContextMenuStripReposRemoveEntry.Image = CType(resources.GetObject("ContextMenuStripReposRemoveEntry.Image"), System.Drawing.Image)
+        Me.ContextMenuStripReposRemoveEntry.Name = "ContextMenuStripReposRemoveEntry"
+        Me.ContextMenuStripReposRemoveEntry.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposRemoveEntry.Text = "Remove Entry"
+        '
+        'ContextMenuStripReposCDHere
+        '
+        Me.ContextMenuStripReposCDHere.Image = CType(resources.GetObject("ContextMenuStripReposCDHere.Image"), System.Drawing.Image)
+        Me.ContextMenuStripReposCDHere.Name = "ContextMenuStripReposCDHere"
+        Me.ContextMenuStripReposCDHere.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposCDHere.Text = "CD Here..."
+        '
         'ContextMenuStripReposSeparator4
         '
         Me.ContextMenuStripReposSeparator4.Name = "ContextMenuStripReposSeparator4"
         Me.ContextMenuStripReposSeparator4.Size = New System.Drawing.Size(269, 6)
+        '
+        'ContextMenuStripReposGitPullThis
+        '
+        Me.ContextMenuStripReposGitPullThis.Image = CType(resources.GetObject("ContextMenuStripReposGitPullThis.Image"), System.Drawing.Image)
+        Me.ContextMenuStripReposGitPullThis.Name = "ContextMenuStripReposGitPullThis"
+        Me.ContextMenuStripReposGitPullThis.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposGitPullThis.Text = "Git Pull this"
+        '
+        'ContextMenuStripReposGitPushThis
+        '
+        Me.ContextMenuStripReposGitPushThis.Image = CType(resources.GetObject("ContextMenuStripReposGitPushThis.Image"), System.Drawing.Image)
+        Me.ContextMenuStripReposGitPushThis.Name = "ContextMenuStripReposGitPushThis"
+        Me.ContextMenuStripReposGitPushThis.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposGitPushThis.Text = "Git Push this"
         '
         'btnRefresh
         '
@@ -386,7 +479,6 @@ Partial Class GitUpdater
         '
         Me.grpCredMan.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpCredMan.Controls.Add(Me.btnShowPass)
-        Me.grpCredMan.Controls.Add(Me.lblHotkey)
         Me.grpCredMan.Controls.Add(Me.btnSave)
         Me.grpCredMan.Controls.Add(Me.lblPassword)
         Me.grpCredMan.Controls.Add(Me.txtPassword)
@@ -401,16 +493,23 @@ Partial Class GitUpdater
         Me.grpCredMan.TabStop = False
         Me.grpCredMan.Text = "Credentials Management"
         '
-        'lblHotkey
+        'btnShowPass
         '
-        Me.lblHotkey.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblHotkey.Location = New System.Drawing.Point(126, 100)
-        Me.lblHotkey.Name = "lblHotkey"
-        Me.lblHotkey.Size = New System.Drawing.Size(114, 23)
-        Me.lblHotkey.TabIndex = 37
-        Me.lblHotkey.Text = "Current key(s): Alt"
-        Me.lblHotkey.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnShowPass.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnShowPass.BackColor = System.Drawing.Color.White
+        Me.btnShowPass.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnShowPass.FlatAppearance.BorderColor = System.Drawing.Color.White
+        Me.btnShowPass.FlatAppearance.BorderSize = 0
+        Me.btnShowPass.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlLight
+        Me.btnShowPass.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
+        Me.btnShowPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnShowPass.ForeColor = System.Drawing.Color.Transparent
+        Me.btnShowPass.Image = CType(resources.GetObject("btnShowPass.Image"), System.Drawing.Image)
+        Me.btnShowPass.Location = New System.Drawing.Point(219, 47)
+        Me.btnShowPass.Name = "btnShowPass"
+        Me.btnShowPass.Size = New System.Drawing.Size(20, 16)
+        Me.btnShowPass.TabIndex = 38
+        Me.btnShowPass.UseVisualStyleBackColor = False
         '
         'btnSave
         '
@@ -449,7 +548,7 @@ Partial Class GitUpdater
         Me.btnHotkey.Name = "btnHotkey"
         Me.btnHotkey.Size = New System.Drawing.Size(114, 23)
         Me.btnHotkey.TabIndex = 35
-        Me.btnHotkey.Text = "Enable Hotkey"
+        Me.btnHotkey.Text = "Enable Hotkey (Alt)"
         Me.btnHotkey.UseVisualStyleBackColor = True
         '
         'txtUsername
@@ -504,118 +603,6 @@ Partial Class GitUpdater
         Me.chkShowErrors.TabIndex = 33
         Me.chkShowErrors.Text = "Show TaskBarItemState change errors"
         Me.chkShowErrors.UseVisualStyleBackColor = True
-        '
-        'btnShowPass
-        '
-        Me.btnShowPass.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnShowPass.BackColor = System.Drawing.Color.White
-        Me.btnShowPass.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnShowPass.FlatAppearance.BorderColor = System.Drawing.Color.White
-        Me.btnShowPass.FlatAppearance.BorderSize = 0
-        Me.btnShowPass.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlLight
-        Me.btnShowPass.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
-        Me.btnShowPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnShowPass.ForeColor = System.Drawing.Color.Transparent
-        Me.btnShowPass.Image = CType(resources.GetObject("btnShowPass.Image"), System.Drawing.Image)
-        Me.btnShowPass.Location = New System.Drawing.Point(219, 47)
-        Me.btnShowPass.Name = "btnShowPass"
-        Me.btnShowPass.Size = New System.Drawing.Size(20, 16)
-        Me.btnShowPass.TabIndex = 38
-        Me.btnShowPass.UseVisualStyleBackColor = False
-        '
-        'ContextMenuStripReposOpenInExplorer
-        '
-        Me.ContextMenuStripReposOpenInExplorer.Image = Global.GitUpdater.My.Resources.Resources.ExplorerSmall
-        Me.ContextMenuStripReposOpenInExplorer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ContextMenuStripReposOpenInExplorer.Name = "ContextMenuStripReposOpenInExplorer"
-        Me.ContextMenuStripReposOpenInExplorer.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposOpenInExplorer.Text = "Open Repo in Windows Explorer"
-        '
-        'ContextMenuStripReposOpenInCMD
-        '
-        Me.ContextMenuStripReposOpenInCMD.Image = Global.GitUpdater.My.Resources.Resources.CmdSmall
-        Me.ContextMenuStripReposOpenInCMD.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ContextMenuStripReposOpenInCMD.Name = "ContextMenuStripReposOpenInCMD"
-        Me.ContextMenuStripReposOpenInCMD.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposOpenInCMD.Text = "Open Repo in CMD"
-        '
-        'ContextMenuStripReposOpenInPS
-        '
-        Me.ContextMenuStripReposOpenInPS.Image = Global.GitUpdater.My.Resources.Resources.PSSmall
-        Me.ContextMenuStripReposOpenInPS.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.ContextMenuStripReposOpenInPS.Name = "ContextMenuStripReposOpenInPS"
-        Me.ContextMenuStripReposOpenInPS.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposOpenInPS.Text = "Open Repo in Windows PowerShell"
-        '
-        'ContextMenuStripReposOpenInGitHub
-        '
-        Me.ContextMenuStripReposOpenInGitHub.Image = Global.GitUpdater.My.Resources.Resources.GitHubForWindowsMedium
-        Me.ContextMenuStripReposOpenInGitHub.Name = "ContextMenuStripReposOpenInGitHub"
-        Me.ContextMenuStripReposOpenInGitHub.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposOpenInGitHub.Text = "Open Repo in GitHub for Windows"
-        '
-        'ContextMenuStripReposOpenReadme
-        '
-        Me.ContextMenuStripReposOpenReadme.Image = Global.GitUpdater.My.Resources.Resources.text_x_readme
-        Me.ContextMenuStripReposOpenReadme.Name = "ContextMenuStripReposOpenReadme"
-        Me.ContextMenuStripReposOpenReadme.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposOpenReadme.Text = "Open Repo Readme"
-        '
-        'ContextMenuStripReposOpenSLN
-        '
-        Me.ContextMenuStripReposOpenSLN.Image = Global.GitUpdater.My.Resources.Resources.VS_SLN2
-        Me.ContextMenuStripReposOpenSLN.Name = "ContextMenuStripReposOpenSLN"
-        Me.ContextMenuStripReposOpenSLN.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposOpenSLN.Text = "Open Repo SLN"
-        '
-        'ContextMenuStripReposOpenURL
-        '
-        Me.ContextMenuStripReposOpenURL.Image = Global.GitUpdater.My.Resources.Resources.internet1
-        Me.ContextMenuStripReposOpenURL.Name = "ContextMenuStripReposOpenURL"
-        Me.ContextMenuStripReposOpenURL.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposOpenURL.Text = "Open Repo URL"
-        '
-        'ContextMenuStripReposCopyRepoName
-        '
-        Me.ContextMenuStripReposCopyRepoName.Image = Global.GitUpdater.My.Resources.Resources.EditCopy
-        Me.ContextMenuStripReposCopyRepoName.Name = "ContextMenuStripReposCopyRepoName"
-        Me.ContextMenuStripReposCopyRepoName.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposCopyRepoName.Text = "Copy Repo Name"
-        '
-        'ContextMenuStripReposCopyRepoPath
-        '
-        Me.ContextMenuStripReposCopyRepoPath.Image = Global.GitUpdater.My.Resources.Resources.EditCopy
-        Me.ContextMenuStripReposCopyRepoPath.Name = "ContextMenuStripReposCopyRepoPath"
-        Me.ContextMenuStripReposCopyRepoPath.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposCopyRepoPath.Text = "Copy Repo Path"
-        '
-        'ContextMenuStripReposRemoveEntry
-        '
-        Me.ContextMenuStripReposRemoveEntry.Image = CType(resources.GetObject("ContextMenuStripReposRemoveEntry.Image"), System.Drawing.Image)
-        Me.ContextMenuStripReposRemoveEntry.Name = "ContextMenuStripReposRemoveEntry"
-        Me.ContextMenuStripReposRemoveEntry.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposRemoveEntry.Text = "Remove Entry"
-        '
-        'ContextMenuStripReposCDHere
-        '
-        Me.ContextMenuStripReposCDHere.Image = CType(resources.GetObject("ContextMenuStripReposCDHere.Image"), System.Drawing.Image)
-        Me.ContextMenuStripReposCDHere.Name = "ContextMenuStripReposCDHere"
-        Me.ContextMenuStripReposCDHere.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposCDHere.Text = "CD Here..."
-        '
-        'ContextMenuStripReposGitPullThis
-        '
-        Me.ContextMenuStripReposGitPullThis.Image = CType(resources.GetObject("ContextMenuStripReposGitPullThis.Image"), System.Drawing.Image)
-        Me.ContextMenuStripReposGitPullThis.Name = "ContextMenuStripReposGitPullThis"
-        Me.ContextMenuStripReposGitPullThis.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposGitPullThis.Text = "Git Pull this"
-        '
-        'ContextMenuStripReposGitPushThis
-        '
-        Me.ContextMenuStripReposGitPushThis.Image = CType(resources.GetObject("ContextMenuStripReposGitPushThis.Image"), System.Drawing.Image)
-        Me.ContextMenuStripReposGitPushThis.Name = "ContextMenuStripReposGitPushThis"
-        Me.ContextMenuStripReposGitPushThis.Size = New System.Drawing.Size(272, 22)
-        Me.ContextMenuStripReposGitPushThis.Text = "Git Push this"
         '
         'GitUpdater
         '
@@ -680,7 +667,6 @@ Partial Class GitUpdater
     Private WithEvents lblPassword As System.Windows.Forms.Label
     Private WithEvents btnHotkey As System.Windows.Forms.Button
     Private WithEvents btnSave As System.Windows.Forms.Button
-    Private WithEvents lblHotkey As System.Windows.Forms.Label
     Private WithEvents grpCredMan As System.Windows.Forms.GroupBox
     Private WithEvents btnInsertCredentials As System.Windows.Forms.Button
     Private WithEvents btnCancel As System.Windows.Forms.Button

@@ -722,10 +722,10 @@ Public Class GitUpdater
 
     Sub TimerKeyChecker_Tick(sender As Object, e As EventArgs) Handles timerKeyChecker.Tick
         If btnHotkey.Text = "Hotkey Enabled!" Then
-            btnHotkey.Text = "Disable Hotkey"
+            btnHotkey.Text = "Disable Hotkey (Alt)"
             timerKeyChecker.Interval = 100
         ElseIf btnHotkey.Text = "Hotkey Disabled!" Then
-            btnHotkey.Text = "Enable Hotkey"
+            btnHotkey.Text = "Enable Hotkey (Alt)"
             timerKeyChecker.Stop()
         End If
         If My.Computer.Keyboard.AltKeyDown = True Then
@@ -736,11 +736,11 @@ Public Class GitUpdater
     End Sub
 
     Sub BtnHotkey_Click(sender As Object, e As EventArgs) Handles btnHotkey.Click
-        If btnHotkey.Text = "Enable Hotkey" Then
+        If btnHotkey.Text = "Enable Hotkey (Alt)" Then
             btnHotkey.Text = "Hotkey Enabled!"
             timerKeyChecker.Interval = 1000
             timerKeyChecker.Start()
-        ElseIf btnHotkey.Text = "Disable Hotkey" Then
+        ElseIf btnHotkey.Text = "Disable Hotkey (Alt)" Then
             btnHotkey.Text = "Hotkey Disabled!"
             timerKeyChecker.Interval = 1000
         End If
@@ -781,6 +781,7 @@ Public Class GitUpdater
                 ContextMenuStripReposOpenReadme.Visible = True
                 ContextMenuStripReposOpenReadme.Text = "Open Wiki home.md"
                 ContextMenuStripReposOpenSLN.Visible = False
+                ContextMenuStripReposOpenURL.Text = "Open Wiki URL"
                 ContextMenuStripReposSeparator2.Visible = True
                 ContextMenuStripReposCopyRepoName.Visible = True
                 ContextMenuStripReposCopyRepoName.Text = "Copy Wiki Name"
@@ -802,6 +803,7 @@ Public Class GitUpdater
                 ContextMenuStripReposOpenReadme.Visible = True
                 ContextMenuStripReposOpenReadme.Text = "Open Site index.html"
                 ContextMenuStripReposOpenSLN.Visible = False
+                ContextMenuStripReposOpenURL.Text = "Open Site GitHub URL"
                 ContextMenuStripReposSeparator2.Visible = True
                 ContextMenuStripReposCopyRepoName.Visible = True
                 ContextMenuStripReposCopyRepoName.Text = "Copy Site Name"
@@ -824,6 +826,7 @@ Public Class GitUpdater
                 ContextMenuStripReposOpenReadme.Text = "Open Repo Readme"
                 ContextMenuStripReposOpenSLN.Visible = True
                 ContextMenuStripReposOpenSLN.Text = "Open Repo SLN"
+                ContextMenuStripReposOpenURL.Text = "Open Repo URL"
                 ContextMenuStripReposSeparator2.Visible = True
                 ContextMenuStripReposCopyRepoName.Visible = True
                 ContextMenuStripReposCopyRepoName.Text = "Copy Repo Name"
@@ -845,6 +848,7 @@ Public Class GitUpdater
             ContextMenuStripReposSeparator1.Visible = True
             ContextMenuStripReposOpenReadme.Visible = False
             ContextMenuStripReposOpenSLN.Visible = False
+            ContextMenuStripReposOpenURL.Text = "Open Folder URL"
             ContextMenuStripReposSeparator2.Visible = False
             ContextMenuStripReposCopyRepoName.Visible = False
             ContextMenuStripReposCopyRepoPath.Visible = True
