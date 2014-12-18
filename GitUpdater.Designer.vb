@@ -81,6 +81,7 @@ Partial Class GitUpdater
         Me.btnCloseCmd = New System.Windows.Forms.Button()
         Me.SaveLogFileDialog = New System.Windows.Forms.SaveFileDialog()
         Me.chkShowErrors = New System.Windows.Forms.CheckBox()
+        Me.timerAutoInsert = New System.Windows.Forms.Timer(Me.components)
         Me.ContextMenuStripRepos.SuspendLayout()
         Me.grpGUI.SuspendLayout()
         Me.grpData.SuspendLayout()
@@ -617,6 +618,10 @@ Partial Class GitUpdater
         Me.chkShowErrors.Text = "Show TaskBarItemState change errors"
         Me.chkShowErrors.UseVisualStyleBackColor = True
         '
+        'timerAutoInsert
+        '
+        Me.timerAutoInsert.Interval = 500
+        '
         'GitUpdater
         '
         Me.AcceptButton = Me.btnGitPushSelected
@@ -716,4 +721,5 @@ Partial Class GitUpdater
     Friend WithEvents chkGitRepoOnly As System.Windows.Forms.CheckBox
     Friend WithEvents ContextMenuStripReposOpenURL As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents chkAutoInsert As System.Windows.Forms.CheckBox
+    Friend WithEvents timerAutoInsert As System.Windows.Forms.Timer
 End Class

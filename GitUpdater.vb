@@ -514,8 +514,8 @@ Public Class GitUpdater
                                 Continue For
                             End If
                         End If
+                        timerAutoInsert.Start()
                         Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
-                        If chkAutoInsert.Checked = True And GitCommand = "push" And chkDontShow.Checked = False Then SendKeys.Send(txtUsername.Text & "~" & txtPassword.Text & "~")
                         progressBar.Value = i
                         TaskbarInfoUpdate(TaskbarItemProgressState.Paused, i / lstRepos.Items.Count)
                     Next
@@ -527,8 +527,8 @@ Public Class GitUpdater
                         progressBar.Maximum = 2
                         progressBar.Value = 1
                         TaskbarInfoUpdate(TaskbarItemProgressState.Indeterminate, 0.5)
+                        timerAutoInsert.Start()
                         Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, vbNormalFocus, True, Wait)
-                        If chkAutoInsert.Checked = True And GitCommand = "push" And chkDontShow.Checked = False Then SendKeys.Send(txtUsername.Text & "~" & txtPassword.Text & "~")
                         progressBar.Value = progressBar.Maximum
                         TaskbarInfoUpdate(TaskbarItemProgressState.Normal, 1)
                     End If
@@ -543,8 +543,8 @@ Public Class GitUpdater
                                         Continue For
                                     End If
                                 End If
+                                timerAutoInsert.Start()
                                 Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
-                                If chkAutoInsert.Checked = True And GitCommand = "push" And chkDontShow.Checked = False Then SendKeys.Send(txtUsername.Text & "~" & txtPassword.Text & "~")
                                 progressBar.Value = i
                                 TaskbarInfoUpdate(TaskbarItemProgressState.Normal, i / lstRepos.Items.Count)
                             End If
@@ -559,8 +559,8 @@ Public Class GitUpdater
                         progressBar.Maximum = 2
                         progressBar.Value = 1
                         TaskbarProgress.ProgressValue = 0.5
+                        timerAutoInsert.Start()
                         Shell("GitUpdater.bat " & Dir & cmdRepo & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, vbNormalFocus, True, Wait)
-                        If chkAutoInsert.Checked = True And GitCommand = "push" And chkDontShow.Checked = False Then SendKeys.Send(txtUsername.Text & "~" & txtPassword.Text & "~")
                         progressBar.Value = progressBar.Maximum
                         TaskbarInfoUpdate(TaskbarItemProgressState.Normal, 1)
                     End If
@@ -575,8 +575,8 @@ Public Class GitUpdater
                                         Continue For
                                     End If
                                 End If
+                                timerAutoInsert.Start()
                                 Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
-                                If chkAutoInsert.Checked = True And GitCommand = "push" And chkDontShow.Checked = False Then SendKeys.Send(txtUsername.Text & "~" & txtPassword.Text & "~")
                                 progressBar.Value = i
                                 TaskbarInfoUpdate(TaskbarItemProgressState.Paused, i / lstRepos.Items.Count)
                             End If
@@ -707,6 +707,20 @@ Public Class GitUpdater
         End If
     End Sub
 
+    Sub btnCloseCmd_Click(sender As Object, e As EventArgs) Handles btnCloseCmd.Click
+        If ShellWorker.IsBusy = False Then
+            If MsgBox("No git operation from this program is in progress, are you sure you want to insert commands to close a CMD window?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirmation") = vbNo Then Exit Sub
+        End If
+        Me.WindowState = FormWindowState.Minimized
+        System.Threading.Thread.Sleep(500)
+        SendKeys.SendWait("^C")
+        System.Threading.Thread.Sleep(500)
+        SendKeys.SendWait("Y")
+        SendKeys.SendWait("~")
+        Me.WindowState = FormWindowState.Normal
+        Me.BringToFront()
+    End Sub
+
     ' credentials-related stuff
 
     Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -740,6 +754,11 @@ Public Class GitUpdater
         End If
     End Sub
 
+    Private Sub timerAutoInsert_Tick(sender As Object, e As EventArgs) Handles timerAutoInsert.Tick
+        timerAutoInsert.Stop()
+        If chkAutoInsert.Checked = True And GitCommand = "push" And chkDontShow.Checked = False Then SendKeys.Send(txtUsername.Text & "~" & txtPassword.Text & "~")
+    End Sub
+
     Sub btnHotkey_Click(sender As Object, e As EventArgs) Handles btnHotkey.Click
         If btnHotkey.Text = "Enable Hotkey (Alt)" Then
             btnHotkey.Text = "Hotkey Enabled!"
@@ -757,20 +776,6 @@ Public Class GitUpdater
 
     Private Sub btnShowPass_MouseUp(sender As Object, e As MouseEventArgs) Handles btnShowPass.MouseUp
         txtPassword.PasswordChar = "●"
-    End Sub
-
-    Sub btnCloseCmd_Click(sender As Object, e As EventArgs) Handles btnCloseCmd.Click
-        If ShellWorker.IsBusy = False Then
-            If MsgBox("No git operation from this program is in progress, are you sure you want to insert commands to close a CMD window?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirmation") = vbNo Then Exit Sub
-        End If
-        Me.WindowState = FormWindowState.Minimized
-        System.Threading.Thread.Sleep(500)
-        SendKeys.SendWait("^C")
-        System.Threading.Thread.Sleep(500)
-        SendKeys.SendWait("Y")
-        SendKeys.SendWait("~")
-        Me.WindowState = FormWindowState.Normal
-        Me.BringToFront()
     End Sub
 
     ' updating the interface
