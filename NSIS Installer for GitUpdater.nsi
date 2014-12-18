@@ -1,6 +1,6 @@
 ; GitUpdater Installer NSIS Script
 ; get NSIS at http://tenet.dl.sourceforge.net/project/nsis/NSIS%202/2.46/nsis-2.46-setup.exe
-; As a program that all Power PC users should have, Notepad ++ is recommended to edit this file
+; As a program that all Power PC users should have, Notepad++ is recommended to edit this file
 
 AddBrandingImage top 20
 Icon "My Project\git.ico"
@@ -72,16 +72,16 @@ SectionEnd
 ; Uninstaller
 
 Section "Uninstall"
-  Delete $INSTDIR\GitUpdater-Uninst.exe   ; Remove Application Files
-  Delete $INSTDIR\GitUpdater.exe
+  Delete "$INSTDIR\GitUpdater-Uninst.exe"   ; Remove Application Files
+  Delete "$INSTDIR\GitUpdater.exe"
   RMDir $INSTDIR
   
-  Delete $SMPROGRAMS\DeavmiOSS\GitUpdater.lnk   ; Remove Start Menu Shortcuts & Folder
+  Delete "$SMPROGRAMS\DeavmiOSS\GitUpdater.lnk"   ; Remove Start Menu Shortcuts & Folder
   Delete "$SMPROGRAMS\DeavmiOSS\Uninstall GitUpdater.lnk"
   RMDir $SMPROGRAMS\DeavmiOSS
   
-  Delete $DESKTOP\GitUpdater.lnk   ; Remove Desktop Shortcut
-  Delete $QUICKLAUNCH\GitUpdater.lnk   ; Remove Quick Launch shortcut
+  Delete "$DESKTOP\GitUpdater.lnk"   ; Remove Desktop Shortcut
+  Delete "$QUICKLAUNCH\GitUpdater.lnk"   ; Remove Quick Launch shortcut
 SectionEnd
 
 ; Functions
