@@ -26,12 +26,13 @@ rem Run the Git command
 git %~2
 
 rem If it doesn't fail, go to the end of no logging code
-if ERRORLEVEL==0 goto end
+if Not ERRORLEVEL==1 goto end
 
 rem If it should retry if it fails go to start
 if %~3==True (
     echo.
     echo Failed to %~2 repo at "%~1", trying again...
+    timeout 10 /NOBREAK
     goto start
 )
 
@@ -57,13 +58,14 @@ rem Run the Git command
 git %~2 >> %~6
 
 rem If it doesn't fail, go to the end of code with logging
-if ERRORLEVEL==0 goto logend
+if Not ERRORLEVEL==1 goto logend
 
 rem If it should retry if it fails go to logging start
 if %~3==True (
     @echo [%date% %time%] Failed to %~2 repo at "%~1", trying again... >> %~6
     echo.
     echo Failed to %~2 repo at "%~1", trying again...
+    timeout 10 /NOBREAK
     goto log
 )
 @echo [%date% %time%] Failed to %~2 repo at "%~1", retry disabled. >> %~6
