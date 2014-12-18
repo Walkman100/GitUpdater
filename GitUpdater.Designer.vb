@@ -620,6 +620,7 @@ Partial Class GitUpdater
         '
         'timerAutoInsert
         '
+        Me.timerAutoInsert.Enabled = True
         Me.timerAutoInsert.Interval = 500
         '
         'GitUpdater

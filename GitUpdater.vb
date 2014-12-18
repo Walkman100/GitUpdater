@@ -7,7 +7,7 @@ Public Class GitUpdater
     Dim cmdRepo As String = ""
     Dim count, GitCommand As String  ' because the Worker doesn't support direct sub calling
     Dim ExitWhenDone As Boolean = False
-    Dim LineIsOrigin, LineIsUpstream As Boolean
+    Dim LineIsOrigin, LineIsUpstream, notInserted As Boolean
     Dim PSFiles() As String = {"CheckVersion.ps1", "GitPrompt.ps1", "GitTabExpansion.ps1", "GitUtils.ps1", "TortoiseGit.ps1", "Utils.ps1", "posh-git.psm1", "profile.example.ps1"}
 
     Dim CmdStyle As AppWinStyle  ' window location of CMD
@@ -502,6 +502,7 @@ Public Class GitUpdater
             btnGitPushNotSelected.Enabled = False
             btnCD.Enabled = False
             btnCancel.Enabled = True
+            timerAutoInsert.Start()
 
             If chkDontShow.Checked = False Then Me.TopMost = True
             progressBar.Maximum = lstRepos.Items.Count
@@ -514,7 +515,7 @@ Public Class GitUpdater
                                 Continue For
                             End If
                         End If
-                        timerAutoInsert.Start()
+                        notInserted = True
                         Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                         progressBar.Value = i
                         TaskbarInfoUpdate(TaskbarItemProgressState.Paused, i / lstRepos.Items.Count)
@@ -527,7 +528,7 @@ Public Class GitUpdater
                         progressBar.Maximum = 2
                         progressBar.Value = 1
                         TaskbarInfoUpdate(TaskbarItemProgressState.Indeterminate, 0.5)
-                        timerAutoInsert.Start()
+                        notInserted = True
                         Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, vbNormalFocus, True, Wait)
                         progressBar.Value = progressBar.Maximum
                         TaskbarInfoUpdate(TaskbarItemProgressState.Normal, 1)
@@ -543,7 +544,7 @@ Public Class GitUpdater
                                         Continue For
                                     End If
                                 End If
-                                timerAutoInsert.Start()
+                                notInserted = True
                                 Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                                 progressBar.Value = i
                                 TaskbarInfoUpdate(TaskbarItemProgressState.Normal, i / lstRepos.Items.Count)
@@ -559,7 +560,7 @@ Public Class GitUpdater
                         progressBar.Maximum = 2
                         progressBar.Value = 1
                         TaskbarProgress.ProgressValue = 0.5
-                        timerAutoInsert.Start()
+                        notInserted = True
                         Shell("GitUpdater.bat " & Dir & cmdRepo & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, vbNormalFocus, True, Wait)
                         progressBar.Value = progressBar.Maximum
                         TaskbarInfoUpdate(TaskbarItemProgressState.Normal, 1)
@@ -575,7 +576,7 @@ Public Class GitUpdater
                                         Continue For
                                     End If
                                 End If
-                                timerAutoInsert.Start()
+                                notInserted = True
                                 Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                                 progressBar.Value = i
                                 TaskbarInfoUpdate(TaskbarItemProgressState.Paused, i / lstRepos.Items.Count)
@@ -755,8 +756,16 @@ Public Class GitUpdater
     End Sub
 
     Private Sub timerAutoInsert_Tick(sender As Object, e As EventArgs) Handles timerAutoInsert.Tick
-        timerAutoInsert.Stop()
-        If chkAutoInsert.Checked = True And GitCommand = "push" And chkDontShow.Checked = False Then SendKeys.Send(txtUsername.Text & "~" & txtPassword.Text & "~")
+        If chkAutoInsert.Checked = True Then
+            If GitCommand = "push" Then
+                If chkDontShow.Checked = False Then
+                    If notInserted Then
+                        SendKeys.Send(txtUsername.Text & "~" & txtPassword.Text & "~")
+                        notInserted = False
+                    End If
+                End If
+            End If
+        End If
     End Sub
 
     Sub btnHotkey_Click(sender As Object, e As EventArgs) Handles btnHotkey.Click
