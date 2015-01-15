@@ -1,5 +1,4 @@
 ﻿Imports System.Windows.Shell
-Imports System.IO.Compression
 
 Public Class GitUpdater
 
