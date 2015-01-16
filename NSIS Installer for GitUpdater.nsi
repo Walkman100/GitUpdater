@@ -1,5 +1,5 @@
 ; GitUpdater Installer NSIS Script
-; get NSIS at http://tenet.dl.sourceforge.net/project/nsis/NSIS%202/2.46/nsis-2.46-setup.exe
+; get NSIS at http://nsis.sourceforge.net/Download
 ; As a program that all Power PC users should have, Notepad++ is recommended to edit this file
 
 AddBrandingImage top 20
@@ -34,6 +34,7 @@ Section "GitUpdater Executable & Uninstaller"
   SetOutPath $INSTDIR
   File "bin\Release\GitUpdater.exe"
   File "bin\Release\GitUpdater.bat"
+  File "bin\Release\OpenRepoInBash.bat"
   WriteUninstaller "GitUpdater-Uninst.exe"
 SectionEnd
 
