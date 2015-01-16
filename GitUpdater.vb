@@ -218,9 +218,9 @@ Public Class GitUpdater
     
     Sub ContextMenuStripReposOpenInBash_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposOpenInBash.Click
         If lstRepos.SelectedIndex <> -1 Then
-            Process.Start(Environment.GetEnvironmentVariable("ProgramFiles") & "\Git\bin\sh.exe", "--login -i -c 'cd " & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "'")
+            Process.Start("OpenRepoInBash.bat", """" & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & """")
         Else
-            Process.Start(Environment.GetEnvironmentVariable("ProgramFiles") & "\Git\bin\sh.exe", "--login -i -c 'cd " & Dir & "'")
+            Process.Start("OpenRepoInBash.bat", """" & Dir & """")
         End If
     End Sub
 
