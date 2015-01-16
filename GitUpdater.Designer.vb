@@ -32,6 +32,7 @@ Partial Class GitUpdater
         Me.ContextMenuStripReposOpenInExplorer = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposOpenInCMD = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposOpenInPS = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposOpenInBash = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposOpenInGitHub = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ContextMenuStripReposOpenReadme = New System.Windows.Forms.ToolStripMenuItem()
@@ -82,65 +83,65 @@ Partial Class GitUpdater
         Me.SaveLogFileDialog = New System.Windows.Forms.SaveFileDialog()
         Me.chkShowErrors = New System.Windows.Forms.CheckBox()
         Me.timerAutoInsert = New System.Windows.Forms.Timer(Me.components)
-        Me.ContextMenuStripRepos.SuspendLayout()
-        Me.grpGUI.SuspendLayout()
-        Me.grpData.SuspendLayout()
-        Me.grpCredMan.SuspendLayout()
-        Me.SuspendLayout()
+        Me.ContextMenuStripRepos.SuspendLayout
+        Me.grpGUI.SuspendLayout
+        Me.grpData.SuspendLayout
+        Me.grpCredMan.SuspendLayout
+        Me.SuspendLayout
         '
         'btnExit
         '
-        Me.btnExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnExit.AutoSize = True
+        Me.btnExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnExit.AutoSize = true
         Me.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnExit.Location = New System.Drawing.Point(449, 508)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(63, 23)
         Me.btnExit.TabIndex = 10
         Me.btnExit.Text = "Close"
-        Me.btnExit.UseVisualStyleBackColor = True
+        Me.btnExit.UseVisualStyleBackColor = true
         '
         'btnGitPullAll
         '
-        Me.btnGitPullAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGitPullAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnGitPullAll.Location = New System.Drawing.Point(266, 228)
         Me.btnGitPullAll.Name = "btnGitPullAll"
         Me.btnGitPullAll.Size = New System.Drawing.Size(120, 23)
         Me.btnGitPullAll.TabIndex = 11
         Me.btnGitPullAll.Text = "Git Pull all"
-        Me.btnGitPullAll.UseVisualStyleBackColor = True
+        Me.btnGitPullAll.UseVisualStyleBackColor = true
         '
         'btnGitPushAll
         '
-        Me.btnGitPushAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGitPushAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnGitPushAll.Location = New System.Drawing.Point(392, 228)
         Me.btnGitPushAll.Name = "btnGitPushAll"
         Me.btnGitPushAll.Size = New System.Drawing.Size(120, 23)
         Me.btnGitPushAll.TabIndex = 12
         Me.btnGitPushAll.Text = "Git Push all"
-        Me.btnGitPushAll.UseVisualStyleBackColor = True
+        Me.btnGitPushAll.UseVisualStyleBackColor = true
         '
         'lstRepos
         '
-        Me.lstRepos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lstRepos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+                        Or System.Windows.Forms.AnchorStyles.Left)  _
+                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lstRepos.ContextMenuStrip = Me.ContextMenuStripRepos
-        Me.lstRepos.FormattingEnabled = True
-        Me.lstRepos.HorizontalScrollbar = True
-        Me.lstRepos.IntegralHeight = False
+        Me.lstRepos.FormattingEnabled = true
+        Me.lstRepos.HorizontalScrollbar = true
+        Me.lstRepos.IntegralHeight = false
         Me.lstRepos.Location = New System.Drawing.Point(12, 12)
         Me.lstRepos.Name = "lstRepos"
         Me.lstRepos.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
         Me.lstRepos.Size = New System.Drawing.Size(248, 518)
-        Me.lstRepos.Sorted = True
+        Me.lstRepos.Sorted = true
         Me.lstRepos.TabIndex = 13
         '
         'ContextMenuStripRepos
         '
-        Me.ContextMenuStripRepos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContextMenuStripReposOpenInExplorer, Me.ContextMenuStripReposOpenInCMD, Me.ContextMenuStripReposOpenInPS, Me.ContextMenuStripReposOpenInGitHub, Me.ContextMenuStripReposSeparator1, Me.ContextMenuStripReposOpenReadme, Me.ContextMenuStripReposOpenSLN, Me.ContextMenuStripReposOpenURL, Me.ContextMenuStripReposSeparator2, Me.ContextMenuStripReposCopyRepoName, Me.ContextMenuStripReposCopyRepoPath, Me.ContextMenuStripReposSeparator3, Me.ContextMenuStripReposRemoveEntry, Me.ContextMenuStripReposCDHere, Me.ContextMenuStripReposSeparator4, Me.ContextMenuStripReposGitPullThis, Me.ContextMenuStripReposGitPushThis})
+        Me.ContextMenuStripRepos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContextMenuStripReposOpenInExplorer, Me.ContextMenuStripReposOpenInCMD, Me.ContextMenuStripReposOpenInPS, Me.ContextMenuStripReposOpenInBash, Me.ContextMenuStripReposOpenInGitHub, Me.ContextMenuStripReposSeparator1, Me.ContextMenuStripReposOpenReadme, Me.ContextMenuStripReposOpenSLN, Me.ContextMenuStripReposOpenURL, Me.ContextMenuStripReposSeparator2, Me.ContextMenuStripReposCopyRepoName, Me.ContextMenuStripReposCopyRepoPath, Me.ContextMenuStripReposSeparator3, Me.ContextMenuStripReposRemoveEntry, Me.ContextMenuStripReposCDHere, Me.ContextMenuStripReposSeparator4, Me.ContextMenuStripReposGitPullThis, Me.ContextMenuStripReposGitPushThis})
         Me.ContextMenuStripRepos.Name = "contextMenuStripRepos"
-        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 314)
+        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 358)
         '
         'ContextMenuStripReposOpenInExplorer
         '
@@ -165,6 +166,13 @@ Partial Class GitUpdater
         Me.ContextMenuStripReposOpenInPS.Name = "ContextMenuStripReposOpenInPS"
         Me.ContextMenuStripReposOpenInPS.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposOpenInPS.Text = "Open Repo in Windows PowerShell"
+        '
+        'ContextMenuStripReposOpenInBash
+        '
+        Me.ContextMenuStripReposOpenInBash.Image = CType(resources.GetObject("ContextMenuStripReposOpenInBash.Image"),System.Drawing.Image)
+        Me.ContextMenuStripReposOpenInBash.Name = "ContextMenuStripReposOpenInBash"
+        Me.ContextMenuStripReposOpenInBash.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposOpenInBash.Text = "Open Repo in Git Bash"
         '
         'ContextMenuStripReposOpenInGitHub
         '
@@ -225,14 +233,14 @@ Partial Class GitUpdater
         '
         'ContextMenuStripReposRemoveEntry
         '
-        Me.ContextMenuStripReposRemoveEntry.Image = CType(resources.GetObject("ContextMenuStripReposRemoveEntry.Image"), System.Drawing.Image)
+        Me.ContextMenuStripReposRemoveEntry.Image = CType(resources.GetObject("ContextMenuStripReposRemoveEntry.Image"),System.Drawing.Image)
         Me.ContextMenuStripReposRemoveEntry.Name = "ContextMenuStripReposRemoveEntry"
         Me.ContextMenuStripReposRemoveEntry.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposRemoveEntry.Text = "Remove Entry"
         '
         'ContextMenuStripReposCDHere
         '
-        Me.ContextMenuStripReposCDHere.Image = CType(resources.GetObject("ContextMenuStripReposCDHere.Image"), System.Drawing.Image)
+        Me.ContextMenuStripReposCDHere.Image = CType(resources.GetObject("ContextMenuStripReposCDHere.Image"),System.Drawing.Image)
         Me.ContextMenuStripReposCDHere.Name = "ContextMenuStripReposCDHere"
         Me.ContextMenuStripReposCDHere.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposCDHere.Text = "CD Here..."
@@ -244,117 +252,117 @@ Partial Class GitUpdater
         '
         'ContextMenuStripReposGitPullThis
         '
-        Me.ContextMenuStripReposGitPullThis.Image = CType(resources.GetObject("ContextMenuStripReposGitPullThis.Image"), System.Drawing.Image)
+        Me.ContextMenuStripReposGitPullThis.Image = CType(resources.GetObject("ContextMenuStripReposGitPullThis.Image"),System.Drawing.Image)
         Me.ContextMenuStripReposGitPullThis.Name = "ContextMenuStripReposGitPullThis"
         Me.ContextMenuStripReposGitPullThis.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposGitPullThis.Text = "Git Pull this"
         '
         'ContextMenuStripReposGitPushThis
         '
-        Me.ContextMenuStripReposGitPushThis.Image = CType(resources.GetObject("ContextMenuStripReposGitPushThis.Image"), System.Drawing.Image)
+        Me.ContextMenuStripReposGitPushThis.Image = CType(resources.GetObject("ContextMenuStripReposGitPushThis.Image"),System.Drawing.Image)
         Me.ContextMenuStripReposGitPushThis.Name = "ContextMenuStripReposGitPushThis"
         Me.ContextMenuStripReposGitPushThis.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposGitPushThis.Text = "Git Push this"
         '
         'btnRefresh
         '
-        Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnRefresh.AutoSize = True
+        Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnRefresh.AutoSize = true
         Me.btnRefresh.Location = New System.Drawing.Point(266, 508)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(63, 23)
         Me.btnRefresh.TabIndex = 14
         Me.btnRefresh.Text = "Refresh"
-        Me.btnRefresh.UseVisualStyleBackColor = True
+        Me.btnRefresh.UseVisualStyleBackColor = true
         '
         'btnGitPullSelected
         '
-        Me.btnGitPullSelected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGitPullSelected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnGitPullSelected.Location = New System.Drawing.Point(266, 257)
         Me.btnGitPullSelected.Name = "btnGitPullSelected"
         Me.btnGitPullSelected.Size = New System.Drawing.Size(120, 23)
         Me.btnGitPullSelected.TabIndex = 15
         Me.btnGitPullSelected.Text = "Git Pull selected"
-        Me.btnGitPullSelected.UseVisualStyleBackColor = True
+        Me.btnGitPullSelected.UseVisualStyleBackColor = true
         '
         'btnGitPushSelected
         '
-        Me.btnGitPushSelected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGitPushSelected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnGitPushSelected.Location = New System.Drawing.Point(392, 257)
         Me.btnGitPushSelected.Name = "btnGitPushSelected"
         Me.btnGitPushSelected.Size = New System.Drawing.Size(120, 23)
         Me.btnGitPushSelected.TabIndex = 16
         Me.btnGitPushSelected.Text = "Git Push selected"
-        Me.btnGitPushSelected.UseVisualStyleBackColor = True
+        Me.btnGitPushSelected.UseVisualStyleBackColor = true
         '
         'btnCD
         '
-        Me.btnCD.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCD.AutoSize = True
+        Me.btnCD.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnCD.AutoSize = true
         Me.btnCD.Location = New System.Drawing.Point(335, 508)
         Me.btnCD.Name = "btnCD"
         Me.btnCD.Size = New System.Drawing.Size(108, 23)
         Me.btnCD.TabIndex = 17
         Me.btnCD.Text = "Change Directory..."
-        Me.btnCD.UseVisualStyleBackColor = True
+        Me.btnCD.UseVisualStyleBackColor = true
         '
         'btnGitPushNotSelected
         '
-        Me.btnGitPushNotSelected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGitPushNotSelected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnGitPushNotSelected.Location = New System.Drawing.Point(392, 286)
         Me.btnGitPushNotSelected.Name = "btnGitPushNotSelected"
         Me.btnGitPushNotSelected.Size = New System.Drawing.Size(120, 23)
         Me.btnGitPushNotSelected.TabIndex = 18
         Me.btnGitPushNotSelected.Text = "...all except selected"
-        Me.btnGitPushNotSelected.UseVisualStyleBackColor = True
+        Me.btnGitPushNotSelected.UseVisualStyleBackColor = true
         '
         'btnGitPullNotSelected
         '
-        Me.btnGitPullNotSelected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGitPullNotSelected.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnGitPullNotSelected.Location = New System.Drawing.Point(266, 286)
         Me.btnGitPullNotSelected.Name = "btnGitPullNotSelected"
         Me.btnGitPullNotSelected.Size = New System.Drawing.Size(120, 23)
         Me.btnGitPullNotSelected.TabIndex = 19
         Me.btnGitPullNotSelected.Text = "...all except selected"
-        Me.btnGitPullNotSelected.UseVisualStyleBackColor = True
+        Me.btnGitPullNotSelected.UseVisualStyleBackColor = true
         '
         'chkRepeat
         '
-        Me.chkRepeat.AutoSize = True
+        Me.chkRepeat.AutoSize = true
         Me.chkRepeat.BackColor = System.Drawing.Color.Transparent
-        Me.chkRepeat.Checked = True
+        Me.chkRepeat.Checked = true
         Me.chkRepeat.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkRepeat.Location = New System.Drawing.Point(6, 19)
         Me.chkRepeat.Name = "chkRepeat"
         Me.chkRepeat.Size = New System.Drawing.Size(125, 17)
         Me.chkRepeat.TabIndex = 20
         Me.chkRepeat.Text = "Repeat until success"
-        Me.chkRepeat.UseVisualStyleBackColor = False
+        Me.chkRepeat.UseVisualStyleBackColor = false
         '
         'chkDontClose
         '
-        Me.chkDontClose.AutoSize = True
+        Me.chkDontClose.AutoSize = true
         Me.chkDontClose.Location = New System.Drawing.Point(6, 42)
         Me.chkDontClose.Name = "chkDontClose"
         Me.chkDontClose.Size = New System.Drawing.Size(223, 17)
         Me.chkDontClose.TabIndex = 22
         Me.chkDontClose.Text = "Don't close command window when done"
-        Me.chkDontClose.UseVisualStyleBackColor = True
+        Me.chkDontClose.UseVisualStyleBackColor = true
         '
         'chkNoWait
         '
-        Me.chkNoWait.AutoSize = True
+        Me.chkNoWait.AutoSize = true
         Me.chkNoWait.BackColor = System.Drawing.Color.Transparent
         Me.chkNoWait.Location = New System.Drawing.Point(6, 19)
         Me.chkNoWait.Name = "chkNoWait"
         Me.chkNoWait.Size = New System.Drawing.Size(244, 17)
         Me.chkNoWait.TabIndex = 23
         Me.chkNoWait.Text = "Don't wait for cmd to close before starting next"
-        Me.chkNoWait.UseVisualStyleBackColor = False
+        Me.chkNoWait.UseVisualStyleBackColor = false
         '
         'grpGUI
         '
-        Me.grpGUI.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpGUI.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.grpGUI.Controls.Add(Me.chkDontShow)
         Me.grpGUI.Controls.Add(Me.chkNoWait)
         Me.grpGUI.Controls.Add(Me.chkDontClose)
@@ -362,22 +370,22 @@ Partial Class GitUpdater
         Me.grpGUI.Name = "grpGUI"
         Me.grpGUI.Size = New System.Drawing.Size(246, 88)
         Me.grpGUI.TabIndex = 25
-        Me.grpGUI.TabStop = False
+        Me.grpGUI.TabStop = false
         Me.grpGUI.Text = "GUI Options"
         '
         'chkDontShow
         '
-        Me.chkDontShow.AutoSize = True
+        Me.chkDontShow.AutoSize = true
         Me.chkDontShow.Location = New System.Drawing.Point(6, 65)
         Me.chkDontShow.Name = "chkDontShow"
         Me.chkDontShow.Size = New System.Drawing.Size(178, 17)
         Me.chkDontShow.TabIndex = 24
         Me.chkDontShow.Text = "Don't show command window(s)"
-        Me.chkDontShow.UseVisualStyleBackColor = True
+        Me.chkDontShow.UseVisualStyleBackColor = true
         '
         'grpData
         '
-        Me.grpData.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpData.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.grpData.Controls.Add(Me.chkGitRepoOnly)
         Me.grpData.Controls.Add(Me.btnBrowseLog)
         Me.grpData.Controls.Add(Me.txtLogPath)
@@ -388,20 +396,20 @@ Partial Class GitUpdater
         Me.grpData.Name = "grpData"
         Me.grpData.Size = New System.Drawing.Size(246, 116)
         Me.grpData.TabIndex = 26
-        Me.grpData.TabStop = False
+        Me.grpData.TabStop = false
         Me.grpData.Text = "Data Options"
         '
         'chkGitRepoOnly
         '
-        Me.chkGitRepoOnly.AutoSize = True
-        Me.chkGitRepoOnly.Checked = True
+        Me.chkGitRepoOnly.AutoSize = true
+        Me.chkGitRepoOnly.Checked = true
         Me.chkGitRepoOnly.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkGitRepoOnly.Location = New System.Drawing.Point(130, 19)
         Me.chkGitRepoOnly.Name = "chkGitRepoOnly"
         Me.chkGitRepoOnly.Size = New System.Drawing.Size(110, 17)
         Me.chkGitRepoOnly.TabIndex = 26
         Me.chkGitRepoOnly.Text = "Check for git repo"
-        Me.chkGitRepoOnly.UseVisualStyleBackColor = True
+        Me.chkGitRepoOnly.UseVisualStyleBackColor = true
         '
         'btnBrowseLog
         '
@@ -410,7 +418,7 @@ Partial Class GitUpdater
         Me.btnBrowseLog.Size = New System.Drawing.Size(75, 23)
         Me.btnBrowseLog.TabIndex = 25
         Me.btnBrowseLog.Text = "Browse..."
-        Me.btnBrowseLog.UseVisualStyleBackColor = True
+        Me.btnBrowseLog.UseVisualStyleBackColor = true
         '
         'txtLogPath
         '
@@ -421,35 +429,35 @@ Partial Class GitUpdater
         '
         'chkOpenLog
         '
-        Me.chkOpenLog.AutoSize = True
-        Me.chkOpenLog.Checked = True
+        Me.chkOpenLog.AutoSize = true
+        Me.chkOpenLog.Checked = true
         Me.chkOpenLog.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkOpenLog.Location = New System.Drawing.Point(6, 91)
         Me.chkOpenLog.Name = "chkOpenLog"
         Me.chkOpenLog.Size = New System.Drawing.Size(125, 17)
         Me.chkOpenLog.TabIndex = 23
         Me.chkOpenLog.Text = "Open log when done"
-        Me.chkOpenLog.UseVisualStyleBackColor = True
+        Me.chkOpenLog.UseVisualStyleBackColor = true
         '
         'chkLog
         '
-        Me.chkLog.AutoSize = True
-        Me.chkLog.Checked = True
+        Me.chkLog.AutoSize = true
+        Me.chkLog.Checked = true
         Me.chkLog.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkLog.Location = New System.Drawing.Point(6, 42)
         Me.chkLog.Name = "chkLog"
         Me.chkLog.Size = New System.Drawing.Size(169, 17)
         Me.chkLog.TabIndex = 22
         Me.chkLog.Text = "Send output from operation to:"
-        Me.chkLog.UseVisualStyleBackColor = True
+        Me.chkLog.UseVisualStyleBackColor = true
         '
         'ShellWorker
         '
-        Me.ShellWorker.WorkerSupportsCancellation = True
+        Me.ShellWorker.WorkerSupportsCancellation = true
         '
         'progressBar
         '
-        Me.progressBar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.progressBar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.progressBar.Location = New System.Drawing.Point(266, 315)
         Me.progressBar.Name = "progressBar"
         Me.progressBar.Size = New System.Drawing.Size(165, 23)
@@ -458,28 +466,28 @@ Partial Class GitUpdater
         '
         'btnCancel
         '
-        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnCancel.Location = New System.Drawing.Point(437, 315)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 29
         Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = True
+        Me.btnCancel.UseVisualStyleBackColor = true
         '
         'btnInsertCredentials
         '
-        Me.btnInsertCredentials.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnInsertCredentials.AutoSize = True
+        Me.btnInsertCredentials.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.btnInsertCredentials.AutoSize = true
         Me.btnInsertCredentials.Location = New System.Drawing.Point(6, 71)
         Me.btnInsertCredentials.Name = "btnInsertCredentials"
         Me.btnInsertCredentials.Size = New System.Drawing.Size(114, 23)
         Me.btnInsertCredentials.TabIndex = 30
         Me.btnInsertCredentials.Text = "Insert Credentials"
-        Me.btnInsertCredentials.UseVisualStyleBackColor = True
+        Me.btnInsertCredentials.UseVisualStyleBackColor = true
         '
         'grpCredMan
         '
-        Me.grpCredMan.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpCredMan.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.grpCredMan.Controls.Add(Me.btnShowPass)
         Me.grpCredMan.Controls.Add(Me.btnSave)
         Me.grpCredMan.Controls.Add(Me.lblPassword)
@@ -493,12 +501,12 @@ Partial Class GitUpdater
         Me.grpCredMan.Name = "grpCredMan"
         Me.grpCredMan.Size = New System.Drawing.Size(246, 129)
         Me.grpCredMan.TabIndex = 31
-        Me.grpCredMan.TabStop = False
+        Me.grpCredMan.TabStop = false
         Me.grpCredMan.Text = "Credentials Management"
         '
         'btnShowPass
         '
-        Me.btnShowPass.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnShowPass.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnShowPass.BackColor = System.Drawing.Color.White
         Me.btnShowPass.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnShowPass.FlatAppearance.BorderColor = System.Drawing.Color.White
@@ -507,27 +515,27 @@ Partial Class GitUpdater
         Me.btnShowPass.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnShowPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnShowPass.ForeColor = System.Drawing.Color.Transparent
-        Me.btnShowPass.Image = CType(resources.GetObject("btnShowPass.Image"), System.Drawing.Image)
+        Me.btnShowPass.Image = CType(resources.GetObject("btnShowPass.Image"),System.Drawing.Image)
         Me.btnShowPass.Location = New System.Drawing.Point(219, 47)
         Me.btnShowPass.Name = "btnShowPass"
         Me.btnShowPass.Size = New System.Drawing.Size(20, 16)
         Me.btnShowPass.TabIndex = 38
-        Me.btnShowPass.UseVisualStyleBackColor = False
+        Me.btnShowPass.UseVisualStyleBackColor = false
         '
         'btnSave
         '
-        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSave.AutoSize = True
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnSave.AutoSize = true
         Me.btnSave.Location = New System.Drawing.Point(126, 71)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(114, 23)
         Me.btnSave.TabIndex = 36
         Me.btnSave.Text = "Save Credentials"
-        Me.btnSave.UseVisualStyleBackColor = True
+        Me.btnSave.UseVisualStyleBackColor = true
         '
         'lblPassword
         '
-        Me.lblPassword.AutoSize = True
+        Me.lblPassword.AutoSize = true
         Me.lblPassword.Location = New System.Drawing.Point(6, 49)
         Me.lblPassword.Name = "lblPassword"
         Me.lblPassword.Size = New System.Drawing.Size(56, 13)
@@ -536,8 +544,8 @@ Partial Class GitUpdater
         '
         'txtPassword
         '
-        Me.txtPassword.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtPassword.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.txtPassword.Location = New System.Drawing.Point(70, 45)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(9679)
@@ -546,18 +554,18 @@ Partial Class GitUpdater
         '
         'btnHotkey
         '
-        Me.btnHotkey.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnHotkey.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.btnHotkey.Location = New System.Drawing.Point(6, 100)
         Me.btnHotkey.Name = "btnHotkey"
         Me.btnHotkey.Size = New System.Drawing.Size(114, 23)
         Me.btnHotkey.TabIndex = 35
         Me.btnHotkey.Text = "Enable Hotkey (Alt)"
-        Me.btnHotkey.UseVisualStyleBackColor = True
+        Me.btnHotkey.UseVisualStyleBackColor = true
         '
         'txtUsername
         '
-        Me.txtUsername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtUsername.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+                        Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.txtUsername.Location = New System.Drawing.Point(70, 19)
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.Size = New System.Drawing.Size(170, 20)
@@ -565,7 +573,7 @@ Partial Class GitUpdater
         '
         'lblUsername
         '
-        Me.lblUsername.AutoSize = True
+        Me.lblUsername.AutoSize = true
         Me.lblUsername.Location = New System.Drawing.Point(6, 22)
         Me.lblUsername.Name = "lblUsername"
         Me.lblUsername.Size = New System.Drawing.Size(58, 13)
@@ -574,59 +582,56 @@ Partial Class GitUpdater
         '
         'chkAutoInsert
         '
-        Me.chkAutoInsert.Checked = True
+        Me.chkAutoInsert.Checked = true
         Me.chkAutoInsert.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkAutoInsert.Location = New System.Drawing.Point(120, 95)
         Me.chkAutoInsert.Name = "chkAutoInsert"
         Me.chkAutoInsert.Size = New System.Drawing.Size(134, 30)
         Me.chkAutoInsert.TabIndex = 39
         Me.chkAutoInsert.Text = "Auto-insert after starting Push operation"
-        Me.chkAutoInsert.UseVisualStyleBackColor = True
-        '
-        'timerKeyChecker
-        '
+        Me.chkAutoInsert.UseVisualStyleBackColor = true
         '
         'btnCloseCmd
         '
-        Me.btnCloseCmd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCloseCmd.AutoSize = True
+        Me.btnCloseCmd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnCloseCmd.AutoSize = true
         Me.btnCloseCmd.Location = New System.Drawing.Point(266, 344)
         Me.btnCloseCmd.Name = "btnCloseCmd"
         Me.btnCloseCmd.Size = New System.Drawing.Size(246, 23)
         Me.btnCloseCmd.TabIndex = 32
         Me.btnCloseCmd.Text = "Cancel foreground CMD window"
-        Me.btnCloseCmd.UseVisualStyleBackColor = True
+        Me.btnCloseCmd.UseVisualStyleBackColor = true
         '
         'SaveLogFileDialog
         '
         Me.SaveLogFileDialog.DefaultExt = "log"
         Me.SaveLogFileDialog.FileName = "GitUpdater.log"
         Me.SaveLogFileDialog.Filter = "Log files|*.log"
-        Me.SaveLogFileDialog.OverwritePrompt = False
+        Me.SaveLogFileDialog.OverwritePrompt = false
         Me.SaveLogFileDialog.Title = "Choose where to save the log to:"
         '
         'chkShowErrors
         '
-        Me.chkShowErrors.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkShowErrors.AutoSize = True
-        Me.chkShowErrors.Checked = True
+        Me.chkShowErrors.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.chkShowErrors.AutoSize = true
+        Me.chkShowErrors.Checked = true
         Me.chkShowErrors.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkShowErrors.Location = New System.Drawing.Point(267, 537)
         Me.chkShowErrors.Name = "chkShowErrors"
         Me.chkShowErrors.Size = New System.Drawing.Size(209, 17)
         Me.chkShowErrors.TabIndex = 33
         Me.chkShowErrors.Text = "Show TaskBarItemState change errors"
-        Me.chkShowErrors.UseVisualStyleBackColor = True
+        Me.chkShowErrors.UseVisualStyleBackColor = true
         '
         'timerAutoInsert
         '
-        Me.timerAutoInsert.Enabled = True
+        Me.timerAutoInsert.Enabled = true
         Me.timerAutoInsert.Interval = 1000
         '
         'GitUpdater
         '
         Me.AcceptButton = Me.btnGitPushSelected
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnExit
         Me.ClientSize = New System.Drawing.Size(524, 538)
@@ -647,24 +652,24 @@ Partial Class GitUpdater
         Me.Controls.Add(Me.lstRepos)
         Me.Controls.Add(Me.btnGitPushAll)
         Me.Controls.Add(Me.btnGitPullAll)
-        Me.HelpButton = True
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.HelpButton = true
+        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
         Me.Name = "GitUpdater"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "GitUpdater"
-        Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.ContextMenuStripRepos.ResumeLayout(False)
-        Me.grpGUI.ResumeLayout(False)
-        Me.grpGUI.PerformLayout()
-        Me.grpData.ResumeLayout(False)
-        Me.grpData.PerformLayout()
-        Me.grpCredMan.ResumeLayout(False)
-        Me.grpCredMan.PerformLayout()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
-
+        Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
+        Me.ContextMenuStripRepos.ResumeLayout(false)
+        Me.grpGUI.ResumeLayout(false)
+        Me.grpGUI.PerformLayout
+        Me.grpData.ResumeLayout(false)
+        Me.grpData.PerformLayout
+        Me.grpCredMan.ResumeLayout(false)
+        Me.grpCredMan.PerformLayout
+        Me.ResumeLayout(false)
+        Me.PerformLayout
     End Sub
+    Private WithEvents ContextMenuStripReposOpenInBash As System.Windows.Forms.ToolStripMenuItem
     Private WithEvents ContextMenuStripReposOpenSLN As System.Windows.Forms.ToolStripMenuItem
     Private WithEvents ContextMenuStripReposSeparator1 As System.Windows.Forms.ToolStripSeparator
     Private WithEvents ContextMenuStripReposSeparator2 As System.Windows.Forms.ToolStripSeparator
