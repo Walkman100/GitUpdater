@@ -599,7 +599,7 @@ Partial Class GitUpdater
         Me.btnCloseCmd.Name = "btnCloseCmd"
         Me.btnCloseCmd.Size = New System.Drawing.Size(246, 23)
         Me.btnCloseCmd.TabIndex = 32
-        Me.btnCloseCmd.Text = "Cancel foreground CMD window"
+        Me.btnCloseCmd.Text = "Cancel focused CMD window"
         Me.btnCloseCmd.UseVisualStyleBackColor = true
         '
         'SaveLogFileDialog
