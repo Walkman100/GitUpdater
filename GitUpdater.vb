@@ -802,6 +802,7 @@ Public Class GitUpdater
                 ContextMenuStripReposOpenInExplorer.Text = "Open Wiki in Windows Explorer"
                 ContextMenuStripReposOpenInCMD.Text = "Open Wiki in CMD"
                 ContextMenuStripReposOpenInPS.Text = "Open Wiki in Windows PowerShell"
+                ContextMenuStripReposOpenInBash.Text = "Open Wiki in Git Bash"
                 ContextMenuStripReposOpenInGitHub.Text = "Open Wiki in GitHub for Windows"
                 ContextMenuStripReposSeparator1.Visible = True
                 ContextMenuStripReposOpenReadme.Visible = True
@@ -824,6 +825,7 @@ Public Class GitUpdater
                 ContextMenuStripReposOpenInExplorer.Text = "Open Site Folder in Windows Explorer"
                 ContextMenuStripReposOpenInCMD.Text = "Open Site Folder in CMD"
                 ContextMenuStripReposOpenInPS.Text = "Open Site Folder in Windows PowerShell"
+                ContextMenuStripReposOpenInBash.Text = "Open Site Folder in Git Bash"
                 ContextMenuStripReposOpenInGitHub.Text = "Open Site in GitHub for Windows"
                 ContextMenuStripReposSeparator1.Visible = True
                 ContextMenuStripReposOpenReadme.Visible = True
@@ -846,6 +848,7 @@ Public Class GitUpdater
                 ContextMenuStripReposOpenInExplorer.Text = "Open Repo in Windows Explorer"
                 ContextMenuStripReposOpenInCMD.Text = "Open Repo in CMD"
                 ContextMenuStripReposOpenInPS.Text = "Open Repo in Windows PowerShell"
+                ContextMenuStripReposOpenInBash.Text = "Open Repo in Git Bash"
                 ContextMenuStripReposOpenInGitHub.Text = "Open Repo in GitHub for Windows"
                 ContextMenuStripReposSeparator1.Visible = True
                 ContextMenuStripReposOpenReadme.Visible = True
@@ -870,6 +873,7 @@ Public Class GitUpdater
             ContextMenuStripReposOpenInExplorer.Text = "Open Folder in Windows Explorer"
             ContextMenuStripReposOpenInCMD.Text = "Open Folder in CMD"
             ContextMenuStripReposOpenInPS.Text = "Open Folder in Windows PowerShell"
+            ContextMenuStripReposOpenInBash.Text = "Open Folder in Git Bash"
             ContextMenuStripReposOpenInGitHub.Text = "Open Folder in GitHub for Windows"
             ContextMenuStripReposSeparator1.Visible = True
             ContextMenuStripReposOpenReadme.Visible = False
