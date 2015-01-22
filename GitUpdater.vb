@@ -138,7 +138,7 @@ Public Class GitUpdater
 
     Sub LstRepos_DoubleClick(sender As Object, e As EventArgs) Handles lstRepos.DoubleClick, ContextMenuStripReposOpenInExplorer.Click
         If lstRepos.SelectedIndex <> -1 Then
-            Process.Start(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex))
+            Process.Start(Dir & lstRepos.SelectedItem)
         Else
             Process.Start(Dir)
         End If
@@ -146,7 +146,7 @@ Public Class GitUpdater
 
     Sub ContextMenuStripReposOpenInCMD_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposOpenInCMD.Click
         If lstRepos.SelectedIndex <> -1 Then
-            Process.Start("cmd.exe", "/k cd " & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex))
+            Process.Start("cmd.exe", "/k cd " & Dir & lstRepos.SelectedItem)
         Else
             Process.Start("cmd.exe", "/k cd " & Dir)
         End If
@@ -169,7 +169,7 @@ Public Class GitUpdater
             If MsgBox(cmdRepo & "Attempt to download missing files?", MsgBoxStyle.YesNo + MsgBoxStyle.Critical) = MsgBoxResult.No Then
                 If MsgBox("Attempt to run script anyway?", MsgBoxStyle.YesNo + MsgBoxStyle.Question) = MsgBoxResult.No Then Exit Sub
                 If lstRepos.SelectedIndex <> -1 Then
-                    Process.Start("OpenRepoInPS.bat", """" & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & """ " & Environment.CurrentDirectory)
+                    Process.Start("OpenRepoInPS.bat", """" & Dir & lstRepos.SelectedItem & """ " & Environment.CurrentDirectory)
                 Else
                     Process.Start("OpenRepoInPS.bat", """" & Dir & """ " & Environment.CurrentDirectory)
                 End If
@@ -209,7 +209,7 @@ Public Class GitUpdater
             MsgBox("File download attempts complete! Please try your action again.", MsgBoxStyle.Information)
         Else
             If lstRepos.SelectedIndex <> -1 Then
-                Process.Start("OpenRepoInPS.bat", """" & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & """ " & Environment.CurrentDirectory)
+                Process.Start("OpenRepoInPS.bat", """" & Dir & lstRepos.SelectedItem & """ " & Environment.CurrentDirectory)
             Else
                 Process.Start("OpenRepoInPS.bat", """" & Dir & """ " & Environment.CurrentDirectory)
             End If
@@ -218,7 +218,7 @@ Public Class GitUpdater
     
     Sub ContextMenuStripReposOpenInBash_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposOpenInBash.Click
         If lstRepos.SelectedIndex <> -1 Then
-            Process.Start("OpenRepoInBash.bat", """" & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & """")
+            Process.Start("OpenRepoInBash.bat", """" & Dir & lstRepos.SelectedItem & """")
         Else
             Process.Start("OpenRepoInBash.bat", """" & Dir & """")
         End If
@@ -227,7 +227,7 @@ Public Class GitUpdater
     Sub ContextMenuStripReposOpenInGitHub_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposOpenInGitHub.Click
         If lstRepos.SelectedIndex <> -1 Then
             Try
-                Process.Start("github-windows://openRepo/" & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex))
+                Process.Start("github-windows://openRepo/" & Dir & lstRepos.SelectedItem)
             Catch
                 MsgBox("GitHub for windows protocol not found!", MsgBoxStyle.Critical)
             End Try
@@ -242,40 +242,40 @@ Public Class GitUpdater
 
     Sub ContextMenuStripReposOpenReadme_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposOpenReadme.Click
         If lstRepos.SelectedIndex <> -1 Then
-            If lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".wiki") Then
-                If File.Exists(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\home.md") Then
-                    Process.Start(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\home.md")
+            If lstRepos.SelectedItem.ToString.EndsWith(".wiki") Then
+                If File.Exists(Dir & lstRepos.SelectedItem & "\home.md") Then
+                    Process.Start(Dir & lstRepos.SelectedItem & "\home.md")
                 Else
                     MsgBox("No file found in Wiki folder:" & vbNewLine & _
-                        """" & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
+                        """" & Dir & lstRepos.SelectedItem & """" & vbNewLine & _
                         "With filename: home.md", MsgBoxStyle.Critical)
                 End If
-            ElseIf lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".github.io") Or lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".github.com") Then
-                If File.Exists(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\index.html") Then
-                    Process.Start(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\index.html")
+            ElseIf lstRepos.SelectedItem.ToString.EndsWith(".github.io") Or lstRepos.SelectedItem.ToString.EndsWith(".github.com") Then
+                If File.Exists(Dir & lstRepos.SelectedItem & "\index.html") Then
+                    Process.Start(Dir & lstRepos.SelectedItem & "\index.html")
                 Else
                     MsgBox("No file found in Site folder:" & vbNewLine & _
-                        """" & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
+                        """" & Dir & lstRepos.SelectedItem & """" & vbNewLine & _
                         "With filename: index.html", MsgBoxStyle.Critical)
                 End If
             Else
-                If File.Exists(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.md") Then
-                    Process.Start(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.md")
-                ElseIf File.Exists(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.txt") Then
-                    Process.Start(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.txt")
-                ElseIf File.Exists(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.htm") Then
-                    Process.Start(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.htm")
-                ElseIf File.Exists(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.html") Then
-                    Process.Start(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.html")
-                ElseIf File.Exists(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.markdown") Then
-                    Process.Start(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.markdown")
-                ElseIf File.Exists(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.mkd") Then
-                    Process.Start(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme.mkd")
-                ElseIf File.Exists(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme") Then
-                    Process.Start(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\readme")
+                If File.Exists(Dir & lstRepos.SelectedItem & "\readme.md") Then
+                    Process.Start(Dir & lstRepos.SelectedItem & "\readme.md")
+                ElseIf File.Exists(Dir & lstRepos.SelectedItem & "\readme.txt") Then
+                    Process.Start(Dir & lstRepos.SelectedItem & "\readme.txt")
+                ElseIf File.Exists(Dir & lstRepos.SelectedItem & "\readme.htm") Then
+                    Process.Start(Dir & lstRepos.SelectedItem & "\readme.htm")
+                ElseIf File.Exists(Dir & lstRepos.SelectedItem & "\readme.html") Then
+                    Process.Start(Dir & lstRepos.SelectedItem & "\readme.html")
+                ElseIf File.Exists(Dir & lstRepos.SelectedItem & "\readme.markdown") Then
+                    Process.Start(Dir & lstRepos.SelectedItem & "\readme.markdown")
+                ElseIf File.Exists(Dir & lstRepos.SelectedItem & "\readme.mkd") Then
+                    Process.Start(Dir & lstRepos.SelectedItem & "\readme.mkd")
+                ElseIf File.Exists(Dir & lstRepos.SelectedItem & "\readme") Then
+                    Process.Start(Dir & lstRepos.SelectedItem & "\readme")
                 Else
                     MsgBox("No file found in repo:" & vbNewLine & _
-                        """" & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
+                        """" & Dir & lstRepos.SelectedItem & """" & vbNewLine & _
                         "With filename: readme.md, readme.txt, readme.htm, readme.html, readme.markdown, readme.mkd, or readme.", MsgBoxStyle.Critical)
                 End If
             End If
@@ -304,17 +304,17 @@ Public Class GitUpdater
 
     Sub ContextMenuStripReposOpenSLN_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposOpenSLN.Click
         If lstRepos.SelectedIndex <> -1 Then
-            If File.Exists(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln") Then
-                Process.Start(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln")
-            ElseIf File.Exists(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln") Then
-                Process.Start(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln")
-                'ElseIf File.Exists(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln") Then
-                '     Process.Start(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln")
+            If File.Exists(Dir & lstRepos.SelectedItem & "\" & lstRepos.SelectedItem & ".sln") Then
+                Process.Start(Dir & lstRepos.SelectedItem & "\" & lstRepos.SelectedItem & ".sln")
+            ElseIf File.Exists(Dir & lstRepos.SelectedItem & "\" & lstRepos.SelectedItem & "\" & lstRepos.SelectedItem & ".sln") Then
+                Process.Start(Dir & lstRepos.SelectedItem & "\" & lstRepos.SelectedItem & "\" & lstRepos.SelectedItem & ".sln")
+                'ElseIf File.Exists(Dir & lstRepos.SelectedItem & "\" & lstRepos.SelectedItem & ".sln") Then
+                '     Process.Start(Dir & lstRepos.SelectedItem & "\" & lstRepos.SelectedItem & ".sln")
             Else
                 MsgBox("No file found in locations:" & vbNewLine & _
-                    """" & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
-                    """" & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\" & lstRepos.Items.Item(lstRepos.SelectedIndex) & """" & vbNewLine & _
-                    "With filename: """ & lstRepos.Items.Item(lstRepos.SelectedIndex) & ".sln""", MsgBoxStyle.Critical)
+                    """" & Dir & lstRepos.SelectedItem & """" & vbNewLine & _
+                    """" & Dir & lstRepos.SelectedItem & "\" & lstRepos.SelectedItem & """" & vbNewLine & _
+                    "With filename: """ & lstRepos.SelectedItem & ".sln""", MsgBoxStyle.Critical)
             End If
         Else
             If File.Exists(Dir & "GitHub.sln") Then
@@ -377,8 +377,8 @@ Public Class GitUpdater
     Sub ContextMenuStripReposCopyRepoName_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposCopyRepoName.Click
         If lstRepos.SelectedIndex <> -1 Then
             Try
-                Clipboard.SetText(lstRepos.Items.Item(lstRepos.SelectedIndex), TextDataFormat.UnicodeText)
-                MsgBox(lstRepos.Items.Item(lstRepos.SelectedIndex) & vbNewLine & "Succesfully copied!", MsgBoxStyle.Information, "Succesfully copied!")
+                Clipboard.SetText(lstRepos.SelectedItem, TextDataFormat.UnicodeText)
+                MsgBox(lstRepos.SelectedItem & vbNewLine & "Succesfully copied!", MsgBoxStyle.Information, "Succesfully copied!")
             Catch ex As Exception
                 MsgBox("Copy failed!" & vbNewLine & "Error: """ & ex.ToString, MsgBoxStyle.Critical & """", "Copy failed!")
             End Try
@@ -395,8 +395,8 @@ Public Class GitUpdater
     Sub ContextMenuStripReposCopyRepoPath_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposCopyRepoPath.Click
         If lstRepos.SelectedIndex <> -1 Then
             Try
-                Clipboard.SetText(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex), TextDataFormat.UnicodeText)
-                MsgBox(Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & vbNewLine & "Succesfully copied!", MsgBoxStyle.Information, "Succesfully copied!")
+                Clipboard.SetText(Dir & lstRepos.SelectedItem, TextDataFormat.UnicodeText)
+                MsgBox(Dir & lstRepos.SelectedItem & vbNewLine & "Succesfully copied!", MsgBoxStyle.Information, "Succesfully copied!")
             Catch ex As Exception
                 MsgBox("Copy failed!" & vbNewLine & "Error: """ & ex.ToString, MsgBoxStyle.Critical & """", "Copy failed!")
             End Try
@@ -418,7 +418,7 @@ Public Class GitUpdater
 
     Private Sub ContextMenuStripReposCDHere_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposCDHere.Click
         If lstRepos.SelectedIndex <> -1 Then
-            Dir = Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & "\"
+            Dir = Dir & lstRepos.SelectedItem & "\"
             My.Settings.SavedDir = Dir
             RebuildRepoList()
         Else
@@ -536,7 +536,7 @@ Public Class GitUpdater
                         progressBar.Value = 1
                         TaskbarInfoUpdate(TaskbarItemProgressState.Indeterminate, 0.5)
                         notInserted = True
-                        Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(lstRepos.SelectedIndex) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, vbNormalFocus, True, Wait)
+                        Shell("GitUpdater.bat " & Dir & lstRepos.SelectedItem & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, vbNormalFocus, True, Wait)
                         progressBar.Value = progressBar.Maximum
                         TaskbarInfoUpdate(TaskbarItemProgressState.Normal, 1)
                     End If
@@ -798,7 +798,7 @@ Public Class GitUpdater
 
     Sub LstRepos_MouseDown(sender As Object, e As MouseEventArgs) Handles lstRepos.MouseDown
         If lstRepos.SelectedIndex <> -1 Then
-            If lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".wiki") Then
+            If lstRepos.SelectedItem.ToString.EndsWith(".wiki") Then
                 ContextMenuStripReposOpenInExplorer.Text = "Open Wiki in Windows Explorer"
                 ContextMenuStripReposOpenInCMD.Text = "Open Wiki in CMD"
                 ContextMenuStripReposOpenInPS.Text = "Open Wiki in Windows PowerShell"
@@ -821,7 +821,7 @@ Public Class GitUpdater
                 ContextMenuStripReposSeparator4.Visible = True
                 ContextMenuStripReposGitPullThis.Visible = True
                 ContextMenuStripReposGitPushThis.Visible = True
-            ElseIf lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".github.io") Or lstRepos.Items.Item(lstRepos.SelectedIndex).ToString.EndsWith(".github.com") Then
+            ElseIf lstRepos.SelectedItem.ToString.EndsWith(".github.io") Or lstRepos.SelectedItem.ToString.EndsWith(".github.com") Then
                 ContextMenuStripReposOpenInExplorer.Text = "Open Site Folder in Windows Explorer"
                 ContextMenuStripReposOpenInCMD.Text = "Open Site Folder in CMD"
                 ContextMenuStripReposOpenInPS.Text = "Open Site Folder in Windows PowerShell"
