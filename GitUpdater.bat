@@ -12,7 +12,7 @@ rem Setting GUI elements and going to the Repo directory
 color 0A
 title Git %~2ing repo at location "%~1" [GitUpdater]
 echo Git %~2ing repo at location "%~1"...
-cd %~1
+cd /d %~1
 :start
 
 rem Check if Logging must be enabled
