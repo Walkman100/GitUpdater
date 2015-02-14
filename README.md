@@ -15,11 +15,17 @@ gitupdater.exe [hideGUI] [exitWhenDone] [-gitcmd=<push|pull|(any git command)>] 
 ```
 some examples are:
 
-`gitupdater.exe -gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run exitWhenDone`
+```bat
+gitupdater.exe -gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run exitWhenDone
+```
 
-`gitupdater.exe -gitcmd=pull -gitwhat=cmdnotselected -repo=YTVL run`
+```batch
+gitupdater.exe -gitcmd=pull -gitwhat=cmdnotselected -repo=YTVL run
+```
 
-`gitupdater.exe hideGUI -gitcmd=pull -gitwhat=all run exitWhenDone`
+```cmd
+gitupdater.exe hideGUI -gitcmd=pull -gitwhat=all run exitWhenDone
+```
 
 Notes:
 
@@ -27,7 +33,9 @@ Notes:
 - The way this has been programmed allows you to put multiple commands after each other:
 `gitupdater.exe -gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run -gitcmd=pull -gitwhat=cmdselected -repo=YTVL run`
 - Any git command can be used in place of `push|pull`, the flags can be put in any order (but it is recommended to use the specified order), and anything that doesn't begin with one of the predefined flags will be ignored. This allows for a command like this:
+
 `gitupdater.exe -repo=GitUpdater -gitcmd=show ouiocuiygcrdackdacrdi -gitwhat=cmdselected run`
+
 This will execute the `git show` command in the `GitUpdater` repo.
 - The `exitWhenDone` flag is only used when the program performs a git operation, so if you use for example `gitupdater.exe exitWhenDone` it will still open the GUI, but after any Git operation it will close.
 
@@ -75,7 +83,12 @@ An external program that you can use is Windows itself, using the Windows Task S
 
 ![Locate GitUpdater](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/GitUpdater/WinTaskSchdLocateGitUpdater.png "Locate GitUpdater")
 
-9: In the 'Add arguments (optional):' box add the arguments you want, e.g. `-gitcmd=pull -gitwhat=all run exitWhenDone` or `-gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run exitWhenDone`
+9: In the 'Add arguments (optional):' box add the arguments you want, e.g.
+
+```shell
+-gitcmd=pull -gitwhat=all run exitWhenDone
+-gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run exitWhenDone
+```
 
 ![Set the Arguments](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/GitUpdater/WinTaskSchdArguments.png "Set the Arguments")
 
