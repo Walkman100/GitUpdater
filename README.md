@@ -15,15 +15,9 @@ gitupdater.exe [hideGUI] [exitWhenDone] [-gitcmd=<push|pull|(any git command)>] 
 ```
 some examples are:
 
-```bat
+```shell
 gitupdater.exe -gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run exitWhenDone
-```
-
-```batch
 gitupdater.exe -gitcmd=pull -gitwhat=cmdnotselected -repo=YTVL run
-```
-
-```cmd
 gitupdater.exe hideGUI -gitcmd=pull -gitwhat=all run exitWhenDone
 ```
 
@@ -34,7 +28,9 @@ Notes:
 `gitupdater.exe -gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run -gitcmd=pull -gitwhat=cmdselected -repo=YTVL run`
 - Any git command can be used in place of `push|pull`, the flags can be put in any order (but it is recommended to use the specified order), and anything that doesn't begin with one of the predefined flags will be ignored. This allows for a command like this:
 
-`gitupdater.exe -repo=GitUpdater -gitcmd=show ouiocuiygcrdackdacrdi -gitwhat=cmdselected run`
+```shell
+gitupdater.exe -repo=GitUpdater -gitcmd=show ouiocuiygcrdackdacrdi -gitwhat=cmdselected run
+```
 
 This will execute the `git show` command in the `GitUpdater` repo.
 - The `exitWhenDone` flag is only used when the program performs a git operation, so if you use for example `gitupdater.exe exitWhenDone` it will still open the GUI, but after any Git operation it will close.
@@ -42,7 +38,9 @@ This will execute the `git show` command in the `GitUpdater` repo.
 **Please note that the `run` flag is necessary to run the program, and if it is put before any other parameters they will not be used** (except the `exitWhenDone` and `hideGUI` flags, they can be put anywhere).
 - You can launch GitUpdater in a specific repo parent folder:
 
-`gitupdater.exe -dir="C:\Users\Matthew\GitHub"`
+```shell
+gitupdater.exe -dir="C:\Users\Matthew\GitHub"
+```
 
 If your repos are located in that folder.
 
