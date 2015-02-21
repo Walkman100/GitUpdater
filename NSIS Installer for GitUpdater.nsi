@@ -3,7 +3,7 @@
 ; As a program that all Power PC users should have, Notepad++ is recommended to edit this file
 
 AddBrandingImage top 20
-Icon "My Project\git.ico"
+Icon "My Project\GitUpdater.ico"
 Caption "GitUpdater Installer"
 Name "GitUpdater"
 AutoCloseWindow true

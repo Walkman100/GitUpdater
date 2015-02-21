@@ -78,7 +78,7 @@ if %~4==True (
     @echo [%date% %time%] Unless you specified the "Don't wait for cmd to close before starting next" option, further git commands will not start until the CMD window is closed. >> %~6
     @echo [%date% %time%] Waiting for user intervention... >> %~6
     echo.
-    echo Press enter to close this window. Unless you specified the "Don't wait for cmd to close before starting next" option, further git commands will not start until you close this window.
+    echo Press enter to close this window. Unless you specified the "Don't wait for cmd to close before starting next" option, further git commands will not start until you press enter to close this window.
     pause
     @echo [%date% %time%] Received user intervention. >> %~6
     @echo. >> %~6
