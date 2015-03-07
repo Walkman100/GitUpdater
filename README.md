@@ -1,14 +1,12 @@
 # GitUpdater [![Build status](https://ci.appveyor.com/api/projects/status/72cvetqe8awtp2fn)](https://ci.appveyor.com/project/Walkman100/gitupdater)
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Walkman100/Walkman?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 A simple application written in VB.Net to update all your repos with one click, or one repeatedly until it works.
 
-## Compile requirements
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Walkman100/Walkman?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+## Compile requirements
 See [CompileInstructions.md](https://github.com/Walkman100/WinCompile/blob/master/CompileInstructions.md)
 
 # Command Line
-
 The syntax to launch GitUpdater from the command line is:
 ```shell
 gitupdater.exe [hideGUI] [exitWhenDone] [-gitcmd=<push|pull|(any git command)>] [-gitwhat=<all|selected|notselected|cmdselected|cmdnotselected>] [-dir=<repos parent folder>] [-repo=<repo name>] [run]
@@ -25,7 +23,9 @@ Notes:
 
 - If you use either of the `selected` or `notselected` options, it will say that no item has been specified, since those methods use the selection in the GUI. Please use the <i><b>cmd</b>selected</i> and <i><b>cmd</b>notselected</i> methods.
 - The way this has been programmed allows you to put multiple commands after each other:
-`gitupdater.exe -gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run -gitcmd=pull -gitwhat=cmdselected -repo=YTVL run`
+```shell
+gitupdater.exe -gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run -gitcmd=pull -gitwhat=cmdselected -repo=YTVL run
+```
 - Any git command can be used in place of `push|pull`, the flags can be put in any order (but it is recommended to use the specified order), and anything that doesn't begin with one of the predefined flags will be ignored. This allows for a command like this:
 
 ```shell
@@ -45,7 +45,6 @@ gitupdater.exe -dir="C:\Users\Matthew\GitHub"
 If your repos are located in that folder.
 
 # Perform Git commands at a scheduled time
-
 To do this you use an external program to launch GitUpdater with command line args (please see [above](#command-line) for an explanation of them).
 
 An external program that you can use is Windows itself, using the Windows Task Scheduler:

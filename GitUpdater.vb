@@ -153,19 +153,20 @@ Public Class GitUpdater
     End Sub
 
     Sub ContextMenuStripReposOpenInPS_Click(sender As Object, e As EventArgs) Handles ContextMenuStripReposOpenInPS.Click
-        If Not File.Exists("PS\CheckVersion.ps1") Or Not File.Exists("PS\GitPrompt.ps1") Or Not File.Exists("PS\GitTabExpansion.ps1") Or Not File.Exists("PS\GitUtils.ps1") Or Not _
-         File.Exists("PS\TortoiseGit.ps1") Or Not File.Exists("PS\Utils.ps1") Or Not File.Exists("PS\posh-git.psm1") Or Not File.Exists("PS\profile.example.ps1") Or Not File.Exists("OpenRepoInPS.bat") Then
+        If Not File.Exists("PS\CheckVersion.ps1") Or Not File.Exists("PS\GitPrompt.ps1") Or Not File.Exists("PS\GitTabExpansion.ps1") _
+                Or Not File.Exists("PS\GitUtils.ps1") Or Not File.Exists("PS\TortoiseGit.ps1") Or Not File.Exists("PS\Utils.ps1") _
+                Or Not File.Exists("PS\posh-git.psm1") Or Not File.Exists("PS\profile.example.ps1") Or Not File.Exists("OpenRepoInPS.bat") Then
 
             cmdRepo = "A file required to start a PowerShell CLI wasn't found! Missing File(s): " & vbNewLine
-            If Not File.Exists("PS\CheckVersion.ps1") Then cmdRepo = cmdRepo & "PS\CheckVersion.ps1" & vbNewLine
-            If Not File.Exists("PS\GitPrompt.ps1") Then cmdRepo = cmdRepo & "PS\GitPrompt.ps1" & vbNewLine
-            If Not File.Exists("PS\GitTabExpansion.ps1") Then cmdRepo = cmdRepo & "PS\GitTabExpansion.ps1" & vbNewLine
-            If Not File.Exists("PS\GitUtils.ps1") Then cmdRepo = cmdRepo & "PS\GitUtils.ps1" & vbNewLine
-            If Not File.Exists("PS\TortoiseGit.ps1") Then cmdRepo = cmdRepo & "PS\TortoiseGit.ps1" & vbNewLine
-            If Not File.Exists("PS\Utils.ps1") Then cmdRepo = cmdRepo & "PS\Utils.ps1" & vbNewLine
-            If Not File.Exists("PS\posh-git.psm1") Then cmdRepo = cmdRepo & "PS\posh-git.psm1" & vbNewLine
-            If Not File.Exists("PS\profile.example.ps1") Then cmdRepo = cmdRepo & "PS\profile.example.ps1" & vbNewLine
-            If Not File.Exists("OpenRepoInPS.bat") Then cmdRepo = cmdRepo & "OpenRepoInPS.bat" & vbNewLine
+                If Not File.Exists("PS\CheckVersion.ps1") Then cmdRepo = cmdRepo & "PS\CheckVersion.ps1" & vbNewLine
+                If Not File.Exists("PS\GitPrompt.ps1") Then cmdRepo = cmdRepo & "PS\GitPrompt.ps1" & vbNewLine
+                If Not File.Exists("PS\GitTabExpansion.ps1") Then cmdRepo = cmdRepo & "PS\GitTabExpansion.ps1" & vbNewLine
+                If Not File.Exists("PS\GitUtils.ps1") Then cmdRepo = cmdRepo & "PS\GitUtils.ps1" & vbNewLine
+                If Not File.Exists("PS\TortoiseGit.ps1") Then cmdRepo = cmdRepo & "PS\TortoiseGit.ps1" & vbNewLine
+                If Not File.Exists("PS\Utils.ps1") Then cmdRepo = cmdRepo & "PS\Utils.ps1" & vbNewLine
+                If Not File.Exists("PS\posh-git.psm1") Then cmdRepo = cmdRepo & "PS\posh-git.psm1" & vbNewLine
+                If Not File.Exists("PS\profile.example.ps1") Then cmdRepo = cmdRepo & "PS\profile.example.ps1" & vbNewLine
+                If Not File.Exists("OpenRepoInPS.bat") Then cmdRepo = cmdRepo & "OpenRepoInPS.bat" & vbNewLine
             If MsgBox(cmdRepo & "Attempt to download missing files?", MsgBoxStyle.YesNo + MsgBoxStyle.Critical) = MsgBoxResult.No Then
                 If MsgBox("Attempt to run script anyway?", MsgBoxStyle.YesNo + MsgBoxStyle.Question) = MsgBoxResult.No Then Exit Sub
                 If lstRepos.SelectedIndex <> -1 Then
@@ -196,7 +197,7 @@ Public Class GitUpdater
             If Not File.Exists("OpenRepoInPS.bat") Then
                 Try
                     My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/OpenRepoInPS.bat", "OpenRepoInPS.bat")
-                    MsgBox("File OpenRepoInPS.bat downloaded succesfully!", MsgBoxStyle.Information)
+                    MsgBox("File OpenRepoInPS.bat downloaded successfully!", MsgBoxStyle.Information)
                 Catch
                     MsgBox("Could not automatically download the PowerShell batchfile! Please download it manually. Click OK to open the download page.", MsgBoxStyle.Exclamation)
                     Try
