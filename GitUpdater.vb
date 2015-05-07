@@ -170,9 +170,9 @@ Public Class GitUpdater
             If MsgBox(cmdRepo & "Attempt to download missing files?", MsgBoxStyle.YesNo + MsgBoxStyle.Critical) = MsgBoxResult.No Then
                 If MsgBox("Attempt to run script anyway?", MsgBoxStyle.YesNo + MsgBoxStyle.Question) = MsgBoxResult.No Then Exit Sub
                 If lstRepos.SelectedIndex <> -1 Then
-                    Process.Start("OpenRepoInPS.bat", """" & Dir & lstRepos.SelectedItem & """ " & Environment.CurrentDirectory)
+                    Process.Start("OpenRepoInPS.bat", """" & Dir & lstRepos.SelectedItem & """ " & Application.StartupPath)
                 Else
-                    Process.Start("OpenRepoInPS.bat", """" & Dir & """ " & Environment.CurrentDirectory)
+                    Process.Start("OpenRepoInPS.bat", """" & Dir & """ " & Application.StartupPath)
                 End If
                 Exit Sub
             End If
@@ -210,9 +210,9 @@ Public Class GitUpdater
             MsgBox("File download attempts complete! Please try your action again.", MsgBoxStyle.Information)
         Else
             If lstRepos.SelectedIndex <> -1 Then
-                Process.Start("OpenRepoInPS.bat", """" & Dir & lstRepos.SelectedItem & """ " & Environment.CurrentDirectory)
+                Process.Start("OpenRepoInPS.bat", """" & Dir & lstRepos.SelectedItem & """ " & Application.StartupPath)
             Else
-                Process.Start("OpenRepoInPS.bat", """" & Dir & """ " & Environment.CurrentDirectory)
+                Process.Start("OpenRepoInPS.bat", """" & Dir & """ " & Application.StartupPath)
             End If
         End If
     End Sub
