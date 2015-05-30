@@ -8,12 +8,12 @@ See [CompileInstructions.md](https://github.com/Walkman100/WinCompile/blob/maste
 
 # Command Line
 The syntax to launch GitUpdater from the command line is:
-```shell
+```cmd
 gitupdater.exe [hideGUI] [exitWhenDone] [-gitcmd=<push|pull|(any git command)>] [-gitwhat=<all|selected|notselected|cmdselected|cmdnotselected>] [-dir=<repos parent folder>] [-repo=<repo name>] [run]
 ```
 some examples are:
 
-```shell
+```cmd
 gitupdater.exe -gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run exitWhenDone
 gitupdater.exe -gitcmd=pull -gitwhat=cmdnotselected -repo=YTVL run
 gitupdater.exe hideGUI -gitcmd=pull -gitwhat=all run exitWhenDone
@@ -23,12 +23,12 @@ Notes:
 
 - If you use either of the `selected` or `notselected` options, it will say that no item has been specified, since those methods use the selection in the GUI. Please use the <i><b>cmd</b>selected</i> and <i><b>cmd</b>notselected</i> methods.
 - The way this has been programmed allows you to put multiple commands after each other:
-```shell
+```cmd
 gitupdater.exe -gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run -gitcmd=pull -gitwhat=cmdselected -repo=YTVL run
 ```
 - Any git command can be used in place of `push|pull`, the flags can be put in any order (but it is recommended to use the specified order), and anything that doesn't begin with one of the predefined flags will be ignored. This allows for a command like this:
 
-```shell
+```cmd
 gitupdater.exe -repo=GitUpdater -gitcmd=show ouiocuiygcrdackdacrdi -gitwhat=cmdselected run
 ```
 
@@ -38,7 +38,7 @@ This will execute the `git show` command in the `GitUpdater` repo.
 **Please note that the `run` flag is necessary to run the program, and if it is put before any other parameters they will not be used** (except the `exitWhenDone` and `hideGUI` flags, they can be put anywhere).
 - You can launch GitUpdater in a specific repo parent folder:
 
-```shell
+```cmd
 gitupdater.exe -dir="C:\Users\Matthew\GitHub"
 ```
 
@@ -82,7 +82,7 @@ An external program that you can use is Windows itself, using the Windows Task S
 
 9: In the 'Add arguments (optional):' box add the arguments you want, e.g.
 
-```shell
+```cmd
 -gitcmd=pull -gitwhat=all run exitWhenDone
 -gitcmd=push -gitwhat=cmdselected -repo=GitUpdater run exitWhenDone
 ```

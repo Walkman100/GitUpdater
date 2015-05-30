@@ -8,12 +8,12 @@ See [CompileInstructions.md](https://github.com/Walkman100/WinCompile/blob/maste
 
 # Command Line
 The syntax to launch GitUpdater from the command line is:
-```shell
+```cmd
 gitupdater.exe [<dir|-dir|/dir|\dir> [parent dir ]<repo> ][<push|pull|(any git command)> [* ]<all|selected|notselected|cmdselected|cmdnotselected>]
 ```
 some examples are:
 
-```shell
+```cmd
 gitupdater.exe -dir GitUpdater push cmdselected
 gitupdater.exe -dir YTVL pull cmdnotselected
 gitupdater.exe pull all
@@ -23,12 +23,12 @@ Notes:
 
 - If you use either of the `selected` or `notselected` options, it will say that no item has been specified, since those methods use the selection in the GUI. Please use the <i><b>cmd</b>selected</i> and <i><b>cmd</b>notselected</i> methods.
 - The way this has been programmed allows you to put multiple commands after each other:
-```shell
+```cmd
 gitupdater.exe -dir GitUpdater push cmdselected -dir YTVL pull cmdselected
 ```
 - Any git command can be used in place of `push|pull`, and anything after that and before the method (e.g. `cmdselected`) will be ignored. This allows for a command like this:
 
-```shell
+```cmd
 gitupdater.exe -dir GitUpdater show ouiocuiygcrdackdacrdi cmdselected
 ```
 
