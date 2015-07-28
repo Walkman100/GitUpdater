@@ -242,6 +242,14 @@
         End If
     End Sub
 
+    Private Sub ContextMenuStripReposOpenInSmartGit_Click() Handles ContextMenuStripReposOpenInSmartGit.Click
+        If lstRepos.SelectedIndex <> -1 Then
+            Process.Start(Environment.GetEnvironmentVariable("ProgramFiles") & "\SmartGit\bin\smartgit.exe", "-open """ & Dir & lstRepos.SelectedItem & """")
+        Else
+            Process.Start(Environment.GetEnvironmentVariable("ProgramFiles") & "\SmartGit\bin\smartgit.exe", "-open """ & Dir & """")
+        End If
+    End Sub
+
     Private Sub ContextMenuStripReposOpenReadme_Click() Handles ContextMenuStripReposOpenReadme.Click
         If lstRepos.SelectedIndex <> -1 Then
             If lstRepos.SelectedItem.ToString.EndsWith(".wiki") Then
@@ -795,6 +803,7 @@
                 ContextMenuStripReposOpenInPS.Text = "Open Wiki in Windows PowerShell"
                 ContextMenuStripReposOpenInBash.Text = "Open Wiki in Git Bash"
                 ContextMenuStripReposOpenInGitHub.Text = "Open Wiki in GitHub for Windows"
+                ContextMenuStripReposOpenInSmartGit.Text = "Open Wiki in SmartGit"
                 ContextMenuStripReposSeparator1.Visible = True
                 ContextMenuStripReposOpenReadme.Visible = True
                 ContextMenuStripReposOpenReadme.Text = "Open Wiki home.md"
@@ -818,6 +827,7 @@
                 ContextMenuStripReposOpenInPS.Text = "Open Site Folder in Windows PowerShell"
                 ContextMenuStripReposOpenInBash.Text = "Open Site Folder in Git Bash"
                 ContextMenuStripReposOpenInGitHub.Text = "Open Site in GitHub for Windows"
+                ContextMenuStripReposOpenInSmartGit.Text = "Open Site Folder in SmartGit"
                 ContextMenuStripReposSeparator1.Visible = True
                 ContextMenuStripReposOpenReadme.Visible = True
                 ContextMenuStripReposOpenReadme.Text = "Open Site index.html"
@@ -841,6 +851,7 @@
                 ContextMenuStripReposOpenInPS.Text = "Open Repo in Windows PowerShell"
                 ContextMenuStripReposOpenInBash.Text = "Open Repo in Git Bash"
                 ContextMenuStripReposOpenInGitHub.Text = "Open Repo in GitHub for Windows"
+                ContextMenuStripReposOpenInSmartGit.Text = "Open Repo in SmartGit"
                 ContextMenuStripReposSeparator1.Visible = True
                 ContextMenuStripReposOpenReadme.Visible = True
                 ContextMenuStripReposOpenReadme.Text = "Open Repo Readme"
@@ -866,6 +877,7 @@
             ContextMenuStripReposOpenInPS.Text = "Open Folder in Windows PowerShell"
             ContextMenuStripReposOpenInBash.Text = "Open Folder in Git Bash"
             ContextMenuStripReposOpenInGitHub.Text = "Open Folder in GitHub for Windows"
+            ContextMenuStripReposOpenInSmartGit.Text = "Open Folder in SmartGit"
             ContextMenuStripReposSeparator1.Visible = True
             ContextMenuStripReposOpenReadme.Visible = False
             ContextMenuStripReposOpenSLN.Visible = False

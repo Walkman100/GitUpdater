@@ -38,12 +38,12 @@ Namespace My.Resources
         
         '''<summary>
         '''  Returns the cached ResourceManager instance used by this class.
+        ''' The designer changes the "GitUpdater.Resources" to "My.Resources.Resources" for some reason. you have to change it back before the program will run
         '''</summary>
         <Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
         Friend Shared ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
             Get
                 If Object.ReferenceEquals(resourceMan, Nothing) Then
-                    ' The designer changes the "GitUpdater.Resources" to "My.Resources.Resources" for some reason. you have to change it back before the program will run
                     Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("GitUpdater.Resources", GetType(Resources).Assembly)
                     resourceMan = temp
                 End If
@@ -181,6 +181,16 @@ Namespace My.Resources
         Friend Shared ReadOnly Property red_dash() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("red-dash", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend Shared ReadOnly Property smartgit_x16() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("smartgit-x16", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

@@ -33,6 +33,7 @@ Partial Class GitUpdater
         Me.ContextMenuStripReposOpenInPS = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposOpenInBash = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposOpenInGitHub = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripReposOpenInSmartGit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ContextMenuStripReposOpenReadme = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripReposOpenSLN = New System.Windows.Forms.ToolStripMenuItem()
@@ -138,9 +139,9 @@ Partial Class GitUpdater
         '
         'ContextMenuStripRepos
         '
-        Me.ContextMenuStripRepos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContextMenuStripReposOpenInExplorer, Me.ContextMenuStripReposOpenInCMD, Me.ContextMenuStripReposOpenInPS, Me.ContextMenuStripReposOpenInBash, Me.ContextMenuStripReposOpenInGitHub, Me.ContextMenuStripReposSeparator1, Me.ContextMenuStripReposOpenReadme, Me.ContextMenuStripReposOpenSLN, Me.ContextMenuStripReposOpenURL, Me.ContextMenuStripReposSeparator2, Me.ContextMenuStripReposCopyRepoName, Me.ContextMenuStripReposCopyRepoPath, Me.ContextMenuStripReposSeparator3, Me.ContextMenuStripReposRemoveEntry, Me.ContextMenuStripReposCDHere, Me.ContextMenuStripReposSeparator4, Me.ContextMenuStripReposGitPullThis, Me.ContextMenuStripReposGitPushThis})
+        Me.ContextMenuStripRepos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContextMenuStripReposOpenInExplorer, Me.ContextMenuStripReposOpenInCMD, Me.ContextMenuStripReposOpenInPS, Me.ContextMenuStripReposOpenInBash, Me.ContextMenuStripReposOpenInGitHub, Me.ContextMenuStripReposOpenInSmartGit, Me.ContextMenuStripReposSeparator1, Me.ContextMenuStripReposOpenReadme, Me.ContextMenuStripReposOpenSLN, Me.ContextMenuStripReposOpenURL, Me.ContextMenuStripReposSeparator2, Me.ContextMenuStripReposCopyRepoName, Me.ContextMenuStripReposCopyRepoPath, Me.ContextMenuStripReposSeparator3, Me.ContextMenuStripReposRemoveEntry, Me.ContextMenuStripReposCDHere, Me.ContextMenuStripReposSeparator4, Me.ContextMenuStripReposGitPullThis, Me.ContextMenuStripReposGitPushThis})
         Me.ContextMenuStripRepos.Name = "contextMenuStripRepos"
-        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 358)
+        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 380)
         '
         'ContextMenuStripReposOpenInExplorer
         '
@@ -179,6 +180,13 @@ Partial Class GitUpdater
         Me.ContextMenuStripReposOpenInGitHub.Name = "ContextMenuStripReposOpenInGitHub"
         Me.ContextMenuStripReposOpenInGitHub.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposOpenInGitHub.Text = "Open Repo in GitHub for Windows"
+        '
+        'ContextMenuStripReposOpenInSmartGit
+        '
+        Me.ContextMenuStripReposOpenInSmartGit.Image = Global.GitUpdater.My.Resources.Resources.smartgit_x16
+        Me.ContextMenuStripReposOpenInSmartGit.Name = "ContextMenuStripReposOpenInSmartGit"
+        Me.ContextMenuStripReposOpenInSmartGit.Size = New System.Drawing.Size(272, 22)
+        Me.ContextMenuStripReposOpenInSmartGit.Text = "Open Repo in SmartGit"
         '
         'ContextMenuStripReposSeparator1
         '
@@ -668,6 +676,7 @@ Partial Class GitUpdater
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private WithEvents ContextMenuStripReposOpenInSmartGit As System.Windows.Forms.ToolStripMenuItem
     Private WithEvents ContextMenuStripReposOpenInBash As System.Windows.Forms.ToolStripMenuItem
     Private WithEvents ContextMenuStripReposOpenSLN As System.Windows.Forms.ToolStripMenuItem
     Private WithEvents ContextMenuStripReposSeparator1 As System.Windows.Forms.ToolStripSeparator
