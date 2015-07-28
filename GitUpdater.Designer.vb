@@ -23,7 +23,6 @@ Partial Class GitUpdater
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GitUpdater))
         Me.btnExit = New System.Windows.Forms.Button()
         Me.btnGitPullAll = New System.Windows.Forms.Button()
         Me.btnGitPushAll = New System.Windows.Forms.Button()
@@ -141,7 +140,7 @@ Partial Class GitUpdater
         '
         Me.ContextMenuStripRepos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContextMenuStripReposOpenInExplorer, Me.ContextMenuStripReposOpenInCMD, Me.ContextMenuStripReposOpenInPS, Me.ContextMenuStripReposOpenInBash, Me.ContextMenuStripReposOpenInGitHub, Me.ContextMenuStripReposSeparator1, Me.ContextMenuStripReposOpenReadme, Me.ContextMenuStripReposOpenSLN, Me.ContextMenuStripReposOpenURL, Me.ContextMenuStripReposSeparator2, Me.ContextMenuStripReposCopyRepoName, Me.ContextMenuStripReposCopyRepoPath, Me.ContextMenuStripReposSeparator3, Me.ContextMenuStripReposRemoveEntry, Me.ContextMenuStripReposCDHere, Me.ContextMenuStripReposSeparator4, Me.ContextMenuStripReposGitPullThis, Me.ContextMenuStripReposGitPushThis})
         Me.ContextMenuStripRepos.Name = "contextMenuStripRepos"
-        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 336)
+        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 358)
         '
         'ContextMenuStripReposOpenInExplorer
         '
@@ -169,7 +168,7 @@ Partial Class GitUpdater
         '
         'ContextMenuStripReposOpenInBash
         '
-        Me.ContextMenuStripReposOpenInBash.Image = CType(resources.GetObject("ContextMenuStripReposOpenInBash.Image"),System.Drawing.Image)
+        Me.ContextMenuStripReposOpenInBash.Image = Global.GitUpdater.My.Resources.Resources.git_code_fork
         Me.ContextMenuStripReposOpenInBash.Name = "ContextMenuStripReposOpenInBash"
         Me.ContextMenuStripReposOpenInBash.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposOpenInBash.Text = "Open Repo in Git Bash"
@@ -233,14 +232,14 @@ Partial Class GitUpdater
         '
         'ContextMenuStripReposRemoveEntry
         '
-        Me.ContextMenuStripReposRemoveEntry.Image = CType(resources.GetObject("ContextMenuStripReposRemoveEntry.Image"),System.Drawing.Image)
+        Me.ContextMenuStripReposRemoveEntry.Image = Global.GitUpdater.My.Resources.Resources.red_dash
         Me.ContextMenuStripReposRemoveEntry.Name = "ContextMenuStripReposRemoveEntry"
         Me.ContextMenuStripReposRemoveEntry.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposRemoveEntry.Text = "Remove Entry"
         '
         'ContextMenuStripReposCDHere
         '
-        Me.ContextMenuStripReposCDHere.Image = CType(resources.GetObject("ContextMenuStripReposCDHere.Image"),System.Drawing.Image)
+        Me.ContextMenuStripReposCDHere.Image = Global.GitUpdater.My.Resources.Resources.go_jump
         Me.ContextMenuStripReposCDHere.Name = "ContextMenuStripReposCDHere"
         Me.ContextMenuStripReposCDHere.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposCDHere.Text = "CD Here..."
@@ -252,14 +251,14 @@ Partial Class GitUpdater
         '
         'ContextMenuStripReposGitPullThis
         '
-        Me.ContextMenuStripReposGitPullThis.Image = CType(resources.GetObject("ContextMenuStripReposGitPullThis.Image"),System.Drawing.Image)
+        Me.ContextMenuStripReposGitPullThis.Image = Global.GitUpdater.My.Resources.Resources.git
         Me.ContextMenuStripReposGitPullThis.Name = "ContextMenuStripReposGitPullThis"
         Me.ContextMenuStripReposGitPullThis.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposGitPullThis.Text = "Git Pull this"
         '
         'ContextMenuStripReposGitPushThis
         '
-        Me.ContextMenuStripReposGitPushThis.Image = CType(resources.GetObject("ContextMenuStripReposGitPushThis.Image"),System.Drawing.Image)
+        Me.ContextMenuStripReposGitPushThis.Image = Global.GitUpdater.My.Resources.Resources.git
         Me.ContextMenuStripReposGitPushThis.Name = "ContextMenuStripReposGitPushThis"
         Me.ContextMenuStripReposGitPushThis.Size = New System.Drawing.Size(272, 22)
         Me.ContextMenuStripReposGitPushThis.Text = "Git Push this"
@@ -515,7 +514,7 @@ Partial Class GitUpdater
         Me.btnShowPass.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control
         Me.btnShowPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnShowPass.ForeColor = System.Drawing.Color.Transparent
-        Me.btnShowPass.Image = CType(resources.GetObject("btnShowPass.Image"),System.Drawing.Image)
+        Me.btnShowPass.Image = Global.GitUpdater.My.Resources.Resources.eye_shown
         Me.btnShowPass.Location = New System.Drawing.Point(219, 47)
         Me.btnShowPass.Name = "btnShowPass"
         Me.btnShowPass.Size = New System.Drawing.Size(20, 16)
@@ -653,7 +652,7 @@ Partial Class GitUpdater
         Me.Controls.Add(Me.btnGitPushAll)
         Me.Controls.Add(Me.btnGitPullAll)
         Me.HelpButton = true
-        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
+        Me.Icon = Global.GitUpdater.My.Resources.Resources.GitUpdater
         Me.Name = "GitUpdater"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
