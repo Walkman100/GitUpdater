@@ -2,9 +2,9 @@
 
     Dim Dir As String = Environment.GetEnvironmentVariable("USERPROFILE") & "\Documents\GitHub\"
     Dim cmdRepo As String = ""
-    Dim count, GitCommand As String  ' because the Worker doesn't support direct sub calling
     Dim ExitWhenDone As Boolean = False
-    Dim LineIsOrigin, LineIsUpstream, notInserted As Boolean
+    Dim notInserted As Boolean = False
+    Dim LineIsOrigin, LineIsUpstream As Boolean
     Dim PSFiles() As String = {"CheckVersion.ps1", "GitPrompt.ps1", "GitTabExpansion.ps1", "GitUtils.ps1", "TortoiseGit.ps1", "Utils.ps1", "posh-git.psm1", "profile.example.ps1"}
 
     Dim CmdStyle As AppWinStyle  ' window location of CMD
@@ -67,34 +67,39 @@
         End If
 
         ' command line args
+        Dim cmdGitCommand As String = ""
+        Dim count As String = ""
         For Each s As String In My.Application.CommandLineArgs
-            If s.ToLower.StartsWith("-gitcmd=") Then
-                GitCommand = s.Substring(8)
-            End If
-            If s.ToLower.StartsWith("-gitwhat=") Then
-                count = s.Substring(9)
-            End If
-            If s.ToLower.StartsWith("-dir=") Then
-                Dir = s.Substring(5)
-                RebuildRepoList()
-            End If
-            If s.ToLower.StartsWith("-repo=") Then
-                cmdRepo = s.Substring(6)
-            End If
-            If s.ToLower.StartsWith("run") Then
-                If ShellWorker.IsBusy = False Then
-                    ShellWorker.RunWorkerAsync()
-                Else
-                    MsgBox("A script is currently in progress!", MsgBoxStyle.Critical)
-                End If
-            End If
-            If s.ToLower.StartsWith("exitwhendone") Then
-                ExitWhenDone = True
-            End If
-            If s.ToLower.StartsWith("hidegui") Then
-                Me.WindowState = FormWindowState.Minimized
-            End If
+            Select Case s.ToLower
+                Case "run"
+                    
+                Case "exitwhendone"
+                    ExitWhenDone = True
+                Case "hidegui"
+                    Me.WindowState = FormWindowState.Minimized
+                Case Else
+                    If s.ToLower.StartsWith("-gitcmd=") Then
+                        cmdGitCommand = s.Substring(8)
+                    End If
+                    If s.ToLower.StartsWith("-gitwhat=") Then
+                        count = s.Substring(9)
+                    End If
+                    If s.ToLower.StartsWith("-dir=") Then
+                        Dir = s.Substring(5)
+                        RebuildRepoList()
+                    End If
+                    If s.ToLower.StartsWith("-repo=") Then
+                        cmdRepo = s.Substring(6)
+                    End If
+            End Select
         Next
+        If My.Application.CommandLineArgs.Contains("run") Then
+            If ShellWorker.IsBusy = False Then
+                ShellWorker.RunWorkerAsync({count, cmdGitCommand})
+            Else
+                MsgBox("A script is currently in progress!", MsgBoxStyle.Critical)
+            End If
+        End If
     End Sub
 
     ' to do with list of repos
@@ -331,13 +336,13 @@
         LineIsUpstream = False
 
         '[remote "origin"] 'Repo location
-        '	url = https://github.com/Walkman100/Dashy.git
+        '   url = https://github.com/Walkman100/Dashy.git
         '[remote "upstream"] '[Fork] repo that current one was forked from
-        '	url = https://github.com/deavmi/Dashy.git
+        '   url = https://github.com/deavmi/Dashy.git
         '[submodule "YTVL"] 'submodule url in git format
-        '	url = git://github.com/Walkman100/YTVL.git/
+        '   url = git://github.com/Walkman100/YTVL.git/
         '[submodule "github-watchers-button"] 'submodule url in https format
-        '	url = https://github.com/addyosmani/github-watchers-button.git
+        '   url = https://github.com/addyosmani/github-watchers-button.git
         For Each line In File.ReadLines(Dir & lstRepos.SelectedItem & "\.git\config")
             If LineIsOrigin Then
                 cmdRepo = line.Substring(line.IndexOf("https://")) ' cmdRepo just because it's a string that would be unused by this point
@@ -353,7 +358,7 @@
             If line = "[remote ""origin""]" Then
                 LineIsOrigin = True
             End If
-
+            
             If LineIsUpstream Then
                 If MsgBox("Fork detected, open fork origin too?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                     cmdRepo = line.Substring(line.IndexOf("https://"))
@@ -492,16 +497,18 @@
 
     Private Sub btnBrowseLog_Click() Handles btnBrowseLog.Click
         If SaveLogFileDialog.InitialDirectory = "" Then SaveLogFileDialog.InitialDirectory = Dir
-        SaveLogFileDialog.ShowDialog()
-        txtLogPath.Text = SaveLogFileDialog.FileName
-        If File.Exists(txtLogPath.Text) Then _
+        If SaveLogFileDialog.ShowDialog() = DialogResult.OK Then
+            txtLogPath.Text = SaveLogFileDialog.FileName
+            If File.Exists(txtLogPath.Text) Then _
             MsgBox("File already exists! If you set the logfile to an already existing one, the log will be appended to the end of the file when the Git operation runs.", _
                    MsgBoxStyle.Information, "File already exists")
+        End If
     End Sub
 
     ' actual code that runs the shells
-    Private Sub ShellWorker_DoWork() Handles ShellWorker.DoWork
+    Private Sub ShellWorker_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles ShellWorker.DoWork
         Try
+            progressBar.ShowInTaskbar = True
             btnGitPullAll.Enabled = False
             btnGitPushAll.Enabled = False
             btnGitPullSelected.Enabled = False
@@ -510,12 +517,13 @@
             btnGitPushNotSelected.Enabled = False
             btnCD.Enabled = False
             btnCancel.Enabled = True
-            timerAutoInsert.Start()
             
+            notInserted = True
+            If e.Argument(1).ToLower = "push" Then timerAutoInsert.Start
             If chkDontShow.Checked = False Then Me.TopMost = True
             progressBar.Maximum = lstRepos.Items.Count
             
-            Select Case count
+            Select Case e.Argument(0).ToLower
                 Case "all"
                     For i = 1 To lstRepos.Items.Count
                         If chkGitRepoOnly.Checked = True Then
@@ -524,22 +532,19 @@
                             End If
                         End If
                         notInserted = True
-                        Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
+                        Shell("GitUpdater.bat """ & Dir & lstRepos.Items.Item(i - 1) & """ " & e.Argument(1) & " " & _
+                          chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                         progressBar.Value = i
-                        'TaskbarInfoUpdate(TaskbarItemProgressState.Paused, i / lstRepos.Items.Count)
                     Next
-                    'TaskbarInfoUpdate(TaskbarItemProgressState.Normal)
                 Case "selected"
                     If lstRepos.SelectedIndex = -1 Then
                         MsgBox("No item selected", MsgBoxStyle.Critical)
                     Else
                         progressBar.Maximum = 2
                         progressBar.Value = 1
-                        'TaskbarInfoUpdate(TaskbarItemProgressState.Indeterminate, 0.5)
                         notInserted = True
-                        Shell("GitUpdater.bat " & Dir & lstRepos.SelectedItem & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, vbNormalFocus, True, Wait)
-                        progressBar.Value = progressBar.Maximum
-                        'TaskbarInfoUpdate(TaskbarItemProgressState.Normal, 1)
+                        Shell("GitUpdater.bat " & Dir & lstRepos.SelectedItem & " " & e.Argument(1) & " " & _
+                          chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, vbNormalFocus, True, Wait)
                     End If
                 Case "notselected"
                     If lstRepos.SelectedIndex = -1 Then
@@ -553,24 +558,21 @@
                                     End If
                                 End If
                                 notInserted = True
-                                Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
+                                Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & e.Argument(1) & " " & _
+                                  chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                                 progressBar.Value = i
-                                'TaskbarInfoUpdate(TaskbarItemProgressState.Normal, i / lstRepos.Items.Count)
                             End If
                         Next
-                        'TaskbarInfoUpdate(TaskbarItemProgressState.Normal)
                     End If
                 Case "cmdselected"
                     If cmdRepo = "" Then
                         MsgBox("No repo passed from command line", MsgBoxStyle.Critical)
                     Else
-                        'TaskbarInfoUpdate(TaskbarItemProgressState.Indeterminate, 0.5)
                         progressBar.Maximum = 2
                         progressBar.Value = 1
                         notInserted = True
-                        Shell("GitUpdater.bat " & Dir & cmdRepo & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, vbNormalFocus, True, Wait)
-                        progressBar.Value = progressBar.Maximum
-                        'TaskbarInfoUpdate(TaskbarItemProgressState.Normal, 1)
+                        Shell("GitUpdater.bat " & Dir & cmdRepo & " " & e.Argument(1) & " " & _
+                          chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, vbNormalFocus, True, Wait)
                     End If
                 Case "cmdnotselected"
                     If cmdRepo = "" Then
@@ -584,14 +586,16 @@
                                     End If
                                 End If
                                 notInserted = True
-                                Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & GitCommand & " " & chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
+                                Shell("GitUpdater.bat " & Dir & lstRepos.Items.Item(i - 1) & " " & e.Argument(1) & " " & _
+                                  chkRepeat.Checked & " " & chkDontClose.Checked & " " & chkLog.Checked & " " & txtLogPath.Text, CmdStyle, True, Wait)
                                 progressBar.Value = i
-                                'TaskbarInfoUpdate(TaskbarItemProgressState.Paused, i / lstRepos.Items.Count)
                             End If
                         Next
-                        'TaskbarInfoUpdate(TaskbarItemProgressState.Normal)
                     End If
             End Select
+            
+            progressBar.Value = progressBar.Maximum
+            progressBar.ShowInTaskbar = False
             
             If chkOpenLog.Checked = True Then
                 Try
@@ -631,19 +635,17 @@
 
     Private Sub btnCancel_Click() Handles btnCancel.Click
         If ShellWorker.IsBusy = True Then
-            If MsgBox("Are you sure you want to cancel operation? This requires restarting GitUpdater." & vbNewLine & vbNewLine & "This will not close the currently active CMD window. To do so, please click on the window and press 'Ctrl' + 'C', then 'Y', then 'Enter'.", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirmation") = vbNo Then Exit Sub
-            Application.Restart()
+            If MsgBox("Are you sure you want to cancel operation? This requires restarting GitUpdater." & vbNewLine & vbNewLine & _
+              "This will not close the currently active CMD window. To do so, please click on the window and press 'Ctrl' + 'C', then 'Y', then 'Enter'.", _
+              MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirmation") = MsgBoxResult.Yes Then Application.Restart()
         Else
             MsgBox("No git operation is currently in progress!", MsgBoxStyle.Information)
         End If
-
     End Sub
 
     Private Sub btnGitPullAll_Click() Handles btnGitPullAll.Click
         If ShellWorker.IsBusy = False Then
-            count = "all"
-            GitCommand = "pull"
-            ShellWorker.RunWorkerAsync()
+            ShellWorker.RunWorkerAsync({"all", "pull"})
         Else
             MsgBox("A git operation is currently in progress!", MsgBoxStyle.Exclamation, "Operation in progress")
         End If
@@ -651,9 +653,7 @@
 
     Private Sub btnGitPushAll_Click() Handles btnGitPushAll.Click
         If ShellWorker.IsBusy = False Then
-            count = "all"
-            GitCommand = "push"
-            ShellWorker.RunWorkerAsync()
+            ShellWorker.RunWorkerAsync({"all", "push"})
         Else
             MsgBox("A git operation is currently in progress!", MsgBoxStyle.Exclamation, "Operation in progress")
         End If
@@ -664,9 +664,7 @@
             MsgBox("No item selected", MsgBoxStyle.Critical)
         Else
             If ShellWorker.IsBusy = False Then
-                count = "selected"
-                GitCommand = "pull"
-                ShellWorker.RunWorkerAsync()
+                ShellWorker.RunWorkerAsync({"selected", "pull"})
             Else
                 MsgBox("A git operation is currently in progress!", MsgBoxStyle.Exclamation, "Operation in progress")
             End If
@@ -678,9 +676,7 @@
             MsgBox("No item selected", MsgBoxStyle.Critical)
         Else
             If ShellWorker.IsBusy = False Then
-                count = "selected"
-                GitCommand = "push"
-                ShellWorker.RunWorkerAsync()
+                ShellWorker.RunWorkerAsync({"selected", "push"})
             Else
                 MsgBox("A git operation is currently in progress!", MsgBoxStyle.Exclamation, "Operation in progress")
             End If
@@ -692,9 +688,7 @@
             MsgBox("No item selected", MsgBoxStyle.Critical)
         Else
             If ShellWorker.IsBusy = False Then
-                count = "notselected"
-                GitCommand = "pull"
-                ShellWorker.RunWorkerAsync()
+                ShellWorker.RunWorkerAsync({"notselected", "pull"})
             Else
                 MsgBox("A git operation is currently in progress!", MsgBoxStyle.Exclamation, "Operation in progress")
             End If
@@ -706,9 +700,7 @@
             MsgBox("No item selected", MsgBoxStyle.Critical)
         Else
             If ShellWorker.IsBusy = False Then
-                count = "notselected"
-                GitCommand = "push"
-                ShellWorker.RunWorkerAsync()
+                ShellWorker.RunWorkerAsync({"notselected", "push"})
             Else
                 MsgBox("A git operation is currently in progress!", MsgBoxStyle.Information, "Operation in progress")
             End If
@@ -764,15 +756,14 @@
 
     Private Sub timerAutoInsert_Tick() Handles timerAutoInsert.Tick
         If chkAutoInsert.Checked = True Then
-            If GitCommand = "push" Then
-                If chkDontShow.Checked = False Then
-                    If notInserted Then
-                        SendKeys.Send(txtUsername.Text & "~" & txtPassword.Text & "~")
-                        notInserted = False
-                    End If
+            If chkDontShow.Checked = False Then
+                If notInserted Then
+                    SendKeys.Send(txtUsername.Text & "~" & txtPassword.Text & "~")
+                    notInserted = False
                 End If
             End If
         End If
+        timerAutoInsert.Stop
     End Sub
 
     Private Sub btnHotkey_Click() Handles btnHotkey.Click

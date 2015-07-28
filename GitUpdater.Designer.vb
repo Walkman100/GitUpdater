@@ -66,7 +66,7 @@ Partial Class GitUpdater
         Me.chkOpenLog = New System.Windows.Forms.CheckBox()
         Me.chkLog = New System.Windows.Forms.CheckBox()
         Me.ShellWorker = New System.ComponentModel.BackgroundWorker()
-        Me.progressBar = New System.Windows.Forms.ProgressBar()
+        Me.progressBar = New wyDay.Controls.Windows7ProgressBar()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnInsertCredentials = New System.Windows.Forms.Button()
         Me.grpCredMan = New System.Windows.Forms.GroupBox()
@@ -141,7 +141,7 @@ Partial Class GitUpdater
         '
         Me.ContextMenuStripRepos.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContextMenuStripReposOpenInExplorer, Me.ContextMenuStripReposOpenInCMD, Me.ContextMenuStripReposOpenInPS, Me.ContextMenuStripReposOpenInBash, Me.ContextMenuStripReposOpenInGitHub, Me.ContextMenuStripReposSeparator1, Me.ContextMenuStripReposOpenReadme, Me.ContextMenuStripReposOpenSLN, Me.ContextMenuStripReposOpenURL, Me.ContextMenuStripReposSeparator2, Me.ContextMenuStripReposCopyRepoName, Me.ContextMenuStripReposCopyRepoPath, Me.ContextMenuStripReposSeparator3, Me.ContextMenuStripReposRemoveEntry, Me.ContextMenuStripReposCDHere, Me.ContextMenuStripReposSeparator4, Me.ContextMenuStripReposGitPullThis, Me.ContextMenuStripReposGitPushThis})
         Me.ContextMenuStripRepos.Name = "contextMenuStripRepos"
-        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 358)
+        Me.ContextMenuStripRepos.Size = New System.Drawing.Size(273, 336)
         '
         'ContextMenuStripReposOpenInExplorer
         '
@@ -458,10 +458,10 @@ Partial Class GitUpdater
         'progressBar
         '
         Me.progressBar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.progressBar.ContainerControl = Me
         Me.progressBar.Location = New System.Drawing.Point(266, 315)
         Me.progressBar.Name = "progressBar"
         Me.progressBar.Size = New System.Drawing.Size(165, 23)
-        Me.progressBar.Step = 1
         Me.progressBar.TabIndex = 28
         '
         'btnCancel
@@ -694,7 +694,7 @@ Partial Class GitUpdater
     Private WithEvents grpCredMan As System.Windows.Forms.GroupBox
     Private WithEvents btnInsertCredentials As System.Windows.Forms.Button
     Private WithEvents btnCancel As System.Windows.Forms.Button
-    Private WithEvents progressBar As System.Windows.Forms.ProgressBar
+    Private progressBar As wyDay.Controls.Windows7ProgressBar
     Private WithEvents ShellWorker As System.ComponentModel.BackgroundWorker
     Private WithEvents grpGUI As System.Windows.Forms.GroupBox
     Private WithEvents grpData As System.Windows.Forms.GroupBox
