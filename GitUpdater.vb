@@ -758,7 +758,7 @@
         If My.Computer.Keyboard.AltKeyDown = True Then
             SendKeys.Send(txtUsername.Text & "~")
             SendKeys.Send(txtPassword.Text & "~")
-            ' See http://msdn.microsoft.com/en-us/library/system.windows.forms.sendkeys.send(v=vs.110).aspx
+            ' See https://msdn.microsoft.com/en-us/library/system.windows.forms.sendkeys.send(v=vs.110).aspx?cs-lang=vb#Anchor_2
         End If
     End Sub
 
