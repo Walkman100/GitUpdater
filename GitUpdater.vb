@@ -147,9 +147,9 @@
 
     Private Sub ContextMenuStripReposOpenInCMD_Click() Handles ContextMenuStripReposOpenInCMD.Click
         If lstRepos.SelectedIndex <> -1 Then
-            Process.Start("cmd.exe", "/k cd " & Dir & lstRepos.SelectedItem)
+            Process.Start("cmd.exe", "/k cd /d " & Dir & lstRepos.SelectedItem)
         Else
-            Process.Start("cmd.exe", "/k cd " & Dir)
+            Process.Start("cmd.exe", "/k cd /d " & Dir)
         End If
     End Sub
 

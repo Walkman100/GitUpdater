@@ -32,7 +32,7 @@ rem If it should retry if it fails go to start
 if %~3==True (
     echo.
     echo Failed to %~2 repo at "%~1", trying again...
-    timeout 10 /NOBREAK
+    timeout 9 /NOBREAK
     goto start
 )
 
@@ -65,7 +65,7 @@ if %~3==True (
     @echo [%date% %time%] Failed to %~2 repo at "%~1", trying again... >> %~6
     echo.
     echo Failed to %~2 repo at "%~1", trying again...
-    timeout 10 /NOBREAK
+    timeout 9 /NOBREAK
     goto log
 )
 @echo [%date% %time%] Failed to %~2 repo at "%~1", retry disabled. >> %~6
