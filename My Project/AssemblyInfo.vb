@@ -10,9 +10,9 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("Git Updater")> 
 <Assembly: AssemblyDescription("A program to update all your Git Repos at once")> 
-<Assembly: AssemblyCompany("DeavmiOSS")> 
+<Assembly: AssemblyCompany("WalkmanOSS")> 
 <Assembly: AssemblyProduct("GitUpdater")> 
-<Assembly: AssemblyCopyright("FOSS from Walkman 2014")> 
+<Assembly: AssemblyCopyright("FOSS from Walkman 2014-15")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
