@@ -5,6 +5,7 @@
 Icon "My Project\GitUpdater.ico"
 Caption "GitUpdater Installer"
 Name "GitUpdater"
+XPStyle on
 AutoCloseWindow true
 ShowInstDetails show
 
