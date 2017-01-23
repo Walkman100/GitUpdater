@@ -1,4 +1,4 @@
-﻿Public Class GitUpdater
+Public Class GitUpdater
 
     Dim Dir As String = Environment.GetEnvironmentVariable("USERPROFILE") & "\Documents\GitHub\"
     Dim cmdRepo As String = ""
