@@ -1,7 +1,7 @@
 # GitUpdater [![Build status](https://ci.appveyor.com/api/projects/status/72cvetqe8awtp2fn)](https://ci.appveyor.com/project/Walkman100/gitupdater)
 A simple application written in VB.Net to update all your repos with one click, or one repeatedly until it works.
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Walkman100/Walkman?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Walkman100/Walkman?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Compile requirements
 See [CompileInstructions.md](https://github.com/Walkman100/WinCompile/blob/master/CompileInstructions.md)
@@ -52,6 +52,7 @@ An external program that you can use is Windows itself, using the Windows Task S
 1: Press <kbd>⊞ Win</kbd> & <kbd>R</kbd>
 
 [![Run Dialog][Run Dialog]][Run Dialog]
+
   [Run Dialog]: http://walkman100.github.io/images/Screenshots/My_Projects/GitUpdater/WinTaskSchdRun.png
 
 2: Type `taskschd.msc` or copy and paste, then press enter
@@ -59,33 +60,40 @@ An external program that you can use is Windows itself, using the Windows Task S
 3: In the window that opens, in the pane on the left click on 'Task Scheduler Library' or expand it and click on the folder where you want to make the task.
 
 [![Left Pane][Left Pane]][Left Pane]
+
   [Left Pane]: http://walkman100.github.io/images/Screenshots/My_Projects/GitUpdater/WinTaskSchdLeftPane.png
 
 4: Click on the option in the pane on the right that reads 'Create Task...'
 
 [![Right Pane][Right Pane]][Right Pane]
+
   [Right Pane]: http://walkman100.github.io/images/Screenshots/My_Projects/GitUpdater/WinTaskSchdRightPane.png
 
 5: Give the task any name you want. Click on the tab 'Triggers', then the 'New...' button.
 
 [![Set a name][Set a name]][Set a name]
-  [Set a name]: http://walkman100.github.io/images/Screenshots/My_Projects/GitUpdater/WinTaskSchdName.png
+
 [![Click Triggers then New][New Trigger]][New Trigger]
+
+  [Set a name]: http://walkman100.github.io/images/Screenshots/My_Projects/GitUpdater/WinTaskSchdName.png
   [New Trigger]: http://walkman100.github.io/images/Screenshots/My_Projects/GitUpdater/WinTaskSchdTriggersNew.png
 
 6: Set when you want the task to start.
 
 [![Set when you want the task to start][task start]][task start]
+
   [task start]: http://walkman100.github.io/images/Screenshots/My_Projects/GitUpdater/WinTaskSchdTaskStart.png
 
 7: Click 'OK', then go to the 'Actions' tab and click 'New...'
 
 [![Click Actions then New][new action]][new action]
+
   [new action]: http://walkman100.github.io/images/Screenshots/My_Projects/GitUpdater/WinTaskSchdActionsNew.png
 
 8: Click 'Browse...' and locate the GitUpdater executable.
 
 [![Locate GitUpdater][locate exe]][locate exe]
+
   [locate exe]: http://walkman100.github.io/images/Screenshots/My_Projects/GitUpdater/WinTaskSchdLocateGitUpdater.png
 
 9: In the 'Add arguments (optional):' box add the arguments you want, e.g.
@@ -96,16 +104,14 @@ An external program that you can use is Windows itself, using the Windows Task S
 ```
 
 [![Set the Arguments][arguments]][arguments]
+
   [arguments]: http://walkman100.github.io/images/Screenshots/My_Projects/GitUpdater/WinTaskSchdArguments.png
 
 10: Click 'OK', 'OK' again, then close the Task Scheduler window.
 
 [![Check the line looks correct][check]][check]
+
   [check]: http://walkman100.github.io/images/Screenshots/My_Projects/GitUpdater/WinTaskSchdDone.png
 
 ## Donate
-[Show your support!](http://walkman100.github.io/Walkman/HTML/Donate.html)
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Walkman100/gitupdater/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
+[Show your support!](http://walkman100.github.io/donate)
