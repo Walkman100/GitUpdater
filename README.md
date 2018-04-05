@@ -6,6 +6,11 @@ A simple application written in VB.Net to update all your repos with one click, 
 ## Compile requirements
 See [CompileInstructions.md](https://github.com/Walkman100/gists/blob/master/CompileInstructions.md)
 
+## Download
+Get the latest version [here](https://github.com/Walkman100/GitUpdater/releases), and the latest build from commit
+[here](https://ci.appveyor.com/project/Walkman100/GitUpdater/build/artifacts)
+(note that these builds are built for the Debug config and so are not optimised)
+
 # Command Line
 The syntax to launch GitUpdater from the command line is:
 ```cmd
