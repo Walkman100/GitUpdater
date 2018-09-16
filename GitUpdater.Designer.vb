@@ -83,6 +83,7 @@ Partial Class GitUpdater
         Me.SaveLogFileDialog = New System.Windows.Forms.SaveFileDialog()
         Me.chkShowErrors = New System.Windows.Forms.CheckBox()
         Me.timerAutoInsert = New System.Windows.Forms.Timer(Me.components)
+        Me.lblVersion = New System.Windows.Forms.Label()
         Me.ContextMenuStripRepos.SuspendLayout
         Me.grpGUI.SuspendLayout
         Me.grpData.SuspendLayout
@@ -635,6 +636,17 @@ Partial Class GitUpdater
         Me.timerAutoInsert.Enabled = true
         Me.timerAutoInsert.Interval = 1000
         '
+        'lblVersion
+        '
+        Me.lblVersion.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lblVersion.AutoSize = true
+        Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 6!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblVersion.Location = New System.Drawing.Point(490, 530)
+        Me.lblVersion.Name = "lblVersion"
+        Me.lblVersion.Size = New System.Drawing.Size(21, 9)
+        Me.lblVersion.TabIndex = 34
+        Me.lblVersion.Text = "1.0.0"
+        '
         'GitUpdater
         '
         Me.AcceptButton = Me.btnGitPushSelected
@@ -642,6 +654,7 @@ Partial Class GitUpdater
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnExit
         Me.ClientSize = New System.Drawing.Size(524, 538)
+        Me.Controls.Add(Me.lblVersion)
         Me.Controls.Add(Me.chkShowErrors)
         Me.Controls.Add(Me.btnCloseCmd)
         Me.Controls.Add(Me.grpCredMan)
@@ -676,6 +689,7 @@ Partial Class GitUpdater
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private lblVersion As System.Windows.Forms.Label
     Private WithEvents ContextMenuStripReposOpenInSmartGit As System.Windows.Forms.ToolStripMenuItem
     Private WithEvents ContextMenuStripReposOpenInBash As System.Windows.Forms.ToolStripMenuItem
     Private WithEvents ContextMenuStripReposOpenSLN As System.Windows.Forms.ToolStripMenuItem

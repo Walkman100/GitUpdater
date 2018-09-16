@@ -15,6 +15,7 @@ Public Class GitUpdater
     End Sub
 
     Private Sub LoadGitUpdater() Handles MyBase.Load
+        lblVersion.Text = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
         If Not File.Exists("GitUpdater.bat") Then
             Try
                 My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/GitUpdater/master/GitUpdater.bat", "GitUpdater.bat")
