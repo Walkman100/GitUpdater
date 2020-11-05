@@ -1,4 +1,4 @@
-Public Class GitUpdater
+﻿Public Class GitUpdater
 
     Dim Dir As String = Environment.GetEnvironmentVariable("USERPROFILE") & "\Documents\GitHub\"
     Dim cmdRepo As String = ""
@@ -389,37 +389,17 @@ Public Class GitUpdater
 
     Private Sub ContextMenuStripReposCopyRepoName_Click() Handles ContextMenuStripReposCopyRepoName.Click
         If lstRepos.SelectedIndex <> -1 Then
-            Try
-                Clipboard.SetText(lstRepos.SelectedItem, TextDataFormat.UnicodeText)
-                MsgBox(lstRepos.SelectedItem & vbNewLine & "Succesfully copied!", MsgBoxStyle.Information, "Succesfully copied!")
-            Catch ex As Exception
-                MsgBox("Copy failed!" & vbNewLine & "Error: """ & ex.ToString & """", MsgBoxStyle.Critical, "Copy failed!")
-            End Try
+            WalkmanLib.SafeSetText(lstRepos.SelectedItem, "default")
         Else
-            Try
-                Clipboard.SetText(Dir, TextDataFormat.UnicodeText)
-                MsgBox(Dir & vbNewLine & "Succesfully copied!", MsgBoxStyle.Information, "Succesfully copied!")
-            Catch ex As Exception
-                MsgBox("Copy failed!" & vbNewLine & "Error: """ & ex.ToString & """", MsgBoxStyle.Critical, "Copy failed!")
-            End Try
+            WalkmanLib.SafeSetText(Dir, "default")
         End If
     End Sub
 
     Private Sub ContextMenuStripReposCopyRepoPath_Click() Handles ContextMenuStripReposCopyRepoPath.Click
         If lstRepos.SelectedIndex <> -1 Then
-            Try
-                Clipboard.SetText(Dir & lstRepos.SelectedItem, TextDataFormat.UnicodeText)
-                MsgBox(Dir & lstRepos.SelectedItem & vbNewLine & "Succesfully copied!", MsgBoxStyle.Information, "Succesfully copied!")
-            Catch ex As Exception
-                MsgBox("Copy failed!" & vbNewLine & "Error: """ & ex.ToString & """", MsgBoxStyle.Critical, "Copy failed!")
-            End Try
+            WalkmanLib.SafeSetText(Dir & lstRepos.SelectedItem, "default")
         Else
-            Try
-                Clipboard.SetText(Dir, TextDataFormat.UnicodeText)
-                MsgBox(Dir & vbNewLine & "Succesfully copied!", MsgBoxStyle.Information, "Succesfully copied!")
-            Catch ex As Exception
-                MsgBox("Copy failed!" & vbNewLine & "Error: """ & ex.ToString & """", MsgBoxStyle.Critical, "Copy failed!")
-            End Try
+            WalkmanLib.SafeSetText(Dir, "default")
         End If
     End Sub
 
