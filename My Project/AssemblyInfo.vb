@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("A program to update all your Git Repos at once")> 
 <Assembly: AssemblyCompany("WalkmanOSS")> 
 <Assembly: AssemblyProduct("GitUpdater")> 
-<Assembly: AssemblyCopyright("FOSS from Walkman 2014-20")> 
+<Assembly: AssemblyCopyright("FOSS from Walkman 2014-21")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
